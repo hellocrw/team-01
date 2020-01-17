@@ -38,10 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())   //在Spring Security 5.0中新增了多种加密方式，也改变了密码的格式
-                .withUser("admin1").password(new BCryptPasswordEncoder().encode("123456")).roles("VIP1", "VIP2")
+                .withUser("admin").password(new BCryptPasswordEncoder().encode("123456")).roles("VIP1", "VIP2")
                 .and()
-                .withUser("admin2").password(new BCryptPasswordEncoder().encode("123456")).roles("VIP2", "VIP3")
+                .withUser("crw").password(new BCryptPasswordEncoder().encode("123456")).roles("VIP1", "VIP2")
                 .and()
-                .withUser("admin3").password(new BCryptPasswordEncoder().encode("123456")).roles("VIP1", "VIP3");
+                .withUser("hzc").password(new BCryptPasswordEncoder().encode("123456")).roles("VIP2", "VIP3");
     }
 }

@@ -1,6 +1,7 @@
 package crw.bishe.team.service;
 
 
+import crw.bishe.team.dto.UserInfoDto;
 import crw.bishe.team.entity.UserInfo;
 
 import java.util.List;
@@ -14,43 +15,29 @@ import java.util.List;
 public interface UserInfoService {
     /**
      * 增加用户信息
-     * @param userInfo
+     * @param userInfoDto
      * @return
      */
-    int persist(UserInfo userInfo);
+    int persist(UserInfoDto userInfoDto);
 
     /**
      * 根据ID删除用户信息
      * @param id
      * @return
      */
-    int delete(Long id);
+    int delete(String id);
 
     /**
-     * 跟新用户信息
-     * @param userInfo
+     * 修改用户信息
+     * @param userInfoDto
      * @return
      */
-    int update(UserInfo userInfo, Long id);
+    int update(UserInfoDto userInfoDto, String id);
 
-    /**
-     * 通过ID查找用户信息
-     * @param id
-     * @return
-     */
-    UserInfo findById(Long id);
-
-    /**
-     * 分页查找用户信息
-     * @param pageNo 页数
-     * @param PageSize 页大小
-     * @return
-     */
-    List<UserInfo> findByPage(int pageNo, int PageSize);
 
     /**
      * 查找所有用户信息
      * @return
      */
-    List<UserInfo> findAll();
+    List<UserInfoDto> findAll();
 }

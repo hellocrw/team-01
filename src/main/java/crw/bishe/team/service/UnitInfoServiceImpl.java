@@ -4,10 +4,12 @@ import crw.bishe.team.dto.UnitInfoDto;
 import crw.bishe.team.dtoEntityMapping.UnitInfoMapping;
 import crw.bishe.team.entity.UnitInfo;
 import crw.bishe.team.mapper.UnitInfoMapper;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +19,7 @@ import java.util.List;
  * @Time 21:57
  */
 @Service
+@Log4j2
 public class UnitInfoServiceImpl implements UnitInfoService {
 
     private final UnitInfoMapper unitInfoMapper;
@@ -46,40 +49,31 @@ public class UnitInfoServiceImpl implements UnitInfoService {
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public int delete(Long id) {
-        return unitInfoMapper.deleteByPrimaryKey(id);
+    public int delete(String id) {
+        if(id == null){
+            return 0;
+        }
+        Long key = Long.parseLong(id);
+        return unitInfoMapper.deleteByPrimaryKey(key);
     }
 
     /**
      * 更新单位信息
-     * @param unitInfo
+     * @param unitInfoDto
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public int update(UnitInfo unitInfo, Long id) {
-        return unitInfoMapper.updateByExample(unitInfo, id);
-    }
-
-    /**
-     * 根据ID查找单位信息
-     * @param id
-     * @return
-     */
-    @Override
-    public UnitInfo findById(Long id) {
-        return unitInfoMapper.selectByPrimaryKey(id);
-    }
-
-    /**
-     * 按页查找单位信息
-     * @param pageNo 页数
-     * @param PageSize 页大小
-     * @return
-     */
-    @Override
-    public List<UnitInfo> findByPage(int pageNo, int PageSize) {
-        return null;
+    public int update(UnitInfoDto unitInfoDto, String id) {
+        if(id == null){
+            return 0;
+        }
+        Long key = Long.parseLong(id);
+        if(unitInfoMapper.selectByPrimaryKey(key) == null){
+            return 0;
+        }
+        UnitInfo unitInfo = unitInfoMapping.toEntity(unitInfoDto);
+        return unitInfoMapper.updateByPrimaryKey(unitInfo);
     }
 
     /**
@@ -87,7 +81,13 @@ public class UnitInfoServiceImpl implements UnitInfoService {
      * @return
      */
     @Override
-    public List<UnitInfo> findAll() {
-        return unitInfoMapper.selectAll();
+    public List<UnitInfoDto> findAll() {
+        List<UnitInfo> unitInfos = unitInfoMapper.selectAll();
+        List<UnitInfoDto> unitInfoDtos = new ArrayList<>();
+        unitInfos.forEach( unitInfo -> {
+            UnitInfoDto unitInfoDto = unitInfoMapping.toDto(unitInfo);
+            unitInfoDtos.add(unitInfoDto);
+        });
+        return unitInfoDtos;
     }
 }

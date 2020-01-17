@@ -8,6 +8,7 @@ public class UnitInfo {
      * 序号
      */
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
     /**

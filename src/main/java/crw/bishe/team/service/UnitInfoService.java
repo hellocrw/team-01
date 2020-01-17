@@ -22,33 +22,18 @@ public interface UnitInfoService {
      * @param id
      * @return
      */
-    int delete(Long id);
+    int delete(String id);
 
     /**
-     * 跟新单位信息
-     * @param unitInfo
+     * 修改单位信息
+     * @param unitInfoDto
      * @return
      */
-    int update(UnitInfo unitInfo, Long id);
-
-    /**
-     * 通过ID查找单位信息
-     * @param id
-     * @return
-     */
-    UnitInfo findById(Long id);
-
-    /**
-     * 分页查找单位信息
-     * @param pageNo 页数
-     * @param PageSize 页大小
-     * @return
-     */
-    List<UnitInfo> findByPage(int pageNo, int PageSize);
+    int update(UnitInfoDto unitInfoDto, String id);
 
     /**
      * 查找所有单位信息
      * @return
      */
-    List<UnitInfo> findAll();
+    List<UnitInfoDto> findAll();
 }

@@ -41,8 +41,8 @@ public class UnitInfoController {
     @GetMapping("/All")
     public ResponseEntity<Result> findAll(){
         try{
-            List<UnitInfo> res = unitInfoService.findAll();
-            return new ResponseEntity<>(new Result(200,"处理成功",res), HttpStatus.OK);
+            List<UnitInfoDto> unitInfoDtos = unitInfoService.findAll();
+            return new ResponseEntity<>(new Result(200,"处理成功",unitInfoDtos), HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
@@ -65,21 +65,26 @@ public class UnitInfoController {
 
     @ApiOperation(value = "修改单位信息")
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Result> update(@ApiParam("单位信息ID") @PathVariable(name = "id") Long id,
-                                         @ApiParam("单位信息") @RequestParam UnitInfo unitInfo
+    public ResponseEntity<Result> update(@ApiParam("单位信息ID") @PathVariable(name = "id") String id,
+                                         @ApiParam("单位信息") @RequestBody @Validated UnitInfoDto unitInfoDto
     ){
         try{
-            unitInfoService.update(unitInfo, id);
+            int res = unitInfoService.update(unitInfoDto, id);
+            if(res > 0){
+                return new ResponseEntity<>(new Result(200,"处理成功"),HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>(new Result("找不到信息，无法更新"),HttpStatus.METHOD_NOT_ALLOWED);
+            }
         }catch (Exception e){
             log.info("单位信息更新失败："+ e.toString());
+            return new ResponseEntity<>(new Result("更新失败"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(new Result(200,"处理成功"),HttpStatus.OK);
     }
 
     @ApiOperation(value = "删除单位信息")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Result> delete(
-            @ApiParam(value = "单位信息") @PathVariable(name = "id") Long id){
+            @ApiParam(value = "单位信息") @PathVariable(name = "id") String id){
         try{
             unitInfoService.delete(id);
         }catch (Exception e){

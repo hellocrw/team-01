@@ -9,10 +9,11 @@ import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication
 @EnableCaching
 @EnableAspectJAutoProxy
-@MapperScan({"crw.bishe.team.mapper", "crw.bishe.team.dtoEntityMapping"})
+@MapperScan("crw.bishe.team.mapper")
 public class TeamApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TeamApplication.class, args);
     }
+
 }

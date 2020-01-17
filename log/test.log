@@ -1,13 +1,13 @@
-2020-01-17 00:30 [restartedMain] [INFO]  org.springframework.boot.StartupInfoLogger.logStarting(StartupInfoLogger.java:55)ev  el crw.bishe.team.TeamApplication - Starting TeamApplication on crw with PID 8348 (started by Administrator in D:\study\project\毕业管理系统\EMS)
-2020-01-17 00:30 [restartedMain] [INFO]  org.springframework.boot.SpringApplication.logStartupProfileInfo(SpringApplication.java:651)ev  el crw.bishe.team.TeamApplication - No active profile set, falling back to default profiles: default
-2020-01-17 00:30 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : DruidConfig--->目标方法名为:druidServlet
-2020-01-17 00:30 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : statViewServlet urls=[/druid/*]
-2020-01-17 00:30 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : DruidConfig--->目标方法名为:filterRegistrationBean
-2020-01-17 00:30 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : filterRegistrationBean urls=[/*] order=2147483647
-2020-01-17 00:30 [restartedMain] [INFO]  crw.bishe.team.config.init.MyInitConfig_InitializingBean.afterPropertiesSet(MyInitConfig_InitializingBean.java:18)ev  el crw.bishe.team.config.init.MyInitConfig_InitializingBean - 实现InitializingBean接口实现项目初始化操作
-2020-01-17 00:30 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : DruidConfig--->目标方法名为:dataSource
-2020-01-17 00:30 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : {
-	CreateTime:"2020-01-17 00:30:18",
+2020-01-17 18:11 [restartedMain] [INFO]  org.springframework.boot.StartupInfoLogger.logStarting(StartupInfoLogger.java:55)ev  el crw.bishe.team.TeamApplication - Starting TeamApplication on PC-201909231002 with PID 7576 (D:\EMS\EMS-01\target\classes started by Administrator in D:\EMS\EMS-01)
+2020-01-17 18:11 [restartedMain] [INFO]  org.springframework.boot.SpringApplication.logStartupProfileInfo(SpringApplication.java:651)ev  el crw.bishe.team.TeamApplication - No active profile set, falling back to default profiles: default
+2020-01-17 18:11 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : DruidConfig--->目标方法名为:druidServlet
+2020-01-17 18:11 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : statViewServlet urls=[/druid/*]
+2020-01-17 18:11 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : DruidConfig--->目标方法名为:filterRegistrationBean
+2020-01-17 18:11 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : filterRegistrationBean urls=[/*] order=2147483647
+2020-01-17 18:11 [restartedMain] [INFO]  crw.bishe.team.config.init.MyInitConfig_InitializingBean.afterPropertiesSet(MyInitConfig_InitializingBean.java:18)ev  el crw.bishe.team.config.init.MyInitConfig_InitializingBean - 实现InitializingBean接口实现项目初始化操作
+2020-01-17 18:11 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : DruidConfig--->目标方法名为:dataSource
+2020-01-17 18:11 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : {
+	CreateTime:"2020-01-17 18:11:55",
 	ActiveCount:0,
 	PoolingCount:0,
 	CreateCount:0,
@@ -20,12 +20,18 @@
 
 [
 ]
-2020-01-17 00:30 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : SwaggerConfig--->目标方法名为:createRestApi
-2020-01-17 00:30 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : springfox.documentation.spring.web.plugins.Docket@410a0cce
-2020-01-17 00:30 [restartedMain] [INFO]  org.springframework.boot.StartupInfoLogger.logStarted(StartupInfoLogger.java:61)ev  el crw.bishe.team.TeamApplication - Started TeamApplication in 8.142 seconds (JVM running for 11.185)
-2020-01-17 00:30 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : MyInitConfig_CommandLineRunner--->目标方法名为:run
-2020-01-17 00:30 [restartedMain] [INFO]  crw.bishe.team.config.init.MyInitConfig_CommandLineRunner.run(MyInitConfig_CommandLineRunner.java:20)ev  el crw.bishe.team.config.init.MyInitConfig_CommandLineRunner - 实现CommandLineRunner接口，进行项目初始化操作
-2020-01-17 00:30 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : null
-2020-01-17 00:30 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : MyInitConfig_ApplicationRunner--->目标方法名为:run
-2020-01-17 00:30 [restartedMain] [INFO]  crw.bishe.team.config.init.MyInitConfig_ApplicationRunner.run(MyInitConfig_ApplicationRunner.java:19)ev  el crw.bishe.team.config.init.MyInitConfig_ApplicationRunner - 实现ApplicationRunner接口，在项目启动完成之前初始化操作
-2020-01-17 00:30 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : null
+2020-01-17 18:11 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : SwaggerConfig--->目标方法名为:createRestApi
+2020-01-17 18:11 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : springfox.documentation.spring.web.plugins.Docket@5f72f4ba
+2020-01-17 18:11 [restartedMain] [INFO]  org.springframework.boot.StartupInfoLogger.logStarted(StartupInfoLogger.java:61)ev  el crw.bishe.team.TeamApplication - Started TeamApplication in 4.993 seconds (JVM running for 6.311)
+2020-01-17 18:11 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : MyInitConfig_CommandLineRunner--->目标方法名为:run
+2020-01-17 18:11 [restartedMain] [INFO]  crw.bishe.team.config.init.MyInitConfig_CommandLineRunner.run(MyInitConfig_CommandLineRunner.java:20)ev  el crw.bishe.team.config.init.MyInitConfig_CommandLineRunner - 实现CommandLineRunner接口，进行项目初始化操作
+2020-01-17 18:11 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : null
+2020-01-17 18:11 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : MyInitConfig_ApplicationRunner--->目标方法名为:run
+2020-01-17 18:11 [restartedMain] [INFO]  crw.bishe.team.config.init.MyInitConfig_ApplicationRunner.run(MyInitConfig_ApplicationRunner.java:19)ev  el crw.bishe.team.config.init.MyInitConfig_ApplicationRunner - 实现ApplicationRunner接口，在项目启动完成之前初始化操作
+2020-01-17 18:11 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : null
+2020-01-17 18:12 [http-nio-8080-exec-2] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : UnitInfoController--->目标方法名为:create
+2020-01-17 18:12 [http-nio-8080-exec-2] [INFO]  com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:669)ev  el com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-01-17 18:12 [http-nio-8080-exec-2] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : UnitInfoServiceImpl--->目标方法名为:persist
+2020-01-17 18:12 [http-nio-8080-exec-2] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : UnitInfoMappingImpl--->目标方法名为:toEntity
+2020-01-17 18:12 [http-nio-8080-exec-2] [INFO]  crw.bishe.team.controller.UnitInfoController.create(UnitInfoController.java:61)ev  el crw.bishe.team.controller.UnitInfoController - For input string: ""
+2020-01-17 18:12 [http-nio-8080-exec-2] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : <500 INTERNAL_SERVER_ERROR Internal Server Error,Result(status=0, desc=处理失败, data=null),[]>

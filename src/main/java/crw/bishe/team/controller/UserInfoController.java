@@ -1,6 +1,6 @@
 package crw.bishe.team.controller;
 
-import crw.bishe.team.entity.UserInfo;
+import crw.bishe.team.dto.UserInfoDto;
 import crw.bishe.team.service.UserInfoService;
 import crw.bishe.team.vo.Result;
 import io.swagger.annotations.Api;
@@ -27,15 +27,18 @@ import java.util.List;
 @RequestMapping(value = "/api/user")
 public class UserInfoController {
 
-    @Autowired
-    private UserInfoService userInfoService;
+    private final UserInfoService userInfoService;
 
+    @Autowired
+    public UserInfoController(UserInfoService userInfoService){
+        this.userInfoService = userInfoService;
+    }
     @ApiOperation(value = "查找所有用户信息")
     @GetMapping("/All")
     public ResponseEntity<Result> findAll(){
         try{
-            List<UserInfo> res = userInfoService.findAll();
-            return new ResponseEntity<>(new Result(200,"处理成功",res), HttpStatus.OK);
+            List<UserInfoDto> userInfoDtos = userInfoService.findAll();
+            return new ResponseEntity<>(new Result(200,"处理成功",userInfoDtos), HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
@@ -44,9 +47,9 @@ public class UserInfoController {
     @ApiOperation(value = "增加用户信息")
     @PostMapping("")
     public ResponseEntity<Result> create(
-            @ApiParam(value = "用户信息") @RequestBody @Validated UserInfo UserInfo){
+            @ApiParam(value = "用户信息") @RequestBody @Validated UserInfoDto userInfoDto){
         try {
-            int res = userInfoService.persist(UserInfo);
+            int res = userInfoService.persist(userInfoDto);
             if (res > 0) {
                 return new ResponseEntity(new Result<>(200, "处理成功"), HttpStatus.OK);
             } else {
@@ -60,12 +63,19 @@ public class UserInfoController {
 
     @ApiOperation(value = "修改用户信息")
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Result> update(@ApiParam(value = "用户信息", required = true) @RequestBody UserInfo UserInfo,
-                                         @ApiParam(value = "用户ID") @PathVariable(name = "id") Long id){
+    public ResponseEntity<Result> update(@ApiParam(value = "用户ID") @PathVariable(name = "id") String id,
+                                         @ApiParam(value = "用户信息", required = true) @RequestBody @Validated UserInfoDto userInfoDto){
+        if(id == null ){
+            return new ResponseEntity<>(new Result("更新数据不正确"), HttpStatus.METHOD_NOT_ALLOWED);
+        }
         try{
-            userInfoService.update(UserInfo,id);
+            int res = userInfoService.update(userInfoDto,id);
+            if(res <= 0){
+                return new ResponseEntity<>(new Result("更新数据不存在"), HttpStatus.BAD_REQUEST);
+            }
         }catch (Exception e){
             log.info("用户信息更新失败："+ e.toString());
+            return new ResponseEntity<>(new Result("错误"), HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(new Result(200,"处理成功"),HttpStatus.OK);
     }
@@ -73,7 +83,7 @@ public class UserInfoController {
     @ApiOperation(value = "删除用户信息")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Result> delete(
-            @ApiParam(value = "用户信息ID") @PathVariable(name = "id") Long id){
+            @ApiParam(value = "用户信息ID") @PathVariable(name = "id") String id){
         try{
             userInfoService.delete(id);
         }catch (Exception e){
