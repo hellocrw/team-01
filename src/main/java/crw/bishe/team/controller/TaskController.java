@@ -1,7 +1,7 @@
 package crw.bishe.team.controller;
 
-import crw.bishe.team.dto.ProjectDto;
-import crw.bishe.team.service.ProjectService;
+import crw.bishe.team.dto.TaskDto;
+import crw.bishe.team.service.TaskService;
 import crw.bishe.team.vo.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,41 +16,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @Description Description 项目管理
+ * @description Description
  * @Author crw
- * @Date Created in 2020/1/19 0019
- * @Time 17:21
- */
-@Api(tags = {"项目管理"})
+ * @create 2020/1/20
+ * @Time 0:17
+ **/
+@Api(tags = {"任务管理"})
 @RestController
-@RequestMapping("/api/project")
 @Log4j2
-public class ProjectController {
+public class TaskController {
 
-    private final ProjectService projectService;
+    private final TaskService taskService;
 
     @Autowired
-    public ProjectController(ProjectService projectService){
-        this.projectService = projectService;
+    public TaskController(TaskService taskService){
+        this.taskService = taskService;
     }
 
-    @ApiOperation(value = "查找所有项目信息")
+    @ApiOperation(value = "查找所有任务信息")
     @GetMapping("")
     public ResponseEntity<Result> findAll(){
         try{
-            List<ProjectDto> teamDtos = projectService.findAll();
-            return new ResponseEntity<>(new Result(200, "处理成功", teamDtos), HttpStatus.OK);
+            List<TaskDto> taskDtos = taskService.findAll();
+            return new ResponseEntity<>(new Result(200, "处理成功", taskDtos), HttpStatus.OK);
         }catch (Exception e){
             log.info(e.toString());
             return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @ApiOperation(value = "新增项目信息")
+    @ApiOperation(value = "新增任务信息")
     @PostMapping("")
-    public ResponseEntity<Result> create(@ApiParam(value = "项目信息") @RequestBody @Validated ProjectDto projectDto){
+    public ResponseEntity<Result> create(@ApiParam(value = "项目信息") @RequestBody @Validated TaskDto taskDto){
         try{
-            int res = projectService.create(projectDto);
+            int res = taskService.create(taskDto);
             if(res > 0){
                 return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
             }
@@ -61,12 +60,12 @@ public class ProjectController {
         return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
     }
 
-    @ApiOperation(value = "修改项目信息")
+    @ApiOperation(value = "修改任务信息")
     @PutMapping("/{id}")
     public ResponseEntity<Result> update(@ApiParam(value = "项目ID") @PathVariable(name = "id") String id ,
-                                         @ApiParam(value = "项目信息") @RequestBody @Validated ProjectDto projectDto){
+                                         @ApiParam(value = "项目信息") @RequestBody @Validated TaskDto taskDto){
         try{
-            int res = projectService.update(projectDto, id);
+            int res = taskService.update(taskDto, id);
             if(res > 0){
                 return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
             }
@@ -77,11 +76,11 @@ public class ProjectController {
         return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
     }
 
-    @ApiOperation(value = "删除项目信息")
+    @ApiOperation(value = "删除任务信息")
     @DeleteMapping("/{id}")
     public ResponseEntity<Result> delete(@ApiParam(value = "项目ID") @PathVariable(name = "id") String id){
         try{
-            int res = projectService.delete(id);
+            int res = taskService.delete(id);
             if(res > 0){
                 return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
             }
@@ -90,5 +89,4 @@ public class ProjectController {
         }
         return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
     }
-
 }

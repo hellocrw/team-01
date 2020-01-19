@@ -68,7 +68,7 @@ file:
     url: D:\upload\
 
 server:
-  port: 8080
+  port: 8888
   servlet:
     session:
       timeout: 60m
