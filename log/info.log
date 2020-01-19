@@ -4100,3 +4100,43 @@ com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Colu
 2020-01-18 22:22 [http-nio-8080-exec-6] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : <200 OK OK,Result(status=200, desc=处理成功, data=null),[]>
 2020-01-18 22:22 [http-nio-8080-exec-7] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : TestController--->目标方法名为:fail
 2020-01-18 22:22 [http-nio-8080-exec-7] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : 失败
+2020-01-19 22:39 [restartedMain] [INFO]  org.springframework.boot.StartupInfoLogger.logStarting(StartupInfoLogger.java:55)ev  el crw.bishe.team.TeamApplication - Starting TeamApplication on crw with PID 15780 (started by Administrator in D:\study\project\找队友系统\后端code\team-01\team-01)
+2020-01-19 22:39 [restartedMain] [INFO]  org.springframework.boot.SpringApplication.logStartupProfileInfo(SpringApplication.java:651)ev  el crw.bishe.team.TeamApplication - No active profile set, falling back to default profiles: default
+2020-01-19 22:39 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : DruidConfig--->目标方法名为:druidServlet
+2020-01-19 22:39 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : statViewServlet urls=[/druid/*]
+2020-01-19 22:39 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : DruidConfig--->目标方法名为:filterRegistrationBean
+2020-01-19 22:39 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : filterRegistrationBean urls=[/*] order=2147483647
+2020-01-19 22:39 [restartedMain] [INFO]  crw.bishe.team.config.init.MyInitConfig_InitializingBean.afterPropertiesSet(MyInitConfig_InitializingBean.java:18)ev  el crw.bishe.team.config.init.MyInitConfig_InitializingBean - 实现InitializingBean接口实现项目初始化操作
+2020-01-19 22:39 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : DruidConfig--->目标方法名为:dataSource
+2020-01-19 22:39 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : {
+	CreateTime:"2020-01-19 22:39:18",
+	ActiveCount:0,
+	PoolingCount:0,
+	CreateCount:0,
+	DestroyCount:0,
+	CloseCount:0,
+	ConnectCount:0,
+	Connections:[
+	]
+}
+
+[
+]
+2020-01-19 22:39 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : SwaggerConfig--->目标方法名为:createRestApi
+2020-01-19 22:39 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : springfox.documentation.spring.web.plugins.Docket@2606bcb9
+2020-01-19 22:39 [restartedMain] [INFO]  org.springframework.boot.StartupInfoLogger.logStarted(StartupInfoLogger.java:61)ev  el crw.bishe.team.TeamApplication - Started TeamApplication in 10.652 seconds (JVM running for 16.371)
+2020-01-19 22:39 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : MyInitConfig_CommandLineRunner--->目标方法名为:run
+2020-01-19 22:39 [restartedMain] [INFO]  crw.bishe.team.config.init.MyInitConfig_CommandLineRunner.run(MyInitConfig_CommandLineRunner.java:20)ev  el crw.bishe.team.config.init.MyInitConfig_CommandLineRunner - 实现CommandLineRunner接口，进行项目初始化操作
+2020-01-19 22:39 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : null
+2020-01-19 22:39 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : MyInitConfig_ApplicationRunner--->目标方法名为:run
+2020-01-19 22:39 [restartedMain] [INFO]  crw.bishe.team.config.init.MyInitConfig_ApplicationRunner.run(MyInitConfig_ApplicationRunner.java:19)ev  el crw.bishe.team.config.init.MyInitConfig_ApplicationRunner - 实现ApplicationRunner接口，在项目启动完成之前初始化操作
+2020-01-19 22:39 [restartedMain] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : null
+2020-01-19 22:41 [http-nio-8080-exec-8] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : TeamController--->目标方法名为:fillAll
+2020-01-19 22:41 [http-nio-8080-exec-8] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : TeamServiceImpl--->目标方法名为:findAll
+2020-01-19 22:41 [http-nio-8080-exec-8] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : SelectAllMapper--->目标方法名为:selectAll
+2020-01-19 22:41 [http-nio-8080-exec-8] [INFO]  com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:669)ev  el com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-01-19 22:41 [http-nio-8080-exec-8] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : [crw.bishe.team.entity.Team@437db1cb]
+2020-01-19 22:41 [http-nio-8080-exec-8] [INFO]  crw.bishe.team.aop.WebLogAspect.doBefore(WebLogAspect.java:28)ev  el crw.bishe.team.aop.WebLogAspect - 调用方法 : TeamMappingImpl--->目标方法名为:toDto
+2020-01-19 22:41 [http-nio-8080-exec-8] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : TeamDto(super=crw.bishe.team.dto.TeamDto@f350dcfe, id=2, teamId=33, teamName=33, leaderId=33, teamDescribe=33, teamType=0, teamNumber=33, teamDate=Sun Feb 02 00:00:00 CST 2020, status=1, staff=string)
+2020-01-19 22:41 [http-nio-8080-exec-8] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : [TeamDto(super=crw.bishe.team.dto.TeamDto@f350dcfe, id=2, teamId=33, teamName=33, leaderId=33, teamDescribe=33, teamType=0, teamNumber=33, teamDate=Sun Feb 02 00:00:00 CST 2020, status=1, staff=string)]
+2020-01-19 22:41 [http-nio-8080-exec-8] [INFO]  crw.bishe.team.aop.WebLogAspect.doAfterReturning(WebLogAspect.java:34)ev  el crw.bishe.team.aop.WebLogAspect - 返回值 : <200 OK OK,Result(status=200, desc=处理成功, data=[TeamDto(super=crw.bishe.team.dto.TeamDto@f350dcfe, id=2, teamId=33, teamName=33, leaderId=33, teamDescribe=33, teamType=0, teamNumber=33, teamDate=Sun Feb 02 00:00:00 CST 2020, status=1, staff=string)]),[]>
