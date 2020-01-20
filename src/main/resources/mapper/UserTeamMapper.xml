@@ -5,8 +5,7 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="ut_id" jdbcType="BIGINT" property="utId" />
+    <id column="ut_id" jdbcType="BIGINT" property="utId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="team_id" jdbcType="BIGINT" property="teamId" />
     <result column="is_leader" jdbcType="TINYINT" property="isLeader" />

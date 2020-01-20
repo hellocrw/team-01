@@ -2,8 +2,8 @@ package crw.bishe.team.service;
 
 import crw.bishe.team.dto.UserDto;
 import crw.bishe.team.dtoEntityMapping.UserMapping;
-import crw.bishe.team.entity.User;
-import crw.bishe.team.mapper.UserMapper;
+import crw.bishe.team.entity.Users;
+import crw.bishe.team.mapper.UsersMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,14 +18,14 @@ import java.util.List;
  * @Time 13:49
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserssServiceImpl implements UsersService {
 
-    private final UserMapper userMapper;
+    private final UsersMapper usersMapper;
     private final UserMapping userMapping;
 
     @Autowired
-    public UserServiceImpl(UserMapper userMapper, UserMapping userMapping){
-        this.userMapper = userMapper;
+    public UserssServiceImpl(UsersMapper userMapper, UserMapping userMapping){
+        this.usersMapper = userMapper;
         this.userMapping = userMapping;
     }
 
@@ -35,14 +35,14 @@ public class UserServiceImpl implements UserService {
         if (userDto == null){
             return 0;
         }
-        return userMapper.insert(userMapping.toEntity(userDto));
+        return usersMapper.insert(userMapping.toEntity(userDto));
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int delete(String id) {
         Long key = Long.parseLong(id);
-        return userMapper.deleteByPrimaryKey(key);
+        return usersMapper.deleteByPrimaryKey(key);
     }
 
     @Override
@@ -52,15 +52,15 @@ public class UserServiceImpl implements UserService {
             return 0;
         }
         Long key = Long.parseLong(id);
-        if(userMapper.selectByPrimaryKey(key) == null){
+        if(usersMapper.selectByPrimaryKey(key) == null){
             return 0;
         }
-        return userMapper.updateByPrimaryKey(userMapping.toEntity(userDto));
+        return usersMapper.updateByPrimaryKey(userMapping.toEntity(userDto));
     }
 
     @Override
     public List<UserDto> findAll() {
-        List<User> users = userMapper.selectAll();
+        List<Users> users = usersMapper.selectAll();
         List<UserDto> userDtos = new ArrayList<>();
         users.forEach(user -> {
             UserDto userDto = userMapping.toDto(user);

@@ -9,13 +9,8 @@ public class Project {
      * ID
      */
     @Id
-    private Long id;
-
-    /**
-     * 项目ID
-     */
     @Column(name = "pro_id")
-    private String proId;
+    private Long proId;
 
     /**
      * 项目名称
@@ -108,36 +103,18 @@ public class Project {
     /**
      * 获取ID
      *
-     * @return id - ID
+     * @return pro_id - ID
      */
-    public Long getId() {
-        return id;
+    public Long getProId() {
+        return proId;
     }
 
     /**
      * 设置ID
      *
-     * @param id ID
+     * @param proId ID
      */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * 获取项目ID
-     *
-     * @return pro_id - 项目ID
-     */
-    public String getProId() {
-        return proId;
-    }
-
-    /**
-     * 设置项目ID
-     *
-     * @param proId 项目ID
-     */
-    public void setProId(String proId) {
+    public void setProId(Long proId) {
         this.proId = proId;
     }
 

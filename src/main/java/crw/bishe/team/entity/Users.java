@@ -2,19 +2,14 @@ package crw.bishe.team.entity;
 
 import javax.persistence.*;
 
-@Table(name = "user")
-public class User {
+@Table(name = "users")
+public class Users {
     /**
      * ID
      */
     @Id
-    private Long id;
-
-    /**
-     * 用户ID
-     */
     @Column(name = "user_id")
-    private String userId;
+    private Long userId;
 
     /**
      * 用户名称
@@ -84,36 +79,18 @@ public class User {
     /**
      * 获取ID
      *
-     * @return id - ID
+     * @return user_id - ID
      */
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
     /**
      * 设置ID
      *
-     * @param id ID
+     * @param userId ID
      */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * 获取用户ID
-     *
-     * @return user_id - 用户ID
-     */
-    public String getUserId() {
-        return userId;
-    }
-
-    /**
-     * 设置用户ID
-     *
-     * @param userId 用户ID
-     */
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

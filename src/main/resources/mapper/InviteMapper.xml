@@ -5,7 +5,7 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="id" jdbcType="BIGINT" property="id" />
+    <id column="invite_id" jdbcType="BIGINT" property="inviteId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="team_id" jdbcType="BIGINT" property="teamId" />
     <result column="date" jdbcType="DATE" property="date" />

@@ -9,7 +9,8 @@ public class Invite {
      * ID
      */
     @Id
-    private Long id;
+    @Column(name = "invite_id")
+    private Long inviteId;
 
     /**
      * 队长ID
@@ -36,19 +37,19 @@ public class Invite {
     /**
      * 获取ID
      *
-     * @return id - ID
+     * @return invite_id - ID
      */
-    public Long getId() {
-        return id;
+    public Long getInviteId() {
+        return inviteId;
     }
 
     /**
      * 设置ID
      *
-     * @param id ID
+     * @param inviteId ID
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setInviteId(Long inviteId) {
+        this.inviteId = inviteId;
     }
 
     /**

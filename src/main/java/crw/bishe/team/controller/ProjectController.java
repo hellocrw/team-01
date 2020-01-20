@@ -1,6 +1,7 @@
 package crw.bishe.team.controller;
 
 import crw.bishe.team.dto.ProjectDto;
+import crw.bishe.team.dto.TeamDto;
 import crw.bishe.team.service.ProjectService;
 import crw.bishe.team.vo.Result;
 import io.swagger.annotations.Api;
@@ -35,28 +36,18 @@ public class ProjectController {
     }
 
     @ApiOperation(value = "查找所有项目信息")
-    @GetMapping("")
-    public ResponseEntity<Result> findAll(){
-        try{
-            List<ProjectDto> teamDtos = projectService.findAll();
-            return new ResponseEntity<>(new Result(200, "处理成功", teamDtos), HttpStatus.OK);
-        }catch (Exception e){
-            log.info(e.toString());
-            return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
-        }
+    @GetMapping("/All")
+    public ResponseEntity<Result<List<ProjectDto>>> findAll(){
+        List<ProjectDto> projectDtos = projectService.findAll();
+        return new ResponseEntity<>(new Result(200, "处理成功", projectDtos), HttpStatus.OK);
     }
 
     @ApiOperation(value = "新增项目信息")
     @PostMapping("")
     public ResponseEntity<Result> create(@ApiParam(value = "项目信息") @RequestBody @Validated ProjectDto projectDto){
-        try{
-            int res = projectService.create(projectDto);
-            if(res > 0){
-                return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
-            }
-        }catch (Exception e){
-            log.info(e.toString());
-            return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
+        int res = projectService.create(projectDto);
+        if(res > 0){
+            return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
         }
         return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
     }
@@ -65,14 +56,9 @@ public class ProjectController {
     @PutMapping("/{id}")
     public ResponseEntity<Result> update(@ApiParam(value = "项目ID") @PathVariable(name = "id") String id ,
                                          @ApiParam(value = "项目信息") @RequestBody @Validated ProjectDto projectDto){
-        try{
-            int res = projectService.update(projectDto, id);
-            if(res > 0){
-                return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
-            }
-        }catch (Exception e){
-            log.info(e.toString());
-            return new ResponseEntity<>(new Result("处理失败"),HttpStatus.BAD_REQUEST);
+        int res = projectService.update(projectDto, id);
+        if(res > 0){
+            return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
         }
         return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
     }
@@ -80,13 +66,9 @@ public class ProjectController {
     @ApiOperation(value = "删除项目信息")
     @DeleteMapping("/{id}")
     public ResponseEntity<Result> delete(@ApiParam(value = "项目ID") @PathVariable(name = "id") String id){
-        try{
-            int res = projectService.delete(id);
-            if(res > 0){
-                return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
-            }
-        }catch (Exception e){
-            return new ResponseEntity<>(new Result("处理失败"),HttpStatus.BAD_REQUEST);
+        int res = projectService.delete(id);
+        if(res > 0){
+            return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
         }
         return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
     }

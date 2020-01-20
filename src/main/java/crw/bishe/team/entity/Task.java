@@ -9,11 +9,6 @@ public class Task {
      * ID
      */
     @Id
-    private Long id;
-
-    /**
-     * 任务ID
-     */
     @Column(name = "task_id")
     private Long taskId;
 
@@ -80,34 +75,16 @@ public class Task {
     /**
      * 获取ID
      *
-     * @return id - ID
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * 设置ID
-     *
-     * @param id ID
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * 获取任务ID
-     *
-     * @return task_id - 任务ID
+     * @return task_id - ID
      */
     public Long getTaskId() {
         return taskId;
     }
 
     /**
-     * 设置任务ID
+     * 设置ID
      *
-     * @param taskId 任务ID
+     * @param taskId ID
      */
     public void setTaskId(Long taskId) {
         this.taskId = taskId;

@@ -17,10 +17,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class TaskDto {
 
-    @ApiModelProperty(position = 1, value = "ID", required = true)
-    private String id;
 
-    @ApiModelProperty(position = 2, value = "任务ID")
+    @ApiModelProperty(position = 2, value = "任务ID", required = true)
     private String taskId;
 
     @ApiModelProperty(position = 3, value = "团队ID")

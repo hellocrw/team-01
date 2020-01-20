@@ -16,10 +16,8 @@ import lombok.ToString;
 @ApiModel(description = "团队基本信息")
 public class TeamDto {
 
-    @ApiModelProperty(position = 1, value = "ID", required = true)
-    private String id;
 
-    @ApiModelProperty(position = 2, value = "团队ID")
+    @ApiModelProperty(position = 2, value = "团队ID", required = true)
     private String teamId;
 
     @ApiModelProperty(position = 3, value = "团队名称")

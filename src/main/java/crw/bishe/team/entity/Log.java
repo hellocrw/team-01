@@ -9,11 +9,6 @@ public class Log {
      * ID
      */
     @Id
-    private Long id;
-
-    /**
-     * 日志ID
-     */
     @Column(name = "log_id")
     private Long logId;
 
@@ -47,34 +42,16 @@ public class Log {
     /**
      * 获取ID
      *
-     * @return id - ID
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * 设置ID
-     *
-     * @param id ID
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * 获取日志ID
-     *
-     * @return log_id - 日志ID
+     * @return log_id - ID
      */
     public Long getLogId() {
         return logId;
     }
 
     /**
-     * 设置日志ID
+     * 设置ID
      *
-     * @param logId 日志ID
+     * @param logId ID
      */
     public void setLogId(Long logId) {
         this.logId = logId;

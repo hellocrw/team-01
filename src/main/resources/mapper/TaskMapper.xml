@@ -5,8 +5,7 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="task_id" jdbcType="BIGINT" property="taskId" />
+    <id column="task_id" jdbcType="BIGINT" property="taskId" />
     <result column="team_id" jdbcType="BIGINT" property="teamId" />
     <result column="pro_id" jdbcType="BIGINT" property="proId" />
     <result column="task_create_time" jdbcType="DATE" property="taskCreateTime" />

@@ -10,7 +10,7 @@ import java.util.List;
  * @Date Created in 2020/1/19 0019
  * @Time 13:48
  */
-public interface UserService {
+public interface UsersService {
     /**
      * 增加用户信息
      * @param userDto

@@ -3,6 +3,7 @@ package crw.bishe.team.controller;
 import io.swagger.annotations.Api;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,15 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @Time 14:00
  */
 @Api(tags = {"测试接口"})
+@RequestMapping("/api/test")
 @RestController
 @ResponseBody
 public class TestController {
-    @GetMapping("")
-    @PreAuthorize("hasRole('USER')")
-    public String demo(){
-        return "首页";
-    }
 
+    /**
+     * 权限ADMIN
+     * @return
+     */
     @GetMapping(value = "/out")
     @PreAuthorize("hasRole('ADMIN')")
     public String logout(){

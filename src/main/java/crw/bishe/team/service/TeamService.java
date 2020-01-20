@@ -1,6 +1,8 @@
 package crw.bishe.team.service;
 
+import crw.bishe.team.dto.MyTeamDto;
 import crw.bishe.team.dto.TeamDto;
+import crw.bishe.team.entity.Team;
 
 import java.util.List;
 
@@ -38,4 +40,10 @@ public interface TeamService {
      * @return
      */
     List<TeamDto> findAll();
+
+    /**
+     *
+     * @return
+     */
+    List<MyTeamDto> getMyTeamList(String id);
 }

@@ -20,12 +20,11 @@ public class ProjectMappingImpl implements ProjectMapping {
             return null;
         }
         Project project = new Project();
-        if(projectDto.getId() == null || projectDto.getId() == ""){
-            project.setId(null);
+        if(projectDto.getProId() == null || projectDto.getProId() == ""){
+            project.setTeamId(null);
         }else{
-            project.setId(Long.parseLong(projectDto.getId()));
+            project.setProId(Long.parseLong(projectDto.getProId()));
         }
-        project.setProId(projectDto.getProId());
         project.setProName(projectDto.getProName());
         project.setLeaderName(projectDto.getLeaderName());
         project.setProDescribe(projectDto.getProDescribe());
@@ -50,8 +49,7 @@ public class ProjectMappingImpl implements ProjectMapping {
             return null;
         }
         ProjectDto projectDto = new ProjectDto();
-        projectDto.setId(String.valueOf(project.getId()));
-        projectDto.setProId(project.getProId());
+        projectDto.setProId(String.valueOf(project.getProId()));
         projectDto.setProName(project.getProName());
         projectDto.setLeaderName(project.getLeaderName());
         projectDto.setProDescribe(project.getProDescribe());

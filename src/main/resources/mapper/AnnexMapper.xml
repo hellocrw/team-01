@@ -5,7 +5,7 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="id" jdbcType="BIGINT" property="id" />
+    <id column="annex_id" jdbcType="BIGINT" property="annexId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="link" jdbcType="VARCHAR" property="link" />
   </resultMap>

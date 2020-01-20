@@ -1,7 +1,7 @@
 package crw.bishe.team.dtoEntityMapping;
 
 import crw.bishe.team.dto.UserDto;
-import crw.bishe.team.entity.User;
+import crw.bishe.team.entity.Users;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,17 +13,16 @@ import org.springframework.stereotype.Component;
 @Component("userMapping")
 public class UserMappingImpl implements UserMapping {
     @Override
-    public User toEntity(UserDto userDto) {
+    public Users toEntity(UserDto userDto) {
         if(userDto == null ){
             return null;
         }
-        User user = new User();
-        if(userDto.getId()==null || userDto.getId() == ""){
-            user.setId(null);
+        Users user = new Users();
+        if(userDto.getUserId()==null || userDto.getUserId() == ""){
+            user.setUserId(null);
         }else{
-            user.setId(Long.parseLong(userDto.getId()));
+            user.setUserId(Long.parseLong(userDto.getUserId()));
         }
-        user.setUserId(userDto.getUserId());
         user.setUserName(userDto.getUserName());
         user.setUserAvatar(userDto.getUserAvatar());
         user.setGender(Byte.parseByte(userDto.getGender()));
@@ -40,12 +39,11 @@ public class UserMappingImpl implements UserMapping {
     }
 
     @Override
-    public UserDto toDto(User user) {
+    public UserDto toDto(Users user) {
         if(user == null){
             return null;
         }
         UserDto userDto = new UserDto();
-        userDto.setId(String.valueOf(user.getId()));
         userDto.setUserName(user.getUserName());
         userDto.setUserAvatar(user.getUserAvatar());
         userDto.setGender(String.valueOf(user.getGender()));

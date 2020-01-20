@@ -16,10 +16,7 @@ import lombok.ToString;
 @ApiModel(description = "项目基本信息")
 public class ProjectDto {
 
-    @ApiModelProperty(position = 1, value = "ID", required = true)
-    private String id;
-
-    @ApiModelProperty(position = 2, value = "项目ID")
+    @ApiModelProperty(position = 2, value = "项目ID", required = true)
     private String proId;
 
     @ApiModelProperty(position = 3, value = "项目名称")

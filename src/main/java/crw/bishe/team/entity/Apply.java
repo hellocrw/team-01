@@ -9,19 +9,14 @@ public class Apply {
      * ID
      */
     @Id
-    private Long id;
+    @Column(name = "apply_id")
+    private Long applyId;
 
     /**
      * 团队ID号
      */
     @Column(name = "team_id")
     private Long teamId;
-
-    /**
-     * 申请ID号
-     */
-    @Column(name = "apply_id")
-    private Long applyId;
 
     /**
      * 申请人ID号
@@ -59,19 +54,19 @@ public class Apply {
     /**
      * 获取ID
      *
-     * @return id - ID
+     * @return apply_id - ID
      */
-    public Long getId() {
-        return id;
+    public Long getApplyId() {
+        return applyId;
     }
 
     /**
      * 设置ID
      *
-     * @param id ID
+     * @param applyId ID
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setApplyId(Long applyId) {
+        this.applyId = applyId;
     }
 
     /**
@@ -90,24 +85,6 @@ public class Apply {
      */
     public void setTeamId(Long teamId) {
         this.teamId = teamId;
-    }
-
-    /**
-     * 获取申请ID号
-     *
-     * @return apply_id - 申请ID号
-     */
-    public Long getApplyId() {
-        return applyId;
-    }
-
-    /**
-     * 设置申请ID号
-     *
-     * @param applyId 申请ID号
-     */
-    public void setApplyId(Long applyId) {
-        this.applyId = applyId;
     }
 
     /**

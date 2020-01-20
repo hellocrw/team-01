@@ -1,5 +1,6 @@
 package crw.bishe.team.controller;
 
+import crw.bishe.team.dto.MyTeamDto;
 import crw.bishe.team.dto.TeamDto;
 import crw.bishe.team.service.TeamService;
 import crw.bishe.team.vo.Result;
@@ -35,29 +36,19 @@ public class TeamController {
     }
 
     @ApiOperation(value = "查找所有团队信息")
-    @GetMapping("")
-    public ResponseEntity<Result> fillAll(){
-        try{
-            List<TeamDto> teamDtos = teamService.findAll();
-            return new ResponseEntity<>(new Result(200, "处理成功", teamDtos), HttpStatus.OK);
-        }catch (Exception e){
-            log.info(e.toString());
-            return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
-        }
+    @GetMapping("/All")
+    public ResponseEntity<Result<TeamDto>> findAll(){
+        List<TeamDto> teamDtos = teamService.findAll();
+        return new ResponseEntity<>(new Result(200, "处理成功", teamDtos), HttpStatus.OK);
     }
 
     @ApiOperation(value = "新增团队信息")
     @PostMapping("")
     public ResponseEntity<Result> create(@ApiParam(value = "团队信息") @RequestBody @Validated TeamDto teamDto){
-        try{
-            int res = teamService.create(teamDto);
-            if(res > 0){
-                return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
-            }else{
-                return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
-            }
-        }catch (Exception e){
-            log.info(e.toString());
+        int res = teamService.create(teamDto);
+        if(res > 0){
+            return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
+        }else{
             return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
         }
     }
@@ -66,32 +57,29 @@ public class TeamController {
     @PutMapping("/{id}")
     public ResponseEntity<Result> update(@ApiParam(value = "团队ID") @PathVariable(name = "id") String id ,
                                          @ApiParam(value = "团队信息") @RequestBody @Validated TeamDto teamDto){
-        try{
-            int res = teamService.update(teamDto, id);
-            if(res > 0){
-                return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
-            }else{
-                return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
-            }
-        }catch (Exception e){
-            log.info(e.toString());
-            return new ResponseEntity<>(new Result("处理失败"),HttpStatus.BAD_REQUEST);
+        int res = teamService.update(teamDto, id);
+        if(res > 0){
+            return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
         }
     }
 
     @ApiOperation(value = "删除团队信息")
     @DeleteMapping("/{id}")
     public ResponseEntity<Result> delete(@ApiParam(value = "团队ID") @PathVariable(name = "id") String id){
-        try{
-            int res = teamService.delete(id);
-            if(res > 0){
-                return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
-            }else{
-                return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
-            }
-        }catch (Exception e){
-            return new ResponseEntity<>(new Result("处理失败"),HttpStatus.BAD_REQUEST);
+        int res = teamService.delete(id);
+        if(res > 0){
+            return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
         }
     }
 
+    @ApiOperation(value = "通过用户ID获取团队列表")
+    @GetMapping("/getMyTeamList/{id}")
+    public ResponseEntity<Result<List<MyTeamDto>>> getMyTeamList(@PathVariable(name = "id") String id){
+        List<MyTeamDto> res = teamService.getMyTeamList(id);
+        return new ResponseEntity<>(new Result<>(200,"处理成功",res), HttpStatus.OK);
+    }
 }

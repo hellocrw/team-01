@@ -2,6 +2,8 @@ package crw.bishe.team.vo;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @Description 结果格式
  * @Author crw
@@ -30,4 +32,5 @@ public class Result<T> {
         this.desc = desc;
         this.data = data;
     }
+
 }

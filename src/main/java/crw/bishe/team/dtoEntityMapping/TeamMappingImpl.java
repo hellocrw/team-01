@@ -20,12 +20,11 @@ public class TeamMappingImpl implements TeamMapping {
             return null;
         }
         Team team = new Team();
-        if(teamDto.getId() == null || teamDto.getId() == ""){
-            team.setId(null);
+        if(teamDto.getTeamId() == null || teamDto.getTeamId() == ""){
+            team.setTeamId(null);
         }else{
-            team.setId(Long.parseLong(teamDto.getId()));
+            team.setTeamId(Long.parseLong(teamDto.getTeamId()));
         }
-        team.setTeamId(Long.parseLong(teamDto.getTeamId()));
         team.setTeamName(teamDto.getTeamName());
         team.setLeaderId(Long.parseLong(teamDto.getLeaderId()));
         team.setTeamDescribe(teamDto.getTeamDescribe());
@@ -43,7 +42,6 @@ public class TeamMappingImpl implements TeamMapping {
             return null;
         }
         TeamDto teamDto = new TeamDto();
-        teamDto.setId(String.valueOf(team.getId()));
         teamDto.setTeamId(String.valueOf(team.getTeamId()));
         teamDto.setTeamName(team.getTeamName());
         teamDto.setLeaderId(String.valueOf(team.getLeaderId()));

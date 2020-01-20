@@ -8,7 +8,8 @@ public class Annex {
      * ID
      */
     @Id
-    private Long id;
+    @Column(name = "annex_id")
+    private Long annexId;
 
     /**
      * 用户ID
@@ -24,19 +25,19 @@ public class Annex {
     /**
      * 获取ID
      *
-     * @return id - ID
+     * @return annex_id - ID
      */
-    public Long getId() {
-        return id;
+    public Long getAnnexId() {
+        return annexId;
     }
 
     /**
      * 设置ID
      *
-     * @param id ID
+     * @param annexId ID
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setAnnexId(Long annexId) {
+        this.annexId = annexId;
     }
 
     /**

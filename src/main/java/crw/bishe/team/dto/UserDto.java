@@ -16,10 +16,7 @@ import lombok.ToString;
 @ApiModel(description = "用户基本信息")
 public class UserDto {
 
-    @ApiModelProperty(position = 1, value = "ID", required = true)
-    private String id;
-
-    @ApiModelProperty(position = 2, value = "用户ID")
+    @ApiModelProperty(position = 2, value = "用户ID", required = true)
     private String userId;
 
     @ApiModelProperty(position = 3, value = "用户名称")

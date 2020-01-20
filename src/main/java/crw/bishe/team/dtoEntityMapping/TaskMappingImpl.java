@@ -21,12 +21,11 @@ public class TaskMappingImpl implements TaskMapping {
             return null;
         }
         Task task = new Task();
-        if(taskDto.getId() == null || taskDto.getId() == ""){
-            task.setId(null);
+        if(taskDto.getTaskId() == null || taskDto.getTaskId() == ""){
+            task.setTaskId(null);
         }else{
-            task.setId(Long.parseLong(taskDto.getId()));
+            task.setTaskId(Long.parseLong(taskDto.getTaskId()));
         }
-        task.setTaskId(Long.parseLong(taskDto.getTaskId()));
         task.setTeamId(Long.parseLong(taskDto.getTeamId()));
         task.setProId(Long.parseLong(taskDto.getProId()));
         task.setTaskCreateTime(Date.valueOf(taskDto.getTaskCreateTime()));
@@ -46,7 +45,6 @@ public class TaskMappingImpl implements TaskMapping {
             return null;
         }
         TaskDto taskDto = new TaskDto();
-        taskDto.setId(String.valueOf(task.getId()));
         taskDto.setTaskId(String.valueOf(task.getTaskId()));
         taskDto.setTeamId(String.valueOf(task.getTeamId()));
         taskDto.setProId(String.valueOf(task.getProId()));

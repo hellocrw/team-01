@@ -29,7 +29,7 @@
                              type="XMLMAPPER"/>
 
         <table tableName="user_team"/>
-        <table tableName="user"/>
+        <table tableName="users"/>
         <table tableName="university"/>
         <table tableName="team"/>
         <table tableName="task"/>

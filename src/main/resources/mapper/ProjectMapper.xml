@@ -5,8 +5,7 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="pro_id" jdbcType="VARCHAR" property="proId" />
+    <id column="pro_id" jdbcType="BIGINT" property="proId" />
     <result column="pro_name" jdbcType="VARCHAR" property="proName" />
     <result column="leader_name" jdbcType="VARCHAR" property="leaderName" />
     <result column="pro_describe" jdbcType="VARCHAR" property="proDescribe" />

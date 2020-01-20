@@ -24,6 +24,7 @@ import java.util.List;
 @Api(tags = {"任务管理"})
 @RestController
 @Log4j2
+@RequestMapping("/api/task")
 public class TaskController {
 
     private final TaskService taskService;
@@ -34,8 +35,8 @@ public class TaskController {
     }
 
     @ApiOperation(value = "查找所有任务信息")
-    @GetMapping("")
-    public ResponseEntity<Result> findAll(){
+    @GetMapping("/All")
+    public ResponseEntity<Result<List<TaskDto>>> findAll(){
         try{
             List<TaskDto> taskDtos = taskService.findAll();
             return new ResponseEntity<>(new Result(200, "处理成功", taskDtos), HttpStatus.OK);
@@ -48,14 +49,9 @@ public class TaskController {
     @ApiOperation(value = "新增任务信息")
     @PostMapping("")
     public ResponseEntity<Result> create(@ApiParam(value = "项目信息") @RequestBody @Validated TaskDto taskDto){
-        try{
-            int res = taskService.create(taskDto);
-            if(res > 0){
-                return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
-            }
-        }catch (Exception e){
-            log.info(e.toString());
-            return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
+        int res = taskService.create(taskDto);
+        if(res > 0){
+            return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
         }
         return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
     }
@@ -64,14 +60,9 @@ public class TaskController {
     @PutMapping("/{id}")
     public ResponseEntity<Result> update(@ApiParam(value = "项目ID") @PathVariable(name = "id") String id ,
                                          @ApiParam(value = "项目信息") @RequestBody @Validated TaskDto taskDto){
-        try{
-            int res = taskService.update(taskDto, id);
-            if(res > 0){
-                return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
-            }
-        }catch (Exception e){
-            log.info(e.toString());
-            return new ResponseEntity<>(new Result("处理失败"),HttpStatus.BAD_REQUEST);
+        int res = taskService.update(taskDto, id);
+        if(res > 0){
+            return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
         }
         return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
     }
@@ -79,14 +70,11 @@ public class TaskController {
     @ApiOperation(value = "删除任务信息")
     @DeleteMapping("/{id}")
     public ResponseEntity<Result> delete(@ApiParam(value = "项目ID") @PathVariable(name = "id") String id){
-        try{
-            int res = taskService.delete(id);
-            if(res > 0){
-                return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
-            }
-        }catch (Exception e){
-            return new ResponseEntity<>(new Result("处理失败"),HttpStatus.BAD_REQUEST);
+        int res = taskService.delete(id);
+        if(res > 0){
+            return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
         }
         return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
     }
+
 }
