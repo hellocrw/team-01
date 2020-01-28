@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description Description 项目管理
@@ -73,4 +74,10 @@ public class ProjectController {
         return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
     }
 
+    @ApiOperation(value = "通过团队ID->获取我的项目信息")
+    @GetMapping("/getMyProList/{team_id}")
+    public ResponseEntity<Result> getMyProList(@ApiParam(value = "团队ID号") @PathVariable(name = "team_id") String id){
+        List<Map> myProList = projectService.getMyProList(id);
+        return new ResponseEntity<>(new Result(200, "获取我的项目信息成功", myProList), HttpStatus.OK);
+    }
 }

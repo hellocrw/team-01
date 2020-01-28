@@ -3,6 +3,7 @@ package crw.bishe.team.service;
 import crw.bishe.team.dto.ProjectDto;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description Description
@@ -38,4 +39,6 @@ public interface ProjectService {
      * @return
      */
     List<ProjectDto> findAll();
+
+    public List<Map> getMyProList(String team_id);
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description Description
@@ -63,9 +64,9 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public List<MyTeamDto> getMyTeamList(String id) {
+    public List<Map> getMyTeamList(String id) {
         Long key = Long.parseLong(id);
-        List<MyTeamDto> teamList = teamMapper.getMyTeamList(key);
+        List<Map> teamList = teamMapper.getMyTeamList(key);
         return teamList;
     }
 }

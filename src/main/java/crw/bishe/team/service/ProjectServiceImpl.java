@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description Description
@@ -62,5 +63,11 @@ public class ProjectServiceImpl implements ProjectService {
         List<ProjectDto> projectDtos = new ArrayList<>();
         projects.forEach(project -> projectDtos.add(projectMapping.toDto(project)));
         return projectDtos;
+    }
+
+    @Override
+    public List<Map> getMyProList(String team_id) {
+        int key = Integer.parseInt(team_id);
+        return projectMapper.getMyProList(key);
     }
 }

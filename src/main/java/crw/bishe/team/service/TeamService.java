@@ -5,6 +5,7 @@ import crw.bishe.team.dto.TeamDto;
 import crw.bishe.team.entity.Team;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description Description
@@ -45,5 +46,5 @@ public interface TeamService {
      *
      * @return
      */
-    List<MyTeamDto> getMyTeamList(String id);
+    List<Map> getMyTeamList(String id);
 }

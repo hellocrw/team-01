@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description Description 团队管理
@@ -78,8 +79,8 @@ public class TeamController {
 
     @ApiOperation(value = "通过用户ID获取团队列表")
     @GetMapping("/getMyTeamList/{id}")
-    public ResponseEntity<Result<List<MyTeamDto>>> getMyTeamList(@PathVariable(name = "id") String id){
-        List<MyTeamDto> res = teamService.getMyTeamList(id);
+    public ResponseEntity<Result<List<Map>>> getMyTeamList(@PathVariable(name = "id") String id){
+        List<Map> res = teamService.getMyTeamList(id);
         return new ResponseEntity<>(new Result<>(200,"处理成功",res), HttpStatus.OK);
     }
 }
