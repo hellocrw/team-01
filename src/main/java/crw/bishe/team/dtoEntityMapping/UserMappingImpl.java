@@ -1,7 +1,7 @@
 package crw.bishe.team.dtoEntityMapping;
 
 import crw.bishe.team.dto.UserDto;
-import crw.bishe.team.entity.Users;
+import crw.bishe.team.entity.UserInfo;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,11 +13,11 @@ import org.springframework.stereotype.Component;
 @Component("userMapping")
 public class UserMappingImpl implements UserMapping {
     @Override
-    public Users toEntity(UserDto userDto) {
+    public UserInfo toEntity(UserDto userDto) {
         if(userDto == null ){
             return null;
         }
-        Users user = new Users();
+        UserInfo user = new UserInfo();
         if(userDto.getUserId()==null || userDto.getUserId() == ""){
             user.setUserId(null);
         }else{
@@ -39,7 +39,7 @@ public class UserMappingImpl implements UserMapping {
     }
 
     @Override
-    public UserDto toDto(Users user) {
+    public UserDto toDto(UserInfo user) {
         if(user == null){
             return null;
         }

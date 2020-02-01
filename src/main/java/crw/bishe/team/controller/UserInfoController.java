@@ -1,7 +1,7 @@
 package crw.bishe.team.controller;
 
 import crw.bishe.team.dto.UserDto;
-import crw.bishe.team.service.UsersService;
+import crw.bishe.team.service.UserInfoService;
 import crw.bishe.team.vo.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,12 +25,12 @@ import java.util.List;
 @RequestMapping("/api/user")
 @RestController
 @Log4j2
-public class UsesrController {
+public class UserInfoController {
 
-    private final UsersService usersService;
+    private final UserInfoService usersService;
 
     @Autowired
-    public UsesrController(UsersService usersService){
+    public UserInfoController(UserInfoService usersService){
         this.usersService = usersService;
     }
 

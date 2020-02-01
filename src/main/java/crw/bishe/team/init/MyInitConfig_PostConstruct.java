@@ -1,4 +1,4 @@
-package crw.bishe.team.config.init;
+package crw.bishe.team.init;
 
 import org.springframework.stereotype.Component;
 

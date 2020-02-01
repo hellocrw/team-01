@@ -2,8 +2,8 @@ package crw.bishe.team.entity;
 
 import javax.persistence.*;
 
-@Table(name = "pw")
-public class Pw {
+@Table(name = "user_roles")
+public class UserRoles {
     /**
      * ID
      */

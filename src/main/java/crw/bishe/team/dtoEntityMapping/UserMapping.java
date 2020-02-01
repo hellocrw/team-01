@@ -1,7 +1,7 @@
 package crw.bishe.team.dtoEntityMapping;
 
 import crw.bishe.team.dto.UserDto;
-import crw.bishe.team.entity.Users;
+import crw.bishe.team.entity.UserInfo;
 
 /**
  * @Description Description
@@ -16,12 +16,12 @@ public interface UserMapping {
      * @param userDto
      * @return user
      */
-    Users toEntity(UserDto userDto);
+    UserInfo toEntity(UserDto userDto);
 
     /**
      * 将用户entity 转为 dto
      * @param user
      * @return userDto
      */
-    UserDto toDto(Users user);
+    UserDto toDto(UserInfo user);
 }

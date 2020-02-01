@@ -28,7 +28,7 @@
                              targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="user_team"/>
+        <!--<table tableName="user_team"/>
         <table tableName="users"/>
         <table tableName="university"/>
         <table tableName="team"/>
@@ -40,7 +40,11 @@
         <table tableName="log"/>
         <table tableName="invite"/>
         <table tableName="apply"/>
-        <table tableName="annex"/>
+        <table tableName="annex"/>-->
+
+        <table tableName="user_info"/>
+        <table tableName="user_roles"/>
+
 
     </context>
 </generatorConfiguration>

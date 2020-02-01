@@ -1,4 +1,4 @@
-package crw.bishe.team.config.init;
+package crw.bishe.team.init;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.CommandLineRunner;
