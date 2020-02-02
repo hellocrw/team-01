@@ -14,7 +14,7 @@ springboot security
 
 IDEA如何debug操作
 
-
+git pull测试你的IDEA是否能够拉取GitHub上的代码
 
 
 
