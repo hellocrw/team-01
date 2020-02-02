@@ -1,5 +1,6 @@
 package crw.bishe.team.service;
 
+import crw.bishe.team.dto.MyTaskDto;
 import crw.bishe.team.dto.TaskDto;
 
 import java.util.List;
@@ -38,4 +39,11 @@ public interface TaskService {
      * @return
      */
     List<TaskDto> findAll();
+
+    /**
+     * 根据用户ID查看用户任务信息
+     * @param user_id
+     * @return
+     */
+    List<MyTaskDto> getMyTaskList(String user_id);
 }

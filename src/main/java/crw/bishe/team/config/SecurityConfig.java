@@ -7,7 +7,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -42,9 +41,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().ignoringAntMatchers("/druid*/");
+        http.csrf().disable();
+//        http.csrf().ignoringAntMatchers("/druid/*");
         http.authorizeRequests().
-                antMatchers("/static/**","/druid/*").permitAll().anyRequest().authenticated()
+                antMatchers("/api/test/**","/static/**","/druid/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
                 .formLogin().permitAll()
@@ -56,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
+        auth.userDetailsService(userRolesService);
         auth.authenticationProvider(authenticationProvider());
 
        /*// 在内存中创建用户和密码，模拟数据库实现用户登录
@@ -69,10 +71,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider
-                = new DaoAuthenticationProvider();
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userRolesService);
-        authProvider.setPasswordEncoder(passwordEncoder());
+        authProvider.setPasswordEncoder(passwordEncoder());  // 设置密码加密方式
         return authProvider;
     }
 

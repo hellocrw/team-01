@@ -1,5 +1,6 @@
 package crw.bishe.team.service;
 
+import crw.bishe.team.dto.MyTaskDto;
 import crw.bishe.team.dto.TaskDto;
 import crw.bishe.team.dtoEntityMapping.TaskMapping;
 import crw.bishe.team.entity.Task;
@@ -53,5 +54,15 @@ public class TaskServiceImpl implements TaskService {
         List<TaskDto> taskDtos = new ArrayList<>();
         tasks.forEach(task -> taskDtos.add(taskMapping.toDto(task)));
         return taskDtos;
+    }
+
+    @Override
+    public List<MyTaskDto> getMyTaskList(String user_id) {
+        Long key = Long.parseLong(user_id);
+        List<Task> tasks = taskMapper.getMyTaskList(key);
+        System.out.println(tasks.get(1).getTaskStartTime());
+        List<MyTaskDto> myTaskDtos = new ArrayList<>();
+        tasks.forEach(task -> myTaskDtos.add(taskMapping.toMyTaskDto(task)));
+        return myTaskDtos;
     }
 }

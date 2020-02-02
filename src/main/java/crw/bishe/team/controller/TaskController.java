@@ -1,5 +1,6 @@
 package crw.bishe.team.controller;
 
+import crw.bishe.team.dto.MyTaskDto;
 import crw.bishe.team.dto.TaskDto;
 import crw.bishe.team.service.TaskService;
 import crw.bishe.team.vo.Result;
@@ -75,6 +76,13 @@ public class TaskController {
             return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
         }
         return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
+    }
+
+    @ApiOperation(value = "根据用户ID获取任务信息")
+    @GetMapping("/getMyTaskList/{id}")
+    public ResponseEntity<Result> getMyTaskList(@ApiParam(value = "用户ID号") @PathVariable(name = "id") String user_id){
+        List<MyTaskDto> taskDtos = taskService.getMyTaskList(user_id);
+        return new ResponseEntity<>(new Result(200, "根据用户ID获取任务信息", taskDtos), HttpStatus.OK);
     }
 
 }

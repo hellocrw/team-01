@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description Description 用户管理
@@ -78,4 +79,5 @@ public class UserInfoController {
             return new ResponseEntity<>(new Result("错误"), HttpStatus.BAD_REQUEST);
         }
     }
+
 }

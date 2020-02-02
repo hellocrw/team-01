@@ -12,4 +12,13 @@ public interface TeamMapper extends Mapper<Team> {
     @Select("SELECT team.`team_id`,team.`team_name`,user_team.`is_leader`,team.`team_describe` FROM team , user_info ,user_team WHERE team.`team_id` = user_team.`team_id` AND user_team.`user_id` = user_info.`user_id`AND user_info.`user_id` = #{id}")
     List<Map> getMyTeamList(Long id);
 
+    /**
+     * 通过团队ID获取该团队的成员列表
+     * @param teamId
+     * @return
+     */
+    @Select("SELECT user_team.`ut_id`,user_team.`team_id`,user_info.`user_id`,user_info.`user_name` FROM user_team, user_info \n" +
+            "WHERE user_team.`user_id`=user_info.`user_id` AND  user_team.`team_id`= #{arg0};")
+    List<Map> getMemberList(Long teamId);
+
 }

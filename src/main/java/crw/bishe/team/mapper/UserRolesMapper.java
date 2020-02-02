@@ -25,9 +25,16 @@ public interface UserRolesMapper extends Mapper<UserRoles> {
 
     /**
      * 用户注册
-     * @param username
-     * @param password
+     * @param userRoles
      */
-    @Select("INSERT INTO user_roles(username, PASSWORD) VALUE (#{arg0},#{arg1});")
-    void register(String username, String password);
+    @Select("INSERT INTO user_roles VALUE (#arg0);")
+    void register(UserRoles userRoles);
+
+    /**
+     * 根据用户名获取用户权限
+     * @param username
+     * @return
+     */
+    @Select("SELECT user_roles.`auth` FROM user_roles WHERE user_roles.`username`=#{arg0};")
+    String getRoles(String username);
 }

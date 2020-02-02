@@ -1,5 +1,6 @@
 package crw.bishe.team.service;
 
+import crw.bishe.team.dto.UserRolesDto;
 import crw.bishe.team.entity.UserRoles;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -12,10 +13,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface UserRolesService extends UserDetailsService {
     /**
      * 用户注册
-     * @param username
-     * @param password
+     * @param userRolesDto
      * @return
      */
-    String register(String username, String password);
+    String register(UserRolesDto userRolesDto);
+
+    /**
+     * 获取用户权限
+     * @param username 用户名
+     * @return
+     */
+    String getAuth(String username);
 
 }

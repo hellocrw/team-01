@@ -83,4 +83,11 @@ public class TeamController {
         List<Map> res = teamService.getMyTeamList(id);
         return new ResponseEntity<>(new Result<>(200,"处理成功",res), HttpStatus.OK);
     }
+
+    @ApiOperation(value = "通过团队ID获取团队成员")
+    @GetMapping("/getMemberList/{teamId}")
+    public ResponseEntity<Result> getMemberList(@PathVariable("teamId") String teamId){
+        List<Map> res = teamService.getMemberList(teamId);
+        return new ResponseEntity<>(new Result(200, "获取团队成员", res),HttpStatus.OK);
+    }
 }

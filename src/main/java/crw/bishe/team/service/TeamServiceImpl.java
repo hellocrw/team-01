@@ -69,4 +69,10 @@ public class TeamServiceImpl implements TeamService {
         List<Map> teamList = teamMapper.getMyTeamList(key);
         return teamList;
     }
+    @Override
+    public List<Map> getMemberList(String teamId) {
+        Long key = Long.parseLong(teamId);
+        return teamMapper.getMemberList(key);
+    }
+
 }

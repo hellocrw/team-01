@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -14,7 +15,7 @@ import java.util.Collection;
  * @Date Created in 2020/1/31 0031
  * @Time 14:44
  */
-public class SecurityUserDto extends UserRoles implements UserDetails {
+public class SecurityUserDto extends UserRoles implements UserDetails, Serializable {
 
     private static final long serialVersionUID = 991427483790164981L;
 

@@ -24,7 +24,7 @@ public class TestController {
      * @return
      */
     @GetMapping(value = "/out")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public String logout(){
         return "退出成功";
     }

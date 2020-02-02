@@ -1,5 +1,6 @@
 package crw.bishe.team.controller;
 
+import crw.bishe.team.dto.UserRolesDto;
 import crw.bishe.team.entity.UserRoles;
 import crw.bishe.team.service.UserRolesService;
 import crw.bishe.team.vo.Result;
@@ -26,8 +27,8 @@ public class UserRolesController {
 
     @ApiOperation("用户注册功能")
     @PostMapping("/register")
-    public ResponseEntity<Result> register(@RequestParam("username") String username, @RequestParam("password") String password){
-        String res = userDetailsService.register(username, password);
+    public ResponseEntity<Result> register(@RequestBody UserRolesDto userRolesDto){
+        String res = userDetailsService.register(userRolesDto);
         return new ResponseEntity<>(new Result(200, res), HttpStatus.OK);
     }
 

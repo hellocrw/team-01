@@ -1,5 +1,6 @@
 package crw.bishe.team.dtoEntityMapping;
 
+import crw.bishe.team.dto.MyTaskDto;
 import crw.bishe.team.dto.TaskDto;
 import crw.bishe.team.entity.Task;
 import org.springframework.stereotype.Component;
@@ -32,7 +33,7 @@ public class TaskMappingImpl implements TaskMapping {
         task.setTaskStartTime(Date.valueOf(taskDto.getTaskStartTime()));
         task.setTaskEndTime(Date.valueOf(taskDto.getTaskEndTime()));
         task.setTaskContent(taskDto.getTaskContent());
-        task.setTaskCharger(taskDto.getTaskCharger());
+        task.setUserId(Long.parseLong(taskDto.getUserId()));
         task.setSubTaskId(Long.parseLong(taskDto.getSubTaskId()));
         task.setTaskStatus(Byte.parseByte(taskDto.getTaskStatus()));
         task.setTaskMark(taskDto.getTaskMark());
@@ -52,10 +53,23 @@ public class TaskMappingImpl implements TaskMapping {
         taskDto.setTaskStartTime(String.valueOf(task.getTaskStartTime()));
         taskDto.setTaskEndTime(String.valueOf(task.getTaskEndTime()));
         taskDto.setTaskContent(task.getTaskContent());
-        taskDto.setTaskCharger(task.getTaskCharger());
+        taskDto.setUserId(String.valueOf(task.getUserId()));
         taskDto.setSubTaskId(String.valueOf(task.getSubTaskId()));
         taskDto.setTaskStatus(String.valueOf(task.getTaskStatus()));
         taskDto.setTaskMark(task.getTaskMark());
         return taskDto;
+    }
+
+    @Override
+    public MyTaskDto toMyTaskDto(Task task) {
+        if (task == null){
+            return null;
+        }
+        MyTaskDto myTaskDto = new MyTaskDto();
+        myTaskDto.setTaskId(String.valueOf(task.getTaskId()));
+        myTaskDto.setTaskStartTime(String.valueOf(task.getTaskStartTime()));
+        myTaskDto.setTaskEndTime(String.valueOf(task.getTaskEndTime()));
+        myTaskDto.setTaskStatus(String.valueOf(task.getTaskStatus()));
+        return myTaskDto;
     }
 }

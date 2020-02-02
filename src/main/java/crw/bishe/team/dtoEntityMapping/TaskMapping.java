@@ -1,5 +1,6 @@
 package crw.bishe.team.dtoEntityMapping;
 
+import crw.bishe.team.dto.MyTaskDto;
 import crw.bishe.team.dto.TaskDto;
 import crw.bishe.team.entity.Task;
 
@@ -24,4 +25,11 @@ public interface TaskMapping {
      * @return dto
      */
     TaskDto toDto(Task task);
+
+    /**
+     * 将将task的entity转为myTaskDto
+     * @param task
+     * @return
+     */
+    MyTaskDto toMyTaskDto(Task task);
 }

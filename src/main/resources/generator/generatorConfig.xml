@@ -28,23 +28,7 @@
                              targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <!--<table tableName="user_team"/>
-        <table tableName="users"/>
-        <table tableName="university"/>
-        <table tableName="team"/>
-        <table tableName="task"/>
-        <table tableName="sub_task"/>
-        <table tableName="role"/>
-        <table tableName="pw"/>
-        <table tableName="project"/>
-        <table tableName="log"/>
-        <table tableName="invite"/>
-        <table tableName="apply"/>
-        <table tableName="annex"/>-->
-
-        <table tableName="user_info"/>
-        <table tableName="user_roles"/>
-
+        <table tableName="dictionary"/>
 
     </context>
 </generatorConfiguration>

@@ -1,5 +1,8 @@
 package crw.bishe.team.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import javax.persistence.*;
 
@@ -34,6 +37,7 @@ public class Task {
      * 任务开始时间
      */
     @Column(name = "task_start_time")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date taskStartTime;
 
     /**
@@ -49,10 +53,10 @@ public class Task {
     private String taskContent;
 
     /**
-     * 任务负责人
+     * 任务负责人ID
      */
-    @Column(name = "task_charger")
-    private String taskCharger;
+    @Column(name = "user_id")
+    private Long userId;
 
     /**
      * 子任务ID
@@ -201,19 +205,19 @@ public class Task {
     /**
      * 获取任务负责人
      *
-     * @return task_charger - 任务负责人
+     * @return userId - 任务负责人ID
      */
-    public String getTaskCharger() {
-        return taskCharger;
+    public Long getUserId() {
+        return userId;
     }
 
     /**
      * 设置任务负责人
      *
-     * @param taskCharger 任务负责人
+     * @param userId 任务负责人ID
      */
-    public void setTaskCharger(String taskCharger) {
-        this.taskCharger = taskCharger;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     /**

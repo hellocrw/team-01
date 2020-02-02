@@ -1,5 +1,8 @@
 spring:
   datasource:
+#    druid:
+#      stat-view-servlet.enabled: true
+#      stat-view-servlet.url-pattern: /druid/*
     #   数据源基本配置
     username: root
     password: 123456
@@ -30,6 +33,7 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
   jackson:
     default-property-inclusion: non_null
+#    date-format: java.text.SimpleDateFormat
   thymeleaf:
     cache: false
   mvc:

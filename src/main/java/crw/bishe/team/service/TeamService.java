@@ -47,4 +47,11 @@ public interface TeamService {
      * @return
      */
     List<Map> getMyTeamList(String id);
+
+    /**
+     * 通过团队ID获取团队的成员
+     * @param teamId
+     * @return
+     */
+    List<Map> getMemberList(String teamId);
 }
