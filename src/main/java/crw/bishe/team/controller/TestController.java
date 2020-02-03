@@ -21,7 +21,7 @@ import java.util.List;
  * @Time 14:00
  */
 @Api(tags = {"测试接口"})
-@RequestMapping("/api/test")
+@RequestMapping("/api/admin")
 @RestController
 @ResponseBody
 public class TestController {
@@ -30,31 +30,32 @@ public class TestController {
     private ProjectMapper projectMapper;
 
     /**
-     * 分页查询测试
+     * 分页查询测试,需要USER权限才能访问
      * @return
      */
     @GetMapping(value = "/pages")
+    @PreAuthorize("hasAuthority('User')")
     public List<Project> projectPages(){
         return projectMapper.selectByRowBounds(new Project(),new RowBounds(1,3));
     }
 
     /**
-     * 权限ADMIN
+     * 测试方法，权限ADMIN
      * @return
      */
-    @GetMapping(value = "/out")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping(value = "/test")
+    @PreAuthorize("hasAuthority('ADMIN')")  // 基于方法的权限控制，拥有ADMIN权限才可以访问
     public String logout(){
-        return "退出成功";
+        return "测试方法,拥有ADMIN权限的用户才能访问";
     }
 
     /**
      * 需要登录，但不需要角色
      * @return
      */
-    @GetMapping(value = "/fail")
+    @GetMapping(value = "/login")
     @PreAuthorize("isAuthenticated()")
     public String fail(){
-        return "失败";
+        return "登录测试，需要登录才能访问";
     }
 }

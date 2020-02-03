@@ -40,6 +40,6 @@ public class VisitorContextListener implements ServletContextListener {
         ServletContext application = servletContextEvent.getServletContext();
         // 在关闭服务器之前，将网站当前的访问量存入数据库
         Integer clientCount = (Integer) application.getAttribute("clientCount");
-        projectMapper.updateSeeNum(clientCount, 1);
+        projectMapper.updateWebNum(clientCount, 1);
     }
 }

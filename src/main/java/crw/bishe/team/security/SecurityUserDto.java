@@ -1,6 +1,8 @@
 package crw.bishe.team.security;
 
 import crw.bishe.team.entity.UserRoles;
+import crw.bishe.team.mapper.UserRolesMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +19,9 @@ import java.util.Collection;
  */
 public class SecurityUserDto extends UserRoles implements UserDetails, Serializable {
 
+//    @Autowired
+//    private UserRolesMapper userRolesMapper;
+
     private static final long serialVersionUID = 991427483790164981L;
 
     public SecurityUserDto(UserRoles userRoles){
@@ -32,6 +37,7 @@ public class SecurityUserDto extends UserRoles implements UserDetails, Serializa
         String username = this.getUsername();
         if(username != null){
             SimpleGrantedAuthority authority = new SimpleGrantedAuthority(username);
+//            String authority = userRolesMapper.getRoles(username);
             authorities.add(authority);
         }
         return authorities;

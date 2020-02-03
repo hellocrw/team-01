@@ -14,7 +14,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
@@ -43,8 +46,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 //        http.csrf().ignoringAntMatchers("/druid/*");
-        http.authorizeRequests().
-                antMatchers("/api/test/**","/static/**","/druid/**").permitAll()
+        http.authorizeRequests()
+                .antMatchers("/api/**").authenticated() //需要登录才能访问URL -> /api/** 资源
+                .antMatchers("/api/admin/**").hasAnyAuthority("ADMIN")  // 有ADMIN权限才能访问URL -> localhost:8080/api/admin/** 资源
+                .antMatchers("/api/test/**","/static/**","/druid/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
@@ -56,10 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //定义认证规则
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
         auth.userDetailsService(userRolesService);
         auth.authenticationProvider(authenticationProvider());
-
        /*// 在内存中创建用户和密码，模拟数据库实现用户登录
         auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())  //在Spring Security 5.0中新增了多种加密方式，也改变了密码的格式
                 .withUser("admin").password(new BCryptPasswordEncoder().encode("123456")).roles("ADMIN")
@@ -116,19 +119,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         };
     }
 
-   /* @Bean
+    /*@Bean
     @Override
     public UserDetailsService userDetailsService() {    //用户登录实现
-        return new UserDetailsService() {
-            @Autowired
-            private UserRolesMapper userRolesMapper;
-
-            @Override
-            public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-                UserRoles user = userRolesMapper.isExistUserName(s);
-                if (user == null) throw new UsernameNotFoundException("Username " + s + " not found");
-                return new SecurityUserDto(user);
-            }
-        };
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+        manager.createUser(User.withUsername("admin").password("123456").authorities("ADMIN").build());
+        manager.createUser(User.withUsername("crw").password("123456").authorities("USER").build());
+        return manager;
     }*/
 }

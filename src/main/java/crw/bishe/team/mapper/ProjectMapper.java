@@ -36,12 +36,21 @@ public interface ProjectMapper extends Mapper<Project> {
     @Select("SELECT see_num FROM project WHERE pro_id = #{arg0};")
     Integer getSeeNum(Integer pro_id);
 
+
     /**
-     * 更新当前项目的查看人数
+     * Web的查看人数
      * @param seeNum
+     * @param pro_id
      */
     @Select("UPDATE project SET see_num= #{arg0} WHERE pro_id=#{arg1};")
-    void updateSeeNum(Integer seeNum, Integer pro_id);
+    void updateWebNum(Integer seeNum, Integer pro_id);
+
+    /**
+     * 项目查看人数+1
+     * @param pro_id
+     */
+    @Select("UPDATE project SET see_num=see_num+1 WHERE pro_id=#{arg0};")
+    void updateSeeNum(Integer pro_id);
 
     /**
      * 查找校内所有项目
