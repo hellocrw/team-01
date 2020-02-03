@@ -1,6 +1,9 @@
 package crw.bishe.team.service;
 
 import crw.bishe.team.dto.ProjectDto;
+import crw.bishe.team.entity.Project;
+import crw.bishe.team.vo.PageRequest;
+import crw.bishe.team.vo.PageResult;
 
 import java.util.List;
 import java.util.Map;
@@ -40,5 +43,17 @@ public interface ProjectService {
      */
     List<ProjectDto> findAll();
 
-    public List<Map> getMyProList(String team_id);
+    /**
+     * 根据团队ID获取项目
+     * @param team_id
+     * @return
+     */
+    List<Map> getMyProList(String team_id);
+
+    /**
+     * 分页查询项目信息
+     * @param pageRequest
+     * @return
+     */
+    PageResult proPages(PageRequest pageRequest);
 }

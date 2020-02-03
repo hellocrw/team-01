@@ -28,4 +28,49 @@ public interface ProjectMapper extends Mapper<Project> {
      * @return
      */
     List<Map> getAllProBySelect(String pro_name,String pro_type, String university);
+
+    /**
+     * 查看当前项目的查看人数
+     * @return
+     */
+    @Select("SELECT see_num FROM project WHERE pro_id = #{arg0};")
+    Integer getSeeNum(Integer pro_id);
+
+    /**
+     * 更新当前项目的查看人数
+     * @param seeNum
+     */
+    @Select("UPDATE project SET see_num= #{arg0} WHERE pro_id=#{arg1};")
+    void updateSeeNum(Integer seeNum, Integer pro_id);
+
+    /**
+     * 查找校内所有项目
+     * @param user_id
+     * @return
+     */
+    @Select("SELECT * FROM project WHERE project.`team_id` IN (SELECT team.`team_id` FROM team WHERE team_scope IN (SELECT university FROM user_info WHERE user_info.`user_id`=#{arg0}));")
+    List<Project> getProjectByUniversity(Long user_id);
+
+    /**
+     * 按类型查找校内所有项目
+     * @param user_id
+     * @param pro_type
+     * @return
+     */
+    @Select("SELECT * FROM project WHERE project.`team_id` IN (SELECT team.`team_id` FROM team WHERE team_scope IN (SELECT university FROM user_info WHERE user_info.`user_id`=#{arg0})) AND pro_type= #{arg1};")
+    List<Project> getProjectByUniversityType(Long user_id, String pro_type);
+
+    /**
+     * 查看校外所有项目
+     * @return
+     */
+    @Select("SELECT * FROM project WHERE project.`team_id` IN (SELECT team.`team_id` FROM team WHERE team_scope='所有学校');")
+    List<Project> getProjectByOtherUniversity();
+
+    /**
+     * 按类型查找校外所有项目
+     * @return
+     */
+    @Select("SELECT * FROM project WHERE project.`team_id` IN (SELECT team.`team_id` FROM team WHERE team_scope='所有学校') AND pro_type=#{arg0};")
+    List<Project> getProjectByOtherUniversityType(String pro_type);
 }

@@ -21,4 +21,19 @@ public interface TeamMapper extends Mapper<Team> {
             "WHERE user_team.`user_id`=user_info.`user_id` AND  user_team.`team_id`= #{arg0};")
     List<Map> getMemberList(Long teamId);
 
+    /**
+     * 查找校内所有团队
+     * @param user_id
+     * @return
+     */
+    @Select("SELECT * FROM team WHERE team_scope IN (SELECT university FROM user_info WHERE user_info.`user_id` = #{arg0};")
+    List<Team> getTeamsByUniversity(Long user_id);
+
+    /**
+     * 查找校外所有团队
+     * @return
+     */
+    @Select("SELECT * FROM team WHERE team_scope = '所有学校';")
+    List<Team> getTeamsByOtherUniversity();
+
 }

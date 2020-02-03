@@ -1,9 +1,14 @@
 package crw.bishe.team.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import crw.bishe.team.dto.ProjectDto;
 import crw.bishe.team.dtoEntityMapping.ProjectMapping;
 import crw.bishe.team.entity.Project;
 import crw.bishe.team.mapper.ProjectMapper;
+import crw.bishe.team.utils.PageUtils;
+import crw.bishe.team.vo.PageRequest;
+import crw.bishe.team.vo.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,5 +74,18 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Map> getMyProList(String team_id) {
         int key = Integer.parseInt(team_id);
         return projectMapper.getMyProList(key);
+    }
+
+    @Override
+    public PageResult proPages(PageRequest pageRequest) {
+        return PageUtils.getPageResult(getPageInfo(pageRequest));
+    }
+
+    public PageInfo getPageInfo(PageRequest pageRequest) {
+        int pageNum = Integer.parseInt(pageRequest.getPageNum());
+        int pageSize = Integer.parseInt(pageRequest.getPageSize());
+        PageHelper.startPage(pageNum, pageSize);
+        List<Project> projects = projectMapper.selectAll();
+        return new PageInfo<>(projects);
     }
 }

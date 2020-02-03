@@ -2,7 +2,10 @@ package crw.bishe.team.controller;
 
 import crw.bishe.team.dto.ProjectDto;
 import crw.bishe.team.dto.TeamDto;
+import crw.bishe.team.entity.Project;
 import crw.bishe.team.service.ProjectService;
+import crw.bishe.team.vo.PageRequest;
+import crw.bishe.team.vo.PageResult;
 import crw.bishe.team.vo.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -79,5 +82,12 @@ public class ProjectController {
     public ResponseEntity<Result> getMyProList(@ApiParam(value = "团队ID号") @PathVariable(name = "team_id") String id){
         List<Map> myProList = projectService.getMyProList(id);
         return new ResponseEntity<>(new Result(200, "获取我的项目信息成功", myProList), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "分页查询项目信息")
+    @PostMapping("/getVisit")
+    public ResponseEntity<Result> getVisitNum(@RequestBody PageRequest pageRequest){
+        PageResult pageResult =  projectService.proPages(pageRequest);
+        return new ResponseEntity<>(new Result(200,"分页查询项目信息", pageResult), HttpStatus.OK);
     }
 }
