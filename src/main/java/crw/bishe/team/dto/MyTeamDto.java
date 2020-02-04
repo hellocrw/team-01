@@ -13,8 +13,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class MyTeamDto {
     private String id;
-    private String team_id;
-    private String team_name;
-    private String is_leader;
-    private String team_describe;
+    private String teamId;
+    private String teamName;
+    private String isLeader;
+    private String teamDescribe;
 }

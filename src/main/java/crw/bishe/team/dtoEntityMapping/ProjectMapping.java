@@ -1,7 +1,11 @@
 package crw.bishe.team.dtoEntityMapping;
 
 import crw.bishe.team.dto.ProjectDto;
+import crw.bishe.team.dto.TeamProDto;
 import crw.bishe.team.entity.Project;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Description Description
@@ -24,4 +28,5 @@ public interface ProjectMapping {
      * @return dto
      */
     ProjectDto toDto(Project project);
+
 }

@@ -1,5 +1,7 @@
 package crw.bishe.team.mapper;
 
+import crw.bishe.team.dto.MemberDto;
+import crw.bishe.team.dto.MyTeamDto;
 import crw.bishe.team.entity.Team;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
@@ -10,7 +12,7 @@ import java.util.Map;
 public interface TeamMapper extends Mapper<Team> {
 
     @Select("SELECT team.`team_id`,team.`team_name`,user_team.`is_leader`,team.`team_describe` FROM team , user_info ,user_team WHERE team.`team_id` = user_team.`team_id` AND user_team.`user_id` = user_info.`user_id`AND user_info.`user_id` = #{id}")
-    List<Map> getMyTeamList(Long id);
+    List<MyTeamDto> getMyTeamList(Long id);
 
     /**
      * 通过团队ID获取该团队的成员列表
@@ -19,7 +21,7 @@ public interface TeamMapper extends Mapper<Team> {
      */
     @Select("SELECT user_team.`ut_id`,user_team.`team_id`,user_info.`user_id`,user_info.`user_name` FROM user_team, user_info \n" +
             "WHERE user_team.`user_id`=user_info.`user_id` AND  user_team.`team_id`= #{arg0};")
-    List<Map> getMemberList(Long teamId);
+    List<MemberDto> getMemberList(Long teamId);
 
     /**
      * 查找校内所有团队
@@ -35,5 +37,21 @@ public interface TeamMapper extends Mapper<Team> {
      */
     @Select("SELECT * FROM team WHERE team_scope = '所有学校';")
     List<Team> getTeamsByOtherUniversity();
+
+    /**
+     * 获取我的团队以及团队对应的项目
+     * @param user_id
+     * @return
+     */
+    @Select("SELECT DISTINCT team.`team_id`,  team.`team_name`,project.* FROM team,project,user_team WHERE user_team.`user_id` = #{arg0} AND user_team.`is_leader`= 1 AND user_team.`team_id`=team.`team_id` AND project.`team_id`=team.`team_id`;  ")
+    List<String> getMyTeamAndProject(Long user_id);
+
+    /**
+     * 获取我参加团队以及团队对应的项目
+     * @param user_id
+     * @return
+     */
+    @Select("SELECT DISTINCT team.`team_id`,  team.`team_name`,project.* FROM team,project,user_team WHERE user_team.`user_id` = #{arg0} AND user_team.`is_leader`= 0 AND user_team.`team_id`=team.`team_id` AND project.`team_id`=team.`team_id`; ")
+    List<String> getMyJoinTeamAndProject(Long user_id);
 
 }

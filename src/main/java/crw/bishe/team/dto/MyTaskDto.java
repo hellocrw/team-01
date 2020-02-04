@@ -25,6 +25,9 @@ public class MyTaskDto {
     @ApiModelProperty(position = 7, value = "任务结束时间")
     private String taskEndTime;
 
+    @ApiModelProperty(position = 8, value = "任务内容")
+    private String taskContent;
+
     @ApiModelProperty(position = 10, value = "任务状态")
     private String taskStatus;
 }

@@ -1,7 +1,9 @@
 package crw.bishe.team.controller;
 
+import crw.bishe.team.dto.MyProListDto;
 import crw.bishe.team.dto.ProjectDto;
 import crw.bishe.team.dto.TeamDto;
+import crw.bishe.team.dto.TeamProDto;
 import crw.bishe.team.entity.Project;
 import crw.bishe.team.service.ProjectService;
 import crw.bishe.team.vo.PageRequest;
@@ -80,7 +82,7 @@ public class ProjectController {
     @ApiOperation(value = "通过团队ID->获取我的项目信息")
     @GetMapping("/getMyProList/{team_id}")
     public ResponseEntity<Result> getMyProList(@ApiParam(value = "团队ID号") @PathVariable(name = "team_id") String id){
-        List<Map> myProList = projectService.getMyProList(id);
+        List<MyProListDto> myProList = projectService.getMyProList(id);
         return new ResponseEntity<>(new Result(200, "获取我的项目信息成功", myProList), HttpStatus.OK);
     }
 
@@ -89,5 +91,13 @@ public class ProjectController {
     public ResponseEntity<Result> getVisitNum(@RequestBody PageRequest pageRequest){
         PageResult pageResult =  projectService.proPages(pageRequest);
         return new ResponseEntity<>(new Result(200,"分页查询项目信息", pageResult), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "根据查询条件获取所有队伍信息")
+    @GetMapping("/getTeamProList")
+    public ResponseEntity<Result> getTeamProList(){
+        List<TeamProDto> res = projectService.getTeamProList();
+        System.out.println("根据查询条件获取所有队伍信息" + res.get(0));
+        return new ResponseEntity<>(new Result(200, "根据查询条件获取所有队伍信息", res), HttpStatus.OK);
     }
 }

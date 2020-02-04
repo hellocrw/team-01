@@ -1,5 +1,6 @@
 package crw.bishe.team.service;
 
+import crw.bishe.team.dto.MemberDto;
 import crw.bishe.team.dto.MyTeamDto;
 import crw.bishe.team.dto.TeamDto;
 import crw.bishe.team.entity.Team;
@@ -46,12 +47,12 @@ public interface TeamService {
      *
      * @return
      */
-    List<Map> getMyTeamList(String id);
+    List<MyTeamDto> getMyTeamList(String id);
 
     /**
      * 通过团队ID获取团队的成员
      * @param teamId
      * @return
      */
-    List<Map> getMemberList(String teamId);
+    List<MemberDto> getMemberList(String teamId);
 }

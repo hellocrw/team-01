@@ -1,5 +1,6 @@
 package crw.bishe.team.controller;
 
+import crw.bishe.team.dto.MemberDto;
 import crw.bishe.team.dto.MyTeamDto;
 import crw.bishe.team.dto.TeamDto;
 import crw.bishe.team.service.TeamService;
@@ -79,15 +80,15 @@ public class TeamController {
 
     @ApiOperation(value = "通过用户ID获取团队列表")
     @GetMapping("/getMyTeamList/{id}")
-    public ResponseEntity<Result<List<Map>>> getMyTeamList(@PathVariable(name = "id") String id){
-        List<Map> res = teamService.getMyTeamList(id);
+    public ResponseEntity<Result<List<MyTeamDto>>> getMyTeamList(@PathVariable(name = "id") String id){
+        List<MyTeamDto> res = teamService.getMyTeamList(id);
         return new ResponseEntity<>(new Result<>(200,"处理成功",res), HttpStatus.OK);
     }
 
     @ApiOperation(value = "通过团队ID获取团队成员")
     @GetMapping("/getMemberList/{teamId}")
     public ResponseEntity<Result> getMemberList(@PathVariable("teamId") String teamId){
-        List<Map> res = teamService.getMemberList(teamId);
+        List<MemberDto> res = teamService.getMemberList(teamId);
         return new ResponseEntity<>(new Result(200, "获取团队成员", res),HttpStatus.OK);
     }
 }

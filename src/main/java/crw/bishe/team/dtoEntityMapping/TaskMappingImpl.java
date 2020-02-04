@@ -69,6 +69,7 @@ public class TaskMappingImpl implements TaskMapping {
         myTaskDto.setTaskId(String.valueOf(task.getTaskId()));
         myTaskDto.setTaskStartTime(String.valueOf(task.getTaskStartTime()));
         myTaskDto.setTaskEndTime(String.valueOf(task.getTaskEndTime()));
+        myTaskDto.setTaskContent(task.getTaskContent());
         myTaskDto.setTaskStatus(String.valueOf(task.getTaskStatus()));
         return myTaskDto;
     }

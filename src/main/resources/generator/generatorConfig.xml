@@ -28,7 +28,7 @@
                              targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="dictionary"/>
+        <table tableName="pro_type"/>
 
     </context>
 </generatorConfiguration>

@@ -1,5 +1,6 @@
 package crw.bishe.team.service;
 
+import crw.bishe.team.dto.MemberDto;
 import crw.bishe.team.dto.MyTeamDto;
 import crw.bishe.team.dto.TeamDto;
 import crw.bishe.team.dtoEntityMapping.TeamMapping;
@@ -64,13 +65,13 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public List<Map> getMyTeamList(String id) {
+    public List<MyTeamDto> getMyTeamList(String id) {
         Long key = Long.parseLong(id);
-        List<Map> teamList = teamMapper.getMyTeamList(key);
+        List<MyTeamDto> teamList = teamMapper.getMyTeamList(key);
         return teamList;
     }
     @Override
-    public List<Map> getMemberList(String teamId) {
+    public List<MemberDto> getMemberList(String teamId) {
         Long key = Long.parseLong(teamId);
         return teamMapper.getMemberList(key);
     }

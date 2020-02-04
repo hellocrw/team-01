@@ -2,7 +2,9 @@ package crw.bishe.team.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import crw.bishe.team.dto.MyProListDto;
 import crw.bishe.team.dto.ProjectDto;
+import crw.bishe.team.dto.TeamProDto;
 import crw.bishe.team.dtoEntityMapping.ProjectMapping;
 import crw.bishe.team.entity.Project;
 import crw.bishe.team.mapper.ProjectMapper;
@@ -71,7 +73,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<Map> getMyProList(String team_id) {
+    public List<MyProListDto> getMyProList(String team_id) {
         int key = Integer.parseInt(team_id);
         return projectMapper.getMyProList(key);
     }
@@ -79,6 +81,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public PageResult proPages(PageRequest pageRequest) {
         return PageUtils.getPageResult(getPageInfo(pageRequest));
+    }
+
+    @Override
+    public List<TeamProDto> getTeamProList() {
+        return projectMapper.getTeamProInfo();
     }
 
     public PageInfo getPageInfo(PageRequest pageRequest) {

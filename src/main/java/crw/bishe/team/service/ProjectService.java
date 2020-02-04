@@ -1,6 +1,8 @@
 package crw.bishe.team.service;
 
+import crw.bishe.team.dto.MyProListDto;
 import crw.bishe.team.dto.ProjectDto;
+import crw.bishe.team.dto.TeamProDto;
 import crw.bishe.team.entity.Project;
 import crw.bishe.team.vo.PageRequest;
 import crw.bishe.team.vo.PageResult;
@@ -48,7 +50,7 @@ public interface ProjectService {
      * @param team_id
      * @return
      */
-    List<Map> getMyProList(String team_id);
+    List<MyProListDto> getMyProList(String team_id);
 
     /**
      * 分页查询项目信息
@@ -56,4 +58,10 @@ public interface ProjectService {
      * @return
      */
     PageResult proPages(PageRequest pageRequest);
+
+    /**
+     * 根据查询条件获取所有队伍信息
+     * @return
+     */
+    List<TeamProDto> getTeamProList();
 }

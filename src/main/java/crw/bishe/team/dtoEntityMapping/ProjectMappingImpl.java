@@ -1,10 +1,13 @@
 package crw.bishe.team.dtoEntityMapping;
 
 import crw.bishe.team.dto.ProjectDto;
+import crw.bishe.team.dto.TeamProDto;
 import crw.bishe.team.entity.Project;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Description Description
@@ -67,4 +70,5 @@ public class ProjectMappingImpl implements ProjectMapping {
         projectDto.setStaff(String.valueOf(project.getStaff()));
         return projectDto;
     }
+
 }
