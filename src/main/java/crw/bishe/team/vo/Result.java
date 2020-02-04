@@ -1,5 +1,7 @@
 package crw.bishe.team.vo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -11,9 +13,13 @@ import java.util.List;
  * @Time 21:43
  */
 @Data
+@ApiModel(value = "返回数据格式")
 public class Result<T> {
+    @ApiModelProperty(position = 1, value = "状态码")
     private int status;
+    @ApiModelProperty(position = 2, value = "信息描述")
     private String desc;
+    @ApiModelProperty(position = 3, value = "数据")
     private T data;
 
     public Result(){}

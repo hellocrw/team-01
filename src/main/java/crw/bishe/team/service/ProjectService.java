@@ -4,6 +4,7 @@ import crw.bishe.team.dto.MyProListDto;
 import crw.bishe.team.dto.ProjectDto;
 import crw.bishe.team.dto.TeamProDto;
 import crw.bishe.team.entity.Project;
+import crw.bishe.team.vo.ConditionRequest;
 import crw.bishe.team.vo.PageRequest;
 import crw.bishe.team.vo.PageResult;
 
@@ -64,4 +65,11 @@ public interface ProjectService {
      * @return
      */
     List<TeamProDto> getTeamProList();
+
+    /**
+     * 根据查询条件查询项目信息
+     * @param conditionRequest
+     * @return
+     */
+    List<TeamProDto> getProBySelectCondition(ConditionRequest conditionRequest);
 }

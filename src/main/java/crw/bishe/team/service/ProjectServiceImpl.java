@@ -9,6 +9,7 @@ import crw.bishe.team.dtoEntityMapping.ProjectMapping;
 import crw.bishe.team.entity.Project;
 import crw.bishe.team.mapper.ProjectMapper;
 import crw.bishe.team.utils.PageUtils;
+import crw.bishe.team.vo.ConditionRequest;
 import crw.bishe.team.vo.PageRequest;
 import crw.bishe.team.vo.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +87,14 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<TeamProDto> getTeamProList() {
         return projectMapper.getTeamProInfo();
+    }
+
+    @Override
+    public List<TeamProDto> getProBySelectCondition(ConditionRequest conditionRequest) {
+        if (conditionRequest.getKey() != null || conditionRequest.getKey() != ""){
+            conditionRequest.setKey("%"+conditionRequest.getKey()+"%");
+        }
+        return projectMapper.getProBySelectCondition(conditionRequest);
     }
 
     public PageInfo getPageInfo(PageRequest pageRequest) {

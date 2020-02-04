@@ -6,6 +6,7 @@ import crw.bishe.team.dto.TeamDto;
 import crw.bishe.team.dto.TeamProDto;
 import crw.bishe.team.entity.Project;
 import crw.bishe.team.service.ProjectService;
+import crw.bishe.team.vo.ConditionRequest;
 import crw.bishe.team.vo.PageRequest;
 import crw.bishe.team.vo.PageResult;
 import crw.bishe.team.vo.Result;
@@ -99,5 +100,12 @@ public class ProjectController {
         List<TeamProDto> res = projectService.getTeamProList();
         System.out.println("根据查询条件获取所有队伍信息" + res.get(0));
         return new ResponseEntity<>(new Result(200, "根据查询条件获取所有队伍信息", res), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "根据条件查询项目信息")
+    @PostMapping("/getProBySelectCondition")
+    public ResponseEntity<Result> getProBySelectCondition(@RequestBody ConditionRequest conditionRequest){
+        List<TeamProDto> teamProDtos = projectService.getProBySelectCondition(conditionRequest);
+        return new ResponseEntity<>(new Result(200, "条件查询项目信息", teamProDtos), HttpStatus.OK);
     }
 }

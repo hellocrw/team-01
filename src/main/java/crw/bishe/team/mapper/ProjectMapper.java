@@ -3,6 +3,7 @@ package crw.bishe.team.mapper;
 import crw.bishe.team.dto.MyProListDto;
 import crw.bishe.team.dto.TeamProDto;
 import crw.bishe.team.entity.Project;
+import crw.bishe.team.vo.ConditionRequest;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -10,6 +11,20 @@ import java.util.List;
 import java.util.Map;
 
 public interface ProjectMapper extends Mapper<Project> {
+
+    /**
+     * 根据查询条件查询项目信息
+     * @param conditionRequest
+     * @return
+     */
+    @Select("SELECT * FROM (SELECT project.* , team.`team_describe`,team.`team_scope` AS university FROM project,team WHERE project.`team_id` = team.`team_id`) AS selectPro\n" +
+            "WHERE \n" +
+            "(CASE WHEN #{university} IS NOT NULL and #{university} != '' THEN selectPro.university=#{university} ELSE (1=1) END)\n" +
+            "AND \n" +
+            "(CASE WHEN #{proType} IS NOT NULL and #{proType} != ''THEN selectPro.pro_type=#{proType} ELSE (1=1) END)\n" +
+            "AND\n" +
+            "(CASE WHEN #{key} IS NOT NULL and #{key} != '' THEN selectPro.pro_name LIKE #{key} ELSE (1=1) END);")
+    List<TeamProDto> getProBySelectCondition(ConditionRequest conditionRequest);
 
     @Select("SELECT project.* , team.`team_describe`,team_scope AS university FROM project,team WHERE project.`team_id` = team.`team_id`;")
     List<TeamProDto> getTeamProInfo();
