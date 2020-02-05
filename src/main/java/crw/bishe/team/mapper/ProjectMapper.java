@@ -26,7 +26,7 @@ public interface ProjectMapper extends Mapper<Project> {
             "(CASE WHEN #{key} IS NOT NULL and #{key} != '' THEN selectPro.pro_name LIKE #{key} ELSE (1=1) END);")
     List<TeamProDto> getProBySelectCondition(ConditionRequest conditionRequest);
 
-    @Select("SELECT project.* , team.`team_describe`,team_scope AS university FROM project,team WHERE project.`team_id` = team.`team_id`;")
+    @Select("SELECT project.* ,team.`team_number` AS proNum,team.`team_type` AS proNature, team.`team_describe`,team_scope AS university FROM project,team WHERE project.`team_id` = team.`team_id`;")
     List<TeamProDto> getTeamProInfo();
 
     /**
