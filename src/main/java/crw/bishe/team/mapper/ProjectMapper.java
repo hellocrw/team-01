@@ -17,13 +17,15 @@ public interface ProjectMapper extends Mapper<Project> {
      * @param conditionRequest
      * @return
      */
-    @Select("SELECT * FROM (SELECT project.* , team.`team_describe`,team.`team_scope` AS university FROM project,team WHERE project.`team_id` = team.`team_id`) AS selectPro\n" +
+    @Select("SELECT * FROM (SELECT project.* ,team.`team_number` AS proNum,team.`team_type` AS proNature, team.`team_describe`,team.`team_scope` AS university FROM project,team WHERE project.`team_id` = team.`team_id`) AS selectPro\n" +
             "WHERE \n" +
             "(CASE WHEN #{university} IS NOT NULL and #{university} != '' THEN selectPro.university=#{university} ELSE (1=1) END)\n" +
             "AND \n" +
             "(CASE WHEN #{proType} IS NOT NULL and #{proType} != ''THEN selectPro.pro_type=#{proType} ELSE (1=1) END)\n" +
             "AND\n" +
-            "(CASE WHEN #{key} IS NOT NULL and #{key} != '' THEN selectPro.pro_name LIKE #{key} ELSE (1=1) END);")
+            "(CASE WHEN #{key} IS NOT NULL and #{key} != '' THEN selectPro.pro_name LIKE #{key} ELSE (1=1) END)\n" +
+            "AND\n" +
+            "(CASE WHEN #{proId} IS NOT NULL and #{proId} != '' THEN selectPro.pro_id=#{proId} ELSE (1=1) END);")
     List<TeamProDto> getProBySelectCondition(ConditionRequest conditionRequest);
 
     @Select("SELECT project.* ,team.`team_number` AS proNum,team.`team_type` AS proNature, team.`team_describe`,team_scope AS university FROM project,team WHERE project.`team_id` = team.`team_id`;")

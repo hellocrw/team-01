@@ -13,10 +13,12 @@ import lombok.Data;
 @Data
 @ApiModel(value = "查询条件请求参数")
 public class ConditionRequest {
-    @ApiModelProperty(position = 1, value = "学校")
+    @ApiModelProperty(position = 1, value = "项目ID")
+    private String proId;
+    @ApiModelProperty(position = 2, value = "学校")
     private String university;
-    @ApiModelProperty(position = 2, value = "项目类型")
+    @ApiModelProperty(position = 3, value = "项目类型")
     private String proType;
-    @ApiModelProperty(position = 3, value = "关键字查询")
+    @ApiModelProperty(position = 4, value = "关键字查询")
     private String key;
 }

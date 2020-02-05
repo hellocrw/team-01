@@ -94,12 +94,11 @@ public class ProjectController {
         return new ResponseEntity<>(new Result(200,"分页查询项目信息", pageResult), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "根据查询条件获取所有队伍信息")
-    @GetMapping("/getTeamProList")
-    public ResponseEntity<Result> getTeamProList(){
-        List<TeamProDto> res = projectService.getTeamProList();
-        System.out.println("根据查询条件获取所有队伍信息" + res.get(0));
-        return new ResponseEntity<>(new Result(200, "根据查询条件获取所有队伍信息", res), HttpStatus.OK);
+    @ApiOperation(value = "根据条件查询项目信息")
+    @PostMapping("/getTeamProList")
+    public ResponseEntity<Result> getTeamProList(@RequestBody ConditionRequest conditionRequest){
+        List<TeamProDto> teamProDtos = projectService.getProBySelectCondition(conditionRequest);
+        return new ResponseEntity<>(new Result(200, "根据查询条件获取所有队伍信息", teamProDtos), HttpStatus.OK);
     }
 
     @ApiOperation(value = "根据条件查询项目信息")
