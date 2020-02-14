@@ -85,3 +85,13 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+
+config:
+  jwt:
+    # 加密密钥
+    secret: secret
+    # token有效时长，单位秒
+    expire: 3600
+    # header 名称
+    headerKey: token
+    token: Authorization

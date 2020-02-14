@@ -1,5 +1,6 @@
 package crw.bishe.team.controller;
 
+import crw.bishe.team.config.JwtConfig;
 import crw.bishe.team.dto.ProjectDto;
 import crw.bishe.team.entity.Project;
 import crw.bishe.team.mapper.ProjectMapper;
@@ -7,12 +8,12 @@ import io.swagger.annotations.Api;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description Description 测试类
@@ -28,6 +29,27 @@ public class TestController {
 
     @Autowired
     private ProjectMapper projectMapper;
+
+    @Autowired
+    private JwtConfig jwtConfig;
+
+    // 拦截器直接放行，返回Token
+    @PostMapping("/login")
+    public Map<String, String> login(@RequestParam("userName") String userName,
+                                     @RequestParam("passWord") String passWord){
+        Map<String,String> result = new HashMap<>() ;
+        String token = jwtConfig.getToken(userName+passWord) ;
+        if (!StringUtils.isEmpty(token)){
+            result.put("token", token);
+        }
+        result.put("userName", userName);
+        return result;
+    }
+    // 需要 Token 验证的接口
+    @PostMapping("/info")
+    public String info (){
+        return "info" ;
+    }
 
     /**
      * 分页查询测试,需要USER权限才能访问

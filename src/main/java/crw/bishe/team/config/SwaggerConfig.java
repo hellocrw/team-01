@@ -22,17 +22,25 @@ public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
         // 添加请求参数，这里把token作为请求头部参数传入后端
-        ParameterBuilder parameterBuilder = new ParameterBuilder();
-        List<Parameter> parameters = new ArrayList<>();
-        parameterBuilder.name("Authorization").description("令牌").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
-        parameters.add(parameterBuilder.build());
-
+//        ParameterBuilder parameterBuilder = new ParameterBuilder();
+//        List<Parameter> parameters = new ArrayList<>();
+//        parameterBuilder.name("Authorization").description("令牌").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
+//        parameters.add(parameterBuilder.build());
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("crw.bishe.team.controller"))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .globalOperationParameters(setHeaderToken());
+    }
+
+    private List<Parameter> setHeaderToken() {
+        ParameterBuilder tokenPar = new ParameterBuilder();
+        List<Parameter> parameters = new ArrayList<>();
+        tokenPar.name("token").description("token").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
+        parameters.add(tokenPar.build());
+        return parameters;
     }
 
     private ApiInfo apiInfo() {
