@@ -5,6 +5,7 @@ import crw.bishe.team.entity.Team;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * @Description Description
@@ -14,6 +15,9 @@ import java.sql.Date;
  */
 @Component("teamMapping")
 public class TeamMappingImpl implements TeamMapping {
+
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
     @Override
     public Team toEntity(TeamDto teamDto) {
         if(teamDto == null ){
@@ -48,7 +52,7 @@ public class TeamMappingImpl implements TeamMapping {
         teamDto.setTeamDescribe(team.getTeamDescribe());
         teamDto.setTeamType(team.getTeamType());
         teamDto.setTeamNumber(String.valueOf(team.getTeamNumber()));
-        teamDto.setTeamDate(String.valueOf(team.getTeamDate()));
+        teamDto.setTeamDate(simpleDateFormat.format(team.getTeamDate()));
         teamDto.setStatus(String.valueOf(team.getStatus()));
         teamDto.setStaff(team.getStaff());
         return teamDto;

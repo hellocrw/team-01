@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import javax.xml.crypto.Data;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * @description Description
@@ -16,6 +17,8 @@ import java.sql.Date;
  **/
 @Component("taskMapping")
 public class TaskMappingImpl implements TaskMapping {
+
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     @Override
     public Task toEntity(TaskDto taskDto) {
         if (taskDto == null) {
@@ -49,9 +52,9 @@ public class TaskMappingImpl implements TaskMapping {
         taskDto.setTaskId(String.valueOf(task.getTaskId()));
         taskDto.setTeamId(String.valueOf(task.getTeamId()));
         taskDto.setProId(String.valueOf(task.getProId()));
-        taskDto.setTaskCreateTime(String.valueOf(task.getTaskCreateTime()));
-        taskDto.setTaskStartTime(String.valueOf(task.getTaskStartTime()));
-        taskDto.setTaskEndTime(String.valueOf(task.getTaskEndTime()));
+        taskDto.setTaskCreateTime(simpleDateFormat.format(task.getTaskCreateTime()));
+        taskDto.setTaskStartTime(simpleDateFormat.format(task.getTaskStartTime()));
+        taskDto.setTaskEndTime(simpleDateFormat.format(task.getTaskEndTime()));
         taskDto.setTaskContent(task.getTaskContent());
         taskDto.setUserId(String.valueOf(task.getUserId()));
         taskDto.setSubTaskId(String.valueOf(task.getSubTaskId()));
@@ -67,8 +70,8 @@ public class TaskMappingImpl implements TaskMapping {
         }
         MyTaskDto myTaskDto = new MyTaskDto();
         myTaskDto.setTaskId(String.valueOf(task.getTaskId()));
-        myTaskDto.setTaskStartTime(String.valueOf(task.getTaskStartTime()));
-        myTaskDto.setTaskEndTime(String.valueOf(task.getTaskEndTime()));
+        myTaskDto.setTaskStartTime(simpleDateFormat.format(task.getTaskStartTime()));
+        myTaskDto.setTaskEndTime(simpleDateFormat.format(task.getTaskEndTime()));
         myTaskDto.setTaskContent(task.getTaskContent());
         myTaskDto.setTaskStatus(String.valueOf(task.getTaskStatus()));
         return myTaskDto;

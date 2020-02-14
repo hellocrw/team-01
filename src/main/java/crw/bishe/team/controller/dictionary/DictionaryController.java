@@ -1,4 +1,4 @@
-package crw.bishe.team.controller;
+package crw.bishe.team.controller.dictionary;
 
 import crw.bishe.team.dto.ProTypeDto;
 import crw.bishe.team.dto.UniversityDto;

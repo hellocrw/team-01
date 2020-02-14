@@ -1,4 +1,4 @@
-package crw.bishe.team.controller;
+package crw.bishe.team.controller.test;
 
 import crw.bishe.team.config.JwtConfig;
 import crw.bishe.team.dto.ProjectDto;
@@ -22,7 +22,7 @@ import java.util.Map;
  * @Time 14:00
  */
 @Api(tags = {"测试接口"})
-@RequestMapping("/api/admin")
+@RequestMapping("/api/test")
 @RestController
 @ResponseBody
 public class TestController {
@@ -75,7 +75,7 @@ public class TestController {
      * 需要登录，但不需要角色
      * @return
      */
-    @GetMapping(value = "/login")
+    @GetMapping(value = "/")
     @PreAuthorize("isAuthenticated()")
     public String fail(){
         return "登录测试，需要登录才能访问";

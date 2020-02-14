@@ -43,9 +43,6 @@ public class ProjectDto {
     @ApiModelProperty(position = 10, value = "所属团队id号")
     private String teamId;
 
-    @ApiModelProperty(position = 11, value = "团队名称")
-    private String teamName;
-
     @ApiModelProperty(position = 12, value = "项目类型")
     private String proType;
 
@@ -63,4 +60,8 @@ public class ProjectDto {
 
     @ApiModelProperty(position = 17, value = "需要人员类型")
     private String staff;
+
+    @ApiModelProperty(position = 18, value = "技术类型")
+    private String staffList;
+
 }

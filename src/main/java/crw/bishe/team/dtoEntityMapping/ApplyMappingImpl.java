@@ -5,6 +5,7 @@ import crw.bishe.team.entity.Apply;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * @Description Description 申请表
@@ -14,6 +15,9 @@ import java.sql.Date;
  */
 @Component("applyMapping")
 public class ApplyMappingImpl implements ApplyMapping {
+
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
     @Override
     public Apply toEntity(ApplyDto applyDto) {
         if (applyDto == null){
@@ -45,7 +49,7 @@ public class ApplyMappingImpl implements ApplyMapping {
         applyDto.setTeamId(String.valueOf(apply.getTeamId()));
         applyDto.setUserId(String.valueOf(apply.getUserId()));
         applyDto.setUserName(apply.getUserName());
-        applyDto.setApplyDate(String.valueOf(apply.getApplyDate()));
+        applyDto.setApplyDate(simpleDateFormat.format(apply.getApplyDate()));
         applyDto.setDecribe(apply.getDecribe());
         applyDto.setPhone(apply.getPhone());
         applyDto.setStatus(String.valueOf(apply.getStatus()));

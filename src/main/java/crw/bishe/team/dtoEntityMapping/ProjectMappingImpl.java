@@ -1,13 +1,12 @@
 package crw.bishe.team.dtoEntityMapping;
 
 import crw.bishe.team.dto.ProjectDto;
-import crw.bishe.team.dto.TeamProDto;
 import crw.bishe.team.entity.Project;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+
 
 /**
  * @Description Description
@@ -17,6 +16,9 @@ import java.util.Map;
  */
 @Component("projectMapping")
 public class ProjectMappingImpl implements ProjectMapping {
+
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
     @Override
     public Project toEntity(ProjectDto projectDto) {
         if(projectDto == null){
@@ -36,13 +38,13 @@ public class ProjectMappingImpl implements ProjectMapping {
         project.setProEndTime(Date.valueOf(projectDto.getProEndTime()));
         project.setProStatus(projectDto.getProStatus());
         project.setTeamId(projectDto.getTeamId());
-        project.setTeamName(projectDto.getTeamName());
+        project.setStaffList(projectDto.getStaffList());
         project.setProType(projectDto.getProType());
         project.setProCurrentNum(Integer.parseInt(projectDto.getProCurrentNum()));
         project.setProLimiedNum(Integer.parseInt(projectDto.getProLimiedNum()));
         project.setNumber(Integer.parseInt(projectDto.getNumber()));
         project.setSeeNum(Integer.parseInt(projectDto.getSeeNum()));
-        project.setStaff(Byte.parseByte(projectDto.getStaff()));
+        project.setStaff(projectDto.getStaff());
         return project;
     }
 
@@ -56,18 +58,18 @@ public class ProjectMappingImpl implements ProjectMapping {
         projectDto.setProName(project.getProName());
         projectDto.setLeaderName(project.getLeaderName());
         projectDto.setProDescribe(project.getProDescribe());
-        projectDto.setProDate(String.valueOf(project.getProDate()));
-        projectDto.setProStartTime(String.valueOf(project.getProStartTime()));
-        projectDto.setProEndTime(String.valueOf(project.getProEndTime()));
+        projectDto.setProDate(simpleDateFormat.format(project.getProDate()));
+        projectDto.setProStartTime(simpleDateFormat.format(project.getProStartTime()));
+        projectDto.setProEndTime(simpleDateFormat.format(project.getProEndTime()));
         projectDto.setProStatus(project.getProStatus());
         projectDto.setTeamId(project.getTeamId());
-        projectDto.setTeamName(project.getTeamName());
+        projectDto.setStaffList(project.getStaffList());
         projectDto.setProType(project.getProType());
         projectDto.setProCurrentNum(String.valueOf(project.getProCurrentNum()));
         projectDto.setProLimiedNum(String.valueOf(project.getProLimiedNum()));
         projectDto.setNumber(String.valueOf(project.getNumber()));
         projectDto.setSeeNum(String.valueOf(project.getSeeNum()));
-        projectDto.setStaff(String.valueOf(project.getStaff()));
+        projectDto.setStaff(project.getStaff());
         return projectDto;
     }
 

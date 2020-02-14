@@ -61,12 +61,6 @@ public class Project {
     private String teamId;
 
     /**
-     * 团队名称
-     */
-    @Column(name = "team_name")
-    private String teamName;
-
-    /**
      * 项目类型
      */
     @Column(name = "pro_type")
@@ -96,9 +90,14 @@ public class Project {
     private Integer seeNum;
 
     /**
+     * 技术类型
+     */
+    private String staffList;
+
+    /**
      * 需要人员类型
      */
-    private Byte staff;
+    private String staff;
 
     /**
      * 获取ID
@@ -263,21 +262,19 @@ public class Project {
     }
 
     /**
-     * 获取团队名称
-     *
-     * @return team_name - 团队名称
+     * 获取技术类型
+     * @return
      */
-    public String getTeamName() {
-        return teamName;
+    public String getStaffList() {
+        return staffList;
     }
 
     /**
-     * 设置团队名称
-     *
-     * @param teamName 团队名称
+     * 设置技术类型
+     * @param staffList
      */
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
+    public void setStaffList(String staffList) {
+        this.staffList = staffList;
     }
 
     /**
@@ -375,7 +372,7 @@ public class Project {
      *
      * @return staff - 需要人员类型
      */
-    public Byte getStaff() {
+    public String getStaff() {
         return staff;
     }
 
@@ -384,7 +381,7 @@ public class Project {
      *
      * @param staff 需要人员类型
      */
-    public void setStaff(Byte staff) {
+    public void setStaff(String staff) {
         this.staff = staff;
     }
 }
