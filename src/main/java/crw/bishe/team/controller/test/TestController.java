@@ -4,9 +4,12 @@ import crw.bishe.team.config.JwtConfig;
 import crw.bishe.team.dto.ProjectDto;
 import crw.bishe.team.entity.Project;
 import crw.bishe.team.mapper.ProjectMapper;
+import crw.bishe.team.vo.Result;
 import io.swagger.annotations.Api;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -35,15 +38,15 @@ public class TestController {
 
     // 拦截器直接放行，返回Token
     @PostMapping("/login")
-    public Map<String, String> login(@RequestParam("userName") String userName,
-                                     @RequestParam("passWord") String passWord){
+    public ResponseEntity<Result> login(@RequestParam("userName") String userName,
+                                        @RequestParam("password") String passWord){
         Map<String,String> result = new HashMap<>() ;
         String token = jwtConfig.getToken(userName+passWord) ;
         if (!StringUtils.isEmpty(token)){
             result.put("token", token);
         }
         result.put("userName", userName);
-        return result;
+        return new ResponseEntity<>(new Result(200, "OK", result), HttpStatus.OK);
     }
     // 需要 Token 验证的接口
     @PostMapping("/info")
