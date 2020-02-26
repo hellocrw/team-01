@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @Description Description
+ * @Description Description token过滤器，拦截请求
  * @Author crw
  * @Date Created in 2020/2/13 0013
  * @Time 21:07
@@ -28,7 +28,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,  Object handler) throws Exception {
         // 地址过滤
         String uri = request.getRequestURI();
-        if (uri.contains("/login")){
+        if (uri.contains("/token") || uri.contains("/api")){
             return true;
         }
         // Token验证

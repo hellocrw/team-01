@@ -167,7 +167,12 @@ public class SwaggerConfig {
     private List<Parameter> setHeaderToken() {
         ParameterBuilder tokenPar = new ParameterBuilder();
         List<Parameter> parameters = new ArrayList<>();
-        tokenPar.name("token").description("token").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
+        tokenPar.name("token")
+                .description("token")
+                .modelRef(new ModelRef("string"))
+                .parameterType("header")
+                .required(false)
+                .build();
         parameters.add(tokenPar.build());
         return parameters;
     }

@@ -1,10 +1,9 @@
 package crw.bishe.team.service;
 
-import crw.bishe.team.dto.ProTypeDto;
+import crw.bishe.team.dto.TeamTypeDto;
 import crw.bishe.team.dto.UniversityDto;
-import crw.bishe.team.entity.ProType;
-import crw.bishe.team.mapper.DictionaryMapper;
-import crw.bishe.team.mapper.ProTypeMapper;
+import crw.bishe.team.entity.TeamType;
+import crw.bishe.team.mapper.TeamTypeMapper;
 import crw.bishe.team.mapper.UniversityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,18 +20,15 @@ import java.util.List;
 public class DictionaryServiceImpl implements DictionaryService {
 
     @Autowired
-    private DictionaryMapper dictionaryMapper;
-
-    @Autowired
-    private ProTypeMapper proTypeMapper;
+    private TeamTypeMapper teamTypeMapper;
 
     @Autowired
     private UniversityMapper universityMapper;
 
     @Override
-    public List<ProTypeDto> getProType() {
-        List<ProTypeDto> proTypes = proTypeMapper.selectProTypeAll();
-        return proTypes;
+    public List<TeamTypeDto> getTeamType() {
+        List<TeamTypeDto> teamTypeDtos = teamTypeMapper.selectTeamType();
+        return teamTypeDtos;
     }
 
     @Override

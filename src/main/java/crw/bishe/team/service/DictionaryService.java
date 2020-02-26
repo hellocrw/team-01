@@ -1,7 +1,8 @@
 package crw.bishe.team.service;
 
-import crw.bishe.team.dto.ProTypeDto;
+import crw.bishe.team.dto.TeamTypeDto;
 import crw.bishe.team.dto.UniversityDto;
+import crw.bishe.team.entity.TeamType;
 
 import java.util.List;
 
@@ -12,6 +13,15 @@ import java.util.List;
  * @Time 15:32
  */
 public interface DictionaryService {
-    List<ProTypeDto> getProType();
+    /**
+     * 获取团队类型
+     * @return
+     */
+    List<TeamTypeDto> getTeamType();
+
+    /**
+     * 获取学校信息
+     * @return
+     */
     List<UniversityDto> getUniversity();
 }

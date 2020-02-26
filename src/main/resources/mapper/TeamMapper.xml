@@ -14,5 +14,6 @@
     <result column="team_date" jdbcType="DATE" property="teamDate" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="staff" jdbcType="VARCHAR" property="staff" />
+    <result column="team_nature" jdbcType="VARCHAR" property="team_nature" />
   </resultMap>
 </mapper>

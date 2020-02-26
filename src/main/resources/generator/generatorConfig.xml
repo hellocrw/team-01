@@ -28,7 +28,7 @@
                              targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="pro_type"/>
+        <table tableName="team_type"/>
 
     </context>
 </generatorConfiguration>

@@ -27,7 +27,7 @@ public class TransactionAspect {
     @Autowired
     private TransactionUtils transactionUtils;
     //切入点
-    @Pointcut("execution(public * crw.bishe.team.service.*.*(..)) ")
+    @Pointcut("execution(public * crw.bishe.team.service.*.add*(..)) ")
     public void pointCut() {
     }
 

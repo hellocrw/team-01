@@ -76,4 +76,9 @@ public class TeamServiceImpl implements TeamService {
         return teamMapper.getMemberList(key);
     }
 
+    @Override
+    public List<TeamDto> getTeams() {
+        return teamMapper.getTeams();
+    }
+
 }

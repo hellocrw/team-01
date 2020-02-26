@@ -63,6 +63,11 @@ public class Team {
     private String staff;
 
     /**
+     * 性质
+     */
+    private String teamNature;
+
+    /**
      * 项目
      */
     private List<Project> projects;

@@ -55,4 +55,10 @@ public interface TeamService {
      * @return
      */
     List<MemberDto> getMemberList(String teamId);
+
+    /**
+     * 获取所有团队以及团队的项目信息： one-to-many
+     * @return
+     */
+    List<TeamDto> getTeams();
 }

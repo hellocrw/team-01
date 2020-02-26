@@ -37,6 +37,7 @@ public class TeamMappingImpl implements TeamMapping {
         team.setTeamDate(Date.valueOf(teamDto.getTeamDate()));
         team.setStatus(Byte.parseByte(teamDto.getStatus()));
         team.setStaff(teamDto.getStaff());
+        team.setTeamNature(teamDto.getTeamNature());
         return team;
     }
 
@@ -55,6 +56,7 @@ public class TeamMappingImpl implements TeamMapping {
         teamDto.setTeamDate(simpleDateFormat.format(team.getTeamDate()));
         teamDto.setStatus(String.valueOf(team.getStatus()));
         teamDto.setStaff(team.getStaff());
+        teamDto.setTeamNature(team.getTeamNature());
         return teamDto;
     }
 }

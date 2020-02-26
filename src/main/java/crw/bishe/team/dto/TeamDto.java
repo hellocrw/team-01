@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.List;
+
 /**
  * @Description Description
  * @Author crw
@@ -15,7 +17,6 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @ApiModel(description = "团队基本信息")
 public class TeamDto {
-
 
     @ApiModelProperty(position = 2, value = "团队ID", required = true)
     private String teamId;
@@ -43,4 +44,13 @@ public class TeamDto {
 
     @ApiModelProperty(position = 10, value = "人员类型")
     private String staff;
+
+    @ApiModelProperty(position = 11, value = "团队性质")
+    private String teamNature;
+
+    @ApiModelProperty(position = 12, value = "学校")
+    private String university;
+
+    @ApiModelProperty(position = 13, value = "项目信息")
+    private List<ProjectDto> projects;
 }

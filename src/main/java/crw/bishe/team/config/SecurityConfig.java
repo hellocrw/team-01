@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/api/**").authenticated() //需要登录才能访问URL -> /api/** 资源
                 .antMatchers("/api/admin/**").hasAnyAuthority("ADMIN")  // 有ADMIN权限才能访问URL -> localhost:8080/api/admin/** 资源
-                .antMatchers("/api/test/**","/static/**","/druid/**").permitAll()
+                .antMatchers("/static/**","/druid/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
@@ -127,10 +127,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }*/
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         web.ignoring().antMatchers(
                 "/static/**",
                 "/api/**"
+//                "/swagger-ui.html"
         );
     }
 }
