@@ -51,7 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
-                .formLogin().permitAll()
+                .formLogin()
+//                .loginPage("http://localhost:4200/#/passport/login")
+//                .successForwardUrl("/api/token/getToken")
+                .permitAll()
                 .and()
                 .logout().permitAll();
     }

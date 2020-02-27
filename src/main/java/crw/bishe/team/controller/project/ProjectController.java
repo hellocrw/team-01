@@ -107,4 +107,18 @@ public class ProjectController {
         List<TeamProDto> teamProDtos = projectService.getProBySelectCondition(conditionRequest);
         return new ResponseEntity<>(new Result(200, "条件查询项目信息", teamProDtos), HttpStatus.OK);
     }
+
+    @ApiOperation(value = "通过teamId获取项目信息")
+    @GetMapping("/getProjectByTeamId/{teamId}")
+    public ResponseEntity<Result> getProjectByTeamId(@PathVariable(name = "teamId") String teamId){
+        List<ProjectDto> projectDtos = projectService.getProjectByTeamId(teamId);
+        return new ResponseEntity<>(new Result<>(200,"OK", projectDtos),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "通过项目ID获取项目信息")
+    @GetMapping("/getProjectByProId/{proId}")
+    public ResponseEntity<Result> getProjectByProId(@PathVariable(name = "proId") String proId){
+        ProjectDto projectDto = projectService.getProjectByProId(proId);
+        return new ResponseEntity<>(new Result(200,"OK", projectDto),HttpStatus.OK);
+    }
 }

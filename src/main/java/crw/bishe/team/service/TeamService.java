@@ -61,4 +61,32 @@ public interface TeamService {
      * @return
      */
     List<TeamDto> getTeams();
+
+    /**
+     * 通过teamId获取团队以及项目信息
+     * @param teamId
+     * @return
+     */
+    TeamDto getTeamProByTeamId(String teamId);
+
+    /**
+     * 通过用户ID获取所有团队以及对应的项目信息
+     * @param userId
+     * @return
+     */
+    List<TeamDto> getTeamProByUserId(String userId);
+
+    /**
+     * 获取我的团队
+     * @param userId
+     * @return
+     */
+    List<TeamDto> getMyTeamProByUserId(String userId);
+
+    /**
+     * 获取我参与的团队
+     * @param userId
+     * @return
+     */
+    List<TeamDto> getJoinTeamProByUserId(String userId);
 }

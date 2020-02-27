@@ -1,9 +1,14 @@
 package crw.bishe.team.mapper;
 
 import crw.bishe.team.dto.MyProListDto;
+import crw.bishe.team.dto.ProjectDto;
+import crw.bishe.team.dto.TeamDto;
 import crw.bishe.team.dto.TeamProDto;
 import crw.bishe.team.entity.Project;
 import crw.bishe.team.vo.ConditionRequest;
+import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -40,6 +45,15 @@ public interface ProjectMapper extends Mapper<Project> {
             "FROM project,user_info,team\n" +
             "WHERE project.`team_id`= #{team_id} AND team.`leader_id`=user_info.`user_id`; ")
     List<MyProListDto> getMyProList(int team_id);
+
+
+    /**
+     * 通过team_id查找项目信息
+     * @param teamId
+     * @return
+     */
+    @Select("SELECT project.* FROM project WHERE project.`team_id`= #{teamId};")
+    List<ProjectDto> getProjectByTeamId(Long teamId);
 
     /**
      * 根据项目名称 项目类型，学校搜索所有符合条件的项目
@@ -103,4 +117,12 @@ public interface ProjectMapper extends Mapper<Project> {
      */
     @Select("SELECT * FROM project WHERE project.`team_id` IN (SELECT team.`team_id` FROM team WHERE team_scope='所有学校') AND pro_type=#{arg0};")
     List<Project> getProjectByOtherUniversityType(String pro_type);
+
+    /**
+     * 通过项目ID获取项目信息
+     * @param proId
+     * @return
+     */
+    @Select("SELECT project.* FROM project WHERE project.`pro_id` = #{proId};")
+    ProjectDto getProjectByProId(Long proId);
 }

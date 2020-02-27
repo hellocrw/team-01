@@ -2,7 +2,9 @@ package crw.bishe.team.controller.project;
 
 import crw.bishe.team.dto.MemberDto;
 import crw.bishe.team.dto.MyTeamDto;
+import crw.bishe.team.dto.ProjectDto;
 import crw.bishe.team.dto.TeamDto;
+import crw.bishe.team.entity.Team;
 import crw.bishe.team.service.TeamService;
 import crw.bishe.team.vo.Result;
 import io.swagger.annotations.Api;
@@ -97,5 +99,33 @@ public class TeamController {
     public ResponseEntity<Result> getTeamList(){
         List<TeamDto> teamDtos = teamService.getTeams();
         return new ResponseEntity<>(new Result(200,"OK", teamDtos),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "通过teamId获取团队以及项目信息")
+    @GetMapping("/getTeamProByTeamId/{teamId}")
+    public ResponseEntity<Result> getTeamProByTeamId(@PathVariable(name = "teamId") String teamId){
+        TeamDto teamDtos = teamService.getTeamProByTeamId(teamId);
+        return new ResponseEntity<>(new Result<>(200,"OK", teamDtos),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "通过用户ID获取团队以及项目信息")
+    @GetMapping("/getTeamProByUserId/{userId}")
+    public ResponseEntity<Result> getTeamProByUserId(@PathVariable(name = "userId") String userId){
+        List<TeamDto> teamDtos = teamService.getTeamProByUserId(userId);
+        return new ResponseEntity<>(new Result(200,"OK",teamDtos),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "获取我的团队以及项目信息")
+    @GetMapping("/getMyTeamProByUserId/{userId}")
+    public ResponseEntity<Result> getMyTeamProByUserId(@PathVariable(name = "userId") String userId){
+        List<TeamDto> teamDtos = teamService.getMyTeamProByUserId(userId);
+        return new ResponseEntity<>(new Result(200,"OK",teamDtos),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "获取我的团队以及项目信息")
+    @GetMapping("/getJoinTeamProByUserId/{userId}")
+    public ResponseEntity<Result> getJoinTeamProByUserId(@PathVariable(name = "userId") String userId){
+        List<TeamDto> teamDtos = teamService.getJoinTeamProByUserId(userId);
+        return new ResponseEntity<>(new Result(200,"OK",teamDtos),HttpStatus.OK);
     }
 }

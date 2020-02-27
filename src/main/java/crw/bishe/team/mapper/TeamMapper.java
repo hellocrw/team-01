@@ -2,7 +2,6 @@ package crw.bishe.team.mapper;
 
 import crw.bishe.team.dto.MemberDto;
 import crw.bishe.team.dto.MyTeamDto;
-import crw.bishe.team.dto.ProjectDto;
 import crw.bishe.team.dto.TeamDto;
 import crw.bishe.team.entity.Team;
 import org.apache.ibatis.annotations.Many;
@@ -12,7 +11,6 @@ import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
-import java.util.Map;
 
 @org.apache.ibatis.annotations.Mapper
 public interface TeamMapper extends Mapper<Team> {
@@ -60,15 +58,6 @@ public interface TeamMapper extends Mapper<Team> {
     @Select("SELECT DISTINCT team.`team_id`,  team.`team_name`,project.* FROM team,project,user_team WHERE user_team.`user_id` = #{arg0} AND user_team.`is_leader`= 0 AND user_team.`team_id`=team.`team_id` AND project.`team_id`=team.`team_id`; ")
     List<String> getMyJoinTeamAndProject(Long user_id);
 
-
-    /**
-     * 通过team_id查找项目信息
-     * @param teamId
-     * @return
-     */
-        @Select("SELECT project.* FROM project WHERE project.`team_id`= #{teamId};")
-    public List<ProjectDto> getProjectByTeamId(Long teamId);
-
     /**
      * 查询所有团队以及团队对应的项目信息
      * @return
@@ -78,8 +67,64 @@ public interface TeamMapper extends Mapper<Team> {
     @Results({
             @Result(property = "teamId", column = "team_id"),
             @Result(property = "projects", column = "team_id",
-            many = @Many(select = "crw.bishe.team.mapper.TeamMapper.getProjectByTeamId"))
+                    many = @Many(select = "crw.bishe.team.mapper.ProjectMapper.getProjectByTeamId"))
     })
     List<TeamDto> getTeams();
 
+    /**
+     * 通过team_id获取团队信息以及团队的项目信息
+     * @param teamId
+     * @return
+     */
+    @Select("SELECT team.*,user_info.`university` FROM team,user_info\n" +
+            "WHERE team.`leader_id`=user_info.`user_id` AND team.`team_id` = #{teamId};")
+    @Results({
+            @Result(property = "teamId", column = "team_id"),
+            @Result(property = "projects", column = "team_id",
+                    many = @Many(select = "crw.bishe.team.mapper.ProjectMapper.getProjectByTeamId"))
+    })
+    TeamDto getTeamProByTeamId(Long teamId);
+
+    /**
+     * 通过用户ID获取所有的团队信息以及团队的项目信息
+     * @param userId
+     * @return
+     */
+    @Select("SELECT team.*,user_info.`university` FROM team,user_info\n" +
+            "            WHERE team.`leader_id`=user_info.`user_id` AND team.`team_id` IN (SELECT team_id FROM user_team WHERE user_id = #{userId} ) ;")
+    @Results({
+            @Result(property = "teamId", column = "team_id"),
+            @Result(property = "projects", column = "team_id",
+                    many = @Many(select = "crw.bishe.team.mapper.ProjectMapper.getProjectByTeamId"))
+    })
+    List<TeamDto> getTeamProByUserId(Long userId);
+
+    /**
+     * 通过用户ID获取我的团队以及项目信息
+     * @param userId
+     * @return
+     */
+    @Select("SELECT team.*,user_info.`university` FROM team,user_info\n" +
+            "            WHERE team.`leader_id`=user_info.`user_id` AND team.`team_id` IN (SELECT team_id FROM user_team WHERE user_id = #{userId} AND is_leader = 1 ) ;")
+    @Results({
+            @Result(property = "teamId", column = "team_id"),
+            @Result(property = "projects", column = "team_id",
+                    many = @Many(select = "crw.bishe.team.mapper.ProjectMapper.getProjectByTeamId"))
+    })
+    List<TeamDto> getMyTeamProByUserId(Long userId);
+
+
+    /**
+     * 通过用户ID获取参与的团队以及项目信息
+     * @param userId
+     * @return
+     */
+    @Select("SELECT team.*,user_info.`university` FROM team,user_info\n" +
+            "            WHERE team.`leader_id`=user_info.`user_id` AND team.`team_id` IN (SELECT team_id FROM user_team WHERE user_id = #{userId} AND is_leader = 0 ) ;")
+    @Results({
+            @Result(property = "teamId", column = "team_id"),
+            @Result(property = "projects", column = "team_id",
+                    many = @Many(select = "crw.bishe.team.mapper.ProjectMapper.getProjectByTeamId"))
+    })
+    List<TeamDto> getJoinTeamProByUserId(Long userId);
 }

@@ -81,4 +81,28 @@ public class TeamServiceImpl implements TeamService {
         return teamMapper.getTeams();
     }
 
+    @Override
+    public TeamDto getTeamProByTeamId(String teamId) {
+        Long key = Long.parseLong(teamId);
+        return teamMapper.getTeamProByTeamId(key);
+    }
+
+    @Override
+    public List<TeamDto> getTeamProByUserId(String userId) {
+        Long key = Long.parseLong(userId);
+        return teamMapper.getTeamProByUserId(key);
+    }
+
+    @Override
+    public List<TeamDto> getMyTeamProByUserId(String userId) {
+        Long key = Long.parseLong(userId);
+        return teamMapper.getMyTeamProByUserId(key);
+    }
+
+    @Override
+    public List<TeamDto> getJoinTeamProByUserId(String userId) {
+        Long key = Long.parseLong(userId);
+        return teamMapper.getJoinTeamProByUserId(key);
+    }
+
 }

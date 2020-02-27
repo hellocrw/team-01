@@ -27,6 +27,11 @@ public class UserRolesServiceImpl implements UserRolesService  {
     @Autowired
     private UserRolesMapping userRolesMapping;
 
+    /**
+     * 用户注册
+     * @param userRolesDto
+     * @return
+     */
     @Override
     public String register(UserRolesDto userRolesDto) {
         UserRoles userRoles = userRolesMapping.toEntity(userRolesDto);
@@ -57,6 +62,9 @@ public class UserRolesServiceImpl implements UserRolesService  {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        System.out.println("用户登录的用户名为：" + username);
+
         System.out.println("调用了UserDetailsService的loadUserByUsername方法");
         UserRoles userRoles = userRolesMapper.findByUserName(username);
         if (userRoles == null){

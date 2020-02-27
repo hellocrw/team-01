@@ -13,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,17 +38,26 @@ public class TokenController {
 
     @ApiOperation("使用账号密码获取Token")
     @PostMapping("/getToken")
-    public ResponseEntity<Result> getToken(@RequestBody UserRoles userRoles){
+    public ResponseEntity<Result> getToken(@PathParam("username") String username, @PathParam("password") String password){
         // 模拟数据库
 //        if (userRoles.getUsername() != "admin" && userRoles.getPassword() != "123456"){
 //            return new ResponseEntity<>(new Result("用户名或密码错误"),HttpStatus.OK);
 //        }
         Map<String, String> res = new HashMap<>();
-        String token = jwtConfig.getToken(userRoles.getUsername()+userRoles.getPassword());
+        String token = jwtConfig.getToken(username+password);
         if (!StringUtils.isEmpty(token)){
             res.put("token", token);
+            // 获取当前登录时间
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+            simpleDateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
+            res.put("loginTime", simpleDateFormat.format(new Date()));
+
+            /**
+             * 模仿数据库，根据用户名查看用户ID
+             */
+            res.put("userId", "1");
         }
-        res.put("userName", userRoles.getUsername());
+        res.put("username", username);
         return new ResponseEntity<>(new Result(200,"ok", res), HttpStatus.OK);
     }
 

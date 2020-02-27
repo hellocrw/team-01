@@ -97,6 +97,18 @@ public class ProjectServiceImpl implements ProjectService {
         return projectMapper.getProBySelectCondition(conditionRequest);
     }
 
+    @Override
+    public List<ProjectDto> getProjectByTeamId(String teamId) {
+        Long key = Long.parseLong(teamId);
+        return projectMapper.getProjectByTeamId(key);
+    }
+
+    @Override
+    public ProjectDto getProjectByProId(String proId) {
+        Long key = Long.parseLong(proId);
+        return projectMapper.getProjectByProId(key);
+    }
+
     public PageInfo getPageInfo(PageRequest pageRequest) {
         int pageNum = Integer.parseInt(pageRequest.getPageNum());
         int pageSize = Integer.parseInt(pageRequest.getPageSize());

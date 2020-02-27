@@ -72,4 +72,18 @@ public interface ProjectService {
      * @return
      */
     List<TeamProDto> getProBySelectCondition(ConditionRequest conditionRequest);
+
+    /**
+     * 通过团队ID获取所有项目信息
+     * @param teamId
+     * @return
+     */
+    List<ProjectDto> getProjectByTeamId(String teamId);
+
+    /**
+     * 通过项目ID获取项目信息
+     * @param proId
+     * @return
+     */
+    ProjectDto getProjectByProId(String proId);
 }
