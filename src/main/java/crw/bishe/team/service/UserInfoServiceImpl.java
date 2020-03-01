@@ -70,5 +70,11 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userDtos;
     }
 
+    @Override
+    public UserDto getUserInfoByUserId(String userId) {
+        Long key = Long.parseLong(userId);
+        return userInfoMapper.getUserInfoByUserId(key);
+    }
+
 
 }

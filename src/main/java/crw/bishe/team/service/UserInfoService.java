@@ -40,5 +40,12 @@ public interface UserInfoService {
      */
     List<UserDto> findAll();
 
+    /**
+     * 根据用户ID获取用户信息
+     * @param userId
+     * @return
+     */
+    UserDto getUserInfoByUserId(String userId);
+
 
 }

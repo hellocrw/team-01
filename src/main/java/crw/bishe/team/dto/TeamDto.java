@@ -51,6 +51,14 @@ public class TeamDto {
     @ApiModelProperty(position = 12, value = "学校")
     private String university;
 
-    @ApiModelProperty(position = 13, value = "项目信息")
+    @ApiModelProperty(position = 13, value = "团队标签")
+    private String teamLabel;
+
+    @ApiModelProperty(position = 14, value = "查看人数")
+    private String seeNum;
+
+    @ApiModelProperty(position = 15, value = "项目信息")
     private List<ProjectDto> projects;
+
+
 }

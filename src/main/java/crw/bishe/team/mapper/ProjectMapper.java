@@ -118,11 +118,18 @@ public interface ProjectMapper extends Mapper<Project> {
     @Select("SELECT * FROM project WHERE project.`team_id` IN (SELECT team.`team_id` FROM team WHERE team_scope='所有学校') AND pro_type=#{arg0};")
     List<Project> getProjectByOtherUniversityType(String pro_type);
 
+    @Select("SELECT * FROM project where pro_id = #{proId}")
+    ProjectDto getProjectByProId(Long proId);
     /**
-     * 通过项目ID获取项目信息
-     * @param proId
+     * 通过项目ID获取项目信息以及项目的任务信息
+     * @param proId 项目ID
      * @return
      */
     @Select("SELECT project.* FROM project WHERE project.`pro_id` = #{proId};")
-    ProjectDto getProjectByProId(Long proId);
+    @Results({
+            @Result(property = "proId", column = "pro_id"),
+            @Result(property = "taskDtos", column = "pro_id",
+                    many = @Many(select = "crw.bishe.team.mapper.TaskMapper.geTaskByProId"))
+    })
+    ProjectDto getProjectTaskByProId(Long proId);
 }

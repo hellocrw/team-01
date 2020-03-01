@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.List;
+
 /**
  * @Description Description
  * @Author crw
@@ -63,5 +65,8 @@ public class ProjectDto {
 
     @ApiModelProperty(position = 18, value = "技术类型")
     private String staffList;
+
+    @ApiModelProperty(position = 19, value = "任务信息列表")
+    private List<TaskDto> taskDtos;
 
 }

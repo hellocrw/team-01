@@ -109,6 +109,12 @@ public class ProjectServiceImpl implements ProjectService {
         return projectMapper.getProjectByProId(key);
     }
 
+    @Override
+    public ProjectDto getProjectTaskByProId(String proId) {
+        Long key = Long.parseLong(proId);
+        return projectMapper.getProjectTaskByProId(key);
+    }
+
     public PageInfo getPageInfo(PageRequest pageRequest) {
         int pageNum = Integer.parseInt(pageRequest.getPageNum());
         int pageSize = Integer.parseInt(pageRequest.getPageSize());

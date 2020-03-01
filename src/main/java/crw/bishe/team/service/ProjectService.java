@@ -86,4 +86,11 @@ public interface ProjectService {
      * @return
      */
     ProjectDto getProjectByProId(String proId);
+
+    /**
+     * 通过项目ID获取项目信息以及项目相关的任务信息
+     * @param proId
+     * @return
+     */
+    ProjectDto getProjectTaskByProId(String proId);
 }

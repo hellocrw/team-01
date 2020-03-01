@@ -121,4 +121,11 @@ public class ProjectController {
         ProjectDto projectDto = projectService.getProjectByProId(proId);
         return new ResponseEntity<>(new Result(200,"OK", projectDto),HttpStatus.OK);
     }
+
+    @ApiOperation(value = "获取项目及项目相关的任务信息")
+    @GetMapping("/getProjectTaskByProId/{proId}")
+    public ResponseEntity<Result> getProjectTaskByProId(@PathVariable(name = "proId" )String proId){
+        ProjectDto projectDto = projectService.getProjectTaskByProId(proId);
+        return new ResponseEntity<>(new Result(200, "OK", projectDto), HttpStatus.OK);
+    }
 }

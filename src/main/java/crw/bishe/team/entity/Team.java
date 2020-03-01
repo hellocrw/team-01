@@ -68,6 +68,16 @@ public class Team {
     private String teamNature;
 
     /**
+     * 团队标签
+     */
+    private String teamLabel;
+
+    /**
+     * 查看人数
+     */
+    private Integer seeNum;
+
+    /**
      * 项目
      */
     private List<Project> projects;

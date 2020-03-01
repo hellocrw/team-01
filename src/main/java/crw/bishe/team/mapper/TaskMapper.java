@@ -1,5 +1,6 @@
 package crw.bishe.team.mapper;
 
+import crw.bishe.team.dto.TaskDto;
 import crw.bishe.team.dto.TaskListDto;
 import crw.bishe.team.entity.Task;
 import org.apache.ibatis.annotations.Select;
@@ -19,4 +20,12 @@ public interface TaskMapper extends Mapper<Task> {
 
     @Select(" SELECT DISTINCT task.`task_id`,task.`task_start_time`,task.`task_end_time`,task.`task_content`,user_info.`user_name` AS taskCharger,task.`sub_task_id`,task.`task_status` FROM task,user_info WHERE task.`pro_id`=#{arg0} AND task.`user_id` = user_info.`user_id`;")
     List<TaskListDto> getTaskList(Long proId);
+
+    /**
+     * 根据项目ID查找所有任务信息
+     * @param proId
+     * @return
+     */
+    @Select("SELECT task.* FROM task WHERE pro_id = #{proId};")
+    List<TaskDto> geTaskByProId(Long proId);
 }
