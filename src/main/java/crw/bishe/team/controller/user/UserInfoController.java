@@ -48,7 +48,7 @@ public class UserInfoController {
     }
 
     @ApiOperation(value = "查找所有用户信息")
-    @GetMapping("/All")
+    @GetMapping("/all")
     public ResponseEntity<Result<UserDto>> findAll(){
         List<UserDto> userDtos = usersService.findAll();
         return new ResponseEntity<>(new Result(200,"处理成功",userDtos), HttpStatus.OK);
@@ -92,4 +92,17 @@ public class UserInfoController {
         }
     }
 
+    @ApiOperation(value = "获取管理员基本信息")
+    @GetMapping("/getAdminInfo")
+    public ResponseEntity<Result> getAdminInfo(){
+        List<UserDto> userDtos = usersService.getAdminInfo();
+        return new ResponseEntity<>(new Result(200, "OK", userDtos), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "获取用户基本信息")
+    @GetMapping("/getUserInfo")
+    public ResponseEntity<Result> getUserInfo(){
+        List<UserDto> userDtos = usersService.getUserInfo();
+        return new ResponseEntity<>(new Result(200, "OK", userDtos), HttpStatus.OK);
+    }
 }

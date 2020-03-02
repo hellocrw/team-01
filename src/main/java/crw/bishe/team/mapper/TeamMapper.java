@@ -127,4 +127,12 @@ public interface TeamMapper extends Mapper<Team> {
                     many = @Many(select = "crw.bishe.team.mapper.ProjectMapper.getProjectByTeamId"))
     })
     List<TeamDto> getJoinTeamProByUserId(Long userId);
+
+    /**
+     * 根据团队名模糊查询团队信息
+     * @param teamName
+     * @return
+     */
+    @Select("SELECT * FROM team WHERE team.`team_name`LIKE #{teamName};")
+    List<TeamDto> getTeamByTeamName(String teamName);
 }

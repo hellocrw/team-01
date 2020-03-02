@@ -105,4 +105,10 @@ public class TeamServiceImpl implements TeamService {
         return teamMapper.getJoinTeamProByUserId(key);
     }
 
+    @Override
+    public List<TeamDto> getTeamByTeamName(String teamName) {
+        String key = "%" + teamName + "%";
+        return teamMapper.getTeamByTeamName(key);
+    }
+
 }

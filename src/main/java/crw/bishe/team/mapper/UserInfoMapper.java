@@ -18,4 +18,18 @@ public interface UserInfoMapper extends Mapper<UserInfo> {
     @Select("SELECT user_info.* FROM user_info WHERE user_info.`user_id` = #{userId}")
     UserDto getUserInfoByUserId(Long userId);
 
+    /**
+     * 获取管理员信息
+     * @return
+     */
+    @Select("SELECT user_info.* FROM user_info WHERE user_info.`role_id` IN (SELECT user_roles.`id` FROM user_roles WHERE user_roles.`auth`='ADMIN');")
+    List<UserDto> getAdminInfo();
+
+    /**
+     * 获取用户信息
+     * @return
+     */
+    @Select("SELECT user_info.* FROM user_info WHERE user_info.`role_id` IN (SELECT user_roles.`id` FROM user_roles WHERE user_roles.`auth`='USER');")
+    List<UserDto> getUserInfo();
+
 }

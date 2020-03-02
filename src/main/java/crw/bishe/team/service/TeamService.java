@@ -89,4 +89,12 @@ public interface TeamService {
      * @return
      */
     List<TeamDto> getJoinTeamProByUserId(String userId);
+
+    /**
+     * 模糊查询团队信息
+     * @param teamName
+     * @return
+     */
+    List<TeamDto> getTeamByTeamName(String teamName);
+
 }

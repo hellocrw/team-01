@@ -76,5 +76,15 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoMapper.getUserInfoByUserId(key);
     }
 
+    @Override
+    public List<UserDto> getAdminInfo() {
+        return userInfoMapper.getAdminInfo();
+    }
+
+    @Override
+    public List<UserDto> getUserInfo() {
+        return userInfoMapper.getUserInfo();
+    }
+
 
 }

@@ -47,5 +47,17 @@ public interface UserInfoService {
      */
     UserDto getUserInfoByUserId(String userId);
 
+    /**
+     * 获取管理员信息
+     * @return
+     */
+    List<UserDto> getAdminInfo();
+
+    /**
+     * 获取用户信息
+     * @return
+     */
+    List<UserDto> getUserInfo();
+
 
 }

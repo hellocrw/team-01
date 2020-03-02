@@ -43,7 +43,7 @@ public class ProjectController {
     }
 
     @ApiOperation(value = "查找所有项目信息")
-    @GetMapping("/All")
+    @GetMapping("/all")
     public ResponseEntity<Result<List<ProjectDto>>> findAll(){
         List<ProjectDto> projectDtos = projectService.findAll();
         return new ResponseEntity<>(new Result(200, "处理成功", projectDtos), HttpStatus.OK);

@@ -132,4 +132,12 @@ public interface ProjectMapper extends Mapper<Project> {
                     many = @Many(select = "crw.bishe.team.mapper.TaskMapper.geTaskByProId"))
     })
     ProjectDto getProjectTaskByProId(Long proId);
+
+    /**
+     * 根据项目名模糊查询项目信息
+     * @param proName
+     * @return
+     */
+    @Select("SELECT * FROM project WHERE project.`pro_name`LIKE #{proName};")
+    List<ProjectDto> getProjectByProName(String proName);
 }

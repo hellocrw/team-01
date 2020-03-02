@@ -44,7 +44,7 @@ public class TokenController {
     @PostMapping("/getToken")
     public ResponseEntity<Result> getToken(@PathParam("username") String username, @PathParam("password") String password){
         // 模拟数据库
-//        if (userRoles.getUsername() != "admin" && userRoles.getPassword() != "123456"){
+//        if (username != "admin" && password != "123456"){
 //            return new ResponseEntity<>(new Result("用户名或密码错误"),HttpStatus.OK);
 //        }
         Map<String, Object> res = new HashMap<>();
@@ -59,7 +59,11 @@ public class TokenController {
             /**
              * 模仿数据库，根据用户名查询用户基本信息
              */
+            // TODO Auto-generated catch block
             res.put("userInfo", userInfoService.getUserInfoByUserId("1"));
+            // 获取用户权限
+            // TODO Auto-generated catch block
+            res.put("auth", "ADMIN");
         }
         return new ResponseEntity<>(new Result(200,"ok", res), HttpStatus.OK);
     }

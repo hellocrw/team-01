@@ -37,7 +37,7 @@ public class TaskController {
     }
 
     @ApiOperation(value = "查找所有任务信息")
-    @GetMapping("/All")
+    @GetMapping("/all")
     public ResponseEntity<Result<List<TaskDto>>> findAll(){
         try{
             List<TaskDto> taskDtos = taskService.findAll();

@@ -128,4 +128,11 @@ public class TeamController {
         List<TeamDto> teamDtos = teamService.getJoinTeamProByUserId(userId);
         return new ResponseEntity<>(new Result(200,"OK",teamDtos),HttpStatus.OK);
     }
+
+    @ApiOperation(value = "模糊查询团队信息")
+    @GetMapping("/getTeamByTeamName/{teamName}")
+    public ResponseEntity<Result> getTeamByTeamName(@PathVariable(name = "teamName") String teamName){
+        List<TeamDto> teamDtos = teamService.getTeamByTeamName(teamName);
+        return new ResponseEntity<>(new Result(200, "OK", teamDtos), HttpStatus.OK);
+    }
 }
