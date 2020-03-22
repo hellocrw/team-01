@@ -5,16 +5,16 @@ import javax.persistence.*;
 @Table(name = "sub_task")
 public class SubTask {
     /**
-     * ID
-     */
-    @Id
-    private Long id;
-
-    /**
      * 子任务ID
      */
-    @Column(name = "sub_task_id")
+    @Id
     private Long subTaskId;
+
+    /**
+     * 任务ID
+     */
+    @Column(name = "task_id")
+    private Long TaskId;
 
     /**
      * 子任务内容
@@ -34,40 +34,20 @@ public class SubTask {
     @Column(name = "sub_task_status")
     private Byte subTaskStatus;
 
-    /**
-     * 获取ID
-     *
-     * @return id - ID
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * 设置ID
-     *
-     * @param id ID
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * 获取子任务ID
-     *
-     * @return sub_task_id - 子任务ID
-     */
     public Long getSubTaskId() {
         return subTaskId;
     }
 
-    /**
-     * 设置子任务ID
-     *
-     * @param subTaskId 子任务ID
-     */
     public void setSubTaskId(Long subTaskId) {
         this.subTaskId = subTaskId;
+    }
+
+    public Long getTaskId() {
+        return TaskId;
+    }
+
+    public void setTaskId(Long taskId) {
+        TaskId = taskId;
     }
 
     /**

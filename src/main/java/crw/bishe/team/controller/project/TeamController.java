@@ -40,7 +40,7 @@ public class TeamController {
     }
 
     @ApiOperation(value = "查找所有团队信息")
-    @GetMapping("/All")
+    @GetMapping("/all")
     public ResponseEntity<Result<TeamDto>> findAll(){
         List<TeamDto> teamDtos = teamService.findAll();
         return new ResponseEntity<>(new Result(200, "处理成功", teamDtos), HttpStatus.OK);

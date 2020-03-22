@@ -37,7 +37,6 @@ public class TaskMappingImpl implements TaskMapping {
         task.setTaskEndTime(Date.valueOf(taskDto.getTaskEndTime()));
         task.setTaskContent(taskDto.getTaskContent());
         task.setUserId(Long.parseLong(taskDto.getUserId()));
-        task.setSubTaskId(Long.parseLong(taskDto.getSubTaskId()));
         task.setTaskStatus(Byte.parseByte(taskDto.getTaskStatus()));
         task.setTaskMark(taskDto.getTaskMark());
         return task;
@@ -57,7 +56,6 @@ public class TaskMappingImpl implements TaskMapping {
         taskDto.setTaskEndTime(simpleDateFormat.format(task.getTaskEndTime()));
         taskDto.setTaskContent(task.getTaskContent());
         taskDto.setUserId(String.valueOf(task.getUserId()));
-        taskDto.setSubTaskId(String.valueOf(task.getSubTaskId()));
         taskDto.setTaskStatus(String.valueOf(task.getTaskStatus()));
         taskDto.setTaskMark(task.getTaskMark());
         return taskDto;

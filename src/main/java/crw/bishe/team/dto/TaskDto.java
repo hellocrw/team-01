@@ -1,10 +1,13 @@
 package crw.bishe.team.dto;
 
+import crw.bishe.team.entity.SubTask;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
+
+import java.util.List;
 
 /**
  * @description Description
@@ -49,4 +52,7 @@ public class TaskDto {
 
     @ApiModelProperty(position = 11, value = "备注")
     private String taskMark;
+
+    @ApiModelProperty(position = 12, value = "子任务信息")
+    private List<SubTaskDto> subTaskDtos;
 }

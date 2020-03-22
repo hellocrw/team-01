@@ -59,12 +59,6 @@ public class Task {
     private Long userId;
 
     /**
-     * 子任务ID
-     */
-    @Column(name = "sub_task_id")
-    private Long subTaskId;
-
-    /**
      * 任务状态
      */
     @Column(name = "task_status")
@@ -218,24 +212,6 @@ public class Task {
      */
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    /**
-     * 获取子任务ID
-     *
-     * @return sub_task_id - 子任务ID
-     */
-    public Long getSubTaskId() {
-        return subTaskId;
-    }
-
-    /**
-     * 设置子任务ID
-     *
-     * @param subTaskId 子任务ID
-     */
-    public void setSubTaskId(Long subTaskId) {
-        this.subTaskId = subTaskId;
     }
 
     /**

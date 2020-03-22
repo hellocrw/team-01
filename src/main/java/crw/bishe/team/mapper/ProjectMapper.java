@@ -127,7 +127,7 @@ public interface ProjectMapper extends Mapper<Project> {
      */
     @Select("SELECT project.* FROM project WHERE project.`pro_id` = #{proId};")
     @Results({
-            @Result(property = "proId", column = "pro_id"),
+//            @Result(property = "proId", column = "pro_id"),
             @Result(property = "taskDtos", column = "pro_id",
                     many = @Many(select = "crw.bishe.team.mapper.TaskMapper.geTaskByProId"))
     })

@@ -94,4 +94,11 @@ public class TaskController {
         return new ResponseEntity<>(new Result<>(200,"处理成功", taskListDtos), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "根据项目ID获取所有任务信息以及子任务信息")
+    @GetMapping("/geTaskByProId/{proId}")
+    public ResponseEntity<Result> geTaskByProId(@PathVariable(name = "proId") String proId){
+        List<TaskDto> taskDtos = taskService.geTaskByProId(proId);
+        return new ResponseEntity<>(new Result(200,"OK", taskDtos), HttpStatus.OK);
+    }
+
 }

@@ -3,6 +3,9 @@ package crw.bishe.team.mapper;
 import crw.bishe.team.dto.TaskDto;
 import crw.bishe.team.dto.TaskListDto;
 import crw.bishe.team.entity.Task;
+import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -27,5 +30,10 @@ public interface TaskMapper extends Mapper<Task> {
      * @return
      */
     @Select("SELECT task.* FROM task WHERE pro_id = #{proId};")
+    @Results({
+//            @Result(property = "proId", column = "pro_id"),
+            @Result(property = "subTaskDtos", column = "task_id",
+                    many = @Many(select = "crw.bishe.team.mapper.SubTaskMapper.getSubTaskByTaskId"))
+    })
     List<TaskDto> geTaskByProId(Long proId);
 }

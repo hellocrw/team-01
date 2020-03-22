@@ -49,4 +49,11 @@ public interface TaskService {
     List<MyTaskDto> getMyTaskList(String userId);
 
     List<TaskListDto> getTaskList(String proId);
+
+    /**
+     * 查找项目所有的任务信息
+     * @param proId
+     * @return
+     */
+    List<TaskDto> geTaskByProId(String proId);
 }

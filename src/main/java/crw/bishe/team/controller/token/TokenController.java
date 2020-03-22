@@ -59,11 +59,11 @@ public class TokenController {
             /**
              * 模仿数据库，根据用户名查询用户基本信息
              */
-            // TODO Auto-generated catch block
             res.put("userInfo", userInfoService.getUserInfoByUserId("1"));
+            // TODO Auto-generated catch block
             // 获取用户权限
             // TODO Auto-generated catch block
-            res.put("auth", "ADMIN");
+            res.put("auth", "USER");
         }
         return new ResponseEntity<>(new Result(200,"ok", res), HttpStatus.OK);
     }

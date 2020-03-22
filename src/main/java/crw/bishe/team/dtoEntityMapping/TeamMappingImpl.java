@@ -38,6 +38,8 @@ public class TeamMappingImpl implements TeamMapping {
         team.setStatus(Byte.parseByte(teamDto.getStatus()));
         team.setStaff(teamDto.getStaff());
         team.setTeamNature(teamDto.getTeamNature());
+        team.setTeamLabel(teamDto.getTeamLabel());
+        team.setSeeNum(Integer.parseInt(teamDto.getSeeNum()));
         return team;
     }
 
@@ -57,6 +59,8 @@ public class TeamMappingImpl implements TeamMapping {
         teamDto.setStatus(String.valueOf(team.getStatus()));
         teamDto.setStaff(team.getStaff());
         teamDto.setTeamNature(team.getTeamNature());
+        teamDto.setTeamLabel(team.getTeamLabel());
+        teamDto.setSeeNum(String.valueOf(team.getSeeNum()));
         return teamDto;
     }
 }

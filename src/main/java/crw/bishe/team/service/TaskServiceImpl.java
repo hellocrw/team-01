@@ -72,4 +72,10 @@ public class TaskServiceImpl implements TaskService {
         Long key = Long.parseLong(proId);
         return taskMapper.getTaskList(key);
     }
+
+    @Override
+    public List<TaskDto> geTaskByProId(String proId) {
+        Long key = Long.parseLong(proId);
+        return taskMapper.geTaskByProId(key);
+    }
 }
