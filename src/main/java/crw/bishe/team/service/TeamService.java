@@ -97,4 +97,6 @@ public interface TeamService {
      */
     List<TeamDto> getTeamByTeamName(String teamName);
 
+    void saveTeam(TeamDto teamDto);
+
 }

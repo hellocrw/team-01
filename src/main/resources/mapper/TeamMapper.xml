@@ -10,6 +10,7 @@
     <result column="leader_id" jdbcType="BIGINT" property="leaderId" />
     <result column="team_describe" jdbcType="VARCHAR" property="teamDescribe" />
     <result column="team_type" jdbcType="VARCHAR" property="teamType" />
+    <result column="team_scope" jdbcType="VARCHAR" property="teamScope" />
     <result column="team_number" jdbcType="INTEGER" property="teamNumber" />
     <result column="team_date" jdbcType="DATE" property="teamDate" />
     <result column="status" jdbcType="TINYINT" property="status" />

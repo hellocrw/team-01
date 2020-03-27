@@ -51,7 +51,7 @@ public class UserRolesServiceImpl implements UserRolesService  {
 
     @Override
     public String getAuth(String username) {
-        return null;
+        return userRolesMapper.getAuth(username);
     }
 
     /**
@@ -73,5 +73,6 @@ public class UserRolesServiceImpl implements UserRolesService  {
 //        return new SecurityUserDto(userRoles);
         UserDetails userDetails = User.withUsername(userRoles.getUsername()).password(userRoles.getPassword()).authorities(userRoles.getAuth()).build();
         return userDetails;
+//        return null;
     }
 }

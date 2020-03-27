@@ -36,5 +36,5 @@ public interface UserRolesMapper extends Mapper<UserRoles> {
      * @return
      */
     @Select("SELECT user_roles.`auth` FROM user_roles WHERE user_roles.`username`=#{arg0};")
-    String getRoles(String username);
+    String getAuth(String username);
 }

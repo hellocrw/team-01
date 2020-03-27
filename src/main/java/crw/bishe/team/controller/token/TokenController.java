@@ -1,6 +1,8 @@
 package crw.bishe.team.controller.token;
 
 import crw.bishe.team.config.JwtConfig;
+import crw.bishe.team.dto.UserDto;
+import crw.bishe.team.dto.UserRolesDto;
 import crw.bishe.team.service.UserInfoService;
 import crw.bishe.team.service.UserRolesService;
 import crw.bishe.team.vo.Result;
@@ -10,9 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.text.SimpleDateFormat;
@@ -42,13 +43,16 @@ public class TokenController {
 
     @ApiOperation("使用账号密码获取Token")
     @PostMapping("/getToken")
-    public ResponseEntity<Result> getToken(@PathParam("username") String username, @PathParam("password") String password){
-        // 模拟数据库
+    public ResponseEntity<Result> getToken(@RequestBody @Validated UserRolesDto userRolesDto){
+        // 模拟数据库验证用户登录信息
 //        if (username != "admin" && password != "123456"){
 //            return new ResponseEntity<>(new Result("用户名或密码错误"),HttpStatus.OK);
 //        }
+//        TODO  如果登录成功
+        UserDto userDto = userInfoService.getUserInfoByUserId("1");
         Map<String, Object> res = new HashMap<>();
-        String token = jwtConfig.getToken(username+password);
+        System.out.println(userRolesDto.getUsername() + " " + userRolesDto.getPassword());
+        String token = jwtConfig.getToken(userRolesDto.getUsername()+userRolesDto.getPassword());
         if (!StringUtils.isEmpty(token)){
             res.put("token", token);
             // 获取当前登录时间
@@ -59,11 +63,9 @@ public class TokenController {
             /**
              * 模仿数据库，根据用户名查询用户基本信息
              */
-            res.put("userInfo", userInfoService.getUserInfoByUserId("1"));
-            // TODO Auto-generated catch block
+            res.put("userInfo", userDto);
             // 获取用户权限
-            // TODO Auto-generated catch block
-            res.put("auth", "USER");
+            res.put("auth", userRolesService.getAuth(userRolesDto.getUsername()));
         }
         return new ResponseEntity<>(new Result(200,"ok", res), HttpStatus.OK);
     }

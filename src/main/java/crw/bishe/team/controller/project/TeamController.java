@@ -135,4 +135,13 @@ public class TeamController {
         List<TeamDto> teamDtos = teamService.getTeamByTeamName(teamName);
         return new ResponseEntity<>(new Result(200, "OK", teamDtos), HttpStatus.OK);
     }
+
+    @ApiOperation(value = "新增团队")
+    @PostMapping("/saveTeam")
+    public ResponseEntity<Result> saveTeam(@RequestBody TeamDto teamDto){
+        System.out.println("teamDto:" + teamDto.toString());
+        teamService.saveTeam(teamDto);
+        return new ResponseEntity<>(new Result(200, "OK"), HttpStatus.OK);
+    }
+
 }

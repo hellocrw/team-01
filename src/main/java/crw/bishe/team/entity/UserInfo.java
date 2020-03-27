@@ -12,6 +12,12 @@ public class UserInfo {
     private Long userId;
 
     /**
+     * 角色ID
+     */
+    @Column(name = "role_id")
+    private Long roleId;
+
+    /**
      * 用户名称
      */
     @Column(name = "user_name")
@@ -92,6 +98,14 @@ public class UserInfo {
      */
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     /**

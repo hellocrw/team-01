@@ -41,6 +41,12 @@ public class Team {
     private String teamType;
 
     /**
+     * 团队范围
+     */
+    @Column(name = "team_scope")
+    private String teamScope;
+
+    /**
      * 团队人数
      */
     @Column(name = "team_number")

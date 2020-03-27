@@ -4,10 +4,7 @@ import crw.bishe.team.dto.MemberDto;
 import crw.bishe.team.dto.MyTeamDto;
 import crw.bishe.team.dto.TeamDto;
 import crw.bishe.team.entity.Team;
-import org.apache.ibatis.annotations.Many;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
@@ -135,4 +132,5 @@ public interface TeamMapper extends Mapper<Team> {
      */
     @Select("SELECT * FROM team WHERE team.`team_name`LIKE #{teamName};")
     List<TeamDto> getTeamByTeamName(String teamName);
+
 }

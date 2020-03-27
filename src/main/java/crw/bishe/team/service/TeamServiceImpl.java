@@ -4,6 +4,7 @@ import crw.bishe.team.dto.MemberDto;
 import crw.bishe.team.dto.MyTeamDto;
 import crw.bishe.team.dto.TeamDto;
 import crw.bishe.team.dtoEntityMapping.TeamMapping;
+import crw.bishe.team.dtoEntityMapping.TeamMappingImpl;
 import crw.bishe.team.entity.Team;
 import crw.bishe.team.mapper.TeamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +110,12 @@ public class TeamServiceImpl implements TeamService {
     public List<TeamDto> getTeamByTeamName(String teamName) {
         String key = "%" + teamName + "%";
         return teamMapper.getTeamByTeamName(key);
+    }
+
+    @Override
+    public void saveTeam(TeamDto teamDto) {
+        Team team = teamMapping.toEntity(teamDto);
+        teamMapper.insert(team);
     }
 
 }

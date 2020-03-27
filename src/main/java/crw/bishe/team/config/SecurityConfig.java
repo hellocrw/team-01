@@ -2,6 +2,7 @@ package crw.bishe.team.config;
 
 import crw.bishe.team.entity.UserRoles;
 import crw.bishe.team.security.SecurityUserDto;
+import crw.bishe.team.service.TokenService;
 import crw.bishe.team.service.UserRolesService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
@@ -40,9 +43,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserRolesService userRolesService;
 
+    @Autowired
+    private TokenService tokenService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+//        http.csrf().disable();
 //        http.csrf().ignoringAntMatchers("/druid/*");
         http.authorizeRequests()
                 .antMatchers("/api/**").authenticated() //需要登录才能访问URL -> /api/** 资源
@@ -51,18 +57,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
+                // 禁用session
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
                 .formLogin()
+                // 指定登录页的路径
 //                .loginPage("http://localhost:4200/#/passport/login")
+                // 指定自定义form表单请求的路径
 //                .successForwardUrl("/api/token/getToken")
                 .permitAll()
                 .and()
                 .logout().permitAll();
+//        http.addFilterBefore(authenticationProvider, UsernamePasswordAuthenticationFilter.class);
     }
 
     //定义认证规则
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userRolesService);
+        auth.userDetailsService(userRolesService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(tokenService);
         auth.authenticationProvider(authenticationProvider());
        /*// 在内存中创建用户和密码，模拟数据库实现用户登录
         auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())  //在Spring Security 5.0中新增了多种加密方式，也改变了密码的格式
