@@ -30,15 +30,24 @@ public class TaskMappingImpl implements TaskMapping {
         }else{
             task.setTaskId(Long.parseLong(taskDto.getTaskId()));
         }
-        task.setTeamId(Long.parseLong(taskDto.getTeamId()));
-        task.setProId(Long.parseLong(taskDto.getProId()));
-        task.setTaskCreateTime(Date.valueOf(taskDto.getTaskCreateTime()));
-        task.setTaskStartTime(Date.valueOf(taskDto.getTaskStartTime()));
-        task.setTaskEndTime(Date.valueOf(taskDto.getTaskEndTime()));
-        task.setTaskContent(taskDto.getTaskContent());
-        task.setUserId(Long.parseLong(taskDto.getUserId()));
-        task.setTaskStatus(Byte.parseByte(taskDto.getTaskStatus()));
-        task.setTaskMark(taskDto.getTaskMark());
+        if (taskDto.getTeamId() != null)
+            task.setTeamId(Long.parseLong(taskDto.getTeamId()));
+        if (taskDto.getProId() != null)
+            task.setProId(Long.parseLong(taskDto.getProId()));
+        if (taskDto.getTaskCreateTime() != null)
+            task.setTaskCreateTime(Date.valueOf(taskDto.getTaskCreateTime()));
+        if (taskDto.getTaskStartTime() != null)
+            task.setTaskStartTime(Date.valueOf(taskDto.getTaskStartTime()));
+        if (taskDto.getTaskEndTime() != null)
+            task.setTaskEndTime(Date.valueOf(taskDto.getTaskEndTime()));
+        if (taskDto.getTaskContent() != null)
+            task.setTaskContent(taskDto.getTaskContent());
+        if (taskDto.getUserId() != null)
+            task.setUserId(Long.parseLong(taskDto.getUserId()));
+        if (taskDto.getTaskStatus() != null)
+            task.setTaskStatus(Byte.parseByte(taskDto.getTaskStatus()));
+        if (taskDto.getTaskMark() != null)
+            task.setTaskMark(taskDto.getTaskMark());
         return task;
     }
 

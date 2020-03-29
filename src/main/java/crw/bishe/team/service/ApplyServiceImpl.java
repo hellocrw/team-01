@@ -7,6 +7,8 @@ import crw.bishe.team.mapper.ApplyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Description Description
  * @Author crw
@@ -26,5 +28,11 @@ public class ApplyServiceImpl implements ApplyService {
     public int create(ApplyDto applyDto) {
         Apply apply = applyMapping.toEntity(applyDto);
         return applyMapper.insert(apply);
+    }
+
+    @Override
+    public List<ApplyDto> getApplyByUserId(String userId) {
+        Long key = Long.parseLong(userId);
+        return applyMapper.getApplyByUserId(key);
     }
 }

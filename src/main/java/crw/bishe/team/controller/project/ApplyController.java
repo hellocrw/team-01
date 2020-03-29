@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @Description Description 申请表管理
  * @Author crw
@@ -24,9 +26,15 @@ public class ApplyController {
     @Autowired
     private ApplyService applyService;
 
-    @GetMapping("/apply")
+    @PostMapping("/apply")
     public ResponseEntity<Result> create(@ApiParam(value = "申请表信息") @RequestBody ApplyDto applyDto){
         Integer res = applyService.create(applyDto);
         return new ResponseEntity<>(new Result(200, "增加申请表成功"), HttpStatus.OK);
+    }
+
+    @GetMapping("/getApplyByUserId/{userId}")
+    public ResponseEntity<Result> getApplyByUserId( @PathVariable(name = "userId") String userId){
+        List<ApplyDto> applyDtos = applyService.getApplyByUserId(userId);
+        return new ResponseEntity<>(new Result(200, "OK", applyDtos), HttpStatus.OK);
     }
 }

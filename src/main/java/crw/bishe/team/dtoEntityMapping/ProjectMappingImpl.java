@@ -30,21 +30,36 @@ public class ProjectMappingImpl implements ProjectMapping {
         }else{
             project.setProId(Long.parseLong(projectDto.getProId()));
         }
-        project.setProName(projectDto.getProName());
-        project.setLeaderName(projectDto.getLeaderName());
-        project.setProDescribe(projectDto.getProDescribe());
-        project.setProDate(Date.valueOf(projectDto.getProDate()));
-        project.setProStartTime(Date.valueOf(projectDto.getProStartTime()));
-        project.setProEndTime(Date.valueOf(projectDto.getProEndTime()));
-        project.setProStatus(projectDto.getProStatus());
-        project.setTeamId(projectDto.getTeamId());
-        project.setStaffList(projectDto.getStaffList());
-        project.setProType(projectDto.getProType());
-        project.setProCurrentNum(Integer.parseInt(projectDto.getProCurrentNum()));
-        project.setProLimiedNum(Integer.parseInt(projectDto.getProLimiedNum()));
-        project.setNumber(Integer.parseInt(projectDto.getNumber()));
-        project.setSeeNum(Integer.parseInt(projectDto.getSeeNum()));
-        project.setStaff(projectDto.getStaff());
+        if (projectDto.getProName() != null)
+            project.setProName(projectDto.getProName());
+        if(projectDto.getLeaderName() != null)
+            project.setLeaderName(projectDto.getLeaderName());
+        if(projectDto.getProDescribe() != null)
+            project.setProDescribe(projectDto.getProDescribe());
+        if (projectDto.getProDate() != null)
+            project.setProDate(Date.valueOf(projectDto.getProDate()));
+        if (projectDto.getProStartTime() != null)
+            project.setProStartTime(Date.valueOf(projectDto.getProStartTime()));
+        if (projectDto.getProEndTime() != null)
+            project.setProEndTime(Date.valueOf(projectDto.getProEndTime()));
+        if (projectDto.getProStatus() != null)
+            project.setProStatus(projectDto.getProStatus());
+        if (projectDto.getTeamId() != null)
+            project.setTeamId(projectDto.getTeamId());
+        if (projectDto.getStaffList() != null)
+            project.setStaffList(projectDto.getStaffList());
+        if (projectDto.getProType() != null)
+            project.setProType(projectDto.getProType());
+        if (projectDto.getProCurrentNum() != null)
+            project.setProCurrentNum(Integer.parseInt(projectDto.getProCurrentNum()));
+        if (projectDto.getProLimiedNum() != null)
+            project.setProLimiedNum(Integer.parseInt(projectDto.getProLimiedNum()));
+        if (projectDto.getNumber() != null)
+            project.setNumber(Integer.parseInt(projectDto.getNumber()));
+        if (projectDto.getSeeNum() != null)
+            project.setSeeNum(Integer.parseInt(projectDto.getSeeNum()));
+        if (projectDto.getStaff() != null)
+            project.setStaff(projectDto.getStaff());
         return project;
     }
 
