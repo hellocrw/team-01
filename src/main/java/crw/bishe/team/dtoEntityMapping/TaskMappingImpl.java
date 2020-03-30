@@ -30,8 +30,6 @@ public class TaskMappingImpl implements TaskMapping {
         }else{
             task.setTaskId(Long.parseLong(taskDto.getTaskId()));
         }
-        if (taskDto.getTeamId() != null)
-            task.setTeamId(Long.parseLong(taskDto.getTeamId()));
         if (taskDto.getProId() != null)
             task.setProId(Long.parseLong(taskDto.getProId()));
         if (taskDto.getTaskCreateTime() != null)
@@ -58,7 +56,6 @@ public class TaskMappingImpl implements TaskMapping {
         }
         TaskDto taskDto = new TaskDto();
         taskDto.setTaskId(String.valueOf(task.getTaskId()));
-        taskDto.setTeamId(String.valueOf(task.getTeamId()));
         taskDto.setProId(String.valueOf(task.getProId()));
         taskDto.setTaskCreateTime(simpleDateFormat.format(task.getTaskCreateTime()));
         taskDto.setTaskStartTime(simpleDateFormat.format(task.getTaskStartTime()));

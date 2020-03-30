@@ -1,8 +1,10 @@
 package crw.bishe.team.service;
 
+import crw.bishe.team.dto.FilesDto;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * @Description Description
@@ -26,4 +28,11 @@ public interface FilesService {
      * @throws Exception
      */
     void downloadFile(HttpServletResponse response, MultipartFile file) throws Exception;
+
+    /**
+     * 通过项目ID获取文件信息
+     * @param proId
+     * @return
+     */
+    List<FilesDto> getFilesByProId(String proId);
 }

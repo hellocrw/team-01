@@ -6,7 +6,6 @@
       WARNING - @mbg.generated
     -->
     <id column="task_id" jdbcType="BIGINT" property="taskId" />
-    <result column="team_id" jdbcType="BIGINT" property="teamId" />
     <result column="pro_id" jdbcType="BIGINT" property="proId" />
     <result column="task_create_time" jdbcType="DATE" property="taskCreateTime" />
     <result column="task_start_time" jdbcType="DATE" property="taskStartTime" />

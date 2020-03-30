@@ -16,12 +16,6 @@ public class Task {
     private Long taskId;
 
     /**
-     * 团队ID
-     */
-    @Column(name = "team_id")
-    private Long teamId;
-
-    /**
      * 项目ID
      */
     @Column(name = "pro_id")
@@ -86,24 +80,6 @@ public class Task {
      */
     public void setTaskId(Long taskId) {
         this.taskId = taskId;
-    }
-
-    /**
-     * 获取团队ID
-     *
-     * @return team_id - 团队ID
-     */
-    public Long getTeamId() {
-        return teamId;
-    }
-
-    /**
-     * 设置团队ID
-     *
-     * @param teamId 团队ID
-     */
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
     }
 
     /**

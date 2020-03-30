@@ -58,13 +58,13 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<MyTaskDto> getMyTaskList(String userId) {
+    public List<TaskDto> getTaskByUserId(String userId) {
         Long key = Long.parseLong(userId);
-        List<Task> tasks = taskMapper.getMyTaskList(key);
-        System.out.println(tasks.get(1).getTaskStartTime());
-        List<MyTaskDto> myTaskDtos = new ArrayList<>();
-        tasks.forEach(task -> myTaskDtos.add(taskMapping.toMyTaskDto(task)));
-        return myTaskDtos;
+        List<TaskDto> taskDtos = taskMapper.getTaskByUserId(key);
+//        System.out.println(tasks.get(1).getTaskStartTime());
+//        List<MyTaskDto> myTaskDtos = new ArrayList<>();
+//        tasks.forEach(task -> myTaskDtos.add(taskMapping.toMyTaskDto(task)));
+        return taskDtos;
     }
 
     @Override

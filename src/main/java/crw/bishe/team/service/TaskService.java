@@ -46,7 +46,7 @@ public interface TaskService {
      * @param userId
      * @return
      */
-    List<MyTaskDto> getMyTaskList(String userId);
+    List<TaskDto> getTaskByUserId(String userId);
 
     List<TaskListDto> getTaskList(String proId);
 

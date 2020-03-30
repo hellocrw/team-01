@@ -80,12 +80,11 @@ public class TaskController {
     }
 
     @ApiOperation(value = "根据用户ID获取任务信息")
-    @GetMapping("/getMyTaskList/{id}")
-    public ResponseEntity<Result> getMyTaskList(@ApiParam(value = "用户ID号") @PathVariable(name = "id") String user_id){
-        List<MyTaskDto> taskDtos = taskService.getMyTaskList(user_id);
+    @GetMapping("/getTaskByUserId/{userId}")
+    public ResponseEntity<Result> getTaskByUserId(@ApiParam(value = "用户ID") @PathVariable(name = "userId") String user_id){
+        List<TaskDto> taskDtos = taskService.getTaskByUserId(user_id);
         return new ResponseEntity<>(new Result(200, "根据用户ID获取任务信息", taskDtos), HttpStatus.OK);
     }
-
 
     @ApiOperation(value = "根据项目ID查找项目对应的任务信息")
     @GetMapping("/getTaskList/{id}")

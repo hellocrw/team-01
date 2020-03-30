@@ -23,9 +23,6 @@ public class TaskDto {
     @ApiModelProperty(position = 2, value = "任务ID", required = true)
     private String taskId;
 
-    @ApiModelProperty(position = 3, value = "团队ID")
-    private String teamId;
-
     @ApiModelProperty(position = 4, value = "项目ID")
     private String proId;
 

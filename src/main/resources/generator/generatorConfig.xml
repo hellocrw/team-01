@@ -24,11 +24,11 @@
         <sqlMapGenerator targetPackage="mapper"
                          targetProject="src/main/resources"/>
 
-        <!--<javaClientGenerator targetPackage="crw.bishe.team.mapper"-->
-                             <!--targetProject="src/main/java"-->
-                             <!--type="XMLMAPPER"/>-->
+        <javaClientGenerator targetPackage="crw.bishe.team.mapper"
+                             targetProject="src/main/java"
+                             type="XMLMAPPER"/>
 
-        <table tableName="team_type"/>
+        <table tableName="user_team"/>
 
     </context>
 </generatorConfiguration>

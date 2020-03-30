@@ -1,6 +1,9 @@
 package crw.bishe.team.service;
 
+import crw.bishe.team.dto.FilesDto;
+import crw.bishe.team.mapper.FilesMapper;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -8,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.List;
 
 /**
  * @Description Description
@@ -17,6 +21,9 @@ import java.io.*;
  */
 @Service
 public class FilesServiceImpl implements FilesService {
+
+    @Autowired
+    private FilesMapper filesMapper;
 
     @Value("${file.upload.url}")
     private String uploadPath;
@@ -78,5 +85,11 @@ public class FilesServiceImpl implements FilesService {
             outputStream.write(buf, 0 , len);
         }
         fileInputStream.close();
+    }
+
+    @Override
+    public List<FilesDto> getFilesByProId(String proId) {
+        Long key = Long.parseLong(proId);
+        return filesMapper.getFilesByProId(key);
     }
 }

@@ -18,8 +18,13 @@ public interface TaskMapper extends Mapper<Task> {
      * @param userId
      * @return
      */
-    @Select("SELECT task.`task_id`,task.`task_start_time`,task.`task_end_time`,task.`task_content`,task.`task_status` FROM task WHERE task.`user_id` = #{arg0}")
-    List<Task> getMyTaskList(Long userId);
+    @Select("SELECT task.* FROM task WHERE task.`user_id` = #{userId}")
+    @Results({
+            @Result(property = "taskId", column = "task_id"),
+            @Result(property = "subTaskDtos", column = "task_id",
+                    many = @Many(select = "crw.bishe.team.mapper.SubTaskMapper.getSubTaskByTaskId"))
+    })
+    List<TaskDto> getTaskByUserId(Long userId);
 
     @Select(" SELECT DISTINCT task.`task_id`,task.`task_start_time`,task.`task_end_time`,task.`task_content`,user_info.`user_name` AS taskCharger,task.`sub_task_id`,task.`task_status` FROM task,user_info WHERE task.`pro_id`=#{arg0} AND task.`user_id` = user_info.`user_id`;")
     List<TaskListDto> getTaskList(Long proId);
@@ -36,4 +41,5 @@ public interface TaskMapper extends Mapper<Task> {
                     many = @Many(select = "crw.bishe.team.mapper.SubTaskMapper.getSubTaskByTaskId"))
     })
     List<TaskDto> geTaskByProId(Long proId);
+
 }
