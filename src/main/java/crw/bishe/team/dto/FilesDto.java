@@ -12,5 +12,6 @@ public class FilesDto {
     private String userName;
     private String fileLink;
     private String proId;
+    private String proName;
     private String uploadTime;
 }

@@ -25,4 +25,11 @@ public interface ApplyService {
      * @return
      */
     List<ApplyDto> getApplyByUserId(String userId);
+
+    /**
+     * 获取别人的入队申请信息
+     * @param userId
+     * @return
+     */
+    List<ApplyDto> getEnqueueApply(String userId);
 }

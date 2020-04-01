@@ -35,4 +35,10 @@ public class ApplyServiceImpl implements ApplyService {
         Long key = Long.parseLong(userId);
         return applyMapper.getApplyByUserId(key);
     }
+
+    @Override
+    public List<ApplyDto> getEnqueueApply(String userId) {
+        Long key = Long.parseLong(userId);
+        return applyMapper.getEnqueueApply(key);
+    }
 }

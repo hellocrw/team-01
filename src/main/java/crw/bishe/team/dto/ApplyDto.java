@@ -20,6 +20,8 @@ public class ApplyDto {
     @ApiModelProperty(position = 2, value = "团队ID号")
     private String teamId;
 
+    private String teamName;
+
     @ApiModelProperty(position = 3, value = "申请人ID号")
     private String userId;
 

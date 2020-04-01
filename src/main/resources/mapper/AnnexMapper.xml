@@ -7,6 +7,8 @@
     -->
     <id column="annex_id" jdbcType="BIGINT" property="annexId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
   </resultMap>
 </mapper>

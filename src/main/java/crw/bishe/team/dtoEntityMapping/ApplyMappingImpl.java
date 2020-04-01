@@ -30,6 +30,7 @@ public class ApplyMappingImpl implements ApplyMapping {
             apply.setApplyId(Long.parseLong(applyDto.getApplyId()));
         }
         apply.setTeamId(Long.parseLong(applyDto.getTeamId()));
+        apply.setTeamName(applyDto.getTeamName());
         apply.setUserId(Long.parseLong(applyDto.getUserId()));
         apply.setUserName(applyDto.getUserName());
         apply.setApplyDate(Date.valueOf(applyDto.getApplyDate()));
@@ -47,6 +48,7 @@ public class ApplyMappingImpl implements ApplyMapping {
         ApplyDto applyDto = new ApplyDto();
         applyDto.setApplyId(String.valueOf(apply.getApplyId()));
         applyDto.setTeamId(String.valueOf(apply.getTeamId()));
+        applyDto.setTeamName(apply.getTeamName());
         applyDto.setUserId(String.valueOf(apply.getUserId()));
         applyDto.setUserName(apply.getUserName());
         applyDto.setApplyDate(simpleDateFormat.format(apply.getApplyDate()));

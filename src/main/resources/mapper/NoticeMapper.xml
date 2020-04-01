@@ -9,7 +9,9 @@
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="pro_id" jdbcType="BIGINT" property="proId" />
+    <result column="pro_name" jdbcType="VARCHAR" property="proName" />
     <result column="notice_content" jdbcType="VARCHAR" property="noticeContent" />
     <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
   </resultMap>
 </mapper>

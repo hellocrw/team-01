@@ -12,4 +12,5 @@ public class NoticeDto {
     private String proId;
     private String noticeContent;
     private String createTime;
+    private String status;
 }

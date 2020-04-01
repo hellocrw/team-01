@@ -26,7 +26,7 @@ public class ApplyController {
     @Autowired
     private ApplyService applyService;
 
-    @PostMapping("/apply")
+    @PostMapping("/create")
     public ResponseEntity<Result> create(@ApiParam(value = "申请表信息") @RequestBody ApplyDto applyDto){
         Integer res = applyService.create(applyDto);
         return new ResponseEntity<>(new Result(200, "增加申请表成功"), HttpStatus.OK);
@@ -35,6 +35,12 @@ public class ApplyController {
     @GetMapping("/getApplyByUserId/{userId}")
     public ResponseEntity<Result> getApplyByUserId( @PathVariable(name = "userId") String userId){
         List<ApplyDto> applyDtos = applyService.getApplyByUserId(userId);
+        return new ResponseEntity<>(new Result(200, "OK", applyDtos), HttpStatus.OK);
+    }
+
+    @GetMapping("/getEnqueueApply/{userId}")
+    public ResponseEntity<Result> getEnqueueApply(@PathVariable(name = "userId") String userId){
+        List<ApplyDto> applyDtos = applyService.getEnqueueApply(userId);
         return new ResponseEntity<>(new Result(200, "OK", applyDtos), HttpStatus.OK);
     }
 }

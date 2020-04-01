@@ -11,6 +11,7 @@
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="file_link" jdbcType="VARCHAR" property="fileLink" />
     <result column="pro_id" jdbcType="BIGINT" property="proId" />
+    <result column="pro_name" jdbcType="VARCHAR" property="proName" />
     <result column="upload_time" jdbcType="DATE" property="uploadTime" />
   </resultMap>
 </mapper>

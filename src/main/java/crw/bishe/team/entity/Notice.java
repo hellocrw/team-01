@@ -34,6 +34,12 @@ public class Notice {
     private Long proId;
 
     /**
+     * 项目名称
+     */
+    @Column(name = "pro_name")
+    private String proName;
+
+    /**
      * 公告内容
      */
     @Column(name = "notice_content")
@@ -44,4 +50,10 @@ public class Notice {
      */
     @Column(name = "create_time")
     private Date createTime;
+
+    /**
+     * 状态
+     */
+    @Column(name = "status")
+    private Byte status;
 }

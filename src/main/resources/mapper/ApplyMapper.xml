@@ -7,6 +7,7 @@
     -->
     <id column="apply_id" jdbcType="BIGINT" property="applyId" />
     <result column="team_id" jdbcType="BIGINT" property="teamId" />
+    <result column="team_name" jdbcType="VARCHAR" property="teamName" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="apply_date" jdbcType="DATE" property="applyDate" />
