@@ -3,6 +3,7 @@ package crw.bishe.team.service;
 import crw.bishe.team.dto.MemberDto;
 import crw.bishe.team.dto.MyTeamDto;
 import crw.bishe.team.dto.TeamDto;
+import crw.bishe.team.dto.TeamProDto;
 import crw.bishe.team.dtoEntityMapping.TeamMapping;
 import crw.bishe.team.dtoEntityMapping.TeamMappingImpl;
 import crw.bishe.team.entity.Team;
@@ -116,6 +117,16 @@ public class TeamServiceImpl implements TeamService {
     public void saveTeam(TeamDto teamDto) {
         Team team = teamMapping.toEntity(teamDto);
         teamMapper.insert(team);
+    }
+
+    @Override
+    public List<TeamDto> getTeamByteamScope(String teamScope) {
+        return teamMapper.getTeamByteamScope(teamScope);
+    }
+
+    @Override
+    public List<TeamDto> getTeamByTeamType(String teamType) {
+        return teamMapper.getTeamByTeamType(teamType);
     }
 
 }

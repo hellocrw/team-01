@@ -1,9 +1,6 @@
 package crw.bishe.team.controller.project;
 
-import crw.bishe.team.dto.MemberDto;
-import crw.bishe.team.dto.MyTeamDto;
-import crw.bishe.team.dto.ProjectDto;
-import crw.bishe.team.dto.TeamDto;
+import crw.bishe.team.dto.*;
 import crw.bishe.team.entity.Team;
 import crw.bishe.team.service.TeamService;
 import crw.bishe.team.vo.Result;
@@ -142,6 +139,13 @@ public class TeamController {
         System.out.println("teamDto:" + teamDto.toString());
         teamService.saveTeam(teamDto);
         return new ResponseEntity<>(new Result(200, "OK"), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "通过团队范围查询团队信息")
+    @GetMapping("/getTeamByteamScope/{teamScope}")
+    public ResponseEntity<Result> getTeamByteamScope(@PathVariable(name = "teamScope") String teamScope){
+        List<TeamDto> teamDtos = teamService.getTeamByteamScope(teamScope);
+        return new ResponseEntity<>(new Result(200, "OK", teamDtos), HttpStatus.OK);
     }
 
 }

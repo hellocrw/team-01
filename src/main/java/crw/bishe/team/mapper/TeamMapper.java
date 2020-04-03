@@ -3,7 +3,9 @@ package crw.bishe.team.mapper;
 import crw.bishe.team.dto.MemberDto;
 import crw.bishe.team.dto.MyTeamDto;
 import crw.bishe.team.dto.TeamDto;
+import crw.bishe.team.dto.TeamProDto;
 import crw.bishe.team.entity.Team;
+import crw.bishe.team.vo.ConditionRequest;
 import org.apache.ibatis.annotations.*;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -132,5 +134,26 @@ public interface TeamMapper extends Mapper<Team> {
      */
     @Select("SELECT * FROM team WHERE team.`team_name`LIKE #{teamName};")
     List<TeamDto> getTeamByTeamName(String teamName);
+
+    /**
+     * 根据学校范围查询团队信息
+     * @param teamScope
+     * @return
+     */
+    @Select("SELECT team.* FROM team WHERE team.`team_scope` = #{teamScope};")
+    @Results({
+            @Result(property = "teamId", column = "team_id"),
+            @Result(property = "projects", column = "team_id",
+                    many = @Many(select = "crw.bishe.team.mapper.ProjectMapper.getProjectByTeamId"))
+    })
+    List<TeamDto> getTeamByteamScope(String teamScope);
+
+    /**
+     * 通过团队类型查找团队信息
+     * @param teamType
+     * @return
+     */
+    @Select("SELECT team.* FROM team WHERE team.`team_type` = #{teamType};")
+    List<TeamDto> getTeamByTeamType(String teamType);
 
 }

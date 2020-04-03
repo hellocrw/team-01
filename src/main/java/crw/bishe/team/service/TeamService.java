@@ -3,6 +3,7 @@ package crw.bishe.team.service;
 import crw.bishe.team.dto.MemberDto;
 import crw.bishe.team.dto.MyTeamDto;
 import crw.bishe.team.dto.TeamDto;
+import crw.bishe.team.dto.TeamProDto;
 import crw.bishe.team.entity.Team;
 
 import java.util.List;
@@ -98,5 +99,9 @@ public interface TeamService {
     List<TeamDto> getTeamByTeamName(String teamName);
 
     void saveTeam(TeamDto teamDto);
+
+    List<TeamDto> getTeamByteamScope(String teamScope);
+
+    List<TeamDto> getTeamByTeamType(String teamType);
 
 }

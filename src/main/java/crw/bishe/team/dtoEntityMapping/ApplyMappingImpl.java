@@ -29,14 +29,22 @@ public class ApplyMappingImpl implements ApplyMapping {
         }else {
             apply.setApplyId(Long.parseLong(applyDto.getApplyId()));
         }
-        apply.setTeamId(Long.parseLong(applyDto.getTeamId()));
-        apply.setTeamName(applyDto.getTeamName());
-        apply.setUserId(Long.parseLong(applyDto.getUserId()));
-        apply.setUserName(applyDto.getUserName());
-        apply.setApplyDate(Date.valueOf(applyDto.getApplyDate()));
-        apply.setDecribe(applyDto.getDecribe());
-        apply.setPhone(applyDto.getPhone());
-        apply.setStatus(Byte.parseByte(applyDto.getStatus()));
+        if (applyDto.getTeamId() != null)
+            apply.setTeamId(Long.parseLong(applyDto.getTeamId()));
+        if (applyDto.getTeamName() != null)
+            apply.setTeamName(applyDto.getTeamName());
+        if (applyDto.getUserId() != null)
+            apply.setUserId(Long.parseLong(applyDto.getUserId()));
+        if (applyDto.getUserName() != null)
+            apply.setUserName(applyDto.getUserName());
+        if (applyDto.getApplyDate() != null)
+            apply.setApplyDate(Date.valueOf(applyDto.getApplyDate()));
+        if (applyDto.getDecribe() != null)
+            apply.setDecribe(applyDto.getDecribe());
+        if (applyDto.getPhone() != null)
+            apply.setPhone(applyDto.getPhone());
+        if (applyDto.getStatus() != null)
+            apply.setStatus(Byte.parseByte(applyDto.getStatus()));
         return apply;
     }
 
