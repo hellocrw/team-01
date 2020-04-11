@@ -3,6 +3,7 @@ package crw.bishe.team.controller.project;
 import crw.bishe.team.dto.*;
 import crw.bishe.team.entity.Team;
 import crw.bishe.team.service.TeamService;
+import crw.bishe.team.service.TeamTypeService;
 import crw.bishe.team.vo.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,9 +31,11 @@ import java.util.Map;
 public class TeamController {
 
     private final TeamService teamService;
+    private final TeamTypeService teamTypeService;
 
     @Autowired
-    public TeamController(TeamService teamService){
+    public TeamController(TeamService teamService, TeamTypeService teamTypeService){
+        this.teamTypeService = teamTypeService;
         this.teamService = teamService;
     }
 
@@ -145,6 +148,14 @@ public class TeamController {
     @GetMapping("/getTeamByteamScope/{teamScope}")
     public ResponseEntity<Result> getTeamByteamScope(@PathVariable(name = "teamScope") String teamScope){
         List<TeamDto> teamDtos = teamService.getTeamByteamScope(teamScope);
+        return new ResponseEntity<>(new Result(200, "OK", teamDtos), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "通过团队类型查找团队信息")
+    @GetMapping("/getTeamByTeamType/{key}")
+    public ResponseEntity<Result> getTeamByTeamType(@PathVariable(name = "key") String key){
+        String value = this.teamTypeService.getValueByKey(key);
+        List<TeamDto> teamDtos = teamService.getTeamByTeamType(value);
         return new ResponseEntity<>(new Result(200, "OK", teamDtos), HttpStatus.OK);
     }
 

@@ -36,10 +36,17 @@ public interface TaskMapper extends Mapper<Task> {
      */
     @Select("SELECT task.* FROM task WHERE pro_id = #{proId};")
     @Results({
-//            @Result(property = "proId", column = "pro_id"),
+            @Result(property = "taskId", column = "task_id"),
             @Result(property = "subTaskDtos", column = "task_id",
                     many = @Many(select = "crw.bishe.team.mapper.SubTaskMapper.getSubTaskByTaskId"))
     })
     List<TaskDto> geTaskByProId(Long proId);
+
+    /**
+     * 根据任务id更新任务状态信息
+     * @param taskId
+     */
+    @Select("UPDATE task SET task.`task_status`=task.`task_status`+1 WHERE task.`task_id` = #{taskId};")
+    Integer updateTaskByTaskId(Long taskId);
 
 }

@@ -24,7 +24,7 @@ public class UserItemRemarkController {
 
     @GetMapping("/getTeamTypeNum/{userId}")
     public ResponseEntity<Result> getTeamTypeNum(@PathVariable(name = "userId") String userId){
-        List<Map<String ,Object>> map = userItemRemarkService.getTeamTypeNum(userId);
+        List<Map<String ,Long>> map = userItemRemarkService.getTeamTypeNum(userId);
         return new ResponseEntity<>(new Result(200,"OK", map), HttpStatus.OK);
     }
 }

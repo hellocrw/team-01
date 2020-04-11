@@ -14,7 +14,7 @@ public class UserItemRemarkServiceImpl implements UserItemRemarkService, Compara
     private UserItemRemarkMapper userItemRemarkMapper;
 
     @Override
-    public List<Map<String, Object>> getTeamTypeNum(String userId) {
+    public List<Map<String, Long>> getTeamTypeNum(String userId) {
         Long key = Long.parseLong(userId);
         return userItemRemarkMapper.getTeamTypeNum(key);
     }

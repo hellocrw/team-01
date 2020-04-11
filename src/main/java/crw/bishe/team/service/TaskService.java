@@ -56,4 +56,11 @@ public interface TaskService {
      * @return
      */
     List<TaskDto> geTaskByProId(String proId);
+
+    /**
+     * 根据任务id更新任务状态信息
+     * @param taskId
+     * @return
+     */
+    Integer updateTaskByTaskId(String taskId);
 }

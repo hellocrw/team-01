@@ -12,5 +12,5 @@ public interface UserItemRemarkMapper extends Mapper<UserItemRemark> {
     @Select("SELECT user_id, team_type_id, COUNT(team_type_id) AS team_type_num FROM user_item_remark\n" +
             "WHERE user_id = 1\n" +
             "GROUP BY team_type_id;")
-    List<Map<String, Object>> getTeamTypeNum(Long userId);
+    List<Map<String, Long>> getTeamTypeNum(Long userId);
 }

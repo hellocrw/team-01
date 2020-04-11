@@ -14,4 +14,12 @@ public interface TeamTypeMapper extends Mapper<TeamType> {
      */
     @Select("select * from team_type")
     List<TeamTypeDto> selectTeamType();
+
+    /**
+     * 通过key查询value
+     * @param key
+     * @return
+     */
+    @Select("SELECT team_type.`value` FROM team_type WHERE team_type.`key` = #{key};")
+    String getValueByKey(Long key);
 }
