@@ -1,5 +1,7 @@
 package crw.bishe.team.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import crw.bishe.team.dto.MemberDto;
 import crw.bishe.team.dto.MyTeamDto;
 import crw.bishe.team.dto.TeamDto;
@@ -8,6 +10,9 @@ import crw.bishe.team.dtoEntityMapping.TeamMapping;
 import crw.bishe.team.dtoEntityMapping.TeamMappingImpl;
 import crw.bishe.team.entity.Team;
 import crw.bishe.team.mapper.TeamMapper;
+import crw.bishe.team.utils.PageUtils;
+import crw.bishe.team.vo.PageRequest;
+import crw.bishe.team.vo.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -127,6 +132,18 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public List<TeamDto> getTeamByTeamType(String teamType) {
         return teamMapper.getTeamByTeamType(teamType);
+    }
+
+    @Override
+    public PageResult pageTeams(PageRequest pageRequest) {
+        return PageUtils.getPageResult(getPageInfo(pageRequest));
+    }
+    public PageInfo getPageInfo(PageRequest pageRequest) {
+        int pageNum = Integer.parseInt(pageRequest.getPageNum());
+        int pageSize = Integer.parseInt(pageRequest.getPageSize());
+        PageHelper.startPage(pageNum, pageSize);
+        List<TeamDto> teamDtos = this.getTeams();
+        return new PageInfo<>(teamDtos);
     }
 
 }

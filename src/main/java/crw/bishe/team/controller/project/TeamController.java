@@ -4,6 +4,8 @@ import crw.bishe.team.dto.*;
 import crw.bishe.team.entity.Team;
 import crw.bishe.team.service.TeamService;
 import crw.bishe.team.service.TeamTypeService;
+import crw.bishe.team.vo.PageRequest;
+import crw.bishe.team.vo.PageResult;
 import crw.bishe.team.vo.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -157,6 +159,13 @@ public class TeamController {
         String value = this.teamTypeService.getValueByKey(key);
         List<TeamDto> teamDtos = teamService.getTeamByTeamType(value);
         return new ResponseEntity<>(new Result(200, "OK", teamDtos), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "分页查询团队信息")
+    @PostMapping("/getPageInfo")
+    public ResponseEntity<Result> getPageInfo(@RequestBody PageRequest pageRequest){
+        PageResult pageResult = teamService.pageTeams(pageRequest);
+        return new ResponseEntity<>(new Result(200,"OK", pageResult), HttpStatus.OK);
     }
 
 }

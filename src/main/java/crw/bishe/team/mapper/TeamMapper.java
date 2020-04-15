@@ -62,7 +62,7 @@ public interface TeamMapper extends Mapper<Team> {
      * @return
      */
     @Select("SELECT team.*,user_info.`university` FROM team,user_info\n" +
-            "WHERE team.`leader_id`=user_info.`user_id`;")
+            "WHERE team.`leader_id`=user_info.`user_id`")
     @Results({
             @Result(property = "teamId", column = "team_id"),
             @Result(property = "projects", column = "team_id",

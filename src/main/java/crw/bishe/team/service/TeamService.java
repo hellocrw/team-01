@@ -5,6 +5,8 @@ import crw.bishe.team.dto.MyTeamDto;
 import crw.bishe.team.dto.TeamDto;
 import crw.bishe.team.dto.TeamProDto;
 import crw.bishe.team.entity.Team;
+import crw.bishe.team.vo.PageRequest;
+import crw.bishe.team.vo.PageResult;
 
 import java.util.List;
 import java.util.Map;
@@ -102,6 +104,18 @@ public interface TeamService {
 
     List<TeamDto> getTeamByteamScope(String teamScope);
 
+    /**
+     * 通过团队类型获取团队信息
+     * @param teamType
+     * @return
+     */
     List<TeamDto> getTeamByTeamType(String teamType);
+
+    /**
+     * 分页查询团队信息
+     * @param pageRequest
+     * @return
+     */
+    PageResult pageTeams(PageRequest pageRequest);
 
 }
