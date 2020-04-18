@@ -1,6 +1,7 @@
 package crw.bishe.team.controller.project;
 
 import crw.bishe.team.dto.NoticeDto;
+import crw.bishe.team.entity.Notice;
 import crw.bishe.team.service.NoticeService;
 import crw.bishe.team.vo.Result;
 import io.swagger.annotations.Api;
@@ -10,11 +11,9 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @Api(tags = {"公告管理"})
@@ -31,5 +30,12 @@ public class NoticeController {
     public ResponseEntity<Result> getNoticesByProId(@PathVariable(name = "proId") String proId){
         List<NoticeDto> noticeDtos = noticeService.getNoticesByProId(proId);
         return new ResponseEntity<>(new Result(200, "OK", noticeDtos), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "保存公告信息")
+    @PostMapping("/save")
+    public ResponseEntity<Result> save(@RequestBody NoticeDto noticeDto){
+        int res = noticeService.save(noticeDto);
+        return new ResponseEntity<>(new Result(200, "OK", res), HttpStatus.OK);
     }
 }

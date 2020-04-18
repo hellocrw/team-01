@@ -59,5 +59,12 @@ public interface UserInfoService {
      */
     List<UserDto> getUserInfo();
 
+    /**
+     * 通过团队ID获取队长信息
+     * @param teamId
+     * @return
+     */
+    UserDto getLeaderByTeamId(String teamId);
+
 
 }

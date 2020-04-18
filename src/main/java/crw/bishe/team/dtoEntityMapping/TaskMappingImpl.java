@@ -43,7 +43,7 @@ public class TaskMappingImpl implements TaskMapping {
         if (taskDto.getUserId() != null)
             task.setUserId(Long.parseLong(taskDto.getUserId()));
         if (taskDto.getTaskStatus() != null)
-            task.setTaskStatus(Byte.parseByte(taskDto.getTaskStatus()));
+            task.setTaskStatus(Integer.parseInt(taskDto.getTaskStatus()));
         if (taskDto.getTaskMark() != null)
             task.setTaskMark(taskDto.getTaskMark());
         return task;

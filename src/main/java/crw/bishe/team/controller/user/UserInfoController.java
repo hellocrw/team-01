@@ -105,4 +105,11 @@ public class UserInfoController {
         List<UserDto> userDtos = usersService.getUserInfo();
         return new ResponseEntity<>(new Result(200, "OK", userDtos), HttpStatus.OK);
     }
+
+    @ApiOperation(value = "通过团队ID获取队长信息")
+    @GetMapping("/getLeaderByTeamId/{teamId}")
+    public ResponseEntity<Result> getLeaderByTeamId(@PathVariable(name = "teamId") String teamId){
+        UserDto userDto = usersService.getLeaderByTeamId(teamId);
+        return new ResponseEntity<>(new Result(200, "OK", userDto), HttpStatus.OK);
+    }
 }

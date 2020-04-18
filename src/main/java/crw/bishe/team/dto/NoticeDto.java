@@ -10,6 +10,7 @@ public class NoticeDto {
     private String userId;
     private String userName;
     private String proId;
+    private String proName;
     private String noticeContent;
     private String createTime;
     private String status;

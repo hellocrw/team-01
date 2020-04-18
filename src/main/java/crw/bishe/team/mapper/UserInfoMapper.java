@@ -32,4 +32,12 @@ public interface UserInfoMapper extends Mapper<UserInfo> {
     @Select("SELECT user_info.* FROM user_info WHERE user_info.`role_id` IN (SELECT user_roles.`id` FROM user_roles WHERE user_roles.`auth`='USER');")
     List<UserDto> getUserInfo();
 
+    /**
+     * 通过团队ID获取团队的队长信息
+     * @param teamId
+     * @return
+     */
+    @Select("SELECT user_info.* FROM user_info, user_team WHERE user_info.`user_id` = user_team.`user_id` AND user_team.`team_id` = #{teamId} AND user_team.`is_leader` = '1';")
+    UserDto getLeaderByTeamId(Long teamId);
+
 }

@@ -86,5 +86,11 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoMapper.getUserInfo();
     }
 
+    @Override
+    public UserDto getLeaderByTeamId(String teamId) {
+        Long key = Long.parseLong(teamId);
+        return userInfoMapper.getLeaderByTeamId(key);
+    }
+
 
 }

@@ -48,6 +48,7 @@ public class TokenController {
 //        if (username != "admin" && password != "123456"){
 //            return new ResponseEntity<>(new Result("用户名或密码错误"),HttpStatus.OK);
 //        }
+        System.out.println(userRolesDto.getUsername() + userRolesDto.getPassword());
 //        TODO  如果登录成功
         UserDto userDto = userInfoService.getUserInfoByUserId("1");
         Map<String, Object> res = new HashMap<>();

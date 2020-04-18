@@ -1,6 +1,7 @@
 package crw.bishe.team.service;
 
 import crw.bishe.team.dto.NoticeDto;
+import crw.bishe.team.entity.Notice;
 
 import java.util.List;
 
@@ -11,4 +12,11 @@ public interface NoticeService {
      * @return
      */
     List<NoticeDto> getNoticesByProId(String proId);
+
+    /**
+     * 保存公告
+     * @param noticeDto
+     * @return
+     */
+    int save(NoticeDto noticeDto);
 }
