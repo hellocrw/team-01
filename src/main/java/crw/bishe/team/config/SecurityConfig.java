@@ -1,13 +1,14 @@
 package crw.bishe.team.config;
 
 import crw.bishe.team.entity.UserRoles;
-import crw.bishe.team.security.SecurityUserDto;
+import crw.bishe.team.security.JwtUserDto;
 import crw.bishe.team.service.TokenService;
 import crw.bishe.team.service.UserRolesService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -19,7 +20,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
-                // 禁用session
+//                 禁用session  (bug: 禁用session后无法登录的问题)
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 //                .and()
                 .formLogin()
@@ -74,8 +74,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //定义认证规则
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userRolesService).passwordEncoder(passwordEncoder());
-        auth.userDetailsService(tokenService);
+        System.out.println("调用了configureGlobal方法");
+        auth.userDetailsService(tokenService).passwordEncoder(passwordEncoder());
+//        auth.userDetailsService(tokenService);
         auth.authenticationProvider(authenticationProvider());
        // 在内存中创建用户和密码，模拟数据库实现用户登录
         /*auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())  //在Spring Security 5.0中新增了多种加密方式，也改变了密码的格式
@@ -86,10 +87,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("hzc").password(new BCryptPasswordEncoder().encode("123456")).roles("USER");*/
     }
 
+    // 解决 tokenController 中的 authenticationManager 无法注入的问题
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userRolesService);
+        authProvider.setUserDetailsService(tokenService);
         authProvider.setPasswordEncoder(passwordEncoder());  // 设置密码加密方式
         return authProvider;
     }
@@ -124,7 +132,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public LogoutSuccessHandler logoutSuccessHandler() { //登出处理
         return (httpServletRequest, httpServletResponse, authentication) -> {
             try {
-                SecurityUserDto user = (SecurityUserDto) authentication.getPrincipal();
+                JwtUserDto user = (JwtUserDto) authentication.getPrincipal();
                 log.info("USER : {} LOGOUT SUCCESS ! ", user.getUsername());
             } catch (Exception e) {
                 log.error("printStackTrace", e);

@@ -81,4 +81,23 @@ public class JwtConfig {
         return expirationTime.before(new Date());
     }
 
+    /**
+     * 获取用户名
+     * @param token
+     * @return
+     */
+    public String getUsername(String token){
+        Claims claims = getTokenClaim(token);
+        return claims.get("username").toString();
+    }
+
+    /**
+     * 获取用户角色
+     * @param token
+     * @return
+     */
+    public String getUserRole(String token){
+        Claims claims = getTokenClaim(token);
+        return claims.get("auth").toString();
+    }
 }

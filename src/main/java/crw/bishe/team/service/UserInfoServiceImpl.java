@@ -77,6 +77,11 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    public UserDto getUserInfoByUserName(String userName) {
+        return userInfoMapper.getUserInfoByUserName(userName);
+    }
+
+    @Override
     public List<UserDto> getAdminInfo() {
         return userInfoMapper.getAdminInfo();
     }

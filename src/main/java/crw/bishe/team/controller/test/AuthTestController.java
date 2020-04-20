@@ -1,15 +1,24 @@
 package crw.bishe.team.controller.test;
 
 import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.security.Principal;
 
 @Api(tags = {"权限测试类"})
 @RequestMapping("/api/auth-test")
 @RestController
 public class AuthTestController {
+
+    @GetMapping("/getUser")
+    public String currentUserName(Principal principal){
+        return principal.getName();
+    }
 
     @GetMapping("/")
     public String login(){

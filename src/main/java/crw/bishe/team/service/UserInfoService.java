@@ -48,6 +48,13 @@ public interface UserInfoService {
     UserDto getUserInfoByUserId(String userId);
 
     /**
+     * 通过用户名获取用户信息
+     * @param userName
+     * @return
+     */
+    UserDto getUserInfoByUserName(String userName);
+
+    /**
      * 获取管理员信息
      * @return
      */

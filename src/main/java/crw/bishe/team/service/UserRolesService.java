@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * @Date Created in 2020/1/31 0031
  * @Time 15:06
  */
-public interface UserRolesService extends UserDetailsService {
+public interface UserRolesService {
     /**
      * 用户注册
      * @param userRolesDto

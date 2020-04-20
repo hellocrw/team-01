@@ -19,6 +19,14 @@ public interface UserInfoMapper extends Mapper<UserInfo> {
     UserDto getUserInfoByUserId(Long userId);
 
     /**
+     * 通过用户名获取用户信息
+     * @param userName
+     * @return
+     */
+    @Select("SELECT user_info.* FROM user_info WHERE user_info.`user_name` = #{userName}")
+    UserDto getUserInfoByUserName(String userName);
+
+    /**
      * 获取管理员信息
      * @return
      */

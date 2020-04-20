@@ -5,6 +5,7 @@ import crw.bishe.team.service.UserRolesService;
 import io.jsonwebtoken.Claims;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 @Log4j2
-public class TokenInterceptor extends HandlerInterceptorAdapter {
+public class TokenInterceptor extends HandlerInterceptorAdapter  {
 
     @Resource
     private JwtConfig jwtConfig;
@@ -32,6 +33,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,  Object handler) throws Exception {
+
         // 地址过滤
         String uri = request.getRequestURI();
         if (uri.contains("/token") || uri.contains("/api")){

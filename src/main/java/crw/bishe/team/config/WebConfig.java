@@ -1,5 +1,6 @@
 package crw.bishe.team.config;
 
+import crw.bishe.team.filter.JWTAuthenticationFilter;
 import crw.bishe.team.filter.TokenInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
