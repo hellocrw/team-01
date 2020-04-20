@@ -36,4 +36,14 @@ public class TeamTypeServiceImpl implements TeamTypeService {
         Long key = Long.parseLong(userId);
         return teamTypeMapper.getTaskTypeNumber(key);
     }
+
+    @Override
+    public List<Map<String, Object>> getTeamAnalysis() {
+        return teamTypeMapper.getTeamAnalysis();
+    }
+
+    @Override
+    public List<Map<String, Object>> getUserAnalysis() {
+        return teamTypeMapper.getUserAnalysis();
+    }
 }

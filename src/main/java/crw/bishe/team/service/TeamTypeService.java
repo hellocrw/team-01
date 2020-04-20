@@ -31,4 +31,16 @@ public interface TeamTypeService {
      * @return
      */
     List<Map<String, Object>> getTaskTypeNumber(String userId);
+
+    /**
+     * 管理员获取团队分析数据
+     * @return
+     */
+    List<Map<String,Object>> getTeamAnalysis();
+
+    /**
+     * 管理员获取用户分析数据
+     * @return
+     */
+    List<Map<String, Object>> getUserAnalysis();
 }

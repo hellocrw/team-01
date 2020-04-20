@@ -77,8 +77,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userRolesService).passwordEncoder(passwordEncoder());
         auth.userDetailsService(tokenService);
         auth.authenticationProvider(authenticationProvider());
-       /*// 在内存中创建用户和密码，模拟数据库实现用户登录
-        auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())  //在Spring Security 5.0中新增了多种加密方式，也改变了密码的格式
+       // 在内存中创建用户和密码，模拟数据库实现用户登录
+        /*auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())  //在Spring Security 5.0中新增了多种加密方式，也改变了密码的格式
                 .withUser("admin").password(new BCryptPasswordEncoder().encode("123456")).roles("ADMIN")
                 .and()
                 .withUser("crw").password(new BCryptPasswordEncoder().encode("123456")).roles("USER")

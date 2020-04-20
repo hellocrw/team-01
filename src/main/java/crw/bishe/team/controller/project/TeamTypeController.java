@@ -46,4 +46,17 @@ public class TeamTypeController {
         return new ResponseEntity<>(new Result(200, "OK", mapList), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "管理员获取团队分析数据")
+    @GetMapping("/getTeamAnalysis")
+    public ResponseEntity<Result> getTeamAnalysis(){
+        List<Map<String , Object>> mapList = teamTypeService.getTeamAnalysis();
+        return new ResponseEntity<>(new Result(200, "OK", mapList), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "管理员获取用户分析数据")
+    @GetMapping("/getUserAnalysis")
+    public ResponseEntity<Result> getUserAnalysis(){
+        List<Map<String , Object>> mapList = teamTypeService.getUserAnalysis();
+        return new ResponseEntity<>(new Result(200, "OK", mapList), HttpStatus.OK);
+    }
 }

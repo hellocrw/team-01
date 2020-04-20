@@ -138,6 +138,24 @@ public class TeamServiceImpl implements TeamService {
     public PageResult pageTeams(PageRequest pageRequest) {
         return PageUtils.getPageResult(getPageInfo(pageRequest));
     }
+
+    @Override
+    public Integer TeamStatusFinish(String teamId) {
+        Long key = Long.parseLong(teamId);
+        return teamMapper.TeamStatusFinish(key);
+    }
+
+    @Override
+    public Integer TeamStatusContinue(String teamId) {
+        Long key = Long.parseLong(teamId);
+        return teamMapper.TeamStatusContinue(key);
+    }
+
+    /**
+     * 分页查询团队信息
+     * @param pageRequest
+     * @return
+     */
     public PageInfo getPageInfo(PageRequest pageRequest) {
         int pageNum = Integer.parseInt(pageRequest.getPageNum());
         int pageSize = Integer.parseInt(pageRequest.getPageSize());

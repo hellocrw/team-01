@@ -54,4 +54,20 @@ public interface TeamTypeMapper extends Mapper<TeamType> {
             "WHERE project.`team_id` IN (SELECT team.`team_id` FROM team, user_team WHERE team.`team_id` = user_team.`team_id` AND user_team.`user_id` = 1))\n" +
             "GROUP BY task.`task_status`;")
     List<Map<String, Object>> getTaskTypeNumber(Long userId);
+
+    /**
+     * 管理员获取团队分析数据
+     * @return
+     */
+    @Select("SELECT team.`team_type` AS x, COUNT(team.`team_type`) AS y FROM team \n" +
+            "GROUP BY team.`team_type`;")
+    List<Map<String,Object>> getTeamAnalysis();
+
+    /**
+     * 管理员获取用户分析数据
+     * @return
+     */
+    @Select("SELECT user_info.`college` AS x, COUNT(user_info.`college`) AS y FROM user_info \n" +
+            "GROUP BY user_info.`college`;")
+    List<Map<String, Object>> getUserAnalysis();
 }

@@ -14,6 +14,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -97,6 +98,7 @@ public class TeamController {
     }
 
     @ApiOperation(value = "获取团队以及团队所对应所有项目信息")
+//    @PreAuthorize("hasAnyRole('USER')")
     @GetMapping("/getTeams")
     public ResponseEntity<Result> getTeamList(){
         List<TeamDto> teamDtos = teamService.getTeams();
@@ -166,6 +168,20 @@ public class TeamController {
     public ResponseEntity<Result> getPageInfo(@RequestBody PageRequest pageRequest){
         PageResult pageResult = teamService.pageTeams(pageRequest);
         return new ResponseEntity<>(new Result(200,"OK", pageResult), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "完成组队")
+    @GetMapping("/TeamStatusFinish/{teamId}")
+    public ResponseEntity<Result> TeamStatusFinish(@PathVariable(name = "teamId") String teamId){
+        Integer res = teamService.TeamStatusFinish(teamId);
+        return new ResponseEntity<>(new Result(200,"OK", res), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "继续组队")
+    @GetMapping("/TeamStatusContinue/{teamId}")
+    public ResponseEntity<Result> TeamStatusContinue(@PathVariable(name = "teamId") String teamId){
+        Integer res = teamService.TeamStatusContinue(teamId);
+        return new ResponseEntity<>(new Result(200,"OK", res), HttpStatus.OK);
     }
 
 }

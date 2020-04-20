@@ -118,4 +118,18 @@ public interface TeamService {
      */
     PageResult pageTeams(PageRequest pageRequest);
 
+    /**
+     * 完成组队
+     * @param teamId
+     * @return
+     */
+    Integer TeamStatusFinish(String teamId);
+
+    /**
+     * 继续组队
+     * @param teamId
+     * @return
+     */
+    Integer TeamStatusContinue(String teamId);
+
 }
