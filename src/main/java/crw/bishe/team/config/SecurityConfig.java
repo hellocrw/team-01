@@ -6,6 +6,7 @@ import crw.bishe.team.service.TokenService;
 import crw.bishe.team.service.UserRolesService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,8 +36,9 @@ import java.io.IOException;
  * @Time 18:21
  */
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true) //开启security注解
+@EnableWebSecurity // 开启spring security
+@EnableAutoConfiguration
+@EnableGlobalMethodSecurity(prePostEnabled = true) //spring security默认是关闭注解的，要开启security注解
 @Log4j2
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -62,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and()
                 .formLogin()
                 // 指定登录页的路径
-//                .loginPage("http://localhost:4200/#/passport/login")
+//                .loginPage("/login")
                 // 指定自定义form表单请求的路径
 //                .successForwardUrl("/api/token/getToken")
                 .permitAll()
@@ -74,9 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //定义认证规则
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        System.out.println("调用了configureGlobal方法");
         auth.userDetailsService(tokenService).passwordEncoder(passwordEncoder());
-//        auth.userDetailsService(tokenService);
         auth.authenticationProvider(authenticationProvider());
        // 在内存中创建用户和密码，模拟数据库实现用户登录
         /*auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())  //在Spring Security 5.0中新增了多种加密方式，也改变了密码的格式
@@ -87,7 +87,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("hzc").password(new BCryptPasswordEncoder().encode("123456")).roles("USER");*/
     }
 
-    // 解决 tokenController 中的 authenticationManager 无法注入的问题
+    /**
+     * 解决 tokenController 中的 authenticationManager 无法注入的问题
+     */
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {

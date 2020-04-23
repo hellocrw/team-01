@@ -15,11 +15,6 @@ import java.security.Principal;
 @RestController
 public class AuthTestController {
 
-    @GetMapping("/getUser")
-    public String currentUserName(Principal principal){
-        return principal.getName();
-    }
-
     @GetMapping("/")
     public String login(){
         return "不需要权限";
@@ -32,13 +27,13 @@ public class AuthTestController {
     }
 
     @GetMapping("/needAdmin")
-    @PreAuthorize("hasAuthority('ADMIN')")  // 基于方法的权限控制，拥有ADMIN权限才可以访问
+    @PreAuthorize("hasAnyAuthority('ADMIN')")  // 基于方法的权限控制，拥有ADMIN权限才可以访问
     public String needAdmin(){
         return "需要管理员权限";
     }
 
     @GetMapping("/needUser")
-    @PreAuthorize("hasAuthority('USER')")  // 基于方法的权限控制，拥有USER权限才可以访问
+    @PreAuthorize("hasAnyAuthority('USER')")  // 基于方法的权限控制，拥有USER权限才可以访问
     public String needUser(){
         return "需要用户权限";
     }
