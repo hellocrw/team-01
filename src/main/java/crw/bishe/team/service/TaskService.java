@@ -18,7 +18,7 @@ public interface TaskService {
      * @param taskDto
      * @return
      */
-    int create(TaskDto taskDto);
+    TaskDto create(TaskDto taskDto);
 
     /**
      * 根据ID删除任务信息
@@ -63,4 +63,11 @@ public interface TaskService {
      * @return
      */
     Integer updateTaskByTaskId(String taskId);
+
+    /**
+     * 根据proId删除task
+     * @param proIds
+     * @return
+     */
+    Integer deleteByProIds(List<String> proIds);
 }

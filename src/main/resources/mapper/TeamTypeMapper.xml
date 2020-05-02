@@ -5,8 +5,7 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="key" jdbcType="VARCHAR" property="key" />
+    <id column="key" jdbcType="BIGINT" property="key" />
     <result column="value" jdbcType="VARCHAR" property="value" />
   </resultMap>
 </mapper>

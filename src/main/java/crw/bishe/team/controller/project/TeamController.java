@@ -18,6 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +41,13 @@ public class TeamController {
     public TeamController(TeamService teamService, TeamTypeService teamTypeService){
         this.teamTypeService = teamTypeService;
         this.teamService = teamService;
+    }
+
+    @ApiOperation(value = "通过管理员ID获取团队信息")
+    @GetMapping("/getTeamByAdmin/{adminId}")
+    public ResponseEntity<Result> getTeamByAdminId(@PathVariable(name = "adminId") String adminId){
+        List<TeamDto> res = teamService.getTeamByAdminId(adminId);
+        return new ResponseEntity<>(new Result(200, "OK", res),HttpStatus.OK);
     }
 
     @ApiOperation(value = "查找所有团队信息")
@@ -73,9 +81,9 @@ public class TeamController {
     }
 
     @ApiOperation(value = "删除团队信息")
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Result> delete(@ApiParam(value = "团队ID") @PathVariable(name = "id") String id){
-        int res = teamService.delete(id);
+    @DeleteMapping("/{teamId}")
+    public ResponseEntity<Result> delete(@ApiParam(value = "团队ID") @PathVariable(name = "teamId") String teamId){
+        int res = teamService.delete(teamId);
         if(res > 0){
             return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
         }else{
@@ -144,8 +152,13 @@ public class TeamController {
     @PostMapping("/saveTeam")
     public ResponseEntity<Result> saveTeam(@RequestBody TeamDto teamDto){
         System.out.println("teamDto:" + teamDto.toString());
-        teamService.saveTeam(teamDto);
-        return new ResponseEntity<>(new Result(200, "OK"), HttpStatus.OK);
+        int res = teamService.saveTeam(teamDto);
+        if (res > 0){
+            return new ResponseEntity<>(new Result(200, "保存成功", res), HttpStatus.OK);
+        }else if(res == -1){
+            return new ResponseEntity<>(new Result(404, "管理员ID不存在", res), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new Result(404, "保存失败", res), HttpStatus.OK);
     }
 
     @ApiOperation(value = "通过团队范围查询团队信息")
@@ -158,8 +171,8 @@ public class TeamController {
     @ApiOperation(value = "通过团队类型查找团队信息")
     @GetMapping("/getTeamByTeamType/{key}")
     public ResponseEntity<Result> getTeamByTeamType(@PathVariable(name = "key") String key){
-        String value = this.teamTypeService.getValueByKey(key);
-        List<TeamDto> teamDtos = teamService.getTeamByTeamType(value);
+//        String value = this.teamTypeService.getValueByKey(key);
+        List<TeamDto> teamDtos = teamService.getTeamByTeamType(key);
         return new ResponseEntity<>(new Result(200, "OK", teamDtos), HttpStatus.OK);
     }
 
@@ -181,6 +194,20 @@ public class TeamController {
     @GetMapping("/TeamStatusContinue/{teamId}")
     public ResponseEntity<Result> TeamStatusContinue(@PathVariable(name = "teamId") String teamId){
         Integer res = teamService.TeamStatusContinue(teamId);
+        return new ResponseEntity<>(new Result(200,"OK", res), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "同意组队")
+    @PutMapping("/agree")
+    public ResponseEntity<Result> agree(@RequestParam(value = "teamId") String teamId){
+        Integer res = teamService.agree(teamId);
+        return new ResponseEntity<>(new Result(200,"OK", res), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "不同意组队")
+    @PutMapping("/disagree")
+    public ResponseEntity<Result> disagree(@RequestParam(name = "teamId") String teamId){
+        Integer res = teamService.disagree(teamId);
         return new ResponseEntity<>(new Result(200,"OK", res), HttpStatus.OK);
     }
 

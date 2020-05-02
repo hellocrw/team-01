@@ -51,9 +51,9 @@ public class TaskController {
     @ApiOperation(value = "新增任务信息")
     @PostMapping("")
     public ResponseEntity<Result> create(@ApiParam(value = "项目信息") @RequestBody @Validated TaskDto taskDto){
-        int res = taskService.create(taskDto);
-        if(res > 0){
-            return new ResponseEntity<>(new Result(200, "处理成功"), HttpStatus.OK);
+        TaskDto res = taskService.create(taskDto);
+        if(res != null){
+            return new ResponseEntity<>(new Result(200, "处理成功", res), HttpStatus.OK);
         }
         return new ResponseEntity<>(new Result("处理失败"), HttpStatus.BAD_REQUEST);
     }

@@ -32,4 +32,20 @@ public interface ApplyService {
      * @return
      */
     List<ApplyDto> getEnqueueApply(String userId);
+
+    Integer deleteByTeamId(String teamId);
+
+    /**
+     * 同意入队
+     * @param applyId
+     * @return
+     */
+    Integer agreeApply(String applyId);
+
+    /**
+     * 拒绝入队
+     * @param applyId
+     * @return
+     */
+    Integer disagreeApply(String applyId);
 }

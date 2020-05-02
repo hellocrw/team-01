@@ -2,6 +2,7 @@ package crw.bishe.team.mapper;
 
 import crw.bishe.team.dto.UserTeamDto;
 import crw.bishe.team.entity.UserTeam;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -16,4 +17,13 @@ public interface UserTeamMapper extends Mapper<UserTeam> {
      */
     @Select("SELECT user_team.* FROM user_team WHERE team_id = #{teamId};")
     List<UserTeamDto> getUserByTeamId(Long teamId);
+
+    /**
+     * 根据团队ID删除用户团队信息
+     * @param teamId
+     * @return
+     */
+    @Delete("DELETE FROM user_team WHERE team_id = #{teamId}")
+    Integer deleteByTeamId(Long teamId);
+
 }

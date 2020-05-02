@@ -1,15 +1,14 @@
 package crw.bishe.team.mapper;
 
+import crw.bishe.team.dto.ProjectDto;
 import crw.bishe.team.dto.TaskDto;
 import crw.bishe.team.dto.TaskListDto;
 import crw.bishe.team.entity.Task;
-import org.apache.ibatis.annotations.Many;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TaskMapper extends Mapper<Task> {
 
@@ -48,5 +47,35 @@ public interface TaskMapper extends Mapper<Task> {
      */
     @Select("UPDATE task SET task.`task_status`=task.`task_status`+1 WHERE task.`task_id` = #{taskId};")
     Integer updateTaskByTaskId(Long taskId);
+
+    /**
+     * 根据proIds删除projects
+     * @param proIds
+     * @return
+     */
+    @Delete("<script>"
+            + "DELETE FROM task WHERE pro_id IN "
+            + "<foreach item='item' index='index' collection='proIds' open='(' separator=',' close=')'>"
+            + "#{item}"
+            + "</foreach>"
+            + "</script>")
+    Integer deleteByProIds(@Param("proIds") List<Long> proIds);
+
+    /**
+     * proIds --> tasks
+     * @param proIds
+     * @return
+     */
+    @Select("<script>"
+            + "SELECT * FROM task WHERE pro_id IN "
+            + "<foreach item='item' index='index' collection='proIds' open='(' separator=',' close=')'>"
+            + "#{item}"
+            + "</foreach>"
+            + "</script>")
+    List<TaskDto> selectByProIds(@Param("proIds") List<Long> proIds);
+
+    @Insert("INSERT INTO task VALUE (NULL,#{proId},#{taskCreateTime},#{taskStartTime},#{taskEndTime},#{taskContent},#{userId},#{taskStatus},#{taskMark} )")
+    @Options(useGeneratedKeys = true, keyProperty = "taskId", keyColumn = "task_id")
+    Integer create(Task task);
 
 }

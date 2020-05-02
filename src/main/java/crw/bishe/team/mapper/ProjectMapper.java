@@ -6,16 +6,20 @@ import crw.bishe.team.dto.TeamDto;
 import crw.bishe.team.dto.TeamProDto;
 import crw.bishe.team.entity.Project;
 import crw.bishe.team.vo.ConditionRequest;
-import org.apache.ibatis.annotations.Many;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 import java.util.Map;
 
 public interface ProjectMapper extends Mapper<Project> {
+    /**
+     * 根据teamId删除: 级联删除
+     * @param teamId
+     * @return
+     */
+    @Delete("DELETE FROM project WHERE project.`team_id` = #{teamId}")
+    Integer deleteByTeamId(Long teamId);
 
     /**
      * 根据查询条件查询项目信息
@@ -32,6 +36,10 @@ public interface ProjectMapper extends Mapper<Project> {
             "AND\n" +
             "(CASE WHEN #{proId} IS NOT NULL and #{proId} != '' THEN selectPro.pro_id=#{proId} ELSE (1=1) END);")
     List<TeamProDto> getProBySelectCondition(ConditionRequest conditionRequest);
+
+    @Insert("INSERT INTO project VALUE (NULL, #{proName}, #{leaderName}, #{proDescribe}, #{proDate}, #{proStartTime}, #{proEndTime}, #{proStatus}, #{teamId}, #{proType}, #{proCurrentNum}, #{proLimiedNum}, #{seeNum}, #{staffList}, #{staff})")
+    @Options(useGeneratedKeys = true, keyProperty = "proId", keyColumn = "pro_id")
+    Integer saveProject(Project project);
 
     @Select("SELECT project.* ,team.`team_number` AS proNum,team.`team_type` AS proNature, team.`team_describe`,team_scope AS university FROM project,team WHERE project.`team_id` = team.`team_id`;")
     List<TeamProDto> getTeamProInfo();
@@ -53,8 +61,12 @@ public interface ProjectMapper extends Mapper<Project> {
      * @return
      */
     @Select("SELECT project.* FROM project WHERE project.`team_id`= #{teamId};")
+    @Results({
+            @Result(property = "proId", column = "pro_id"),
+            @Result(property = "tasks", column = "proId",
+                    many = @Many(select = "crw.bishe.team.mapper.TaskMapper.geTaskByProId"))
+    })
     List<ProjectDto> getProjectByTeamId(Long teamId);
-
     /**
      * 根据项目名称 项目类型，学校搜索所有符合条件的项目
      * @param pro_name 项目名称

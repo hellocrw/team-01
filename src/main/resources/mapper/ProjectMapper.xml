@@ -18,7 +18,6 @@
     <result column="pro_type" jdbcType="VARCHAR" property="proType" />
     <result column="pro_current_num" jdbcType="INTEGER" property="proCurrentNum" />
     <result column="pro_limied_num" jdbcType="INTEGER" property="proLimiedNum" />
-    <result column="number" jdbcType="INTEGER" property="number" />
     <result column="see_num" jdbcType="INTEGER" property="seeNum" />
     <result column="staff" jdbcType="TINYINT" property="staff" />
   </resultMap>

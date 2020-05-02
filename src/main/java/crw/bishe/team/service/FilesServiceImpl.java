@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -91,5 +92,14 @@ public class FilesServiceImpl implements FilesService {
     public List<FilesDto> getFilesByProId(String proId) {
         Long key = Long.parseLong(proId);
         return filesMapper.getFilesByProId(key);
+    }
+
+    @Override
+    public Integer deleteByProIds(List<String> proIds) {
+        List<Long> proIds_list = new ArrayList<>();
+        proIds.forEach(proId ->{
+            proIds_list.add(Long.parseLong(proId));
+        });
+        return filesMapper.delectByProIds(proIds_list);
     }
 }

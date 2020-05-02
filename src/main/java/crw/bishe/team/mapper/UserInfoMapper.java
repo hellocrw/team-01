@@ -45,7 +45,7 @@ public interface UserInfoMapper extends Mapper<UserInfo> {
      * @param teamId
      * @return
      */
-    @Select("SELECT user_info.* FROM user_info, user_team WHERE user_info.`user_id` = user_team.`user_id` AND user_team.`team_id` = #{teamId} AND user_team.`is_leader` = '1';")
+    @Select("SELECT user_info.* FROM user_info WHERE user_info.`user_id` IN (SELECT team.`leader_id` FROM team WHERE team.`team_id` = #{teamId})")
     UserDto getLeaderByTeamId(Long teamId);
 
 }

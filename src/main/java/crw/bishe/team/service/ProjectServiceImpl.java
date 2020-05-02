@@ -30,27 +30,78 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectMapper projectMapper;
     private final ProjectMapping projectMapping;
-
+    private final TaskService taskService;
+    private final FilesService filesService;
+    private final NoticeService noticeService;
     @Autowired
-    public ProjectServiceImpl(ProjectMapper projectMapper, ProjectMapping projectMapping){
+    public ProjectServiceImpl(ProjectMapper projectMapper,
+                              ProjectMapping projectMapping,
+                              TaskService taskService,
+                              FilesService filesService,
+                              NoticeService noticeService){
         this.projectMapper = projectMapper;
         this.projectMapping = projectMapping;
+        this.taskService = taskService;
+        this.filesService = filesService;
+        this.noticeService = noticeService;
     }
     @Override
-    public int create(ProjectDto projectDto) {
-        if(projectDto == null ){
-            return 0;
+    public ProjectDto create(ProjectDto projectDto) {
+        if(projectDto == null){
+            return null;
         }
-        return projectMapper.insert(projectMapping.toEntity(projectDto));
+        Project project = projectMapping.toEntity(projectDto);
+        int res = projectMapper.saveProject(project);
+        return projectMapping.toDto(project);
     }
 
+    /**
+     * 根据项目ID删除项目信息： 级联删除
+     * @param proId
+     * @return
+     */
     @Override
-    public int delete(String id) {
-        if(id == null){
-            return 0;
+    public Integer delete(String proId) {
+        if(proId == null){
+            return null;
         }
-        Long key = Long.parseLong(id);
+        Long key = Long.parseLong(proId);
+        List<String> ids = new ArrayList<>();
+        ids.add(proId);
+        // delete task
+        taskService.deleteByProIds(ids);
+        // delete notice
+        noticeService.deleteByProIds(ids);
+        // delete files
+        filesService.deleteByProIds(ids);
+        // delete project
         return projectMapper.deleteByPrimaryKey(key);
+    }
+
+    /**
+     * 删除项目级联删除：2删除任务--》 3删除文件 --》 4删除公告
+     * @param teamId
+     * @return
+     */
+    @Override
+    public Integer delectByTeamId(String teamId) {
+        // delete tasks by proIds
+        Long key = Long.parseLong(teamId);
+        // 1、req: teamId --> res: proIds
+        List<String> proIds = new ArrayList<>();
+        projectMapper.getProjectByTeamId(key).forEach(projectDto -> {
+            proIds.add(projectDto.getProId());
+        });
+        if ( null != proIds && proIds.size() != 0){     //如果proIds 不存在，则不用删任务tasks了
+            // 2、delete tasks by proIds
+            taskService.deleteByProIds(proIds);
+            // 3、delete files by proIds
+            filesService.deleteByProIds(proIds);
+            // 4、delete notices by proIds
+            noticeService.deleteByProIds(proIds);
+        }
+        // delete projects
+        return projectMapper.deleteByTeamId(key);
     }
 
     @Override

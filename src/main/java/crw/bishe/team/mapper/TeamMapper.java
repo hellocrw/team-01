@@ -14,6 +14,14 @@ import java.util.List;
 @org.apache.ibatis.annotations.Mapper
 public interface TeamMapper extends Mapper<Team> {
 
+    /**
+     * 通过管理员Id获取项目信息
+     * @param adminId
+     * @return
+     */
+    @Select("SELECT * FROM team WHERE team.`admin_id` = #{adminId}")
+    List<TeamDto> getTeamByAdminId(Long adminId);
+
     @Select("SELECT team.`team_id`,team.`team_name`,user_team.`is_leader`,team.`team_describe` FROM team , user_info ,user_team WHERE team.`team_id` = user_team.`team_id` AND user_team.`user_id` = user_info.`user_id`AND user_info.`user_id` = #{id}")
     List<MyTeamDto> getMyTeamList(Long id);
 
@@ -60,9 +68,10 @@ public interface TeamMapper extends Mapper<Team> {
     /**
      * 查询所有团队以及团队对应的项目信息
      * @return
+     * 记录： 在select语句后面加“；”号和没加分号的区别，加分号会限制limit ?的分页查询等功能
      */
     @Select("SELECT team.*,user_info.`university` FROM team,user_info\n" +
-            "WHERE team.`leader_id`=user_info.`user_id` AND team.`status` = 0")
+            "WHERE team.`leader_id`=user_info.`user_id`")
     @Results({
             @Result(property = "teamId", column = "team_id"),
             @Result(property = "projects", column = "team_id",
@@ -103,8 +112,7 @@ public interface TeamMapper extends Mapper<Team> {
      * @param userId
      * @return
      */
-    @Select("SELECT team.*,user_info.`university` FROM team,user_info\n" +
-            "            WHERE team.`leader_id`=user_info.`user_id` AND team.`team_id` IN (SELECT team_id FROM user_team WHERE user_id = #{userId} AND is_leader = 1 ) ;")
+    @Select("SELECT team.* FROM team WHERE team.`leader_id` = #{userId};")
     @Results({
             @Result(property = "teamId", column = "team_id"),
             @Result(property = "projects", column = "team_id",
@@ -118,8 +126,7 @@ public interface TeamMapper extends Mapper<Team> {
      * @param userId
      * @return
      */
-    @Select("SELECT team.*,user_info.`university` FROM team,user_info\n" +
-            "            WHERE team.`leader_id`=user_info.`user_id` AND team.`team_id` IN (SELECT team_id FROM user_team WHERE user_id = #{userId} AND is_leader = 0 ) ;")
+    @Select("SELECT team.* FROM team WHERE  team.`team_id` IN (SELECT team_id FROM user_team WHERE user_id = #{userId} ) ;")
     @Results({
             @Result(property = "teamId", column = "team_id"),
             @Result(property = "projects", column = "team_id",
@@ -153,23 +160,44 @@ public interface TeamMapper extends Mapper<Team> {
      * @param teamType
      * @return
      */
-    @Select("SELECT team.* FROM team WHERE team.`team_type` = #{teamType} AND team.`status` = 0;")
-    List<TeamDto> getTeamByTeamType(String teamType);
+    @Select("SELECT team.* FROM team WHERE team.`team_type` = #{teamType} AND team.`status` = 1;")
+    List<TeamDto> getTeamByTeamType(Long teamType);
 
     /**
      * 完成组队
      * @param teamId
      * @return
      */
-    @Select("UPDATE team SET team.`status` = 1 WHERE team.`team_id`=#{teamId};")
+    @Select("UPDATE team SET team.`status` = 2 WHERE team.`team_id`=#{teamId};")
     Integer TeamStatusFinish(Long teamId);
+
+    /**
+     * 同意发起组队
+     * @param teamId
+     * @return
+     */
+    @Select("UPDATE team SET team.`status` = 1 WHERE team.`team_id`=#{teamId};")
+    Integer agree(Long teamId);
+
+    /**
+     * 同意发起组队
+     * @param teamId
+     * @return
+     */
+    @Select("UPDATE team SET team.`status` = -1 WHERE team.`team_id`=#{teamId};")
+    Integer disagree(Long teamId);
 
     /**
      * 继续组队
      * @param teamId
      * @return
      */
-    @Select("UPDATE team SET team.`status` = 0 WHERE team.`team_id`=#{teamId};")
+    @Select("UPDATE team SET team.`status` = 1 WHERE team.`team_id`=#{teamId};")
     Integer TeamStatusContinue(Long teamId);
+
+
+    @Insert("INSERT INTO team VALUES (null, #{teamName}, #{adminId}, #{leaderId}, #{leaderName}, #{teamDescribe}, #{teamType}, #{teamScope}, #{teamNumber}, #{teamDate}, #{status}, #{staff}, #{teamNature}, #{teamLabel}, #{seeNum})")
+    @Options(useGeneratedKeys = true, keyProperty = "teamId", keyColumn = "team_id")
+    int saveTeam( Team team);
 
 }

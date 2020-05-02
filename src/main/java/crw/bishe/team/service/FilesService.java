@@ -35,4 +35,6 @@ public interface FilesService {
      * @return
      */
     List<FilesDto> getFilesByProId(String proId);
+
+    Integer deleteByProIds(List<String> proIds);
 }

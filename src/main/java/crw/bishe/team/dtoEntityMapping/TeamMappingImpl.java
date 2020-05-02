@@ -2,6 +2,7 @@ package crw.bishe.team.dtoEntityMapping;
 
 import crw.bishe.team.dto.TeamDto;
 import crw.bishe.team.entity.Team;
+import crw.bishe.team.entity.UserTeam;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
@@ -30,13 +31,15 @@ public class TeamMappingImpl implements TeamMapping {
             team.setTeamId(Long.parseLong(teamDto.getTeamId()));
         }
         team.setTeamName(teamDto.getTeamName());
+        team.setAdminId(Long.parseLong(teamDto.getAdminId()));
         team.setLeaderId(Long.parseLong(teamDto.getLeaderId()));
+        team.setLeaderName(teamDto.getLeaderName());
         team.setTeamDescribe(teamDto.getTeamDescribe());
         team.setTeamType(teamDto.getTeamType());
         team.setTeamScope(teamDto.getTeamScope());
         team.setTeamNumber(Integer.parseInt(teamDto.getTeamNumber()));
         team.setTeamDate(Date.valueOf(teamDto.getTeamDate()));
-        team.setStatus(Byte.parseByte(teamDto.getStatus()));
+        team.setStatus(Integer.parseInt(teamDto.getStatus()));
         team.setStaff(teamDto.getStaff());
         team.setTeamNature(teamDto.getTeamNature());
         team.setTeamLabel(teamDto.getTeamLabel());
@@ -52,7 +55,9 @@ public class TeamMappingImpl implements TeamMapping {
         TeamDto teamDto = new TeamDto();
         teamDto.setTeamId(String.valueOf(team.getTeamId()));
         teamDto.setTeamName(team.getTeamName());
+        teamDto.setAdminId(String.valueOf(team.getAdminId()));
         teamDto.setLeaderId(String.valueOf(team.getLeaderId()));
+        teamDto.setLeaderName(team.getLeaderName());
         teamDto.setTeamDescribe(team.getTeamDescribe());
         teamDto.setTeamType(team.getTeamType());
         teamDto.setTeamScope(team.getTeamScope());
@@ -65,4 +70,5 @@ public class TeamMappingImpl implements TeamMapping {
         teamDto.setSeeNum(String.valueOf(team.getSeeNum()));
         return teamDto;
     }
+
 }

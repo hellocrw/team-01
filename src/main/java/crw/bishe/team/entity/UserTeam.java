@@ -1,8 +1,11 @@
 package crw.bishe.team.entity;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 
 @Table(name = "user_team")
+@Builder
 public class UserTeam {
     /**
      * ID
@@ -148,4 +151,5 @@ public class UserTeam {
     public void setIsLeader(Byte isLeader) {
         this.isLeader = isLeader;
     }
+
 }

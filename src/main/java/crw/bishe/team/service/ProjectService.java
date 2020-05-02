@@ -23,14 +23,21 @@ public interface ProjectService {
      * @param projectDto
      * @return
      */
-    int create(ProjectDto projectDto);
+    ProjectDto create(ProjectDto projectDto);
 
     /**
      * 根据ID删除项目信息
      * @param id
      * @return
      */
-    int delete(String id);
+    Integer delete(String proId);
+
+    /**
+     * 根据teamId删除项目信息
+     * @param teamId
+     * @return
+     */
+    Integer delectByTeamId(String teamId);
 
     /**
      * 修改项目信息
@@ -93,4 +100,5 @@ public interface ProjectService {
      * @return
      */
     ProjectDto getProjectTaskByProId(String proId);
+
 }

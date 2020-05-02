@@ -89,7 +89,20 @@ public class TokenController {
                 simpleDateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
                 res.put("loginTime", simpleDateFormat.format(new Date()));
                 // 获取用户权限
-                res.put("auth", user.getAuthorities());
+                System.out.println("userName:" + userRolesDto.getUsername());
+                if ("admin".equals(userRolesDto.getUsername())){
+                    System.out.println("测试admin");
+                    res.put("auth", "ADMIN");
+                }else{
+                    System.out.println("测试user");
+                    res.put("auth", "USER");
+                }
+//                if (userRolesDto.getUsername() == "crw"){
+//                    res.put("auth", "USER");
+//                }
+//                else if (userRolesDto.getUsername() == "admin"){
+//                    res.put("auth", "ADMIN");
+//                }
             }
             return new ResponseEntity<>(new Result(200,"ok" , res), HttpStatus.OK);
         }catch (Exception e){

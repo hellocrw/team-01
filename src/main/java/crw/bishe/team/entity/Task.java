@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 @Table(name = "task")
@@ -65,4 +66,9 @@ public class Task {
      */
     @Column(name = "task_mark")
     private String taskMark;
+
+    /**
+     * 项目
+     */
+    private List<SubTask> subTasks;
 }

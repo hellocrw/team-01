@@ -18,6 +18,14 @@ import java.util.Map;
  * @Time 15:00
  */
 public interface TeamService {
+
+    /**
+     * 通过管理员ID获取团队信息
+     * @param adminId
+     * @return
+     */
+    List<TeamDto> getTeamByAdminId(String adminId);
+
     /**
      * 增加团队信息
      * @param teamDto
@@ -100,7 +108,12 @@ public interface TeamService {
      */
     List<TeamDto> getTeamByTeamName(String teamName);
 
-    void saveTeam(TeamDto teamDto);
+    /**
+     * 创建团队
+     * @param teamDto
+     * @return
+     */
+    int saveTeam(TeamDto teamDto);
 
     List<TeamDto> getTeamByteamScope(String teamScope);
 
@@ -131,5 +144,19 @@ public interface TeamService {
      * @return
      */
     Integer TeamStatusContinue(String teamId);
+
+    /**
+     * 同意组队
+     * @param teamId
+     * @return
+     */
+    Integer agree(String teamId);
+
+    /**
+     * 不同意组队
+     * @param teamId
+     * @return
+     */
+    Integer disagree(String teamId);
 
 }

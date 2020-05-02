@@ -54,8 +54,6 @@ public class ProjectMappingImpl implements ProjectMapping {
             project.setProCurrentNum(Integer.parseInt(projectDto.getProCurrentNum()));
         if (projectDto.getProLimiedNum() != null)
             project.setProLimiedNum(Integer.parseInt(projectDto.getProLimiedNum()));
-        if (projectDto.getNumber() != null)
-            project.setNumber(Integer.parseInt(projectDto.getNumber()));
         if (projectDto.getSeeNum() != null)
             project.setSeeNum(Integer.parseInt(projectDto.getSeeNum()));
         if (projectDto.getStaff() != null)
@@ -82,7 +80,6 @@ public class ProjectMappingImpl implements ProjectMapping {
         projectDto.setProType(project.getProType());
         projectDto.setProCurrentNum(String.valueOf(project.getProCurrentNum()));
         projectDto.setProLimiedNum(String.valueOf(project.getProLimiedNum()));
-        projectDto.setNumber(String.valueOf(project.getNumber()));
         projectDto.setSeeNum(String.valueOf(project.getSeeNum()));
         projectDto.setStaff(project.getStaff());
         return projectDto;

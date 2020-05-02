@@ -19,4 +19,6 @@ public interface NoticeService {
      * @return
      */
     int save(NoticeDto noticeDto);
+
+    Integer deleteByProIds(List<String> proIds);
 }

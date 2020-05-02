@@ -18,19 +18,25 @@ import java.util.List;
 @ApiModel(description = "团队基本信息")
 public class TeamDto {
 
-    @ApiModelProperty(position = 2, value = "团队ID", required = true)
+    @ApiModelProperty(position = 1, value = "团队ID", required = true)
     private String teamId;
 
-    @ApiModelProperty(position = 3, value = "团队名称")
+    @ApiModelProperty(position = 2, value = "团队名称")
     private String teamName;
+
+    @ApiModelProperty(position = 3, value = "管理员ID")
+    private String adminId;
 
     @ApiModelProperty(position = 4, value = "队长ID")
     private String leaderId;
 
-    @ApiModelProperty(position = 5, value = "团队描述")
+    @ApiModelProperty(position = 5, value = "队长名称")
+    private String leaderName;
+
+    @ApiModelProperty(position = 6, value = "团队描述")
     private String teamDescribe;
 
-    @ApiModelProperty(position = 6, value = "团队类型")
+    @ApiModelProperty(position = 7, value = "团队类型")
     private String teamType;
 
     @ApiModelProperty(position = 8, value = "团队人数")

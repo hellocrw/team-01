@@ -43,4 +43,16 @@ public class ApplyController {
         List<ApplyDto> applyDtos = applyService.getEnqueueApply(userId);
         return new ResponseEntity<>(new Result(200, "OK", applyDtos), HttpStatus.OK);
     }
+
+    @GetMapping("/agreeApply/{applyId}")
+    public ResponseEntity<Result> agreeApply(@PathVariable(name = "applyId") String applyId){
+        Integer res = applyService.agreeApply(applyId);
+        return new ResponseEntity<>(new Result(200, "OK", res) , HttpStatus.OK);
+    }
+
+    @GetMapping("/disagreeApply/{applyId}")
+    public ResponseEntity<Result> disagreeApply(@PathVariable(name = "applyId") String applyId){
+        Integer res = applyService.disagreeApply(applyId);
+        return new ResponseEntity<>(new Result(200, "OK", res), HttpStatus.OK);
+    }
 }

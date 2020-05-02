@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import tk.mybatis.mapper.entity.Example;
+import tk.mybatis.mapper.util.Sqls;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +38,14 @@ public class TestController {
     @Autowired
     private JwtConfig jwtConfig;
 
+    @DeleteMapping("/delete/{teamId}")
+    public String delectTest(@PathVariable(name = "teamId") String teamId){
+        Long key = Long.parseLong(teamId);
+//        Project project = new Project();
+//        int res = projectMapper.deleteByExample(key);
+        return "测试";
+    }
+
     // 拦截器直接放行，返回Token
     @PostMapping("/login")
     public ResponseEntity<Result> login(@RequestParam("userName") String userName,
@@ -49,8 +59,11 @@ public class TestController {
         return new ResponseEntity<>(new Result(200, "OK", result), HttpStatus.OK);
     }
     // 需要 Token 验证的接口
-    @PostMapping("/info")
-    public String info (){
+    @GetMapping("/info/userId/{userId}/teamId/{teamId}")
+    public String info (@PathVariable(required = false) String userId,
+                        @PathVariable(required = false) String teamId){
+        System.out.println("userId:" + userId);
+        System.out.println("teamId" + teamId);
         return "info" ;
     }
 

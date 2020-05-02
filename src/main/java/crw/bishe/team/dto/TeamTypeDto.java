@@ -10,7 +10,6 @@ import lombok.Data;
  */
 @Data
 public class TeamTypeDto {
-    private String id;
     private String key;
     private String value;
 }

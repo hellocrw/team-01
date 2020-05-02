@@ -7,7 +7,9 @@
     -->
     <id column="team_id" jdbcType="BIGINT" property="teamId" />
     <result column="team_name" jdbcType="VARCHAR" property="teamName" />
+    <result column="admin_id" jdbcType="BIGINT" property="adminId" />
     <result column="leader_id" jdbcType="BIGINT" property="leaderId" />
+    <result column="leader_name" jdbcType="VARCHAR" property="leaderName" />
     <result column="team_describe" jdbcType="VARCHAR" property="teamDescribe" />
     <result column="team_type" jdbcType="VARCHAR" property="teamType" />
     <result column="team_scope" jdbcType="VARCHAR" property="teamScope" />

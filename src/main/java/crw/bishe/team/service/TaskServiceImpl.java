@@ -1,6 +1,7 @@
 package crw.bishe.team.service;
 
 import crw.bishe.team.dto.MyTaskDto;
+import crw.bishe.team.dto.ProjectDto;
 import crw.bishe.team.dto.TaskDto;
 import crw.bishe.team.dto.TaskListDto;
 import crw.bishe.team.dtoEntityMapping.TaskMapping;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description Description
@@ -23,15 +25,19 @@ public class TaskServiceImpl implements TaskService {
 
     private final TaskMapper taskMapper;
     private final TaskMapping taskMapping;
+    private final SubTaskService subTaskService;
 
     @Autowired
-    public TaskServiceImpl(TaskMapper taskMapper,TaskMapping taskMapping){
+    public TaskServiceImpl(TaskMapper taskMapper,TaskMapping taskMapping,SubTaskService subTaskService){
         this.taskMapper = taskMapper;
         this.taskMapping = taskMapping;
+        this.subTaskService = subTaskService;
     }
     @Override
-    public int create(TaskDto taskDto) {
-        return taskMapper.insert(taskMapping.toEntity(taskDto));
+    public TaskDto create(TaskDto taskDto) {
+        Task task = taskMapping.toEntity(taskDto);
+        Integer res = taskMapper.create(task);
+        return taskMapping.toDto(task);
     }
 
     @Override
@@ -83,5 +89,25 @@ public class TaskServiceImpl implements TaskService {
     public Integer updateTaskByTaskId(String taskId) {
         Long key = Long.parseLong(taskId);
         return taskMapper.updateTaskByTaskId(key);
+    }
+
+    @Override
+    public Integer deleteByProIds(List<String> proIds) {
+        // delect subTasks by taskIds
+        List<Long> proIds_list = new ArrayList<>();
+        proIds.forEach(proId ->{
+            proIds_list.add(Long.parseLong(proId));
+        });
+        // 1. req: proIds --> taskIds
+        List<String> taskIds = new ArrayList<>();
+        taskMapper.selectByProIds(proIds_list).forEach(taskDto -> {
+            taskIds.add(taskDto.getTaskId());
+        });
+        // 2. delete subTasks by taskIds
+        if ( null !=taskIds && taskIds.size() != 0){
+            subTaskService.deleteByTaskIds(taskIds);
+        }
+        // delete tasks
+        return taskMapper.deleteByProIds(proIds_list);
     }
 }

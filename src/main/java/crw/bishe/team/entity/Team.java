@@ -21,12 +21,20 @@ public class Team {
      */
     @Column(name = "team_name")
     private String teamName;
+    /**
+     * 管理员ID
+     */
+    @Column(name = "admin_id")
+    private Long adminId;
 
     /**
      * 队长ID
      */
     @Column(name = "leader_id")
     private Long leaderId;
+
+    @Column(name = "leader_name")
+    private String LeaderName;
 
     /**
      * 团队描述
@@ -61,7 +69,7 @@ public class Team {
     /**
      * 团队状态
      */
-    private Byte status;
+    private Integer status;
 
     /**
      * 人员类型

@@ -1,6 +1,7 @@
 package crw.bishe.team.entity;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 @Table(name = "project")
@@ -79,11 +80,6 @@ public class Project {
     private Integer proLimiedNum;
 
     /**
-     * 项目人数
-     */
-    private Integer number;
-
-    /**
      * 查看人数
      */
     @Column(name = "see_num")
@@ -98,6 +94,11 @@ public class Project {
      * 需要人员类型
      */
     private String staff;
+
+    /**
+     * 项目
+     */
+    private List<Task> tasks;
 
     /**
      * 获取ID
@@ -329,24 +330,6 @@ public class Project {
      */
     public void setProLimiedNum(Integer proLimiedNum) {
         this.proLimiedNum = proLimiedNum;
-    }
-
-    /**
-     * 获取项目人数
-     *
-     * @return number - 项目人数
-     */
-    public Integer getNumber() {
-        return number;
-    }
-
-    /**
-     * 设置项目人数
-     *
-     * @param number 项目人数
-     */
-    public void setNumber(Integer number) {
-        this.number = number;
     }
 
     /**

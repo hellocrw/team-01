@@ -54,9 +54,6 @@ public class ProjectDto {
     @ApiModelProperty(position = 14, value = "项目限制人数")
     private String proLimiedNum;
 
-    @ApiModelProperty(position = 15, value = "项目人数")
-    private String number;
-
     @ApiModelProperty(position = 16, value = "查看人数")
     private String seeNum;
 
