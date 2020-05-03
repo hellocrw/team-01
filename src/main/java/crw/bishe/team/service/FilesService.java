@@ -1,6 +1,7 @@
 package crw.bishe.team.service;
 
 import crw.bishe.team.dto.FilesDto;
+import crw.bishe.team.entity.Files;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -19,15 +20,15 @@ public interface FilesService {
      * @param files 上传的文件
      * @return
      */
-    String[] uploadFiles(MultipartFile[] files);
+    String uploadFiles(MultipartFile files);
 
     /**
      * 文件下载功能
      * @param response
-     * @param file
+     * @param fileName
      * @throws Exception
      */
-    void downloadFile(HttpServletResponse response, MultipartFile file) throws Exception;
+    String downloadFile(HttpServletResponse response, String fileName) throws Exception;
 
     /**
      * 通过项目ID获取文件信息
@@ -36,5 +37,12 @@ public interface FilesService {
      */
     List<FilesDto> getFilesByProId(String proId);
 
+    /**
+     * 通过项目ID删除文件信息
+     * @param proIds
+     * @return
+     */
     Integer deleteByProIds(List<String> proIds);
+
+    FilesDto saveFile(FilesDto filesDto);
 }

@@ -20,6 +20,11 @@ public interface TeamMapper extends Mapper<Team> {
      * @return
      */
     @Select("SELECT * FROM team WHERE team.`admin_id` = #{adminId}")
+    @Results({
+            @Result(property = "teamId", column = "team_id"),
+            @Result(property = "projects", column = "team_id",
+                    many = @Many(select = "crw.bishe.team.mapper.ProjectMapper.getProjectByTeamId"))
+    })
     List<TeamDto> getTeamByAdminId(Long adminId);
 
     @Select("SELECT team.`team_id`,team.`team_name`,user_team.`is_leader`,team.`team_describe` FROM team , user_info ,user_team WHERE team.`team_id` = user_team.`team_id` AND user_team.`user_id` = user_info.`user_id`AND user_info.`user_id` = #{id}")

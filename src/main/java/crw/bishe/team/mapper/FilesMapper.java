@@ -2,9 +2,7 @@ package crw.bishe.team.mapper;
 
 import crw.bishe.team.dto.FilesDto;
 import crw.bishe.team.entity.Files;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
@@ -31,4 +29,8 @@ public interface FilesMapper extends Mapper<Files> {
             + "</foreach>"
             + "</script>")
     Integer delectByProIds(@Param("proIds") List<Long> proIds);
+
+    @Insert("INSERT INTO files VALUE (NULL,#{fileName},#{userId},#{userName},#{fileLink},#{proId},#{proName},#{uploadTime})")
+    @Options(useGeneratedKeys = true, keyProperty = "fileId", keyColumn = "file_id")
+    Integer saveFile(Files files);
 }

@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.csrf().ignoringAntMatchers("/druid/*");
         http.authorizeRequests()
                 .antMatchers("/api/**").authenticated() //需要登录才能访问URL -> /api/** 资源
-                .antMatchers("/api/admin/**").hasAnyAuthority("ADMIN")  // 有ADMIN权限才能访问URL -> localhost:8080/api/admin/** 资源
+                .antMatchers("/api/team/**").hasAnyAuthority("ADMIN")  // 有ADMIN权限才能访问URL -> localhost:8080/api/admin/** 资源
                 .antMatchers("/static/**","/druid/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

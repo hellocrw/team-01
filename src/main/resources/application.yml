@@ -70,7 +70,7 @@ web:
 
 file:
   upload:
-    url: D:\upload\
+    url: D:/upload/
 
 server:
   port: 8888
