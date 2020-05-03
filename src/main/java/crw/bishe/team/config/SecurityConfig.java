@@ -31,6 +31,7 @@ import java.io.IOException;
 
 /**
  * @Description spring security 认证和授权 用于web登录和拦截请求等
+ * quesion:加了configure(WebSercurity web)导致spring security默认的权限控制失效的问题
  * @Author crw
  * @Date Created in 2019/12/18 0018
  * @Time 18:21
@@ -152,12 +153,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return manager;
     }*/
 
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(
-                "/static/**",
-                "/api/**"
-//                "/swagger-ui.html"
-        );
-    }
+    /**
+     * 加了configure(WebSercurity web)导致spring security默认的权限控制失效的问题
+     */
+//    @Override
+//    public void configure(WebSecurity web) {
+//        web.ignoring().antMatchers(
+//                "/static/**",
+//                "/api/**"
+////                "/swagger-ui.html"
+//        );
+//    }
 }
