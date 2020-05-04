@@ -44,6 +44,7 @@ public class TeamController {
     }
 
     @ApiOperation(value = "通过管理员ID获取团队信息")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/getTeamByAdmin/{adminId}")
     public ResponseEntity<Result> getTeamByAdminId(@PathVariable(name = "adminId") String adminId){
         List<TeamDto> res = teamService.getTeamByAdminId(adminId);
@@ -198,6 +199,7 @@ public class TeamController {
     }
 
     @ApiOperation(value = "同意组队")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @PutMapping("/agree")
     public ResponseEntity<Result> agree(@RequestParam(value = "teamId") String teamId){
         Integer res = teamService.agree(teamId);
@@ -206,6 +208,7 @@ public class TeamController {
 
     @ApiOperation(value = "不同意组队")
     @PutMapping("/disagree")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<Result> disagree(@RequestParam(name = "teamId") String teamId){
         Integer res = teamService.disagree(teamId);
         return new ResponseEntity<>(new Result(200,"OK", res), HttpStatus.OK);

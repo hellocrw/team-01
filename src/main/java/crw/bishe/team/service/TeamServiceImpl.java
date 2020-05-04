@@ -219,7 +219,7 @@ public class TeamServiceImpl implements TeamService {
         int pageNum = Integer.parseInt(pageRequest.getPageNum());
         int pageSize = Integer.parseInt(pageRequest.getPageSize());
         PageHelper.startPage(pageNum, pageSize);
-        List<TeamDto> teamDtos = this.getTeams();
+        List<TeamDto> teamDtos = this.findAll();
         return new PageInfo<>(teamDtos);
     }
 

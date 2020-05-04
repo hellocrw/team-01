@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +48,7 @@ public class TeamTypeController {
     }
 
     @ApiOperation(value = "管理员获取团队分析数据")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping("/getTeamAnalysis")
     public ResponseEntity<Result> getTeamAnalysis(){
         List<Map<String , Object>> mapList = teamTypeService.getTeamAnalysis();
@@ -55,6 +57,7 @@ public class TeamTypeController {
 
     @ApiOperation(value = "管理员获取用户分析数据")
     @GetMapping("/getUserAnalysis")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<Result> getUserAnalysis(){
         List<Map<String , Object>> mapList = teamTypeService.getUserAnalysis();
         return new ResponseEntity<>(new Result(200, "OK", mapList), HttpStatus.OK);

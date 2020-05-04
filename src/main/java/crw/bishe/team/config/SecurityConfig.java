@@ -54,9 +54,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.csrf().disable();
 //        http.csrf().ignoringAntMatchers("/druid/*");
         http.authorizeRequests()
+                // 设置权限访问时，先设置具体指定的路径，在设置范围的
+                .antMatchers("/api/token/getToken","/static/**","/druid/**","/swagger-ui.html#/").permitAll()// 都可以访问的资源
+//                .antMatchers("/api/team/**").hasAnyAuthority("ADMIN")  // 需要ADMIN权限才能访问
                 .antMatchers("/api/**").authenticated() //需要登录才能访问URL -> /api/** 资源
-                .antMatchers("/api/team/**").hasAnyAuthority("ADMIN")  // 有ADMIN权限才能访问URL -> localhost:8080/api/admin/** 资源
-                .antMatchers("/static/**","/druid/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
@@ -65,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and()
                 .formLogin()
                 // 指定登录页的路径
-//                .loginPage("/login")
+//                .loginPage("http://localhost:4200/#/passport/login")
                 // 指定自定义form表单请求的路径
 //                .successForwardUrl("/api/token/getToken")
                 .permitAll()

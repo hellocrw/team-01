@@ -65,6 +65,7 @@ public class TokenController {
     @ApiOperation("使用账号密码获取Token")
     @PostMapping("/getToken")
     public ResponseEntity<Result> getToken(@RequestBody @Validated UserRolesDto userRolesDto, HttpServletRequest request){
+        System.out.println("调用了getToken方法");
         Map<String, Object> res = new HashMap<>();
         try{
             // 用户登录，验证用户名和密码
@@ -89,20 +90,8 @@ public class TokenController {
                 simpleDateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
                 res.put("loginTime", simpleDateFormat.format(new Date()));
                 // 获取用户权限
-                System.out.println("userName:" + userRolesDto.getUsername());
-                if ("admin".equals(userRolesDto.getUsername())){
-                    System.out.println("测试admin");
-                    res.put("auth", "ADMIN");
-                }else{
-                    System.out.println("测试user");
-                    res.put("auth", "USER");
-                }
-//                if (userRolesDto.getUsername() == "crw"){
-//                    res.put("auth", "USER");
-//                }
-//                else if (userRolesDto.getUsername() == "admin"){
-//                    res.put("auth", "ADMIN");
-//                }
+                System.out.println("权限:" + authentication.getAuthorities());
+                res.put("auth", authentication.getAuthorities());
             }
             return new ResponseEntity<>(new Result(200,"ok" , res), HttpStatus.OK);
         }catch (Exception e){
