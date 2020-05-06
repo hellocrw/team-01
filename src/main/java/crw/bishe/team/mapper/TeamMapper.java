@@ -44,14 +44,14 @@ public interface TeamMapper extends Mapper<Team> {
      * @param user_id
      * @return
      */
-    @Select("SELECT * FROM team WHERE team_scope IN (SELECT university FROM user_info WHERE user_info.`user_id` = #{arg0}) AND team.`status` = 0;")
+    @Select("SELECT * FROM team WHERE team_scope IN (SELECT university FROM user_info WHERE user_info.`user_id` = #{arg0}) AND team.`status` = 1;")
     List<Team> getTeamsByUniversity(Long user_id);
 
     /**
      * 查找校外所有团队
      * @return
      */
-    @Select("SELECT * FROM team WHERE team_scope = '所有学校' AND team.`status` = 0;")
+    @Select("SELECT * FROM team WHERE team_scope = '所有学校' AND team.`status` = 1;")
     List<Team> getTeamsByOtherUniversity();
 
     /**
@@ -144,7 +144,8 @@ public interface TeamMapper extends Mapper<Team> {
      * @param teamName
      * @return
      */
-    @Select("SELECT * FROM team WHERE team.`team_name`LIKE #{teamName} AND team.`status` = 0;")
+    @Select("SELECT team.*,user_info.`university` FROM team,user_info\n" +
+            "WHERE team.`leader_id`=user_info.`user_id` AND team.`team_name` LIKE  #{teamName} AND team.`status` = 0;")
     List<TeamDto> getTeamByTeamName(String teamName);
 
     /**
@@ -152,7 +153,8 @@ public interface TeamMapper extends Mapper<Team> {
      * @param teamScope
      * @return
      */
-    @Select("SELECT team.* FROM team WHERE team.`team_scope` = #{teamScope} AND team.`status` = 0;")
+    @Select("SELECT team.*,user_info.`university` FROM team,user_info\n" +
+            "WHERE team.`leader_id`=user_info.`user_id` AND team.`team_scope` = #{teamScope} AND team.`status` = 1;")
     @Results({
             @Result(property = "teamId", column = "team_id"),
             @Result(property = "projects", column = "team_id",
@@ -165,7 +167,8 @@ public interface TeamMapper extends Mapper<Team> {
      * @param teamType
      * @return
      */
-    @Select("SELECT team.* FROM team WHERE team.`team_type` = #{teamType} AND team.`status` = 1;")
+    @Select("SELECT team.*,user_info.`university` FROM team,user_info\n" +
+            "            WHERE team.`leader_id`=user_info.`user_id` AND team.`team_type` = #{teamType} AND team.`status` = 1;")
     List<TeamDto> getTeamByTeamType(Long teamType);
 
     /**
@@ -201,7 +204,7 @@ public interface TeamMapper extends Mapper<Team> {
     Integer TeamStatusContinue(Long teamId);
 
 
-    @Insert("INSERT INTO team VALUES (null, #{teamName}, #{adminId}, #{leaderId}, #{leaderName}, #{teamDescribe}, #{teamType}, #{teamScope}, #{teamNumber}, #{teamDate}, #{status}, #{staff}, #{teamNature}, #{teamLabel}, #{seeNum})")
+    @Insert("INSERT INTO team VALUES (null, #{teamName}, #{adminId}, #{leaderId}, #{leaderName}, #{teamDescribe}, #{teamType}, #{teamScope}, #{teamNumber}, #{sumNumber}, #{teamDate}, #{status}, #{staff}, #{teamNature}, #{teamLabel}, #{seeNum})")
     @Options(useGeneratedKeys = true, keyProperty = "teamId", keyColumn = "team_id")
     int saveTeam( Team team);
 

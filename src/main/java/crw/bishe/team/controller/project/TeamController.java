@@ -214,4 +214,11 @@ public class TeamController {
         return new ResponseEntity<>(new Result(200,"OK", res), HttpStatus.OK);
     }
 
+    @GetMapping("/isLeader/{teamId}/{userId}")
+    public ResponseEntity<Result> isLeader(@PathVariable(name = "teamId") String teamId,
+                                           @PathVariable(name = "userId") String userId){
+        Boolean res = teamService.isLeader(teamId, userId);
+        return new ResponseEntity<>(new Result(200, "OK", res), HttpStatus.OK);
+    }
+
 }

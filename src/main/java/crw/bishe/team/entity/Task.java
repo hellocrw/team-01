@@ -55,6 +55,9 @@ public class Task {
     @Column(name = "user_id")
     private Long userId;
 
+    @Column(name = "user_name")
+    private String userName;
+
     /**
      * 任务状态
      */

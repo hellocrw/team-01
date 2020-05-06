@@ -14,6 +14,7 @@
     <result column="team_type" jdbcType="VARCHAR" property="teamType" />
     <result column="team_scope" jdbcType="VARCHAR" property="teamScope" />
     <result column="team_number" jdbcType="INTEGER" property="teamNumber" />
+    <result column="sum_number" jdbcType="INTEGER" property="sumNumber" />
     <result column="team_date" jdbcType="DATE" property="teamDate" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="staff" jdbcType="VARCHAR" property="staff" />

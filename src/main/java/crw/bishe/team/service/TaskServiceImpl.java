@@ -50,7 +50,7 @@ public class TaskServiceImpl implements TaskService {
     public int update(TaskDto taskDto, String id) {
         Long key = Long.parseLong(id);
         if(taskMapper.selectByPrimaryKey(key) != null){
-            taskMapper.updateByPrimaryKey(taskMapping.toEntity(taskDto));
+            return taskMapper.update(taskMapping.toEntity(taskDto));
         }
         return 0;
     }

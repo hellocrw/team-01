@@ -12,6 +12,7 @@ import crw.bishe.team.utils.PageUtils;
 import crw.bishe.team.vo.ConditionRequest;
 import crw.bishe.team.vo.PageRequest;
 import crw.bishe.team.vo.PageResult;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -164,6 +165,13 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectDto getProjectTaskByProId(String proId) {
         Long key = Long.parseLong(proId);
         return projectMapper.getProjectTaskByProId(key);
+    }
+
+    @Override
+    public Boolean getLeaderIdByProId(String proId, String userId) {
+        Long key = Long.parseLong(proId);
+        Integer res = projectMapper.getLeaderIdByProId(key);
+        return String.valueOf(res).equals(userId)? true: false;
     }
 
     public PageInfo getPageInfo(PageRequest pageRequest) {

@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 设置权限访问时，先设置具体指定的路径，在设置范围的
                 .antMatchers("/api/token/getToken","/static/**","/druid/**","/swagger-ui.html#/").permitAll()// 都可以访问的资源
 //                .antMatchers("/api/team/**").hasAnyAuthority("ADMIN")  // 需要ADMIN权限才能访问
-                .antMatchers("/api/**").authenticated() //需要登录才能访问URL -> /api/** 资源
+                .antMatchers("/api/**").permitAll() //需要登录才能访问URL -> /api/** 资源
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()

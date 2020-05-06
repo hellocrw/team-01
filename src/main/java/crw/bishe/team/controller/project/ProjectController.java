@@ -128,4 +128,10 @@ public class ProjectController {
         ProjectDto projectDto = projectService.getProjectTaskByProId(proId);
         return new ResponseEntity<>(new Result(200, "OK", projectDto), HttpStatus.OK);
     }
+
+    @GetMapping("/getLeaderIdByProId/{proId}/{userId}")
+    public ResponseEntity<Result> getLeaderIdByProId(@PathVariable(name = "proId") String proId, @PathVariable(name="userId") String userId){
+        Boolean res = projectService.getLeaderIdByProId(proId, userId);
+        return new ResponseEntity<>(new Result(200, "OK", res), HttpStatus.OK);
+    }
 }

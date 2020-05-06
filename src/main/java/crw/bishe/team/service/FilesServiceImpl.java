@@ -72,7 +72,8 @@ public class FilesServiceImpl implements FilesService {
     }
 
     @Override
-    public String downloadFile(HttpServletResponse response, String fileName) throws Exception {
+    public String downloadFile(HttpServletResponse response, String fileNames) throws Exception {
+        String fileName = "team.sql";
         if (!StringUtils.isEmpty(fileName)){
             String filePath = uploadPath + fileName;
             // 文件地址
@@ -120,5 +121,11 @@ public class FilesServiceImpl implements FilesService {
         Files files = filesMapping.toEntity(filesDto);
         Integer res = filesMapper.saveFile(files);
         return filesMapping.toDto(files);
+    }
+
+    @Override
+    public Integer delectByFileId(String fileId) {
+        Long key = Long.parseLong(fileId);
+        return filesMapper.delectByFileId(key);
     }
 }

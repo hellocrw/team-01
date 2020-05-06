@@ -101,4 +101,6 @@ public interface ProjectService {
      */
     ProjectDto getProjectTaskByProId(String proId);
 
+    Boolean getLeaderIdByProId(String proId, String userId);
+
 }

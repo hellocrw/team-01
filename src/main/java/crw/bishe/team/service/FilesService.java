@@ -45,4 +45,6 @@ public interface FilesService {
     Integer deleteByProIds(List<String> proIds);
 
     FilesDto saveFile(FilesDto filesDto);
+
+    Integer delectByFileId(String fileId);
 }

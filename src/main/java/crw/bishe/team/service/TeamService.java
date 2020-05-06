@@ -159,4 +159,12 @@ public interface TeamService {
      */
     Integer disagree(String teamId);
 
+    /**
+     * 是否是队长
+     * @param teamId
+     * @param userId
+     * @return
+     */
+    Boolean isLeader(String teamId, String userId);
+
 }

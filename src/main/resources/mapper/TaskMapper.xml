@@ -12,6 +12,7 @@
     <result column="task_end_time" jdbcType="DATE" property="taskEndTime" />
     <result column="task_content" jdbcType="VARCHAR" property="taskContent" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="task_status" jdbcType="INTEGER" property="taskStatus" />
     <result column="task_mark" jdbcType="VARCHAR" property="taskMark" />
   </resultMap>

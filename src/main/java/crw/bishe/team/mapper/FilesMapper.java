@@ -33,4 +33,7 @@ public interface FilesMapper extends Mapper<Files> {
     @Insert("INSERT INTO files VALUE (NULL,#{fileName},#{userId},#{userName},#{fileLink},#{proId},#{proName},#{uploadTime})")
     @Options(useGeneratedKeys = true, keyProperty = "fileId", keyColumn = "file_id")
     Integer saveFile(Files files);
+
+    @Delete("DELETE FROM files WHERE files.`file_id` = #{fileId} ")
+    Integer delectByFileId(Long fileId);
 }

@@ -60,6 +60,9 @@ public class Team {
     @Column(name = "team_number")
     private Integer teamNumber;
 
+    @Column(name = "sum_number")
+    private Integer sumNumber;
+
     /**
      * 团队创建日期
      */

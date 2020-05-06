@@ -41,15 +41,18 @@ public class TaskDto {
     @ApiModelProperty(position = 8, value = "任务负责人ID")
     private String userId;
 
-    @ApiModelProperty(position = 9, value = "子任务ID")
+    @ApiModelProperty(position = 9, value = "负责人")
+    private String userName;
+
+    @ApiModelProperty(position = 10, value = "子任务ID")
     private String subTaskId;
 
-    @ApiModelProperty(position = 10, value = "任务状态")
+    @ApiModelProperty(position = 11, value = "任务状态")
     private String taskStatus;
 
-    @ApiModelProperty(position = 11, value = "备注")
+    @ApiModelProperty(position = 12, value = "备注")
     private String taskMark;
 
-    @ApiModelProperty(position = 12, value = "子任务信息")
+    @ApiModelProperty(position = 13, value = "子任务信息")
     private List<SubTaskDto> subTaskDtos;
 }

@@ -5,7 +5,6 @@ import crw.bishe.team.dto.TaskDto;
 import crw.bishe.team.entity.Task;
 import org.springframework.stereotype.Component;
 
-import javax.xml.crypto.Data;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -42,6 +41,8 @@ public class TaskMappingImpl implements TaskMapping {
             task.setTaskContent(taskDto.getTaskContent());
         if (taskDto.getUserId() != null)
             task.setUserId(Long.parseLong(taskDto.getUserId()));
+        if ((taskDto.getUserName() != null))
+            task.setUserName(taskDto.getUserName());
         if (taskDto.getTaskStatus() != null)
             task.setTaskStatus(Integer.parseInt(taskDto.getTaskStatus()));
         if (taskDto.getTaskMark() != null)
@@ -62,6 +63,7 @@ public class TaskMappingImpl implements TaskMapping {
         taskDto.setTaskEndTime(simpleDateFormat.format(task.getTaskEndTime()));
         taskDto.setTaskContent(task.getTaskContent());
         taskDto.setUserId(String.valueOf(task.getUserId()));
+        taskDto.setUserName(task.getUserName());
         taskDto.setTaskStatus(String.valueOf(task.getTaskStatus()));
         taskDto.setTaskMark(task.getTaskMark());
         return taskDto;

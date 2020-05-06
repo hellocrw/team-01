@@ -187,8 +187,8 @@ public class TeamServiceImpl implements TeamService {
                 .build();
         // 保存用户-团队关联表数据
         userTeamMapper.insert(userTeam);
-        // 判断是否是系统管理员ID: AdminId = 3
-        if (teamDto.getAdminId().equals("3")){   // 如果是，直接组队成功
+        // 判断是否是系统管理员ID: AdminId = 0
+        if (teamDto.getAdminId().equals("0")){   // 如果是，直接组队成功
             this.agree(String.valueOf(team.getTeamId()));
         }
         return res;
@@ -219,8 +219,9 @@ public class TeamServiceImpl implements TeamService {
         int pageNum = Integer.parseInt(pageRequest.getPageNum());
         int pageSize = Integer.parseInt(pageRequest.getPageSize());
         PageHelper.startPage(pageNum, pageSize);
-        List<TeamDto> teamDtos = this.findAll();
-        return new PageInfo<>(teamDtos);
+        List<Team> teams = teamMapper.selectAll();
+//        List<TeamDto> teamDtos = this.findAll();
+        return new PageInfo<>(teams);
     }
 
     @Override
@@ -245,6 +246,15 @@ public class TeamServiceImpl implements TeamService {
     public Integer disagree(String teamId) {
         Long key = Long.parseLong(teamId);
         return teamMapper.disagree(key);
+    }
+
+    @Override
+    public Boolean isLeader(String teamId, String userId) {
+        TeamDto teamDto = this.getTeamProByTeamId(teamId);
+        if (teamDto.getLeaderId().equals(userId)){
+            return true;
+        }
+        return false;
     }
 
 

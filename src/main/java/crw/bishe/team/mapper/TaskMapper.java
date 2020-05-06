@@ -74,8 +74,11 @@ public interface TaskMapper extends Mapper<Task> {
             + "</script>")
     List<TaskDto> selectByProIds(@Param("proIds") List<Long> proIds);
 
-    @Insert("INSERT INTO task VALUE (NULL,#{proId},#{taskCreateTime},#{taskStartTime},#{taskEndTime},#{taskContent},#{userId},#{taskStatus},#{taskMark} )")
+    @Insert("INSERT INTO task VALUE (NULL,#{proId},#{taskCreateTime},#{taskStartTime},#{taskEndTime},#{taskContent},#{userId},#{userName},#{taskStatus},#{taskMark} )")
     @Options(useGeneratedKeys = true, keyProperty = "taskId", keyColumn = "task_id")
     Integer create(Task task);
+
+    @Update("UPDATE task SET pro_id = #{proId},task_create_time = #{taskCreateTime},task_start_time = #{taskStartTime},task_end_time = #{taskEndTime},task_content = #{taskContent},user_id = #{userId},user_name = #{userName},task_status = #{taskStatus},task_mark = #{taskMark} WHERE task_id = #{taskId} ")
+    Integer update(Task task);
 
 }

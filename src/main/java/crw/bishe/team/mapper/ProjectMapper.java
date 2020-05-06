@@ -152,4 +152,10 @@ public interface ProjectMapper extends Mapper<Project> {
      */
     @Select("SELECT * FROM project WHERE project.`pro_name`LIKE #{proName};")
     List<ProjectDto> getProjectByProName(String proName);
+
+    /**
+     * 通过项目Id获取队长ID
+     */
+    @Select("SELECT team.`leader_id` FROM team WHERE team.`team_id` = (SELECT project.`team_id` FROM project WHERE project.`pro_id`=#{proId})")
+    Integer getLeaderIdByProId(Long proId);
 }

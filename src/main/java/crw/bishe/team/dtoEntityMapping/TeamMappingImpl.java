@@ -38,6 +38,7 @@ public class TeamMappingImpl implements TeamMapping {
         team.setTeamType(teamDto.getTeamType());
         team.setTeamScope(teamDto.getTeamScope());
         team.setTeamNumber(Integer.parseInt(teamDto.getTeamNumber()));
+        team.setSumNumber(Integer.parseInt(teamDto.getSumNumber()));
         team.setTeamDate(Date.valueOf(teamDto.getTeamDate()));
         team.setStatus(Integer.parseInt(teamDto.getStatus()));
         team.setStaff(teamDto.getStaff());
@@ -62,6 +63,7 @@ public class TeamMappingImpl implements TeamMapping {
         teamDto.setTeamType(team.getTeamType());
         teamDto.setTeamScope(team.getTeamScope());
         teamDto.setTeamNumber(String.valueOf(team.getTeamNumber()));
+        teamDto.setSumNumber(String.valueOf(team.getSumNumber()));
         teamDto.setTeamDate(simpleDateFormat.format(team.getTeamDate()));
         teamDto.setStatus(String.valueOf(team.getStatus()));
         teamDto.setStaff(team.getStaff());

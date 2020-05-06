@@ -50,9 +50,9 @@ public class ProjectMappingImpl implements ProjectMapping {
             project.setStaffList(projectDto.getStaffList());
         if (projectDto.getProType() != null)
             project.setProType(projectDto.getProType());
-        if (projectDto.getProCurrentNum() != null)
+        if (projectDto.getProCurrentNum() != null && projectDto.getProCurrentNum() != "" && !projectDto.getProCurrentNum().equals("null"))
             project.setProCurrentNum(Integer.parseInt(projectDto.getProCurrentNum()));
-        if (projectDto.getProLimiedNum() != null)
+        if (projectDto.getProLimiedNum() != null && projectDto.getProLimiedNum() != ""&& !projectDto.getProLimiedNum().equals("null"))
             project.setProLimiedNum(Integer.parseInt(projectDto.getProLimiedNum()));
         if (projectDto.getSeeNum() != null)
             project.setSeeNum(Integer.parseInt(projectDto.getSeeNum()));

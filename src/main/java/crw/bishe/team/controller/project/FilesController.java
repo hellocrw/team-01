@@ -54,4 +54,10 @@ public class FilesController {
         FilesDto res = filesService.saveFile(filesDto);
         return new ResponseEntity<>(new Result(200, "OK", res), HttpStatus.OK);
     }
+
+    @DeleteMapping("/deleteByFileId/{fileId}")
+    public ResponseEntity<Result> delectByFileId(@PathVariable(name = "fileId")String fileId){
+        Integer res = filesService.delectByFileId(fileId);
+        return new ResponseEntity<>(new Result(200,"OK",res), HttpStatus.OK);
+    }
 }
