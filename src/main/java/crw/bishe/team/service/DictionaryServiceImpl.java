@@ -6,6 +6,8 @@ import crw.bishe.team.entity.TeamType;
 import crw.bishe.team.mapper.TeamTypeMapper;
 import crw.bishe.team.mapper.UniversityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +28,7 @@ public class DictionaryServiceImpl implements DictionaryService {
     private UniversityMapper universityMapper;
 
     @Override
+    @Cacheable(value = "teamType", key = "")
     public List<TeamTypeDto> getTeamType() {
         List<TeamTypeDto> teamTypeDtos = teamTypeMapper.selectTeamType();
         return teamTypeDtos;

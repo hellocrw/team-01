@@ -3,9 +3,11 @@ package crw.bishe.team.dto;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @Data
 @ToString
-public class FilesDto {
+public class FilesDto implements Serializable {
     private String fileId;
     private String fileName;
     private String userId;

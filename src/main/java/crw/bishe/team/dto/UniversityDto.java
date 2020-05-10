@@ -2,6 +2,8 @@ package crw.bishe.team.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Description Description
  * @Author crw
@@ -9,7 +11,7 @@ import lombok.Data;
  * @Time 21:54
  */
 @Data
-public class UniversityDto {
+public class UniversityDto implements Serializable {
     private String id;
     private String university;
     private String college;

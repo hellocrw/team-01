@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
 @Data
 @ToString(callSuper = true)
 @ApiModel(description = "团队基本信息")
-public class TeamDto {
+public class TeamDto implements Serializable {
 
     @ApiModelProperty(position = 1, value = "团队ID", required = true)
     private String teamId;

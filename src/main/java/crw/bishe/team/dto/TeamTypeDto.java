@@ -2,6 +2,8 @@ package crw.bishe.team.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Description Description
  * @Author crw
@@ -9,7 +11,7 @@ import lombok.Data;
  * @Time 21:42
  */
 @Data
-public class TeamTypeDto {
+public class TeamTypeDto implements Serializable {
     private String key;
     private String value;
 }

@@ -15,6 +15,8 @@ import crw.bishe.team.utils.PageUtils;
 import crw.bishe.team.vo.PageRequest;
 import crw.bishe.team.vo.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -57,12 +59,14 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    @Cacheable(value = "team", key = "#adminId")
     public List<TeamDto> getTeamByAdminId(String adminId) {
         Long key = Long.parseLong(adminId);
         return teamMapper.getTeamByAdminId(key);
     }
 
     @Override
+    @CacheEvict(cacheNames = "team", allEntries = true)
     public int create(TeamDto teamDto) {
         if(teamDto == null){
             return 0;
@@ -77,6 +81,7 @@ public class TeamServiceImpl implements TeamService {
      * @return
      */
     @Override
+    @CacheEvict(cacheNames = "team", allEntries = true)
     public int delete(String teamId) {
         // 1、delete applys
         applyService.deleteByTeamId(teamId);
@@ -90,6 +95,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    @CacheEvict(cacheNames = "team", allEntries = true)
     public int update(TeamDto teamDto, String id) {
         if(teamDto == null){
             return 0;
@@ -110,18 +116,21 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    @Cacheable(value = "team", key = "#id")
     public List<MyTeamDto> getMyTeamList(String id) {
         Long key = Long.parseLong(id);
         List<MyTeamDto> teamList = teamMapper.getMyTeamList(key);
         return teamList;
     }
     @Override
+    @Cacheable(value = "team", key = "#teamId")
     public List<MemberDto> getMemberList(String teamId) {
         Long key = Long.parseLong(teamId);
         return teamMapper.getMemberList(key);
     }
 
     @Override
+    @Cacheable(value = "team", key = "")
     public List<TeamDto> getTeams() {
         List<TeamDto> teamDtos = new ArrayList<>();
         teamMapper.getTeams().forEach(teamDto -> {
@@ -133,36 +142,42 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+//    @Cacheable(value = "team", key = "#teamId")
     public TeamDto getTeamProByTeamId(String teamId) {
         Long key = Long.parseLong(teamId);
         return teamMapper.getTeamProByTeamId(key);
     }
 
     @Override
+    @Cacheable(value = "team", key = "#userId")
     public List<TeamDto> getTeamProByUserId(String userId) {
         Long key = Long.parseLong(userId);
         return teamMapper.getTeamProByUserId(key);
     }
 
     @Override
+    @Cacheable(value = "myTeam", key = "#userId")
     public List<TeamDto> getMyTeamProByUserId(String userId) {
         Long key = Long.parseLong(userId);
         return teamMapper.getMyTeamProByUserId(key);
     }
 
     @Override
+    @Cacheable(value = "joinTeam", key = "#userId")
     public List<TeamDto> getJoinTeamProByUserId(String userId) {
         Long key = Long.parseLong(userId);
         return teamMapper.getJoinTeamProByUserId(key);
     }
 
     @Override
+    @Cacheable(value = "team", key = "#teamName")
     public List<TeamDto> getTeamByTeamName(String teamName) {
         String key = "%" + teamName + "%";
         return teamMapper.getTeamByTeamName(key);
     }
 
     @Override
+    @CacheEvict(cacheNames = {"team", "myTeam", "joinTeam"}, allEntries = true)
     public int saveTeam(TeamDto teamDto) {
         // 判断adminId是否存在，不存在则不保存
         if(teamDto.getAdminId().equals("") || teamDto.getAdminId() == null){
@@ -195,17 +210,20 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    @Cacheable(value = "team", key = "#teamScope")
     public List<TeamDto> getTeamByteamScope(String teamScope) {
         return teamMapper.getTeamByteamScope(teamScope);
     }
 
+    @Cacheable(value = "team", key = "#teamType")
     @Override
     public List<TeamDto> getTeamByTeamType(String teamType) {
-        Long key = Long.parseLong(teamType);
-        return teamMapper.getTeamByTeamType(key);
+//        Long key = Long.parseLong(teamType);
+        return teamMapper.getTeamByTeamType(teamType);
     }
 
     @Override
+//    @Cacheable(value = "team", key = "#pageRequest.pageNum")
     public PageResult pageTeams(PageRequest pageRequest) {
         return PageUtils.getPageResult(getPageInfo(pageRequest));
     }
@@ -225,24 +243,28 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    @Cacheable(value = "team", key = "#teamId")
     public Integer TeamStatusFinish(String teamId) {
         Long key = Long.parseLong(teamId);
         return teamMapper.TeamStatusFinish(key);
     }
 
     @Override
+    @CacheEvict(cacheNames = {"team", "myTeam", "joinTeam"}, allEntries = true)
     public Integer TeamStatusContinue(String teamId) {
         Long key = Long.parseLong(teamId);
         return teamMapper.TeamStatusContinue(key);
     }
 
     @Override
+    @CacheEvict(cacheNames = {"team", "myTeam", "joinTeam"}, allEntries = true)
     public Integer agree(String teamId) {
         Long key = Long.parseLong(teamId);
         return teamMapper.agree(key);
     }
 
     @Override
+    @CacheEvict(cacheNames = {"team", "myTeam", "joinTeam"}, allEntries = true)
     public Integer disagree(String teamId) {
         Long key = Long.parseLong(teamId);
         return teamMapper.disagree(key);

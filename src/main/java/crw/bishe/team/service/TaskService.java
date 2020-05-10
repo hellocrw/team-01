@@ -62,7 +62,7 @@ public interface TaskService {
      * @param taskId
      * @return
      */
-    Integer updateTaskByTaskId(String taskId);
+    Integer updateTaskByTaskId(String taskId, String userId, String userName);
 
     /**
      * 根据proId删除task

@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * @description Description
  * @Author crw
@@ -14,7 +16,7 @@ import lombok.ToString;
 @ApiModel(description = "任务信息")
 @Data
 @ToString(callSuper = true)
-public class MyTaskDto {
+public class MyTaskDto implements Serializable {
 
     @ApiModelProperty(position = 2, value = "任务ID", required = true)
     private String taskId;

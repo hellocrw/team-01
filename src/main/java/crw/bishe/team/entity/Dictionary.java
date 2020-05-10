@@ -3,10 +3,11 @@ package crw.bishe.team.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Table(name = "dictionary")
-public class Dictionary {
+public class Dictionary implements Serializable {
     /**
      * 字典ID
      */

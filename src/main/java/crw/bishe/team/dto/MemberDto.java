@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Description Description
  * @Author crw
@@ -12,7 +14,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel(value = "团队成员信息")
-public class MemberDto {
+public class MemberDto implements Serializable {
     @ApiModelProperty(position = 1, value = "用户ID")
     private String UserId;
     @ApiModelProperty(position = 2, value = "团队ID")

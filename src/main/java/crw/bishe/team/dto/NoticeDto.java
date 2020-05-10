@@ -3,9 +3,11 @@ package crw.bishe.team.dto;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @Data
 @ToString
-public class NoticeDto {
+public class NoticeDto implements Serializable {
     private String noticeId;
     private String userId;
     private String userName;

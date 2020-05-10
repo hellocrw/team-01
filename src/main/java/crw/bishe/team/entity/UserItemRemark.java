@@ -1,9 +1,10 @@
 package crw.bishe.team.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "user_item_remark")
-public class UserItemRemark{
+public class UserItemRemark implements Serializable {
     /**
      * id号
      */

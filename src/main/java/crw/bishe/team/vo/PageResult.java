@@ -2,6 +2,7 @@ package crw.bishe.team.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * @Time 17:42
  */
 @Data
-public class PageResult {
+public class PageResult implements Serializable{
     /**
      * 当前页码
      */

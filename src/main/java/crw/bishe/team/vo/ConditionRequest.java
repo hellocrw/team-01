@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Description Description 查询条件请求参数
  * @Author crw
@@ -12,7 +14,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel(value = "查询条件请求参数")
-public class ConditionRequest {
+public class ConditionRequest implements Serializable {
     @ApiModelProperty(position = 1, value = "项目ID")
     private String proId;
     @ApiModelProperty(position = 2, value = "学校")

@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Description Description
  * @Author crw
@@ -12,7 +14,7 @@ import lombok.Data;
  */
 @ApiModel(value = "申请表信息")
 @Data
-public class ApplyDto {
+public class ApplyDto implements Serializable {
 
     @ApiModelProperty(position = 1, value = "申请ID")
     private String applyId;

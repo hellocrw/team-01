@@ -45,8 +45,8 @@ public interface TaskMapper extends Mapper<Task> {
      * 根据任务id更新任务状态信息
      * @param taskId
      */
-    @Select("UPDATE task SET task.`task_status`=task.`task_status`+1 WHERE task.`task_id` = #{taskId};")
-    Integer updateTaskByTaskId(Long taskId);
+    @Select("UPDATE task SET task.`task_status`=task.`task_status`+1 , task.`user_id` = #{arg1}, task.`user_name`=#{arg2} WHERE task.`task_id` = #{arg0} ")
+    Integer updateTaskByTaskId(Long taskId, Long userId, String userName);
 
     /**
      * 根据proIds删除projects

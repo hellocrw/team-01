@@ -5,6 +5,8 @@ import crw.bishe.team.dtoEntityMapping.NoticeMapping;
 import crw.bishe.team.entity.Notice;
 import crw.bishe.team.mapper.NoticeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,12 +22,14 @@ public class NoticeServiceImpl implements NoticeService {
     private NoticeMapping noticeMapping;
 
     @Override
+    @Cacheable(value = "notice", key = "#proId")
     public List<NoticeDto> getNoticesByProId(String proId) {
         Long key = Long.parseLong(proId);
         return noticeMapper.getNoticesByProId(key);
     }
 
     @Override
+    @CacheEvict(cacheNames = "notice", allEntries = true)
     public int save(NoticeDto noticeDto) {
         Notice notice = noticeMapping.toEntity(noticeDto);
         return noticeMapper.insert(notice);

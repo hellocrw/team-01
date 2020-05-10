@@ -41,4 +41,11 @@ public class UserTeamServiceImpl implements UserTeamService {
         Long key = Long.parseLong(utId);
         return userTeamMapper.deleteByPrimaryKey(key);
     }
+
+    @Override
+    public Integer existInTeam(String userId, String teamId) {
+        Long key1 = Long.parseLong(userId);
+        Long key2 = Long.parseLong(teamId);
+        return userTeamMapper.existInTeam(key1, key2);
+    }
 }

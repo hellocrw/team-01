@@ -101,9 +101,11 @@ public class TaskController {
     }
 
     @ApiOperation(value = "根据任务id更新任务状态信息")
-    @GetMapping("/updateTaskByTaskId/{taskId}")
-    public ResponseEntity<Result> updateTaskByTaskId(@PathVariable(name = "taskId") String taskId){
-        Integer res = taskService.updateTaskByTaskId(taskId);
+    @GetMapping("/updateTaskByTaskId/{taskId}/{userId}/{userName}")
+    public ResponseEntity<Result> updateTaskByTaskId(@PathVariable(name = "taskId") String taskId,
+                                                     @PathVariable(name = "userId") String userId,
+                                                     @PathVariable(name = "userName") String userName){
+        Integer res = taskService.updateTaskByTaskId(taskId, userId, userName);
         return new ResponseEntity<>(new Result(200, "OK", res), HttpStatus.OK);
     }
 

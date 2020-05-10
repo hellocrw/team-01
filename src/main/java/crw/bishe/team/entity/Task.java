@@ -4,13 +4,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
 @Table(name = "task")
 @Data
-public class Task {
+public class Task implements Serializable {
     /**
      * ID
      */

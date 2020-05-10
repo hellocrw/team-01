@@ -3,6 +3,8 @@ package crw.bishe.team.dto;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * @Description Description
  * @Author crw
@@ -11,7 +13,7 @@ import lombok.ToString;
  */
 @Data
 @ToString(callSuper = true)
-public class MyTeamDto {
+public class MyTeamDto implements Serializable {
     private String id;
     private String teamId;
     private String teamName;

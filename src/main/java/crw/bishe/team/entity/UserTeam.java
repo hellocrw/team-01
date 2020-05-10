@@ -3,10 +3,11 @@ package crw.bishe.team.entity;
 import lombok.Builder;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "user_team")
 @Builder
-public class UserTeam {
+public class UserTeam implements Serializable {
     /**
      * ID
      */

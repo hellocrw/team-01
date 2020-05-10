@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
  */
 @Data
 @ApiModel(value = "返回数据格式")
-public class Result<T> {
+public class Result<T> implements Serializable {
     @ApiModelProperty(position = 1, value = "状态码")
     private int status;
     @ApiModelProperty(position = 2, value = "信息描述")

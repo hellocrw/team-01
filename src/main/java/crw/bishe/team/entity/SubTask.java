@@ -1,9 +1,10 @@
 package crw.bishe.team.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "sub_task")
-public class SubTask {
+public class SubTask implements Serializable {
     /**
      * 子任务ID
      */

@@ -1,9 +1,10 @@
 package crw.bishe.team.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "pro_type")
-public class ProType {
+public class ProType implements Serializable {
     @Id
     private Long id;
 

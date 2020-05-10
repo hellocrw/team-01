@@ -2,6 +2,8 @@ package crw.bishe.team.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Description Description
  * @Author crw
@@ -9,7 +11,7 @@ import lombok.Data;
  * @Time 22:11
  */
 @Data
-public class TaskListDto {
+public class TaskListDto implements Serializable {
     private String taskId;
     private String taskStartTime;
     private String taskEndTime;

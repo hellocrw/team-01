@@ -3,6 +3,8 @@ package crw.bishe.team.dto;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Description Description
  * @Author crw
@@ -11,7 +13,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel(value = "子任务信息")
-public class SubTaskDto {
+public class SubTaskDto implements Serializable {
 
     private String id;
 

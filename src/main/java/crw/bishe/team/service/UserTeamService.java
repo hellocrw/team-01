@@ -26,4 +26,6 @@ public interface UserTeamService {
      * @return
      */
     Integer deleteByUtId(String utId);
+
+    Integer existInTeam(String userId, String teamId);
 }

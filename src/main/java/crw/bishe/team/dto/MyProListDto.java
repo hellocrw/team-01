@@ -2,6 +2,8 @@ package crw.bishe.team.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Description Description
  * @Author crw
@@ -9,7 +11,7 @@ import lombok.Data;
  * @Time 15:45
  */
 @Data
-public class MyProListDto {
+public class MyProListDto implements Serializable {
     private String teamId;
     private String teamName;
     private String proId;

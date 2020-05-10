@@ -3,11 +3,12 @@ package crw.bishe.team.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @Table(name = "notice")
-public class Notice {
+public class Notice implements Serializable {
     /**
      * 公告id
      */

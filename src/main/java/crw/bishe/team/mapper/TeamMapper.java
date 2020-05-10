@@ -131,7 +131,7 @@ public interface TeamMapper extends Mapper<Team> {
      * @param userId
      * @return
      */
-    @Select("SELECT team.* FROM team WHERE  team.`team_id` IN (SELECT team_id FROM user_team WHERE user_id = #{userId} ) ;")
+    @Select("SELECT team.* FROM team WHERE  team.`team_id` IN (SELECT team_id FROM user_team WHERE user_id = #{userId}  AND user_team.`is_leader`=0) ;")
     @Results({
             @Result(property = "teamId", column = "team_id"),
             @Result(property = "projects", column = "team_id",
@@ -145,7 +145,7 @@ public interface TeamMapper extends Mapper<Team> {
      * @return
      */
     @Select("SELECT team.*,user_info.`university` FROM team,user_info\n" +
-            "WHERE team.`leader_id`=user_info.`user_id` AND team.`team_name` LIKE  #{teamName} AND team.`status` = 0;")
+            "WHERE team.`leader_id`=user_info.`user_id` AND team.`team_name` LIKE  #{teamName} AND team.`status` = 1;")
     List<TeamDto> getTeamByTeamName(String teamName);
 
     /**
@@ -169,7 +169,7 @@ public interface TeamMapper extends Mapper<Team> {
      */
     @Select("SELECT team.*,user_info.`university` FROM team,user_info\n" +
             "            WHERE team.`leader_id`=user_info.`user_id` AND team.`team_type` = #{teamType} AND team.`status` = 1;")
-    List<TeamDto> getTeamByTeamType(Long teamType);
+    List<TeamDto> getTeamByTeamType(String teamType);
 
     /**
      * 完成组队

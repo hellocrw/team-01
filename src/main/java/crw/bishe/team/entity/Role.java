@@ -1,9 +1,10 @@
 package crw.bishe.team.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "role")
-public class Role {
+public class Role implements Serializable {
     /**
      * ID
      */

@@ -26,4 +26,13 @@ public interface UserTeamMapper extends Mapper<UserTeam> {
     @Delete("DELETE FROM user_team WHERE team_id = #{teamId}")
     Integer deleteByTeamId(Long teamId);
 
+    /**
+     * 判断团队中是否有这个用户存在
+     * @param userId
+     * @param teamId
+     * @return
+     */
+    @Select("SELECT COUNT(*) FROM user_team WHERE user_team.`user_id` = #{arg0} AND user_team.`team_id` = #{arg1}")
+    Integer existInTeam(Long userId, Long teamId);
+
 }

@@ -2,12 +2,13 @@ package crw.bishe.team.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Data
 @Table(name = "apply")
-public class Apply {
+public class Apply implements Serializable {
     /**
      * ID
      */

@@ -1,11 +1,12 @@
 package crw.bishe.team.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
 @Table(name = "project")
-public class Project {
+public class Project implements Serializable {
     /**
      * ID
      */

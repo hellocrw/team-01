@@ -117,8 +117,8 @@ public class TeamController {
     @ApiOperation(value = "通过teamId获取团队以及项目信息")
     @GetMapping("/getTeamProByTeamId/{teamId}")
     public ResponseEntity<Result> getTeamProByTeamId(@PathVariable(name = "teamId") String teamId){
-        TeamDto teamDtos = teamService.getTeamProByTeamId(teamId);
-        return new ResponseEntity<>(new Result<>(200,"OK", teamDtos),HttpStatus.OK);
+        TeamDto teamDto = teamService.getTeamProByTeamId(teamId);
+        return new ResponseEntity<>(new Result<>(200,"OK", teamDto),HttpStatus.OK);
     }
 
     @ApiOperation(value = "通过用户ID获取团队以及项目信息")

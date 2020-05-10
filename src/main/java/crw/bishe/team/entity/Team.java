@@ -2,13 +2,14 @@ package crw.bishe.team.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
 @Table(name = "team")
 @Data
-public class Team {
+public class Team implements Serializable {
     /**
      * ID
      */

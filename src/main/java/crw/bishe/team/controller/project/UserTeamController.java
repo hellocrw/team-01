@@ -44,4 +44,13 @@ public class UserTeamController {
         return new ResponseEntity<>(new Result(200, "OK"), HttpStatus.OK);
     }
 
+    @GetMapping("/existInTeam/{userId}/{teamId}")
+    public ResponseEntity<Result> existInTeam(@PathVariable(name = "userId")String userId,
+                                              @PathVariable(name = "teamId") String teamId){
+        Integer res = userTeamService.existInTeam(userId, teamId);
+        if(res <= 0){
+            return new ResponseEntity<>(new Result(200, "无法访问", res), HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<>(new Result(200, "OK", res), HttpStatus.OK);
+    }
 }
