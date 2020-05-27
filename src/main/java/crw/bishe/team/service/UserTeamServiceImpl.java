@@ -46,6 +46,6 @@ public class UserTeamServiceImpl implements UserTeamService {
     public Integer existInTeam(String userId, String teamId) {
         Long key1 = Long.parseLong(userId);
         Long key2 = Long.parseLong(teamId);
-        return userTeamMapper.existInTeam(key1, key2);
+        return userTeamMapper.existInTeam(key1,key2);
     }
 }

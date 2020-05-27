@@ -3,6 +3,7 @@ package crw.bishe.team.mapper;
 import crw.bishe.team.dto.UserTeamDto;
 import crw.bishe.team.entity.UserTeam;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -32,7 +33,9 @@ public interface UserTeamMapper extends Mapper<UserTeam> {
      * @param teamId
      * @return
      */
-    @Select("SELECT COUNT(*) FROM user_team WHERE user_team.`user_id` = #{arg0} AND user_team.`team_id` = #{arg1}")
+    //    TODO
+    @Select("SELECT COUNT(*) FROM user_team WHERE user_team.`user_id` = #{param1} AND user_team.`team_id` = #{param2}")
+    @ResultType(value = Integer.class)
     Integer existInTeam(Long userId, Long teamId);
 
 }

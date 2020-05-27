@@ -81,7 +81,7 @@ public class TeamServiceImpl implements TeamService {
      * @return
      */
     @Override
-    @CacheEvict(cacheNames = "team", allEntries = true)
+    @CacheEvict(cacheNames = {"team", "myTeam", "joinTeam"}, allEntries = true)
     public int delete(String teamId) {
         // 1、delete applys
         applyService.deleteByTeamId(teamId);
