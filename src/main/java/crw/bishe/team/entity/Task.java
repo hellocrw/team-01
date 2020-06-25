@@ -72,6 +72,12 @@ public class Task implements Serializable {
     private String taskMark;
 
     /**
+     * 链接
+     */
+    @Column(name = "task_link")
+    private String taskLink;
+
+    /**
      * 项目
      */
     private List<SubTask> subTasks;

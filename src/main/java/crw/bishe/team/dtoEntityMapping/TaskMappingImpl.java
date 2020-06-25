@@ -47,6 +47,8 @@ public class TaskMappingImpl implements TaskMapping {
             task.setTaskStatus(Integer.parseInt(taskDto.getTaskStatus()));
         if (taskDto.getTaskMark() != null)
             task.setTaskMark(taskDto.getTaskMark());
+        if (taskDto.getTaskLink() != null)
+            task.setTaskLink(taskDto.getTaskLink());
         return task;
     }
 
@@ -66,6 +68,7 @@ public class TaskMappingImpl implements TaskMapping {
         taskDto.setUserName(task.getUserName());
         taskDto.setTaskStatus(String.valueOf(task.getTaskStatus()));
         taskDto.setTaskMark(task.getTaskMark());
+        taskDto.setTaskLink(task.getTaskLink());
         return taskDto;
     }
 

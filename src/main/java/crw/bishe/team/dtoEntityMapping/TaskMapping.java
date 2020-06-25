@@ -27,7 +27,7 @@ public interface TaskMapping {
     TaskDto toDto(Task task);
 
     /**
-     * 将将task的entity转为myTaskDto
+     * 将task的entity转为myTaskDto
      * @param task
      * @return
      */

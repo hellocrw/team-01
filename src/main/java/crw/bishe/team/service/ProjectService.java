@@ -27,7 +27,7 @@ public interface ProjectService {
 
     /**
      * 根据ID删除项目信息
-     * @param id
+     * @param proId
      * @return
      */
     Integer delete(String proId);

@@ -54,6 +54,9 @@ public class TaskDto implements Serializable {
     @ApiModelProperty(position = 12, value = "备注")
     private String taskMark;
 
-    @ApiModelProperty(position = 13, value = "子任务信息")
+    @ApiModelProperty(position = 13, value = "链接")
+    private String taskLink;
+
+    @ApiModelProperty(position = 14, value = "子任务信息")
     private List<SubTaskDto> subTaskDtos;
 }
