@@ -1,9 +1,12 @@
 package crw.bishe.team.entity;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Table(name = "user_info")
+//@Builder
 public class UserInfo implements Serializable {
     /**
      * ID

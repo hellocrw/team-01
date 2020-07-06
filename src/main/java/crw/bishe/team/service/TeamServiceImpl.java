@@ -17,6 +17,9 @@ import crw.bishe.team.vo.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -40,6 +43,7 @@ public class TeamServiceImpl implements TeamService {
     private final ApplyService applyService;
     private final UserTeamService userTeamService;
     private final UserTeamMapper userTeamMapper;
+    private final RedisTemplate redisTemplate;
 
     @Autowired
     public TeamServiceImpl(TeamMapper teamMapper,
@@ -48,7 +52,8 @@ public class TeamServiceImpl implements TeamService {
                            ProjectService projectService,
                            ApplyService applyService,
                            UserTeamService userTeamService,
-                           UserTeamMapper userTeamMapper){
+                           UserTeamMapper userTeamMapper,
+                           RedisTemplate redisTemplate){
         this.teamMapper = teamMapper;
         this.teamMapping = teamMapping;
         this.adminMapper = adminMapper;
@@ -56,6 +61,7 @@ public class TeamServiceImpl implements TeamService {
         this.applyService = applyService;
         this.userTeamService = userTeamService;
         this.userTeamMapper = userTeamMapper;
+        this.redisTemplate = redisTemplate;
     }
 
     @Override
@@ -66,7 +72,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    @CacheEvict(cacheNames = "team", allEntries = true)
+    @Caching(evict = {@CacheEvict(cacheNames = "team", allEntries = true)})
     public int create(TeamDto teamDto) {
         if(teamDto == null){
             return 0;
@@ -109,6 +115,9 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public List<TeamDto> findAll() {
+        ValueOperations<String, TeamDto> operations = redisTemplate.opsForValue();
+        System.out.println(redisTemplate.hasKey("team"));
+
         List<Team> teams = teamMapper.selectAll();
         List<TeamDto> teamDtos = new ArrayList<>();
         teams.forEach(team -> teamDtos.add(teamMapping.toDto(team)));

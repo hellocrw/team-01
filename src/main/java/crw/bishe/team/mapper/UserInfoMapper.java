@@ -2,6 +2,9 @@ package crw.bishe.team.mapper;
 
 import crw.bishe.team.dto.UserDto;
 import crw.bishe.team.entity.UserInfo;
+import crw.bishe.team.entity.UserRoles;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
 

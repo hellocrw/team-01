@@ -49,6 +49,7 @@ public class ProjectServiceImpl implements ProjectService {
         this.noticeService = noticeService;
     }
     @Override
+    @CacheEvict(value = {"team", "myTeam", "joinTeam"}, allEntries = true)
     public ProjectDto create(ProjectDto projectDto) {
         if(projectDto == null){
             return null;
@@ -64,6 +65,7 @@ public class ProjectServiceImpl implements ProjectService {
      * @return
      */
     @Override
+    @CacheEvict(value = {"team", "myTeam", "joinTeam"}, allEntries = true)
     public Integer delete(String proId) {
         if(proId == null){
             return null;
@@ -87,6 +89,7 @@ public class ProjectServiceImpl implements ProjectService {
      * @return
      */
     @Override
+    @CacheEvict(value = {"team", "myTeam", "joinTeam"}, allEntries = true)
     public Integer delectByTeamId(String teamId) {
         // delete tasks by proIds
         Long key = Long.parseLong(teamId);

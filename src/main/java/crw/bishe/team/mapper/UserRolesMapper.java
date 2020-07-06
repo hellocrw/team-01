@@ -1,6 +1,8 @@
 package crw.bishe.team.mapper;
 
 import crw.bishe.team.entity.UserRoles;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -27,8 +29,9 @@ public interface UserRolesMapper extends Mapper<UserRoles> {
      * 用户注册
      * @param userRoles
      */
-    @Select("INSERT INTO user_roles VALUE (#arg0);")
-    void register(UserRoles userRoles);
+    @Insert("INSERT INTO user_roles VALUES (null, #{username}, #{password}, #{auth})")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    Integer userRegister(UserRoles userRoles);
 
     /**
      * 根据用户名获取用户权限
