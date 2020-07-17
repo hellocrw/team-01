@@ -2,7 +2,6 @@ package crw.bishe.team.controller;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -36,10 +35,9 @@ public class MyWebSocket {
 
     @OnOpen
     public void onOpen(Session session, @PathParam("name") String name) throws IOException {
-        System.out.println("--------------open-----------");
+        System.out.println("--------------open-----------" + name);
         this.username = name;
         this.session = session;
-
         addOnlineCount();
         clients.put(username, this);
         System.out.println("已连接" + clients.size() + "人");
@@ -56,10 +54,7 @@ public class MyWebSocket {
 
     @OnMessage
     public void onMessage(String message) throws IOException {
-
         System.out.println("来自客户端的消息:" + message);
-
-        // 群发消息
         sendMessageAll(message);
     }
 
@@ -71,7 +66,10 @@ public class MyWebSocket {
 
     private void sendMessageAll(String message) throws IOException {
         System.out.println("群发消息");
-        for (MyWebSocket item: clients.values()){
+        // 给每一个人都发送消息
+        for (MyWebSocket item: clients.values()){    // key: username --> (connection)MyWebSocket
+            // 指定项目ID
+            // 查看那些人在该项目中
             item.session.getAsyncRemote().sendText(message);
         }
     }
