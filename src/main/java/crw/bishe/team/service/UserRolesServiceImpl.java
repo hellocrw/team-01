@@ -17,7 +17,8 @@ import org.springframework.stereotype.Service;
  * @Time 16:11
  **/
 @Service
-public class UserRolesServiceImpl implements UserRolesService  {
+public class UserRolesServiceImpl implements UserRolesService
+{
 
     @Autowired
     private UserRolesMapper userRolesMapper;
@@ -65,12 +66,21 @@ public class UserRolesServiceImpl implements UserRolesService  {
         userInfo.setEmail("null");
         userInfo.setAbility("null");
         userInfoMapper.insert(userInfo);
-
         return "用户注册成功";
     }
 
     @Override
     public String getAuth(String username) {
         return userRolesMapper.getAuth(username);
+    }
+
+    @Override
+    public String getPassword(String username) {
+        return userRolesMapper.getPassword(username);
+    }
+
+    @Override
+    public Integer alterPassword(String username, String newPassword) {
+        return userRolesMapper.alterPassword(username, newPassword);
     }
 }

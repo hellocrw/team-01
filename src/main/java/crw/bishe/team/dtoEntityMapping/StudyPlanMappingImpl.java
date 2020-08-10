@@ -33,7 +33,6 @@ public class StudyPlanMappingImpl implements StudyPlanMapping {
                     System.out.println(studyPlanDto.getSpTime());
                     System.out.println(new Date());
                     Date date = simpleDateFormat.parse(studyPlanDto.getSpTime());
-                    System.out.println("date------------" + date);
                     studyPlan.setSpTime(date);
                 } catch (ParseException e) {
                     e.printStackTrace();

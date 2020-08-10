@@ -25,4 +25,18 @@ public interface UserRolesService {
      */
     String getAuth(String username);
 
+    /**
+     * 获取用户加密后的密码
+     * @param username
+     * @return
+     */
+    String getPassword(String username);
+
+    /**
+     * 修改密码
+     * @param username
+     * @param newPassword
+     * @return
+     */
+    Integer alterPassword(String username, String newPassword);
 }

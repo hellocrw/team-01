@@ -4,6 +4,7 @@ import crw.bishe.team.entity.UserRoles;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import tk.mybatis.mapper.common.Mapper;
 
 public interface UserRolesMapper extends Mapper<UserRoles> {
@@ -40,4 +41,20 @@ public interface UserRolesMapper extends Mapper<UserRoles> {
      */
     @Select("SELECT user_roles.`auth` FROM user_roles WHERE user_roles.`username`=#{arg0};")
     String getAuth(String username);
+
+    /**
+     * 获取加密后的密码
+     * @param username
+     * @return
+     */
+    @Select("SELECT user_roles.`password` FROM user_roles WHERE user_roles.`username`=#{arg0};")
+    String getPassword(String username);
+
+    /**
+     * 修改密码
+     * @param username
+     * @return
+     */
+    @Update("UPDATE user_roles SET user_roles.`password` = #{param2} WHERE user_roles.`username`=#{param1};")
+    Integer alterPassword(String username, String newPassword);
 }
