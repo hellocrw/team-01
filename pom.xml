@@ -72,6 +72,12 @@
             <optional>true</optional>
             <scope>provided</scope>
         </dependency>
+        <!-- hutool 工具类 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.3.10</version>
+        </dependency>
         <!--jdbc-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -110,13 +116,19 @@
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
         </dependency>
+        <!-- MyBatis-Plus 插件的引入-->
+        <!--<dependency>-->
+            <!--<groupId>com.baomidou</groupId>-->
+            <!--<artifactId>mybatis-plus-boot-starter</artifactId>-->
+            <!--<version>3.3.2</version>-->
+        <!--</dependency>-->
         <!--springboot整合mybatis启动器-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.1.1</version>
         </dependency>
-        <!-- tkmybatis -->
+        <!-- tkmybatis 插件的引入 -->
         <dependency>
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper</artifactId>

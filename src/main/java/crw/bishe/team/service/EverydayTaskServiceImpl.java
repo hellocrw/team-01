@@ -1,5 +1,6 @@
 package crw.bishe.team.service;
 
+import cn.hutool.core.convert.Convert;
 import crw.bishe.team.entity.EverydayTask;
 import crw.bishe.team.entity.StudyPlan;
 import crw.bishe.team.mapper.EverydayTaskMapper;
@@ -65,5 +66,11 @@ public class EverydayTaskServiceImpl implements EverydayTaskService {
         studyPlan.setSpLink("http://120.79.191.236/#/team");
         studyPlanMapper.insert(studyPlan);
         return res;
+    }
+
+    @Override
+    public Integer deleteTask(String everydayTaskId) {
+        Long everydayId = Convert.toLong(everydayTaskId);
+        return everydayTaskMapper.deleteByPrimaryKey(everydayId);
     }
 }

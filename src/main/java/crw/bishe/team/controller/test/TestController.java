@@ -1,9 +1,11 @@
 package crw.bishe.team.controller.test;
 
+import cn.hutool.core.date.DateUtil;
 import crw.bishe.team.config.JwtConfig;
 import crw.bishe.team.dto.ProjectDto;
 import crw.bishe.team.entity.Project;
 import crw.bishe.team.mapper.ProjectMapper;
+import crw.bishe.team.utils.ResponseUtils;
 import crw.bishe.team.vo.Result;
 import io.swagger.annotations.Api;
 import org.apache.ibatis.session.RowBounds;
@@ -16,9 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.Sqls;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static jdk.nashorn.internal.objects.NativeDebug.map;
 
 /**
  * @Description Description 测试类
@@ -37,6 +39,9 @@ public class TestController {
 
     @Autowired
     private JwtConfig jwtConfig;
+
+    @Autowired
+    private ResponseUtils responseUtils;
 
     @DeleteMapping("/delete/{teamId}")
     public String delectTest(@PathVariable(name = "teamId") String teamId){
@@ -95,5 +100,17 @@ public class TestController {
     @PreAuthorize("isAuthenticated()")
     public String fail(){
         return "登录测试，需要登录才能访问";
+    }
+
+    @GetMapping(value = "/hutool")
+    public ResponseEntity<Result> hutool(){
+        Map<String ,Object> map = new HashMap<>();
+        // 当前时间
+        Date date = DateUtil.date();
+        map("date", date);
+        // 当前时间
+        Date date2 = DateUtil.date(Calendar.getInstance());
+        map("date2", date2);
+        return responseUtils.success(map);
     }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="crw.bishe.team.mapper.EverydayTaskLogMapper">
+  <resultMap id="BaseResultMap" type="crw.bishe.team.entity.EverydayTaskLog">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="everyday_id" jdbcType="BIGINT" property="everydayId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="finish" jdbcType="TINYINT" property="finish" />
+    <result column="clock_time" jdbcType="TIMESTAMP" property="clockTime" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+  </resultMap>
+</mapper>

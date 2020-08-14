@@ -24,4 +24,11 @@ public interface EverydayTaskService {
      * @return
      */
     Integer clock(String userId, String everydayTaskId);
+
+    /**
+     * 删除每日打卡任务
+     * @param everydayTaskId 每天打卡任务ID
+     * @return
+     */
+    Integer deleteTask(String everydayTaskId);
 }

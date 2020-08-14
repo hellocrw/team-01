@@ -38,4 +38,9 @@ public class EverydayTaskController {
         return res >= 1 ? new ResponseEntity<>(new Result(200, "success", res), HttpStatus.OK): new ResponseEntity<>(new Result(500, "fault"), HttpStatus.BAD_REQUEST);
     }
 
+    @GetMapping("/delete/{everydayTaskId}")
+    public ResponseEntity<Result> deleteByEverydayTaskId(@PathVariable("everydayTaskId") String everydayTaskId){
+        Integer res = everydayTaskService.deleteTask(everydayTaskId);
+        return res >= 1 ? new ResponseEntity<>(new Result(200, "success", res), HttpStatus.OK): new ResponseEntity<>(new Result(500, "fault"), HttpStatus.BAD_REQUEST);
+    }
 }
