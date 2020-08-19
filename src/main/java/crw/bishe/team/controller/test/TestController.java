@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.Sqls;
 
@@ -34,6 +35,8 @@ import static jdk.nashorn.internal.objects.NativeDebug.map;
 @ResponseBody
 public class TestController {
 
+    private final static String URL = "http://ORDER80";
+
     @Autowired
     private ProjectMapper projectMapper;
 
@@ -42,6 +45,18 @@ public class TestController {
 
     @Autowired
     private ResponseUtils responseUtils;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    /**
+     * Eureka 服务调用测试
+     * @return
+     */
+    @GetMapping("/demo")
+    public String demo(){
+        return restTemplate.getForObject(URL+ "/demo01", String.class);
+    }
 
     @DeleteMapping("/delete/{teamId}")
     public String delectTest(@PathVariable(name = "teamId") String teamId){

@@ -60,6 +60,11 @@ spring:
         min-idle: 0
     #连接超时时间
     timeout: 10000
+  application:
+    name: team-01
+#    通过配置文件排除spring security 自动配置
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 
 mybatis:
   # 指定sql映射文件位置
@@ -104,3 +109,9 @@ config:
     headerKey: token
     token: Authorization
 
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka

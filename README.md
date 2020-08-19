@@ -20,5 +20,6 @@ git pull测试你的IDEA是否能够拉取GitHub上的代码
 
 上传代码20200718
 
-
+问题：  
+- [ ] spring security 跳过登录认证和身份认证如何实现
 
