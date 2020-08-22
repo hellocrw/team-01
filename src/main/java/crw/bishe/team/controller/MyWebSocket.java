@@ -36,6 +36,7 @@ public class MyWebSocket {
     @OnOpen
     public void onOpen(Session session, @PathParam("name") String name) throws IOException {
         System.out.println("--------------open-----------" + name);
+        System.out.println("sessionId:" + session.getId());
         this.username = name;
         this.session = session;
         addOnlineCount();
@@ -64,6 +65,18 @@ public class MyWebSocket {
         error.printStackTrace();
     }
 
+    /**
+     * 消息独发
+     * @param message
+     */
+    public void sendMessage(String message) {
+
+    }
+    /**
+     * 消息群发
+     * @param message
+     * @throws IOException
+     */
     private void sendMessageAll(String message) throws IOException {
         System.out.println("群发消息");
         // 给每一个人都发送消息
@@ -89,6 +102,5 @@ public class MyWebSocket {
     public static synchronized Map<String, MyWebSocket> getClients() {
         return clients;
     }
-
 
 }

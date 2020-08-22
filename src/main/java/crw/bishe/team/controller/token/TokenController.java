@@ -26,6 +26,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -64,7 +65,7 @@ public class TokenController {
 
     @ApiOperation("使用账号密码获取Token")
     @PostMapping("/getToken")
-    public ResponseEntity<Result> getToken(@RequestBody @Validated UserRolesDto userRolesDto, HttpServletRequest request){
+    public ResponseEntity<Result> getToken(@RequestBody @Validated UserRolesDto userRolesDto, HttpServletRequest request, HttpSession session){
         System.out.println("调用了getToken方法");
         Map<String, Object> res = new HashMap<>();
         try{
@@ -92,6 +93,7 @@ public class TokenController {
                 // 获取用户权限
                 System.out.println("权限:" + authentication.getAuthorities());
                 res.put("auth", authentication.getAuthorities());
+                session.setAttribute(userDto.getUserName(), "123456");
             }
             return new ResponseEntity<>(new Result(200,"ok" , res), HttpStatus.OK);
         }catch (Exception e){

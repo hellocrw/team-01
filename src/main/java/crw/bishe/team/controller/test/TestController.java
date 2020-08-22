@@ -1,7 +1,6 @@
 package crw.bishe.team.controller.test;
 
 import crw.bishe.team.config.JwtConfig;
-import crw.bishe.team.dto.ProjectDto;
 import crw.bishe.team.entity.Project;
 import crw.bishe.team.mapper.ProjectMapper;
 import crw.bishe.team.vo.Result;
@@ -13,9 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.util.Sqls;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,5 +93,15 @@ public class TestController {
     @PreAuthorize("isAuthenticated()")
     public String fail(){
         return "登录测试，需要登录才能访问";
+    }
+
+    @GetMapping("/session")
+    public String getSession(HttpSession session){
+        session.getServletContext();
+        String[] attrs = session.getValueNames();
+        for (String attr : attrs) {
+            System.out.print(attr + " ");
+        }
+        return "sesson";
     }
 }

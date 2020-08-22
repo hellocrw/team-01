@@ -1,6 +1,7 @@
 package crw.bishe.team.config;
 
 import crw.bishe.team.filter.JWTAuthenticationFilter;
+import crw.bishe.team.filter.SpringWebSocketHandlerIntercepter;
 import crw.bishe.team.filter.TokenInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -19,8 +20,13 @@ public class WebConfig implements WebMvcConfigurer {
     @Resource
     private TokenInterceptor tokenInterceptor;
 
+    /**
+     * 拦截器配置
+     * @param registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(tokenInterceptor).addPathPatterns("/api/**");
+//        registry.addInterceptor(springWebSocketHandlerIntercepter).addPathPatterns("/api/");
     }
 }
