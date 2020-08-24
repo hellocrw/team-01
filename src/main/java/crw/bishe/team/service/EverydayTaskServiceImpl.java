@@ -2,7 +2,9 @@ package crw.bishe.team.service;
 
 import cn.hutool.core.convert.Convert;
 import crw.bishe.team.entity.EverydayTask;
+import crw.bishe.team.entity.EverydayTaskLog;
 import crw.bishe.team.entity.StudyPlan;
+import crw.bishe.team.mapper.EverydayTaskLogMapper;
 import crw.bishe.team.mapper.EverydayTaskMapper;
 import crw.bishe.team.mapper.StudyPlanMapper;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,10 @@ public class EverydayTaskServiceImpl implements EverydayTaskService {
     private EverydayTaskMapper everydayTaskMapper;
 
     @Resource
-    public StudyPlanMapper studyPlanMapper;
+    private StudyPlanMapper studyPlanMapper;
+
+    @Resource
+    private EverydayTaskLogMapper everydayTaskLogMapper;
 
     @Override
     public Integer createEverydayTask(EverydayTask everydayTask) {
@@ -47,7 +52,6 @@ public class EverydayTaskServiceImpl implements EverydayTaskService {
                 everydayTaskList.add(item);
             }
         });
-
         return everydayTaskList;
     }
 
@@ -56,10 +60,20 @@ public class EverydayTaskServiceImpl implements EverydayTaskService {
         Long user_id = Long.parseLong(userId);
         Long everyday_task_id = Long.parseLong(everydayTaskId);
         Integer res = everydayTaskMapper.updateClockTime(user_id, everyday_task_id);
-        // 将今日完成的任务添加到学习任务中
+        // 将今日完成的任务添加到每天任务日志中
         EverydayTask everydayTask =everydayTaskMapper.selectByPrimaryKey(everyday_task_id);
+        EverydayTaskLog everydayTaskLog = new EverydayTaskLog();
+        everydayTaskLog.setEverydayId(everydayTask.getEverydayTaskId());
+        everydayTaskLog.setClockTime(everydayTask.getClockTime());
+        everydayTaskLog.setContent(everydayTask.getContent());
+        everydayTaskLog.setFinish(everydayTask.getFinish());
+        // TODO 任务描述
+        everydayTaskLog.setSummary(null);
+        everydayTaskLog.setUserId(everydayTask.getUserId());
+        everydayTaskLogMapper.insert(everydayTaskLog);
+        // 将每天任务添加到学习计划中
         StudyPlan studyPlan = new StudyPlan();
-        studyPlan.setSpTime(new Date());
+        studyPlan.setSpTime(everydayTask.getClockTime());
         studyPlan.setSpTitle(everydayTask.getContent());
         studyPlan.setSpContext("每天任务");
         studyPlan.setUserId(everydayTask.getUserId());

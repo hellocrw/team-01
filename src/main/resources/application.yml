@@ -115,3 +115,9 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:7001/eureka
+
+# 此处的Logger要使用feign中的
+logging:
+  level:
+    # feign日志以什么级别监控哪个接口
+    crw.bishe.team.service.TestService: debug

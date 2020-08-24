@@ -5,6 +5,7 @@ import crw.bishe.team.config.JwtConfig;
 import crw.bishe.team.dto.ProjectDto;
 import crw.bishe.team.entity.Project;
 import crw.bishe.team.mapper.ProjectMapper;
+import crw.bishe.team.service.TestService;
 import crw.bishe.team.utils.ResponseUtils;
 import crw.bishe.team.vo.Result;
 import io.swagger.annotations.Api;
@@ -47,7 +48,28 @@ public class TestController {
     private ResponseUtils responseUtils;
 
     @Autowired
+    private TestService testService;
+
+    @Autowired
     private RestTemplate restTemplate;
+
+    /**
+     * 服务调用接口
+     * @return
+     */
+    @GetMapping("/a")
+    public String openFeign(){
+        return testService.demo();
+    }
+
+    /**
+     * 服务超时测试
+     * @return
+     */
+    @GetMapping(value = "/feign/timeout")
+    public String paymentFeignTimeout(){
+        return testService.paymentFeignTimeout();
+    }
 
     /**
      * Eureka 服务调用测试
