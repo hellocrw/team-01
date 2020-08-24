@@ -18,9 +18,9 @@ import java.util.concurrent.locks.ReentrantLock;
 public class TeamApplication {
 
     public static void main(String[] args) {
-//        AbstractQueuedSynchronizer aqs;
-//        ReentrantLock reentrantLock;
         SpringApplication.run(TeamApplication.class, args);
+        // 获取所有已加载的bean
+
     }
 
 }
