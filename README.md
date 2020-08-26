@@ -23,4 +23,17 @@ git pull测试你的IDEA是否能够拉取GitHub上的代码
 问题：  
 - [ ] spring security 跳过登录认证和身份认证如何实现
 
-git测试1 -- 回滚到openFegin分支再重新提交
+git测试1 -- 回滚到openFegin分支再重新提交 
+```aidl
+git reset --soft HEAN_ID 指定版本ID  
+修改代码
+git add .
+git commit -m "回退"
+git push -f origin master 强制提交代码
+```
+
+
+回退到指定版本提交
+```aidl
+ git revert
+```
