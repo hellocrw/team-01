@@ -38,6 +38,14 @@
             <version>2.2.2.RELEASE</version>
         </dependency>
 
+        <!--Hystrix依赖-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+            <!--在同一版本管理中，版本号可以不写-->
+            <version>2.1.5.RELEASE</version>
+        </dependency>
+
         <!-- 引入log4j2依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

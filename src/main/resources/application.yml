@@ -65,6 +65,8 @@ spring:
 #    通过配置文件排除spring security 自动配置
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  main:
+    allow-bean-definition-overriding: true
 
 mybatis:
   # 指定sql映射文件位置
@@ -121,3 +123,14 @@ logging:
   level:
     # feign日志以什么级别监控哪个接口
     crw.bishe.team.service.TestService: debug
+
+feign:
+  hystrix:
+    enabled: true
+
+hystrix:
+  metrics:
+#    默认的超时时间设置
+    polling-interval-ms: 2000
+#    hystrix配置
+    enabled: true

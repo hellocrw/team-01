@@ -72,7 +72,7 @@ public class TestController {
     }
 
     /**
-     * Eureka 服务调用测试
+     * RestTempate服务调用测试
      * @return
      */
     @GetMapping("/demo")
