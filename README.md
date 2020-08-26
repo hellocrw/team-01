@@ -35,5 +35,5 @@ git push -f origin master 强制提交代码
 
 回退到指定版本提交
 ```aidl
- git revert
+ git revert -n HEAD_ID
 ```
