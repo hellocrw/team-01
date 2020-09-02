@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  * Filter过滤器
  */
-@WebFilter(filterName = "MyFilter", urlPatterns = "/*")
+@WebFilter(filterName = "MyFilter", urlPatterns = "/api/project/*")
 public class MyFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

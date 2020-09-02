@@ -69,9 +69,9 @@ spring:
     allow-bean-definition-overriding: true
   elasticsearch:
     rest:
-      username: elastic
+      username: user
       password: 123456
-      uris: http://localhost:9200
+      uris: http://127.0.0.1:9200
 
 mybatis:
   # 指定sql映射文件位置
@@ -118,8 +118,8 @@ config:
 
 eureka:
   client:
-    register-with-eureka: true
-    fetch-registry: true
+    register-with-eureka: false
+    fetch-registry: false
     service-url:
       defaultZone: http://localhost:7001/eureka
 

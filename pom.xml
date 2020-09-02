@@ -80,10 +80,11 @@
             <version>2.2.2.RELEASE</version>
         </dependency>
 
+        <!-- 引入elasticsearch -->
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-high-level-client</artifactId>
-            <version>7.9.0</version>
+            <version>7.6.1</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.elasticsearch</groupId>
@@ -99,14 +100,14 @@
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-client</artifactId>
-            <version>7.9.0</version>
+            <version>7.6.1</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->
         <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
-            <version>7.9.0</version>
+            <version>7.6.1</version>
         </dependency>
 
 
