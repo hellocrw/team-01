@@ -12,6 +12,7 @@
 10. eureka服务注册和发现
 11. OpenFeign
 12. webSocket通信
+13. elasticsearch测试类
     ...
 
 ```

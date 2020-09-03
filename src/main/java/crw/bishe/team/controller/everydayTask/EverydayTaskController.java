@@ -3,6 +3,7 @@ package crw.bishe.team.controller.everydayTask;
 import crw.bishe.team.entity.EverydayTask;
 import crw.bishe.team.service.EverydayTaskService;
 import crw.bishe.team.vo.Result;
+import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 
+@Api(tags = {"每天任务管理器"})
 @RestController
 @RequestMapping("/api/everyday-task")
 public class EverydayTaskController {
