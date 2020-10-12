@@ -27,8 +27,6 @@ public class WebLogAspect {
     @Pointcut("execution(public * crw.bishe.team..*.*(..)) && !execution(public * crw.bishe.team.controller.MyWebSocket.*(..))")
     public void webLog(){}
 
-
-
     @Before("webLog()")
     public void doBefore(JoinPoint joinPoint) {
         // 记录下请求内容
