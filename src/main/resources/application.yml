@@ -77,6 +77,16 @@ spring:
       database: demo
       host: 120.79.191.236
       port: 27017
+#  kafka:
+#    bootstrap-servers: 127.0.0.1:9092
+  # 配置rabbitmq服务器
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    # 虚拟host，可以不设置，使用server 默认host
+    virtual-host: host
 #      username: root
 #      password: 123456
 
