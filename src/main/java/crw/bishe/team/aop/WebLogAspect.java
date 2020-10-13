@@ -27,12 +27,10 @@ public class WebLogAspect {
     @Pointcut("execution(public * crw.bishe.team..*.*(..)) && !execution(public * crw.bishe.team.controller.MyWebSocket.*(..))")
     public void webLog(){}
 
-
-
     @Before("webLog()")
     public void doBefore(JoinPoint joinPoint) {
         // 记录下请求内容
-        log.info("调用方法 : " + joinPoint.getSignature().getDeclaringType().getSimpleName() + "--->目标方法名为:" + joinPoint.getSignature().getName());
+        log.info("调用类名 : " + joinPoint.getSignature().getDeclaringType().getSimpleName() + "--->方法名为 : " + joinPoint.getSignature().getName());
     }
 
     @AfterReturning(returning = "ret",pointcut = "webLog()")

@@ -5,6 +5,7 @@ import crw.bishe.team.config.JwtConfig;
 import crw.bishe.team.dto.ProjectDto;
 import crw.bishe.team.entity.Project;
 import crw.bishe.team.mapper.ProjectMapper;
+import crw.bishe.team.service.TestService;
 import crw.bishe.team.utils.ResponseUtils;
 import crw.bishe.team.vo.Result;
 import io.swagger.annotations.Api;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.Sqls;
 
@@ -34,6 +36,8 @@ import static jdk.nashorn.internal.objects.NativeDebug.map;
 @ResponseBody
 public class TestController {
 
+    private final static String URL = "http://ORDER80";
+
     @Autowired
     private ProjectMapper projectMapper;
 
@@ -42,6 +46,39 @@ public class TestController {
 
     @Autowired
     private ResponseUtils responseUtils;
+
+    @Autowired
+    private TestService testService;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    /**
+     * 服务调用接口
+     * @return
+     */
+    @GetMapping("/a")
+    public String openFeign(){
+        return testService.demo();
+    }
+
+    /**
+     * 服务超时测试
+     * @return
+     */
+    @GetMapping(value = "/feign/timeout")
+    public String paymentFeignTimeout(){
+        return testService.paymentFeignTimeout();
+    }
+
+    /**
+     * RestTempate服务调用测试
+     * @return
+     */
+    @GetMapping("/demo")
+    public String demo(){
+        return restTemplate.getForObject(URL+ "/demo01", String.class);
+    }
 
     @DeleteMapping("/delete/{teamId}")
     public String delectTest(@PathVariable(name = "teamId") String teamId){

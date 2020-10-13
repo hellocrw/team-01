@@ -16,8 +16,9 @@ import java.util.Map;
 public class SpringWebSocketHandlerIntercepter extends HttpSessionHandshakeInterceptor {
 
     @Override
-    public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
-        System.out.println("Before Handsake");
+    public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response,
+                                   WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
+        System.out.println("调用了SpringWebSocketHandlerIntercepter #BeforeHandsake");
         if (request instanceof ServletServerHttpRequest){
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
             HttpSession session = servletRequest.getServletRequest().getSession(false);
@@ -28,12 +29,17 @@ public class SpringWebSocketHandlerIntercepter extends HttpSessionHandshakeInter
                     attributes.put("WEBSOCKET_USERID", userName);
                 }
             }
+            /* 在拦截器中强行修改websocket协议，将部分浏览器不支持的x-webkit-deflate-frame扩展修改成permessage-deflate */
+            if(request.getHeaders().containsKey("Sec-WebSocket-Extensions")){
+                request.getHeaders().set("Sec-WebSocket-Extensions", "permessage-deflate");
+            }
         }
         return super.beforeHandshake(request, response, wsHandler, attributes);
     }
 
     @Override
     public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception ex) {
+        System.out.println("SpringWebSocketHandlerIntercepter #afterHandshake");
         super.afterHandshake(request, response, wsHandler, ex);
     }
 }
