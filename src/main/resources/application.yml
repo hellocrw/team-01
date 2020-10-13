@@ -8,7 +8,7 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
     # &useAffectedRows=true
-    url: jdbc:mysql://localhost:3306/team?characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://120.79.191.236:3306/team?characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai
     type: com.alibaba.druid.pool.DruidDataSource
     #   数据源其他配置
     initialSize: 5
@@ -45,7 +45,7 @@ spring:
   redis:
     #数据库索引
     database: 0
-    host: 127.0.0.1
+    host: 120.79.191.236
     port: 6379
     password:
     jedis:
