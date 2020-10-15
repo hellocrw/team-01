@@ -38,4 +38,12 @@ public class Provider {
     public void routeProdiver(){
         rabbitTemplate.convertAndSend("directs","error","error 的日志信息");
     }
+
+    // Topic订阅模式（动态路由模型）
+    @GetMapping("/topicProvider")
+    public void topicProvider(){
+        rabbitTemplate.convertAndSend("topics", "user.save.findAll", "user.save.findAll 的消息");
+    }
+
+
 }

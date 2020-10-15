@@ -2,7 +2,6 @@ package crw.bishe.team.controller.rabbitmq;
 
 import io.swagger.annotations.Api;
 import org.springframework.amqp.rabbit.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -66,8 +65,33 @@ public class Customer {
                     exchange = @Exchange(type = "direct", name="directs")
             )
     })
+    // Route 路由模型
     public void routeCostomer2(String message){
         System.out.println("routeCostomer2 => " + message);
+    }
+
+    // Topic 主题模式
+    @RabbitListener(bindings = {
+            @QueueBinding(
+                    value = @Queue,
+                    key = {"user.*"},
+                    exchange = @Exchange(type = "topic", name = "topics")
+            )
+    })
+    public void topicCostomer1(String message){
+        System.out.println("topicCostomer1 => " + message);
+    }
+
+    // Topic 主题模式
+    @RabbitListener(bindings = {
+            @QueueBinding(
+                    value = @Queue,
+                    key = {"user.#"},
+                    exchange = @Exchange(type = "topic", name = "topics")
+            )
+    })
+    public void topicCostomer2(String message){
+        System.out.println("topicCostomer2 => " + message);
     }
 
 }
