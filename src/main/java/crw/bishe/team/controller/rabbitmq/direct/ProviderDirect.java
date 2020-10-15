@@ -1,4 +1,4 @@
-package crw.bishe.team.controller.rabbitmq;
+package crw.bishe.team.controller.rabbitmq.direct;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
