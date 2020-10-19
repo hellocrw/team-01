@@ -161,3 +161,7 @@ hystrix:
     polling-interval-ms: 2000
 #    hystrix配置
     enabled: true
+
+zookeeper:
+  address: 120.79.191.236:2181
+  timeout: 4000
