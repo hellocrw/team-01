@@ -164,4 +164,4 @@ hystrix:
 
 zookeeper:
   address: 120.79.191.236:2181
-  timeout: 4000
+  timeout: 10000

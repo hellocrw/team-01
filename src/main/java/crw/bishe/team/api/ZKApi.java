@@ -136,7 +136,7 @@ public class ZKApi {
         logger.info("【执行初始化测试方法getData返回值。。。。。。。。。。。。】={}",value);
 
         // 删除节点出发 监听事件
-        deleteNode(path);
+        // deleteNode(path);
 
     }
 
