@@ -129,14 +129,14 @@ public class ZKApi {
      */
     @PostConstruct
     public  void init(){
-        String path="/zk-watcher-2";
+        String path="/zk-watcher-3";
         logger.info("【执行初始化测试方法。。。。。。。。。。。。】");
         createNode(path,"测试");
         String value=getData(path,new WatcherApi());
         logger.info("【执行初始化测试方法getData返回值。。。。。。。。。。。。】={}",value);
 
         // 删除节点出发 监听事件
-        // deleteNode(path);
+         deleteNode(path);
 
     }
 
