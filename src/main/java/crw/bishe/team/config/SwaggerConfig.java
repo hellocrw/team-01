@@ -38,7 +38,7 @@ public class SwaggerConfig {
     private static final String WORKING_ORGANIZATION = "Working-Organization";
     private static final String USER_TYPE = "User-Type";
 
-    private static final String API_BASE_PACKAGE = "crw.bishe.team.controller";
+    private static final String API_BASE_PACKAGE = "crw.bishe.team";
 
     private final TypeResolver typeResolver;
 

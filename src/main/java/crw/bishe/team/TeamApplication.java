@@ -9,6 +9,7 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.kafka.annotation.EnableKafka;
 import tk.mybatis.spring.annotation.MapperScan;
 
 /**
@@ -25,6 +26,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableCircuitBreaker    // 开启 Hystrix 熔断
 @MapperScan("crw.bishe.team.mapper")
 @EnableEurekaClient
+@EnableKafka
 public class TeamApplication {
 
     public static void main(String[] args) {
