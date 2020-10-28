@@ -261,7 +261,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.0.12</version>
+            <version>1.0.27</version>
         </dependency>
         <!--swagger2-->
         <dependency>

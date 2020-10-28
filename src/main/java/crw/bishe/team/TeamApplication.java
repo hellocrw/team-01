@@ -27,6 +27,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @MapperScan("crw.bishe.team.mapper")
 @EnableEurekaClient
 @EnableKafka
+//@EnableConfigurationProperties(DruidConfig.class)
 public class TeamApplication {
 
     public static void main(String[] args) {

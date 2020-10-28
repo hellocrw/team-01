@@ -3,7 +3,9 @@ package crw.bishe.team.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -61,12 +63,18 @@ public class DruidConfig {
     @Value("${spring.datasource.poolPreparedStatements}")
     private boolean poolPreparedStatements;
 
+    @Value("${spring.datasource.maxPoolPreparedStatementPerConnectionSize}")
+    private int maxPoolPreparedStatementPerConnectionSize;
+
     @Value("${spring.datasource.filters}")
     private String filters;
 
+    @Value("{spring.datasource.connectionProperties}")
+    private String connectionProperties;
 
-    @Bean
-    @Primary
+
+    @Bean   // 声明bean实例
+    @Primary    // 在同样的DataSource中，首先使用被标注的DataSource
     public DataSource dataSource() {
         //@Primary 注解作用是当程序选择dataSource时选择被注解的这个
         DruidDataSource datasource = new DruidDataSource();
@@ -74,6 +82,8 @@ public class DruidConfig {
         datasource.setUsername(username);
         datasource.setPassword(password);
         datasource.setDriverClassName(driverClassName);
+
+        // configuration
         datasource.setInitialSize(initialSize);
         datasource.setMinIdle(minIdle);
         datasource.setMaxActive(maxActive);
@@ -85,34 +95,52 @@ public class DruidConfig {
         datasource.setTestOnBorrow(testOnBorrow);
         datasource.setTestOnReturn(testOnReturn);
         datasource.setPoolPreparedStatements(poolPreparedStatements);
+        datasource.setMaxPoolPreparedStatementPerConnectionSize(maxPoolPreparedStatementPerConnectionSize);
+
         try {
             datasource.setFilters(filters);
         } catch (SQLException e) {
             // TODO Auto-generated catch block
+            System.out.println("druid configuration initialization filter : " + e);
             e.printStackTrace();
         }
+        datasource.setConnectionProperties(connectionProperties);
+        System.out.println("dataSource successful");
         return datasource;
     }
 
     @Bean
     public ServletRegistrationBean druidServlet() {
-        ServletRegistrationBean reg = new ServletRegistrationBean();
-        reg.setServlet(new StatViewServlet());
-        reg.addUrlMappings("/druid/*");
-        reg.addInitParameter("loginUsername", this.username);
-        reg.addInitParameter("loginPassword", this.password);
+        System.out.println("init Druid Servlet Configuration");
+        ServletRegistrationBean reg = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
+//        reg.setServlet(new StatViewServlet());
+        // 初始化参数initParams
+        // 添加白名单
+        reg.addInitParameter("allow", "");
+        // 添加IP黑名单
+        reg.addInitParameter("deny", "192.168.16.111");
+        // reg.addUrlMappings("/druid/*");
+        //登录查看信息的账号密码
+        reg.addInitParameter("loginUsername", "admin");
+        reg.addInitParameter("loginPassword", "admin");
         //是否能够重置数据 禁用HTML页面上的“Reset All”功能
         reg.addInitParameter("resetEnable", "false");
         return reg;
     }
 
+    /**
+     * 过滤不需要监控的后缀
+     * @return
+     */
     @Bean
     public FilterRegistrationBean filterRegistrationBean() {
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-        filterRegistrationBean.setFilter(new WebStatFilter());
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new WebStatFilter());
+//        filterRegistrationBean.setFilter(new WebStatFilter());
+        // 添加过滤规则
         filterRegistrationBean.addUrlPatterns("/*");
+        // 添加不需要忽略的格式信息
         filterRegistrationBean.addInitParameter("exclusions", "*.js,*.html,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
-        filterRegistrationBean.addInitParameter("profileEnable", "true");
+//        filterRegistrationBean.addInitParameter("profileEnable", "true");
         return filterRegistrationBean;
     }
 }

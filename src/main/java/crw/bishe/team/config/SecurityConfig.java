@@ -23,6 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -60,7 +61,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/**").permitAll() //需要登录才能访问URL -> /api/** 资源
                 .anyRequest().authenticated()
                 .and()
-                .csrf().disable()
+                .csrf().requireCsrfProtectionMatcher(new RequestMatcher() {
+            @Override
+            public boolean matches(HttpServletRequest request) {
+                String servletPath  = request.getServletPath();
+                if (servletPath.contains("/druid")){
+                    return false;
+                }
+                return false;
+            }
+        }).and()
 //                 禁用session  (bug: 禁用session后无法登录的问题)
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 //                .and()
