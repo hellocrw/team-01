@@ -12,7 +12,8 @@ import java.util.Optional;
 @Component
 @Slf4j
 public class UserLogConsumer {
-    @KafkaListener(topics = {"user-log"})
+
+    @KafkaListener(topics = {"user-log", "test"})
     public void consumer(ConsumerRecord<?,?> consumerRecord){
         //判断是否为null
         Optional<?> kafkaMessage = Optional.ofNullable(consumerRecord.value());
@@ -23,4 +24,5 @@ public class UserLogConsumer {
             log.info("消费消息:"+message);
         }
     }
+
 }
