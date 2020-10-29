@@ -121,10 +121,10 @@ public class DruidConfig {
         reg.addInitParameter("deny", "192.168.16.111");
         // reg.addUrlMappings("/druid/*");
         //登录查看信息的账号密码
-        reg.addInitParameter("loginUsername", "admin");
-        reg.addInitParameter("loginPassword", "admin");
+        reg.addInitParameter("loginUsername", this.username);
+        reg.addInitParameter("loginPassword", this.password);
         //是否能够重置数据 禁用HTML页面上的“Reset All”功能
-        reg.addInitParameter("resetEnable", "false");
+        reg.addInitParameter("resetEnable", "true");
         return reg;
     }
 
@@ -135,12 +135,12 @@ public class DruidConfig {
     @Bean
     public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new WebStatFilter());
-//        filterRegistrationBean.setFilter(new WebStatFilter());
+        // filterRegistrationBean.setFilter(new WebStatFilter());
         // 添加过滤规则
         filterRegistrationBean.addUrlPatterns("/*");
         // 添加不需要忽略的格式信息
         filterRegistrationBean.addInitParameter("exclusions", "*.js,*.html,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
-//        filterRegistrationBean.addInitParameter("profileEnable", "true");
+        filterRegistrationBean.addInitParameter("profileEnable", "true");
         return filterRegistrationBean;
     }
 }

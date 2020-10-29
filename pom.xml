@@ -257,12 +257,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
-        <!--druid数据源-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.0.27</version>
-        </dependency>
         <!--swagger2-->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -326,10 +320,18 @@
         </dependency>
 
         <!-- 引入druid数据源 -->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.0.12</version>
+            <version>1.1.10</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.10</version>
         </dependency>
 
         <!--kaptcha验证码生成器-->
@@ -339,6 +341,7 @@
             <version>0.0.9</version>
         </dependency>
 
+        <!-- pagehelper 分页查询 -->
         <!-- pagehelper 分页查询 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
