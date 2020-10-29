@@ -86,13 +86,20 @@ spring:
       missing-topics-fatal: false
     # Producer
     producer:
+      # 发生错误后，消息重发的次数
       retries: 0
-      # 每次批量发送消息的数量
+      #  每次批量发送消息的数量
+      #  当有多个消息需要被发送到同一分区时，生产者会把它放到同一批次里。该参数指定了一个批次可以使用的内存大小，按照字节数计算
       batch-size: 16384
+      # 设置生产者内存缓冲区的大小
       buffer-memory: 33554432
       # 指定消息key和消息体的编解码方式
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
+      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
+      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
+      acks: 1
     # consumer
     consumer:
       # 指定默认消费者group id

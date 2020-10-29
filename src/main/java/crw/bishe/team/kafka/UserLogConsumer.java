@@ -20,7 +20,7 @@ public class UserLogConsumer {
         if(kafkaMessage.isPresent()){
             //得到Optional实例中的值
             Object message = kafkaMessage.get();
-            System.err.println("消费消息:"+message);
+            log.info("消费消息:"+message);
         }
     }
 }
