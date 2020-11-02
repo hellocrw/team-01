@@ -1,4 +1,4 @@
-package my.study.demo.thread.future;
+package my.study.demo.future;
 
 /**
  * 公共数据接口
