@@ -13,13 +13,16 @@
 11. OpenFeign
 12. webSocket通信
 13. elasticsearch测试类
+14. zookeeper
+15. kafka 消息队列
+16. rabbitmq 消息队列
     ...
 
 ```
 
 ## BUG
 ```text
- 1. driud无法访问问题
+ 1. driud无法访问问题 已经解决
  2. webSocket通信
     ...
 ```
