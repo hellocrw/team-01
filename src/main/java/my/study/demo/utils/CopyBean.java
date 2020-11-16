@@ -1,6 +1,8 @@
-package my.study.demo.test;
+package my.study.demo.utils;
 
 import com.alibaba.fastjson.JSON;
+import my.study.demo.bean.Student;
+import my.study.demo.vo.StudentVo;
 import org.springframework.beans.BeanUtils;
 
 /**
