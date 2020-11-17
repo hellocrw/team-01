@@ -212,3 +212,24 @@ hystrix:
 zookeeper:
   address: 120.79.191.236:2181
   timeout: 10000
+#########################################################################################################
+########################################## quartz配置项 #############################################
+#########################################################################################################
+org:
+  quartz:
+    scheduler:
+      instanceName: DefaultQuartzScheduler
+    threadPool:
+      class: org.quartz.simpl.SimpleThreadPool
+      threadCount: 20
+      threadPriority: 5
+    jobStore:
+      misfireThreshold: 60000
+      class: org.quartz.impl.jdbcjobstore.JobStoreTX
+      useProperties: false
+      driverDelegateClass: org.quartz.impl.jdbcjobstore.oracle.OracleDelegate
+      tablePrefix: qrtz_
+      dataSource: qzDS
+    triggerListener:
+      NAME:
+        class: com.ly.cloud.datacollection.quartz.Listener.LoopTaskTriggerListener

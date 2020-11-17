@@ -19,6 +19,12 @@
     </properties>
 
     <dependencies>
+        <!-- 定时调度依赖包 -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.3</version>
+        </dependency>
         <!-- springboot启动器 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
