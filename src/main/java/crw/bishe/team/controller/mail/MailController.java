@@ -32,7 +32,7 @@ public class MailController {
 
     //发送邮箱带附件
     @RequestMapping("/sendadvance")
-    @Scheduled(cron = "0 0/1 * * * ? ")
+    // @Scheduled(cron = "0 0/59 * * * ? ")
     public void sendadvance() throws MessagingException {
         MimeMessage mimeMessage=mailSender.createMimeMessage();
         MimeMessageHelper helpers = new MimeMessageHelper(mimeMessage,true);
@@ -42,6 +42,10 @@ public class MailController {
         helpers.setTo("1121754955@qq.com");//发送给他人邮箱
         helpers.setFrom("2388092655@qq.com");//发送者，本人邮箱
         mailSender.send(mimeMessage);
+    }
+
+    public void stopScheduling(){
+
     }
 
 }
