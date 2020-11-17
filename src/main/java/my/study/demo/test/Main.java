@@ -1,7 +1,9 @@
 package my.study.demo.test;
 
 import com.alibaba.fastjson.JSON;
+import my.study.demo.bean.Student;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +18,11 @@ import java.util.Map;
 */
 public class Main {
     public static void main(String[] args){
+
+        String str = "" + "," + "" + "," + "1";
+        String[] split = str.split(",");
+        System.out.println(JSON.toJSONString(split));
+
         Student student1=new Student("1","tom",20);
         Student student2=new Student("1","tom",20);
         List<Student> list1 = new ArrayList<>();
@@ -23,13 +30,15 @@ public class Main {
         list1.add(student2);
 
         List<Student> list2 = new ArrayList<>();
-        for (Student s : list1) {
+        /*for (Student s : list1) {
             try {
                 list2.add((Student)s.clone());
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
+
+        list2 = listCopy(list1);
 
         System.out.println("list2:"+ JSON.toJSONString(list2));
         student1.setAge(1);
@@ -43,51 +52,28 @@ public class Main {
         System.out.println(map.containsKey(student2));
         System.out.println(student1.hashCode()+"：："+student2);
         System.out.println(map.get(student1)+"::"+map.get(student2));
-    }
-}
-class Student implements Cloneable {
-    private String type;
-    private String name;
-    private  int age;
-    Student(String type,String name,int age){
-        this.age=age;
-        this.type=type;
-        this.name=name;
+
+
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        Student student = null;
+    /**
+     * 深度复制的方法
+     */
+    public static <T> List<T> listCopy(List<T> src) {
+        List<T> dest = null;
         try {
-            student = (Student) super.clone();
-        } catch (CloneNotSupportedException e) {
+            ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+            ObjectOutputStream out = new ObjectOutputStream(byteOut);
+            out.writeObject(src);
+
+            ByteArrayInputStream byteIn = new ByteArrayInputStream(byteOut.toByteArray());
+            ObjectInputStream in = new ObjectInputStream(byteIn);
+            dest = (List<T>) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return student;
 
+        return dest;
     }
 }
+
