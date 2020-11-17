@@ -63,7 +63,14 @@ spring:
   mail:
     host: smtp.qq.com
     username: 2388092655@qq.com
-    password:
+    password: wklodihscouaeahj
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable:
+              true
+
 
 mybatis:
   # 指定sql映射文件位置
