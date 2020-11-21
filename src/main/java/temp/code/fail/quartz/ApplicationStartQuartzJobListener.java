@@ -1,4 +1,4 @@
-package crw.bishe.team.quartz;
+package temp.code.fail.quartz;
 
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Scheduler;
@@ -15,9 +15,6 @@ import java.util.Properties;
 @Configuration
 @Slf4j
 public class ApplicationStartQuartzJobListener implements ApplicationListener<ContextRefreshedEvent> {
-
-    @Autowired
-    private QuartzUtils quartzUtils;
 
     @Autowired
     private QuartzObject quartzObject;

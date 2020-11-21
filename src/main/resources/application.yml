@@ -10,10 +10,10 @@ spring:
         enabled: false
     #   数据源基本配置
     username: root
-    password: 123456
+    password: hellocrw.1103
     driver-class-name: com.mysql.cj.jdbc.Driver
     # &useAffectedRows=true
-    url: jdbc:mysql://120.79.191.236:3306/team?characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://8.129.110.202:3306/team?characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai
     type: com.alibaba.druid.pool.DruidDataSource
     #   数据源其他配置
     initialSize: 5
@@ -50,7 +50,7 @@ spring:
   redis:
     #数据库索引
     database: 0
-    host: 120.79.191.236
+    host: 8.129.110.202
     port: 6379
     password:
     jedis:
@@ -82,14 +82,16 @@ spring:
   data:
     mongodb:
       database: demo
-      host: 120.79.191.236
+      host: 8.129.110.202
       port: 27017
-# ===========================kafka=============================
+      username: admin
+      password: 123456
+  # ===========================kafka=============================
   kafka:
     # 是否开启消息发送，如果不需要和门户对接，该参数设置为false
     enable: true
     # 消息地址
-    bootstrap-servers: 120.79.191.236:9092
+    bootstrap-servers: 8.129.110.202:9092
     listener:
       missing-topics-fatal: false
     # Producer
@@ -128,7 +130,7 @@ spring:
 # 配置rabbitmq服务器
 # ========================rabbitmq=============================
   rabbitmq:
-    host: 120.79.191.236
+    host: 8.129.110.202
     port: 5672
     username: ems
     password: 123
@@ -182,10 +184,10 @@ config:
 
 eureka:
   client:
-    register-with-eureka: true
-    fetch-registry: true
+    register-with-eureka: false
+    fetch-registry: false
     service-url:
-      defaultZone: http://120.79.191.236:7001/eureka
+      defaultZone: http://8.129.110.202:7001/eureka
 
 # 此处的Logger要使用feign中的
 logging:
@@ -210,7 +212,7 @@ hystrix:
     enabled: true
 
 zookeeper:
-  address: 120.79.191.236:2181
+  address: 8.129.110.202:2181
   timeout: 10000
 #########################################################################################################
 ########################################## quartz配置项 #############################################
@@ -232,4 +234,4 @@ org:
       dataSource: qzDS
     triggerListener:
       NAME:
-        class: com.ly.cloud.datacollection.quartz.Listener.LoopTaskTriggerListener
+        class: temp.code.fail.quartz.ApplicationStartQuartzJobListener

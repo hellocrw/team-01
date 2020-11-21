@@ -1,4 +1,4 @@
-package crw.bishe.team.quartz;
+package temp.code.fail.quartz;
 
 import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
-package crw.bishe.team.quartz.custom;
+package temp.code.fail.quartz.custom;
 
-import crw.bishe.team.quartz.QuartzUtils;
+import temp.code.fail.quartz.QuartzUtils;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.SchedulerException;
