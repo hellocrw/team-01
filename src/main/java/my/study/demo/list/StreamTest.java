@@ -16,11 +16,25 @@ public class StreamTest {
     public static void main(String[] args) {
         Student s1 = new Student("aa","1", 10);
         Student s2 = new Student("bb","2", 20);
+        Student s3 = new Student("bc","2", 20);
         List<Student> studentList = Arrays.asList(s1, s2);
+        List<Student> studentList1 = Arrays.asList(s3);
 
+        List<Student> students = new ArrayList<>();
+        students.addAll(studentList);
+        students.addAll(studentList1);
+        System.out.println(JSON.toJSONString(students));
+
+        System.out.println("============================字符串拼接=========================");
+
+        String collect2 = studentList.stream().map(student -> student.getType()
+        ).collect(Collectors.joining(","));
+        System.out.println(collect2);
+        System.out.println("============================studentList=========================");
         studentList.stream()
                 .peek(o -> o.setAge(100))
                 .forEach(System.out::println);
+        System.out.println("============================studentList=========================");
         System.out.println(JSON.toJSONString(studentList));
 
         List<Student> aa = studentList.stream().map(item -> {
