@@ -2,6 +2,7 @@ package my.study.demo.hadoop;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -10,6 +11,8 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
+
+import java.net.URI;
 
 public class JobMain extends Configured implements Tool {
     // 该方法用于指定一个job任务
@@ -22,8 +25,8 @@ public class JobMain extends Configured implements Tool {
         // 配置Job任务对象（八个步骤）
         // 1. 指定文件读取方式和读取路径
         job.setInputFormatClass(TextInputFormat.class);
-//        TextInputFormat.addInputPath(job, new Path("hdfs://192.168.92.135:9000/crw"));
-        TextInputFormat.addInputPath(job, new Path("file:///D:\\input"));
+//        TextInputFormat.addInputPath(job, new Path("hdfs://192.168.92.135:9000/crw/a.txt"));
+        TextInputFormat.addInputPath(job, new Path("file:///D:\\input\\*.txt"));
         // 2. 指定Map阶段的处理方式，自定义map逻辑
         job.setMapperClass(WordCountMapper.class);
         // 设置Map阶段的K2类型
@@ -40,11 +43,18 @@ public class JobMain extends Configured implements Tool {
         // 8. 设置输出方式
         job.setOutputFormatClass(TextOutputFormat.class);
         // 设置输出路径
-//        TextOutputFormat.setOutputPath(job, new Path("hdfs://192.168.92.135:9000/output"));
-        TextOutputFormat.setOutputPath(job, new Path("file:///D:\\output"));
+        Path path = new Path("file:///D:\\output");
+        FileSystem fileSystem = FileSystem.get(new URI("file:///"), new Configuration());
+        boolean exists = fileSystem.exists(path);
+        if (exists){
+            fileSystem.delete(path, true);
+        }
+        // TextOutputFormat.setOutputPath(job, new Path("hdfs://192.168.92.135:9000/output1"));
+        TextOutputFormat.setOutputPath(job, path);
 
         // 等待任务结束
         boolean wait = job.waitForCompletion(true);
+        System.out.println(wait);
         return wait ? 0 : 1;
     }
 
