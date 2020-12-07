@@ -1,4 +1,4 @@
-package my.study.demo.hadoop.partition;
+package bigdata.demo.hadoop.partition;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;

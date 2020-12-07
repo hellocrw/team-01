@@ -1,4 +1,4 @@
-package my.study.demo.hadoop;
+package bigdata.demo.hadoop.HdfsOparetion;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.hadoop.conf.Configuration;
@@ -14,6 +14,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+/**
+ * 获取文件系统
+ */
 public class GetFileSystem {
 
     /**

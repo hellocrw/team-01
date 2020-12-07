@@ -1,4 +1,4 @@
-package my.study.demo.hadoop.partition;
+package bigdata.demo.hadoop.partition;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -23,7 +23,7 @@ public class JobMain extends Configured implements Tool {
         // 1. 设置输入类和输入路径
         job.setInputFormatClass(TextInputFormat.class);
 //        TextInputFormat.addInputPath(job, new Path("hdfs://192.168.92.135:9000/crw/a.txt"));
-        TextInputFormat.addInputPath(job, new Path("file:///D:\\input\\a2.txt"));
+        TextInputFormat.addInputPath(job, new Path("D:\\hadoop\\input\\a.txt"));
         // 2. 设置Mapper类和数据类型
         job.setMapperClass(PartitionMapper.class);
         job.setMapOutputKeyClass(Text.class);
@@ -42,7 +42,7 @@ public class JobMain extends Configured implements Tool {
         // 8. 指定输出类和输出路径
         job.setOutputFormatClass(TextOutputFormat.class);
 // 设置输出路径
-        Path path = new Path("file:///D:\\output");
+        Path path = new Path("D:\\hadoop\\output");
         FileSystem fileSystem = FileSystem.get(new URI("file:///"), new Configuration());
         boolean exists = fileSystem.exists(path);
         if (exists){

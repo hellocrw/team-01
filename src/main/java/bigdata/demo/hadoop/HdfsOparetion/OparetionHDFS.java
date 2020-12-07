@@ -1,4 +1,4 @@
-package my.study.demo.hadoop;
+package bigdata.demo.hadoop.HdfsOparetion;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.hadoop.conf.Configuration;
@@ -13,7 +13,7 @@ import java.net.URISyntaxException;
 public class OparetionHDFS {
 
     /**
-     * hdfs文件的遍历
+     * hdfs文件的遍历， 文件的上传和下载
      * @throws URISyntaxException
      * @throws IOException
      */

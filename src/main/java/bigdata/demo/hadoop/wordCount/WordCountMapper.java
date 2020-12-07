@@ -1,4 +1,4 @@
-package my.study.demo.hadoop;
+package bigdata.demo.hadoop.wordCount;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -7,11 +7,11 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 
 /**
- * KEYIN: k1的类型
- * VALUEIN: v1的类型
+ * KEYIN: k1的类型 输入数据的key
+ * VALUEIN: v1的类型 输入数据的value
  *
- * KEYOUT： K2的类型
- * VALUEOUT： K2的类型
+ * KEYOUT： K2的类型 输出数据的类型key
+ * VALUEOUT： K2的类型 输入数据的类型value
  */
 public class WordCountMapper extends Mapper<LongWritable, Text, Text, LongWritable> {
     // map方法，将K1和V1 转为K2 和 V2
@@ -29,7 +29,7 @@ public class WordCountMapper extends Mapper<LongWritable, Text, Text, LongWritab
         Text text = new Text();
         LongWritable longWritable = new LongWritable();
         // 将一行的文本数据进行拆分
-        String[] split = value.toString().split(",");
+        String[] split = value.toString().split(" ");
         // 遍历数据，组装K2 V2
         for (String word: split) {
             text.set(word);
