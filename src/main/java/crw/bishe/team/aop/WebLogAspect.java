@@ -34,9 +34,9 @@ public class WebLogAspect {
     }
 
     @AfterReturning(returning = "ret",pointcut = "webLog()")
-    public void doAfterReturning(Object ret) {
+    public void doAfterReturning(JoinPoint joinPoint, Object ret) {
         // 处理完请求，返回内容
-        log.info("返回值 : " + ret);
+        log.info(joinPoint.getSignature().getDeclaringType().getSimpleName() +"类"+joinPoint.getSignature().getName()+"方法的"+"返回值 : " + ret);
     }
 
 }
