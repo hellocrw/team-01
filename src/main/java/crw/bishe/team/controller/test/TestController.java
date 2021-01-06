@@ -77,7 +77,7 @@ public class TestController {
      */
     @GetMapping("/demo")
     public String demo(){
-        return restTemplate.getForObject(URL+ "/demo01", String.class);
+        return restTemplate.getForObject(URL+ "/optional", String.class);
     }
 
     @DeleteMapping("/delete/{teamId}")

@@ -17,8 +17,13 @@ public class StreamTest {
         Student s1 = new Student("aa","1", 10);
         Student s2 = new Student("bb","2", 20);
         Student s3 = new Student("bc","2", 20);
+
         List<Student> studentList = Arrays.asList(s1, s2);
         List<Student> studentList1 = Arrays.asList(s3);
+
+        System.out.println("============================判断是否存在=========================");
+        boolean present = studentList.stream().filter(item -> "bb".equals(item.getType())).findAny().isPresent();
+        System.out.println(present);
 
         List<Student> students = new ArrayList<>();
         students.addAll(studentList);
