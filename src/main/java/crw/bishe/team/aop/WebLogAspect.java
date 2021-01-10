@@ -19,12 +19,8 @@ import org.springframework.context.annotation.Configuration;
 @Log4j2
 public class WebLogAspect {
 
-    // 排除掉WebSocket ,否则无法使用@ServerEndpoint
-//    @Pointcut("!execution(public * crw.bishe.team.controller.MyWebSocket.*(..))")
-//    public void webLog2(){}
-
     //切入点
-    @Pointcut("execution(public * crw.bishe.team..*.*(..)) && !execution(public * crw.bishe.team.controller.MyWebSocket.*(..))")
+    @Pointcut("execution(public * crw.bishe.team..*.*(..))")
     public void webLog(){}
 
     @Before("webLog()")

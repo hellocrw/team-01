@@ -1,6 +1,5 @@
 //package crw.bishe.team.listener;
 //
-//import crw.bishe.team.mapper.ProjectMapper;
 //import org.springframework.beans.factory.annotation.Autowired;
 //
 //import javax.servlet.ServletContext;
@@ -17,8 +16,6 @@
 //@WebListener
 //public class VisitorContextListener implements ServletContextListener {
 //
-//    @Autowired
-//    private ProjectMapper projectMapper;
 //
 //    /**
 //     * 项目初始化时调用该方法，获取数据库中的seeNum，用ServletContext保存起来

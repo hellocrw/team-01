@@ -46,7 +46,7 @@ public class JwtConfig {
         // 设置过期时间
         Date expireDate = new Date(nowDate.getTime() + expire * 1000);
         return Jwts.builder()
-                .setHeaderParam("typ","JWT")  // 设置头部信息
+                .setHeaderParam("type","JWT")  // 设置头部信息e
                 .setSubject(identityId)
                 .setIssuedAt(nowDate)
                 .setExpiration(expireDate)

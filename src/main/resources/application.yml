@@ -72,72 +72,6 @@ spring:
     exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
   main:
     allow-bean-definition-overriding: true
-# ========================elasticsearch=========================
-  elasticsearch:
-    rest:
-      username: user
-      password: 123456
-      uris: http://127.0.0.1:9200
-  # ========================mongodb============================
-  data:
-    mongodb:
-      database: demo
-      host: 8.129.110.202
-      port: 27017
-      username: admin
-      password: 123456
-  # ===========================kafka=============================
-  kafka:
-    # 是否开启消息发送，如果不需要和门户对接，该参数设置为false
-    enable: true
-    # 消息地址
-    bootstrap-servers: 8.129.110.202:9092
-    listener:
-      missing-topics-fatal: false
-    # Producer
-    producer:
-      # 自定义topic
-      topic: test
-      # 发生错误后，消息重发的次数
-      retries: 1
-      # 批量发送，延迟为1毫秒，启用该功能能有效减少生产者发送消息次数，从而提高并发量
-      linger-ms: 1
-      # 每次批量发送消息的数量
-      # 当有多个消息需要被发送到同一分区时，生产者会把它放到同一批次里。该参数指定了一个批次可以使用的内存大小，按照字节数计算
-      batch-size: 16384
-      # 请求的最大字节数
-      max-request-size: 5242880
-      # 设置生产者内存缓冲区的大小
-      buffer-memory: 33554432
-      # 指定消息key和消息体的编解码方式
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
-      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
-      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
-      acks: 1
-    # consumer
-    consumer:
-      # 指定默认消费者group id
-      group-id: user-log-group
-      auto-offset-reset: earliest
-      enable-auto-commit: true
-      auto-commit-interval: 100
-      # 指定消息key和消息体的编解码方式
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-
-# 配置rabbitmq服务器
-# ========================rabbitmq=============================
-  rabbitmq:
-    host: 8.129.110.202
-    port: 5672
-    username: ems
-    password: 123
-    # 虚拟host，可以不设置，使用server 默认host
-    virtual-host: /ems
-#      username: root
-#      password: 123456
 
 mybatis:
   # 指定sql映射文件位置
@@ -167,7 +101,7 @@ file:
     url: D:/upload/
 
 server:
-  port: 8888
+  port: 1103
   servlet:
     session:
       timeout: 60m
@@ -182,12 +116,6 @@ config:
     headerKey: token
     token: Authorization
 
-eureka:
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
-      defaultZone: http://8.129.110.202:7001/eureka
 
 # 此处的Logger要使用feign中的
 logging:
@@ -200,38 +128,3 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
-feign:
-  hystrix:
-    enabled: true
-
-hystrix:
-  metrics:
-#    默认的超时时间设置
-    polling-interval-ms: 2000
-#    hystrix配置
-    enabled: true
-
-zookeeper:
-  address: 8.129.110.202:2181
-  timeout: 10000
-#########################################################################################################
-########################################## quartz配置项 #############################################
-#########################################################################################################
-org:
-  quartz:
-    scheduler:
-      instanceName: DefaultQuartzScheduler
-    threadPool:
-      class: org.quartz.simpl.SimpleThreadPool
-      threadCount: 20
-      threadPriority: 5
-    jobStore:
-      misfireThreshold: 60000
-      class: org.quartz.impl.jdbcjobstore.JobStoreTX
-      useProperties: false
-      driverDelegateClass: org.quartz.impl.jdbcjobstore.oracle.OracleDelegate
-      tablePrefix: qrtz_
-      dataSource: qzDS
-    triggerListener:
-      NAME:
-        class: temp.code.fail.quartz.ApplicationStartQuartzJobListener
