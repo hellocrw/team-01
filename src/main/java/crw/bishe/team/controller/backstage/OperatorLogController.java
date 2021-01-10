@@ -1,10 +1,10 @@
-package crw.bishe.team.controller.auth;
+package crw.bishe.team.controller.backstage;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.web.bind.annotation.*;
-import crw.bishe.team.service.auth.IRoleGroupService;
-import crw.bishe.team.entity.auth.RoleGroup;
+import crw.bishe.team.service.auth.IOperatorLogService;
+import crw.bishe.team.entity.auth.OperatorLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -22,46 +22,46 @@ import org.springframework.web.bind.annotation.RestController;
  * @author caorongwu
  * @since 2021-01-10
  */
-@Api(tags = {"角色组控制器"})
+@Api(tags = {"操作日志控制器"})
 @RestController
-@RequestMapping("/role-group")
-public class RoleGroupController {
+@RequestMapping("/operator-log")
+public class OperatorLogController {
 
     private Logger log = LoggerFactory.getLogger(getClass());
 
     @Resource
-    private IRoleGroupService roleGroupService;
+    private IOperatorLogService operatorLogService;
 
 
     @ApiOperation(value = "新增 ")
     @PostMapping()
-    public int add(@RequestBody RoleGroup roleGroup){
-        return roleGroupService.add(roleGroup);
+    public int add(@RequestBody OperatorLog operatorLog){
+        return operatorLogService.add(operatorLog);
     }
 
     @ApiOperation(value = "删除 ")
     @DeleteMapping("{id}")
     public int delete(@PathVariable("id") Long id){
-        return roleGroupService.delete(id);
+        return operatorLogService.delete(id);
     }
 
     @ApiOperation(value = "更新 ")
     @PutMapping()
-    public int update(@RequestBody RoleGroup roleGroup){
-        return roleGroupService.updateData(roleGroup);
+    public int update(@RequestBody OperatorLog operatorLog){
+        return operatorLogService.updateData(operatorLog);
     }
 
     @ApiOperation(value = "查询 分页数据")
     @GetMapping()
-    public IPage<RoleGroup> findListByPage(@RequestParam Integer page,
+    public IPage<OperatorLog> findListByPage(@RequestParam Integer page,
                                    @RequestParam Integer pageCount){
-        return roleGroupService.findListByPage(page, pageCount);
+        return operatorLogService.findListByPage(page, pageCount);
     }
 
     @ApiOperation(value = "id查询 ")
     @GetMapping("{id}")
-    public RoleGroup findById(@PathVariable Long id){
-        return roleGroupService.findById(id);
+    public OperatorLog findById(@PathVariable Long id){
+        return operatorLogService.findById(id);
     }
 
 }

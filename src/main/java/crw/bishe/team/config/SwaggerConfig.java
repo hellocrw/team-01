@@ -27,7 +27,7 @@ import java.util.stream.Stream;
 public class SwaggerConfig {
 
     private static final String COMMON_ERROR_CLASS = "CommonErrorDTO";
-    private static final String API_TITLe = "大学生组队系统后端API";
+    private static final String API_TITLe = "权限管理系统后端API";
     private static final String API_DESCRIPTION = "系统后台REST接口定义";
     private static final String API_LICENSE = "有crw开发编写";
     private static final String API_LICENSE_URL = "https://github.com/hellocrw/teamup-01";

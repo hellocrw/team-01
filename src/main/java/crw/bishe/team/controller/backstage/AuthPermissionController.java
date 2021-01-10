@@ -1,4 +1,4 @@
-package crw.bishe.team.controller.auth;
+package crw.bishe.team.controller.backstage;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import crw.bishe.team.entity.auth.AuthPermission;

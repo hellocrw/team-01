@@ -1,10 +1,10 @@
-package crw.bishe.team.controller.auth;
+package crw.bishe.team.controller.backstage;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.web.bind.annotation.*;
-import crw.bishe.team.service.auth.IUserGroupService;
-import crw.bishe.team.entity.auth.UserGroup;
+import crw.bishe.team.service.auth.IUserRoleService;
+import crw.bishe.team.entity.auth.UserRole;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -22,46 +22,46 @@ import org.springframework.web.bind.annotation.RestController;
  * @author caorongwu
  * @since 2021-01-10
  */
-@Api(tags = {"用户组控制器"})
+@Api(tags = {"用户角色控制器"})
 @RestController
-@RequestMapping("/user-group")
-public class UserGroupController {
+@RequestMapping("/user-role")
+public class UserRoleController {
 
     private Logger log = LoggerFactory.getLogger(getClass());
 
     @Resource
-    private IUserGroupService userGroupService;
+    private IUserRoleService userRoleService;
 
 
     @ApiOperation(value = "新增 ")
     @PostMapping()
-    public int add(@RequestBody UserGroup userGroup){
-        return userGroupService.add(userGroup);
+    public int add(@RequestBody UserRole userRole){
+        return userRoleService.add(userRole);
     }
 
     @ApiOperation(value = "删除 ")
     @DeleteMapping("{id}")
     public int delete(@PathVariable("id") Long id){
-        return userGroupService.delete(id);
+        return userRoleService.delete(id);
     }
 
     @ApiOperation(value = "更新 ")
     @PutMapping()
-    public int update(@RequestBody UserGroup userGroup){
-        return userGroupService.updateData(userGroup);
+    public int update(@RequestBody UserRole userRole){
+        return userRoleService.updateData(userRole);
     }
 
     @ApiOperation(value = "查询 分页数据")
     @GetMapping()
-    public IPage<UserGroup> findListByPage(@RequestParam Integer page,
+    public IPage<UserRole> findListByPage(@RequestParam Integer page,
                                    @RequestParam Integer pageCount){
-        return userGroupService.findListByPage(page, pageCount);
+        return userRoleService.findListByPage(page, pageCount);
     }
 
     @ApiOperation(value = "id查询 ")
     @GetMapping("{id}")
-    public UserGroup findById(@PathVariable Long id){
-        return userGroupService.findById(id);
+    public UserRole findById(@PathVariable Long id){
+        return userRoleService.findById(id);
     }
 
 }

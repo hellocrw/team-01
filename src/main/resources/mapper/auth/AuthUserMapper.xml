@@ -20,4 +20,8 @@
             REVISION, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, USER_ID, USER_NAME, PASSWORD, USER_GROUP_ID
         </sql>
 
+    <select id="getByNum" resultType="crw.bishe.team.entity.auth.AuthUser">
+      select * from AUTH_USER where USER_ID = #{id}
+    </select>
+
 </mapper>

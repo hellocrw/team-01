@@ -1,5 +1,6 @@
 package crw.bishe.team.service.auth;
 
+import crw.bishe.team.dto.UserRegisterDto;
 import crw.bishe.team.entity.auth.AuthUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -24,9 +25,9 @@ public interface IAuthUserService extends IService<AuthUser> {
     IPage<AuthUser> findListByPage(Integer page, Integer pageCount);
 
     /**
-     * 添加 
+     * 添加
      *
-     * @param authUser  
+     * @param authUser
      * @return int
      */
     int add(AuthUser authUser);
@@ -56,4 +57,6 @@ public interface IAuthUserService extends IService<AuthUser> {
     AuthUser findById(Long id);
 
     AuthUser selectByUsername(String username);
+
+    String register(UserRegisterDto userRegisterDto);
 }

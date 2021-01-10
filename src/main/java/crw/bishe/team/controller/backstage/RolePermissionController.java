@@ -1,10 +1,10 @@
-package crw.bishe.team.controller.auth;
+package crw.bishe.team.controller.backstage;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.web.bind.annotation.*;
-import crw.bishe.team.service.auth.IOperatorLogService;
-import crw.bishe.team.entity.auth.OperatorLog;
+import crw.bishe.team.service.auth.IRolePermissionService;
+import crw.bishe.team.entity.auth.RolePermission;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -22,46 +22,46 @@ import org.springframework.web.bind.annotation.RestController;
  * @author caorongwu
  * @since 2021-01-10
  */
-@Api(tags = {"操作日志控制器"})
+@Api(tags = {"角色权限控制器"})
 @RestController
-@RequestMapping("/operator-log")
-public class OperatorLogController {
+@RequestMapping("/role-permission")
+public class RolePermissionController {
 
     private Logger log = LoggerFactory.getLogger(getClass());
 
     @Resource
-    private IOperatorLogService operatorLogService;
+    private IRolePermissionService rolePermissionService;
 
 
     @ApiOperation(value = "新增 ")
     @PostMapping()
-    public int add(@RequestBody OperatorLog operatorLog){
-        return operatorLogService.add(operatorLog);
+    public int add(@RequestBody RolePermission rolePermission){
+        return rolePermissionService.add(rolePermission);
     }
 
     @ApiOperation(value = "删除 ")
     @DeleteMapping("{id}")
     public int delete(@PathVariable("id") Long id){
-        return operatorLogService.delete(id);
+        return rolePermissionService.delete(id);
     }
 
     @ApiOperation(value = "更新 ")
     @PutMapping()
-    public int update(@RequestBody OperatorLog operatorLog){
-        return operatorLogService.updateData(operatorLog);
+    public int update(@RequestBody RolePermission rolePermission){
+        return rolePermissionService.updateData(rolePermission);
     }
 
     @ApiOperation(value = "查询 分页数据")
     @GetMapping()
-    public IPage<OperatorLog> findListByPage(@RequestParam Integer page,
+    public IPage<RolePermission> findListByPage(@RequestParam Integer page,
                                    @RequestParam Integer pageCount){
-        return operatorLogService.findListByPage(page, pageCount);
+        return rolePermissionService.findListByPage(page, pageCount);
     }
 
     @ApiOperation(value = "id查询 ")
     @GetMapping("{id}")
-    public OperatorLog findById(@PathVariable Long id){
-        return operatorLogService.findById(id);
+    public RolePermission findById(@PathVariable Long id){
+        return rolePermissionService.findById(id);
     }
 
 }

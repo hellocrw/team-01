@@ -1,10 +1,10 @@
-package crw.bishe.team.controller.auth;
+package crw.bishe.team.controller.backstage;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.web.bind.annotation.*;
-import crw.bishe.team.service.auth.IPermissionGroupService;
-import crw.bishe.team.entity.auth.PermissionGroup;
+import crw.bishe.team.service.auth.IRoleGroupService;
+import crw.bishe.team.entity.auth.RoleGroup;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -22,46 +22,46 @@ import org.springframework.web.bind.annotation.RestController;
  * @author caorongwu
  * @since 2021-01-10
  */
-@Api(tags = {"权限组控制器"})
+@Api(tags = {"角色组控制器"})
 @RestController
-@RequestMapping("/permission-group")
-public class PermissionGroupController {
+@RequestMapping("/role-group")
+public class RoleGroupController {
 
     private Logger log = LoggerFactory.getLogger(getClass());
 
     @Resource
-    private IPermissionGroupService permissionGroupService;
+    private IRoleGroupService roleGroupService;
 
 
     @ApiOperation(value = "新增 ")
     @PostMapping()
-    public int add(@RequestBody PermissionGroup permissionGroup){
-        return permissionGroupService.add(permissionGroup);
+    public int add(@RequestBody RoleGroup roleGroup){
+        return roleGroupService.add(roleGroup);
     }
 
     @ApiOperation(value = "删除 ")
     @DeleteMapping("{id}")
     public int delete(@PathVariable("id") Long id){
-        return permissionGroupService.delete(id);
+        return roleGroupService.delete(id);
     }
 
     @ApiOperation(value = "更新 ")
     @PutMapping()
-    public int update(@RequestBody PermissionGroup permissionGroup){
-        return permissionGroupService.updateData(permissionGroup);
+    public int update(@RequestBody RoleGroup roleGroup){
+        return roleGroupService.updateData(roleGroup);
     }
 
     @ApiOperation(value = "查询 分页数据")
     @GetMapping()
-    public IPage<PermissionGroup> findListByPage(@RequestParam Integer page,
+    public IPage<RoleGroup> findListByPage(@RequestParam Integer page,
                                    @RequestParam Integer pageCount){
-        return permissionGroupService.findListByPage(page, pageCount);
+        return roleGroupService.findListByPage(page, pageCount);
     }
 
     @ApiOperation(value = "id查询 ")
     @GetMapping("{id}")
-    public PermissionGroup findById(@PathVariable Long id){
-        return permissionGroupService.findById(id);
+    public RoleGroup findById(@PathVariable Long id){
+        return roleGroupService.findById(id);
     }
 
 }
