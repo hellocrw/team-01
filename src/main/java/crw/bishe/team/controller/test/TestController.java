@@ -1,20 +1,17 @@
 package crw.bishe.team.controller.test;
 
-import crw.bishe.team.utils.LoginUserUtil;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = {"管理员测试控制器"})
-@RequestMapping("/api/admin")
+@Api(tags = {"测试控制器"})
+@RequestMapping("/test")
 @RestController
-public class AdminController {
+public class TestController {
 
-    @GetMapping("/login")
+    @GetMapping("/demo01")
     public String Login(){
-        String userId = LoginUserUtil.getUserId();
-        System.out.println("当前登陆人：" + userId);
-        return "管理员";
+        return "测试";
     }
 }

@@ -1,13 +1,10 @@
 package crw.bishe.team.security;
 
 import crw.bishe.team.entity.UserRoles;
-import crw.bishe.team.mapper.UserRolesMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 

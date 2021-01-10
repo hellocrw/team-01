@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
-@Api(tags = {"权限测试类"})
+@Api(tags = {"权限测试控制器"})
 @RequestMapping("/api/auth-test")
 @RestController
 public class AuthTestController {

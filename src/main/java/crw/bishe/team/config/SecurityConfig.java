@@ -2,8 +2,7 @@ package crw.bishe.team.config;
 
 import crw.bishe.team.entity.UserRoles;
 import crw.bishe.team.security.JwtUserDto;
-import crw.bishe.team.service.TokenService;
-import crw.bishe.team.service.UserRolesService;
+import crw.bishe.team.service.auth.TokenService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -14,10 +13,8 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -45,9 +42,6 @@ import java.io.IOException;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserRolesService userRolesService;
-
-    @Autowired
     private TokenService tokenService;
 
     @Override
@@ -56,8 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.csrf().ignoringAntMatchers("/druid/*");
         http.authorizeRequests()
                 // 设置权限访问时，先设置具体指定的路径，在设置范围的
-                .antMatchers("/api/token/getToken","/static/**","/druid/**","/swagger-ui.html#/").permitAll()// 都可以访问的资源
-//                .antMatchers("/api/team/**").hasAnyAuthority("ADMIN")  // 需要ADMIN权限才能访问
+                .antMatchers("/api/token/getToken","/static/**","/druid/**", "/test/**").permitAll()// 都可以访问的资源
+                .antMatchers("/api/admin/**").hasAnyAuthority("ADMIN","SUPERADMIN")  // 需要ADMIN权限才能访问
                 .antMatchers("/api/**").authenticated()  //需要登录才能访问URL -> /api/** 资源
                 .anyRequest().authenticated()
                 .and()
