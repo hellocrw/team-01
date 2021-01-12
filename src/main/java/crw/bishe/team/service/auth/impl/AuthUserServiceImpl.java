@@ -1,17 +1,26 @@
 package crw.bishe.team.service.auth.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import crw.bishe.team.dto.AlterPasswordDto;
 import crw.bishe.team.dto.UserRegisterDto;
 import crw.bishe.team.entity.auth.AuthUser;
 import crw.bishe.team.mapper.auth.AuthUserMapper;
 import crw.bishe.team.service.auth.IAuthUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
@@ -62,6 +71,7 @@ public class AuthUserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser> i
     }
 
     @Override
+    @Transactional
     public String register(UserRegisterDto userRegisterDto) {
         // 判断用户名是否存在
         AuthUser authUser = baseMapper.selectOne(new QueryWrapper<AuthUser>().eq("USER_NAME", userRegisterDto.getUsername()));
@@ -80,6 +90,28 @@ public class AuthUserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser> i
         else {
             return "注册失败";
         }
+    }
+
+    @Override
+    @Transactional
+    public String alterPassword(AlterPasswordDto alterPasswordDto, HttpServletRequest request) {
+        if (alterPasswordDto.getNewPassword().equals(alterPasswordDto.getConfirmPassword())){
+            return "密码不一致";
+        }
+        HttpSession session = request.getSession();
+        // 获取session域的用户名
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        UserDetails user = (UserDetails) authentication.getPrincipal();
+        AuthUser authUser = baseMapper.selectOne(new QueryWrapper<AuthUser>().eq("USER_NAME", user.getUsername()));
+        BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+        boolean matches = bc.matches(alterPasswordDto.getOldPassword(), authUser.getPassword());
+        if (matches){
+            authUser.setPassword(BCrypt.hashpw(alterPasswordDto.getNewPassword(), BCrypt.gensalt()));
+            baseMapper.updateById(authUser);
+            return "修改密码成功";
+        }
+        return "修改密码失败";
     }
 
 }

@@ -1,9 +1,12 @@
 package crw.bishe.team.service.auth;
 
+import crw.bishe.team.dto.AlterPasswordDto;
 import crw.bishe.team.dto.UserRegisterDto;
 import crw.bishe.team.entity.auth.AuthUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -58,5 +61,17 @@ public interface IAuthUserService extends IService<AuthUser> {
 
     AuthUser selectByUsername(String username);
 
+    /**
+     * 用户注册
+     * @param userRegisterDto
+     * @return
+     */
     String register(UserRegisterDto userRegisterDto);
+
+    /**
+     * 修改密码
+     * @param alterPasswordDto
+     * @return
+     */
+    String alterPassword(AlterPasswordDto alterPasswordDto, HttpServletRequest request);
 }
