@@ -1,6 +1,8 @@
 package crw.bishe.team.config;
 
 import crw.bishe.team.entity.UserRoles;
+import crw.bishe.team.filter.CustomLogoutHandler;
+import crw.bishe.team.filter.CustomLogoutSuccessHandler;
 import crw.bishe.team.security.JwtUserDto;
 import crw.bishe.team.service.auth.TokenService;
 import lombok.extern.log4j.Log4j2;
@@ -75,7 +77,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .successForwardUrl("/api/token/getToken")
                 .permitAll()
                 .and()
-                .logout().permitAll();
+                // .logout().permitAll();
+                .logout().addLogoutHandler(new CustomLogoutHandler())
+                .logoutSuccessHandler(new CustomLogoutSuccessHandler());
 //        http.addFilterBefore(authenticationProvider, UsernamePasswordAuthenticationFilter.class);
     }
 

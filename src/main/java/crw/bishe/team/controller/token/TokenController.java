@@ -107,4 +107,9 @@ public class TokenController {
         }
     }
 
+    @DeleteMapping("logout")
+    public ResponseEntity<Result> logout(){
+        return new ResponseEntity<>(new Result(200, "success"), HttpStatus.OK);
+    }
+
 }
