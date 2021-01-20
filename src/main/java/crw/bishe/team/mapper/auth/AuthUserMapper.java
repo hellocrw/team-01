@@ -15,4 +15,5 @@ public interface AuthUserMapper extends BaseMapper<AuthUser> {
 
     AuthUser getByNum(String id);
 
+    Long getAllUsers();
 }

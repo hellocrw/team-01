@@ -8,6 +8,8 @@ import crw.bishe.team.vo.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.SetOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @Description Description 用户登录，获取token
@@ -46,9 +49,13 @@ public class TokenController {
 
     private final AuthenticationManager authenticationManager;
 
+    private RedisTemplate redisTemplate;
+
     @Autowired
-    public TokenController(AuthenticationManager authenticationManager) {
+    public TokenController(AuthenticationManager authenticationManager,
+                           RedisTemplate redisTemplate) {
         this.authenticationManager = authenticationManager;
+        this.redisTemplate = redisTemplate;
     }
 
     @ApiOperation("使用账号密码获取Token")
@@ -88,6 +95,11 @@ public class TokenController {
                 response.setHeader("Access-Control-Expose-Headers","username ");
                 response.setHeader("Access-Control-Expose-Headers","role");
             }
+            // 将当前登录的用户存储到redis缓存中
+            SetOperations setOperations = redisTemplate.opsForSet();
+            setOperations.add("onlineUser", userRolesDto.getUsername());
+            Set onlineUser = setOperations.members("onlineUser");
+            System.out.println("onlineUser:"+ onlineUser);
             return new ResponseEntity<>(new Result(200,"ok" , res), HttpStatus.OK);
         }catch (Exception e){
             System.out.println("空指针异常");

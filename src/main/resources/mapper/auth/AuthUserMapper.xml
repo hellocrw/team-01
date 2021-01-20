@@ -24,4 +24,8 @@
       select * from AUTH_USER where USER_ID = #{id}
     </select>
 
+    <select id="getAllUsers" resultType="java.lang.Long">
+        select count(*) from AUTH_USER
+    </select>
+
 </mapper>

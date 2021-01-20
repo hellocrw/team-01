@@ -21,4 +21,8 @@
             REVISION, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, LOG_ID, OPERATOR_USER, OPERATOR_TIME, OPERATOR_TYPE, OPERATOR_DESC
         </sql>
 
+    <select id="getOnlineUser" resultType="java.lang.Long">
+
+    </select>
+
 </mapper>

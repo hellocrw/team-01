@@ -74,4 +74,16 @@ public interface IAuthUserService extends IService<AuthUser> {
      * @return
      */
     String alterPassword(AlterPasswordDto alterPasswordDto, HttpServletRequest request);
+
+    /**
+     * 获取当前在线的用户
+     * @return
+     */
+    Long getOnlineUser();
+
+    /**
+     * 获取系统用户总数
+     * @return
+     */
+    Long getAllUsers();
 }

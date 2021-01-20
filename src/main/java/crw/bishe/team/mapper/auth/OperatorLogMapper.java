@@ -13,4 +13,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface OperatorLogMapper extends BaseMapper<OperatorLog> {
 
+    /**
+     * 获取当前在线的用户数量
+     * @return
+     */
+    Long getOnlineUser();
+
 }

@@ -5,8 +5,13 @@ import crw.bishe.team.dto.AlterPasswordDto;
 import crw.bishe.team.dto.UserRegisterDto;
 import crw.bishe.team.entity.auth.AuthUser;
 import crw.bishe.team.mapper.auth.AuthUserMapper;
+import crw.bishe.team.mapper.auth.OperatorLogMapper;
 import crw.bishe.team.service.auth.IAuthUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.SetOperations;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -35,6 +41,21 @@ import java.util.UUID;
  */
 @Service
 public class AuthUserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser> implements IAuthUserService {
+
+    private OperatorLogMapper operatorLogMapper;
+
+    private AuthUserMapper authUserMapper;
+
+    private RedisTemplate redisTemplate;
+
+    @Autowired
+    public AuthUserServiceImpl(OperatorLogMapper operatorLogMapper,
+                               AuthUserMapper authUserMapper,
+                               RedisTemplate redisTemplate) {
+        this.operatorLogMapper = operatorLogMapper;
+        this.authUserMapper = authUserMapper;
+        this.redisTemplate = redisTemplate;
+    }
 
     @Override
     public  IPage<AuthUser> findListByPage(Integer page, Integer pageCount){
@@ -112,6 +133,23 @@ public class AuthUserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser> i
             return "修改密码成功";
         }
         return "修改密码失败";
+    }
+
+    @Override
+    public Long getOnlineUser() {
+        Long onlineUser = 0L;
+        // 获取redis缓存在线用户的数据
+        SetOperations setOperations = redisTemplate.opsForSet();
+        if (redisTemplate.hasKey("onlineUser")){
+            Set onlineUser1 = setOperations.members("onlineUser");
+            onlineUser = Long.valueOf(onlineUser1.size());
+        }
+        return onlineUser;
+    }
+
+    @Override
+    public Long getAllUsers() {
+        return authUserMapper.getAllUsers();
     }
 
 }
