@@ -1,4 +1,4 @@
-package my.study.demo.thread;
+package my.study.demo.thread.demo;
 
 /**
  * 错误的加锁方式
