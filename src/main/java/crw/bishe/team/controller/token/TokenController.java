@@ -58,12 +58,11 @@ public class TokenController {
         this.redisTemplate = redisTemplate;
     }
 
-    @ApiOperation("使用账号密码获取Token")
+    @ApiOperation("使用账号密码获取Token,自定义登录")
     @PostMapping("/getToken")
     public ResponseEntity<Result> getToken(@RequestBody @Validated UserRolesDto userRolesDto,
                                            HttpServletRequest request,
                                            HttpServletResponse response){
-        System.out.println("调用了getToken方法");
         Map<String, Object> res = new HashMap<>();
         try{
             // 用户登录，验证用户名和密码
@@ -75,7 +74,6 @@ public class TokenController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             System.out.println("getPrincipal：" + SecurityContextHolder.getContext().getAuthentication().getPrincipal());
             UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            System.out.println(user.getUsername());
             // 通过用户名获取用户的基本信息
             AuthUser authUser = authUserService.selectByUsername(userRolesDto.getUsername());
             res.put("userInfo", authUser);
@@ -88,7 +86,6 @@ public class TokenController {
                 simpleDateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
                 res.put("loginTime", simpleDateFormat.format(new Date()));
                 // 获取用户权限
-                System.out.println("权限:" + authentication.getAuthorities());
                 res.put("auth", authentication.getAuthorities());
                 response.setHeader("username", user.getUsername());
                 response.setHeader("role", authentication.getAuthorities().toString());
@@ -98,8 +95,6 @@ public class TokenController {
             // 将当前登录的用户存储到redis缓存中
             SetOperations setOperations = redisTemplate.opsForSet();
             setOperations.add("onlineUser", userRolesDto.getUsername());
-            Set onlineUser = setOperations.members("onlineUser");
-            System.out.println("onlineUser:"+ onlineUser);
             return new ResponseEntity<>(new Result(200,"ok" , res), HttpStatus.OK);
         }catch (Exception e){
             System.out.println("空指针异常");
@@ -107,7 +102,8 @@ public class TokenController {
         }
     }
 
-    @DeleteMapping("logout")
+    @ApiOperation(value = "自定义退出")
+    @PostMapping("customerLogout")
     public ResponseEntity<Result> logout(){
         return new ResponseEntity<>(new Result(200, "success"), HttpStatus.OK);
     }

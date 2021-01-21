@@ -83,8 +83,8 @@ public class RedisConfig {
         redisTemplate.setConnectionFactory(factory);
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-        redisTemplate.setHashValueSerializer(new EntityRedisSerializer());
-        redisTemplate.setValueSerializer(new EntityRedisSerializer());
+        redisTemplate.setHashValueSerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new StringRedisSerializer());
         redisTemplate.afterPropertiesSet();
         redisTemplate.setEnableTransactionSupport(true);
         return redisTemplate;

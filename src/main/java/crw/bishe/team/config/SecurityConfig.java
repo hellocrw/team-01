@@ -78,7 +78,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 // .logout().permitAll();
-                .logout().addLogoutHandler(new CustomLogoutHandler())
+                .logout()
+                .logoutUrl("/api/token/customerLogout")
+                .addLogoutHandler(new CustomLogoutHandler())
                 .logoutSuccessHandler(new CustomLogoutSuccessHandler());
 //        http.addFilterBefore(authenticationProvider, UsernamePasswordAuthenticationFilter.class);
     }
