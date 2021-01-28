@@ -17,7 +17,7 @@ public class WordCountReducer extends Reducer<Text, LongWritable, Text, LongWrit
     // 将K2 V2转为K3 V3,将K3 V3 写入上下文中
 
     /**
-     *
+     * reducde方法
      * @param key 新K2
      * @param values 集合，新V2
      * @param context 上下文对象
@@ -26,7 +26,8 @@ public class WordCountReducer extends Reducer<Text, LongWritable, Text, LongWrit
      */
     @Override
     protected void reduce(Text key, Iterable<LongWritable> values, Context context) throws IOException, InterruptedException {
-        // 遍历集合，将集合中的数字相加，得到V3
+
+        // 遍历集合，将集合中的数字相加，得到V3  (取出每个key , 对相同key的数字相加)
         long count = 0;
         for(LongWritable value : values){
             count += value.get();

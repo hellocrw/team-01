@@ -19,13 +19,17 @@ import java.net.URI;
  * 配置Job任务对象（八个步骤）
  */
 public class JobMain extends Configured implements Tool {
+
     // 该方法用于指定一个job任务
     @Override
     public int run(String[] strings) throws Exception {
+
         // 创建一个job任务对象
         Job job = Job.getInstance(super.getConf(), "wordcount");
+
         // 设置jar存储位置
         job.setJarByClass(JobMain.class);
+
         // 指定Map阶段和reduce的处理方式，自定义map逻辑
         job.setMapperClass(WordCountMapper.class);
         job.setReducerClass(WordCountReducer.class);
@@ -37,17 +41,18 @@ public class JobMain extends Configured implements Tool {
         // 设置最终输出的K3和V3的类型
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
-        // 设置文件的输入路径和输出路径
 
+        // 设置文件的输入路径和输出路径
          job.setInputFormatClass(TextInputFormat.class);
          job.setOutputFormatClass(TextOutputFormat.class);
 
-         // TextInputFormat.addInputPath(job, new Path("hdfs://192.168.92.135:9000/crw/a.txt"));
-        TextInputFormat.addInputPath(job, new Path("D:\\hadoop\\input\\*.txt"));
+          TextInputFormat.addInputPath(job, new Path("hdfs://192.168.92.135:9000/crw/b.txt"));
+//        TextInputFormat.addInputPath(job, new Path("D:\\hadoop\\input\\wordcount.txt"));
 
-        //Path path = new Path("hdfs://192.168.92.135:9000/output1");
-        Path path = new Path("D:\\hadoop\\output");
-        FileSystem fileSystem = FileSystem.get(new URI("file:///"), new Configuration());
+        Path path = new Path("hdfs://192.168.92.135:9000/server/output/wordcount");
+//        Path path = new Path("D:\\hadoop\\output\\server\\wordcount");
+//        FileSystem fileSystem = FileSystem.get(new URI("file:///"), new Configuration());
+        FileSystem fileSystem = FileSystem.get(new URI("hdfs://192.168.92.135:9000/"), new Configuration());
         boolean exists = fileSystem.exists(path);
         if (exists){
             fileSystem.delete(path, true);
@@ -62,6 +67,7 @@ public class JobMain extends Configured implements Tool {
 
     public static void main(String[] args) throws Exception {
         Configuration configuration = new Configuration();
+
         // 启动job任务
         int run = ToolRunner.run(configuration, new JobMain(), args);
         System.exit(run);

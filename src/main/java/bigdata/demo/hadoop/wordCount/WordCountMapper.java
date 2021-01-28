@@ -3,6 +3,7 @@ package bigdata.demo.hadoop.wordCount;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
+import org.mortbay.util.ajax.JSON;
 
 import java.io.IOException;
 
@@ -26,14 +27,18 @@ public class WordCountMapper extends Mapper<LongWritable, Text, Text, LongWritab
      */
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-        Text text = new Text();
-        LongWritable longWritable = new LongWritable();
-        // 将一行的文本数据进行拆分
+        Text text = new Text();  // 定义输出类型K2 的key， 封装到context中
+        LongWritable longWritable = new LongWritable(); // 定义输出类型的V2 的value ， 封装到context中
+
+        // 将一行的文本数据进行拆分 value：文本中一行的数据
         String[] split = value.toString().split(" ");
+        System.out.println(split.toString());
+
         // 遍历数据，组装K2 V2
         for (String word: split) {
             text.set(word);
             longWritable.set(1);
+
             // 将K2 V2写入上下文
             context.write(text, longWritable);
         }
