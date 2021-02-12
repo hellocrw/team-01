@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -48,11 +49,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable();
+        http.csrf().disable();
 //        http.csrf().ignoringAntMatchers("/druid/*");
         http.authorizeRequests()
                 // 设置权限访问时，先设置具体指定的路径，在设置范围的
-                .antMatchers("/api/token/getToken","/static/**","/druid/**", "/test/**").permitAll()// 都可以访问的资源
+                .antMatchers("/api/token/getToken","/api/question-naire/**","/static/**","/druid/**", "/test/**").permitAll()// 都可以访问的资源
                 .antMatchers("/api/admin/**").hasAnyAuthority("ADMIN","SUPERADMIN")  // 需要ADMIN权限才能访问
                 .antMatchers("/api/**").authenticated()  //需要登录才能访问URL -> /api/** 资源
                 .anyRequest().authenticated()

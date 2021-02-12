@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="crw.bishe.team.mapper.naire.QuestionNaireMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="crw.bishe.team.entity.naire.QuestionNaire">
+                    <id column="id" property="id"/>
+                    <result column="name" property="name"/>
+                    <result column="create_time" property="createTime"/>
+                    <result column="join" property="join"/>
+                    <result column="join_time" property="joinTime"/>
+                    <result column="place" property="place"/>
+                    <result column="active_content" property="activeContent"/>
+                    <result column="active_prosal" property="activeProsal"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            id, name, create_time, join, join_time, place, active_content, active_prosal
+        </sql>
+
+</mapper>
