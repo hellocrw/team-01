@@ -4,15 +4,18 @@ import crw.bishe.team.dto.FilesDto;
 import crw.bishe.team.dtoEntityMapping.FilesMapping;
 import crw.bishe.team.entity.Files;
 import crw.bishe.team.mapper.FilesMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +26,7 @@ import java.util.List;
  * @Time 5:31
  */
 @Service
+@Slf4j
 public class FilesServiceImpl implements FilesService {
 
     @Autowired
@@ -72,33 +76,47 @@ public class FilesServiceImpl implements FilesService {
     }
 
     @Override
-    public String downloadFile(HttpServletResponse response, String fileNames) throws Exception {
-        String fileName = "team.sql";
-        if (!StringUtils.isEmpty(fileName)){
-            String filePath = uploadPath + fileName;
-            // 文件地址
-            File dest = new File(filePath);
-            // 创建输入对象
-            FileInputStream fileInputStream = new FileInputStream(dest);
-            // 设置相关格式
+    public String downloadFile(HttpServletResponse response, String fileName) throws Exception {
+        File file = new File(uploadPath + fileName);
+        if (!file.exists()){
+            return "文件不存在";
+        }
+        byte[] bytes = new byte[1024];
+        BufferedInputStream bufferedInputStream = null;
+        OutputStream outputStream = null;
+        FileInputStream fileInputStream = null;
+        try {
+            fileInputStream = new FileInputStream(file);
+            bufferedInputStream = new BufferedInputStream(fileInputStream);
             response.setContentType("application/force-download");
-            // 设置下载后的文件名以及header
-            response.addHeader("Content-disposition","attachment;fileName=" + fileName);
-            try{
-                // 创建输出对象
-                OutputStream outputStream = response.getOutputStream();
-                byte[] buf = new byte[1024];
-                int len = 0;
-                while ((len = fileInputStream.read(buf)) != -1){
-                    outputStream.write(buf, 0 , len);
+            response.setHeader("Content-Disposition",
+                    "attachment;filename=" + new String(fileName.getBytes("utf-8"), "ISO8859-1"));
+            outputStream = response.getOutputStream();
+            int length;
+            while ((length = bufferedInputStream.read(bytes)) != -1){
+                outputStream.write(bytes, 0, length);
+            }
+            outputStream.flush();
+        }catch (Exception e){
+            log.error("文件下载失败", e);
+        }finally {
+            try {
+                if (bufferedInputStream != null){
+                    bufferedInputStream.close();
                 }
-            } catch (IOException e){
-                e.printStackTrace();
-            }finally {
-                fileInputStream.close();
+
+                if (outputStream != null){
+                    outputStream.close();
+                }
+
+                if (fileInputStream != null){
+                    fileInputStream.close();
+                }
+            }catch (IOException e){
+                log.error(e.getMessage(), e);
             }
         }
-        return "下载成功";
+        return "success";
     }
 
     @Override

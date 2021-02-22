@@ -30,15 +30,14 @@ public class FilesController {
     }
 
     @ApiOperation(value = "文件下载")
-    @GetMapping("/{fileName}")
-    public ResponseEntity<Result> download(HttpServletResponse response,@PathVariable(name = "fileName") String fileName){
+    @GetMapping("/downloadFile/{fileName}")
+    public void download(HttpServletResponse response,@PathVariable(name = "fileName") String fileName){
         try {
             String res = filesService.downloadFile(response, fileName);
-            return new ResponseEntity<>(new Result(200,"OK",res),HttpStatus.OK);
+            System.out.println(res);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<>(new Result(200,"下载失败"),HttpStatus.OK);
     }
 
     @ApiOperation(value = "通过项目ID获取文件信息")
