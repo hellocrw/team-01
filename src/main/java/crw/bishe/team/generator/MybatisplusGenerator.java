@@ -59,7 +59,7 @@ public class MybatisplusGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://8.129.110.202:3306/authsystem?&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
+        dsc.setUrl("jdbc:mysql://8.129.110.202:3306/blogsystem?&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("hellocrw.1103");

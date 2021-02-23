@@ -1,7 +1,5 @@
 package ${package.Controller};
 
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.web.bind.annotation.*;
 import ${package.Service}.${table.serviceName};
 import ${package.Entity}.${entity};
@@ -10,6 +8,9 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.springframework.http.ResponseEntity;
+import crw.bishe.team.vo.Result;
+import org.springframework.http.HttpStatus;
 
 import javax.annotation.Resource;
 <#if restControllerStyle>
@@ -51,33 +52,33 @@ class ${table.controllerName}<#if superControllerClass??>:${superControllerClass
 
     @ApiOperation(value = "新增${table.comment!}")
     @PostMapping()
-    public int add(@RequestBody ${entity} ${entity?uncap_first}){
-        return ${(table.serviceName?substring(1))?uncap_first}.add(${entity?uncap_first});
+    public ResponseEntity<Result> add(@RequestBody ${entity} ${entity?uncap_first}){
+        return new ResponseEntity<>(new Result<>(200, "success", ${(table.serviceName?substring(1))?uncap_first}.add(${entity?uncap_first})), HttpStatus.OK);
     }
 
     @ApiOperation(value = "删除${table.comment!}")
     @DeleteMapping("{id}")
-    public int delete(@PathVariable("id") Long id){
-        return ${(table.serviceName?substring(1))?uncap_first}.delete(id);
+    public ResponseEntity<Result> delete(@PathVariable("id") Long id){
+        return new ResponseEntity<>(new Result<>(200, "success", ${(table.serviceName?substring(1))?uncap_first}.delete(id)), HttpStatus.OK);
     }
 
     @ApiOperation(value = "更新${table.comment!}")
     @PutMapping()
-    public int update(@RequestBody ${entity} ${entity?uncap_first}){
-        return ${(table.serviceName?substring(1))?uncap_first}.updateData(${entity?uncap_first});
+    public ResponseEntity<Result> update(@RequestBody ${entity} ${entity?uncap_first}){
+        return new ResponseEntity<>(new Result<>(200, "success", ${(table.serviceName?substring(1))?uncap_first}.updateData(${entity?uncap_first})), HttpStatus.OK);
     }
 
     @ApiOperation(value = "查询${table.comment!}分页数据")
     @GetMapping()
-    public IPage<${entity}> findListByPage(@RequestParam Integer page,
+    public ResponseEntity<Result<IPage<${entity}>>> findListByPage(@RequestParam Integer page,
                                    @RequestParam Integer pageCount){
-        return ${(table.serviceName?substring(1))?uncap_first}.findListByPage(page, pageCount);
+        return new ResponseEntity<>(new Result<>(200, "success", ${(table.serviceName?substring(1))?uncap_first}.findListByPage(page, pageCount)), HttpStatus.OK);
     }
 
     @ApiOperation(value = "id查询${table.comment!}")
     @GetMapping("{id}")
-    public ${entity} findById(@PathVariable Long id){
-        return ${(table.serviceName?substring(1))?uncap_first}.findById(id);
+    public ResponseEntity<Result<${entity}>> findById(@PathVariable Long id){
+        return new ResponseEntity<>(new Result<>(200, "success", ${(table.serviceName?substring(1))?uncap_first}.findById(id)), HttpStatus.OK);
     }
 
 }
