@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = {"标签表"})
 @RestController
-@RequestMapping("//bolg-label")
+@RequestMapping("/bolg/bolg-label")
 public class BolgLabelController {
 
     private Logger log = LoggerFactory.getLogger(getClass());

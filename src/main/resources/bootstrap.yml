@@ -4,7 +4,7 @@ spring:
   cloud:
     config:
       label: master # master分支
-      name: auth-system # 配置文件名称
+      name: bolg-system # 配置文件名称
       profile: dev # 读取后缀名称    master 分支下的config-dev.yml配置文件
       uri: http://8.129.110.202:9003  # 配置中心地址
 #    nacos:

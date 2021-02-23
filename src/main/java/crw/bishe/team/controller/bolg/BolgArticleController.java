@@ -24,7 +24,7 @@ import javax.annotation.Resource;
  */
 @Api(tags = {"博客表"})
 @RestController
-@RequestMapping("//bolg-article")
+@RequestMapping("/bolg/bolg-article")
 public class BolgArticleController {
 
     private Logger log = LoggerFactory.getLogger(getClass());

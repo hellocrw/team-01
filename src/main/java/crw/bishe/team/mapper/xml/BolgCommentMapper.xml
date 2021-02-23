@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="crw.bishe.team.mapper.bolg.BolgCommentMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="crw.bishe.team.entity.bolg.BolgComment">
+                    <id column="comment_id" property="commentId"/>
+                    <result column="commit_like_count" property="commitLikeCount"/>
+                    <result column="comment_create_date" property="commentCreateDate"/>
+                    <result column="comment_content" property="commentContent"/>
+                    <result column="comment_parent_comment_id" property="commentParentCommentId"/>
+                    <result column="user_id" property="userId"/>
+                    <result column="article_id" property="articleId"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            comment_id, commit_like_count, comment_create_date, comment_content, comment_parent_comment_id, user_id, article_id
+        </sql>
+
+</mapper>

@@ -4,7 +4,6 @@ import crw.bishe.team.entity.UserRoles;
 import crw.bishe.team.filter.CustomLogoutHandler;
 import crw.bishe.team.filter.CustomLogoutSuccessHandler;
 import crw.bishe.team.security.JwtUserDto;
-import crw.bishe.team.service.auth.TokenService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -18,7 +17,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
@@ -42,9 +44,6 @@ import java.io.IOException;
 @EnableGlobalMethodSecurity(prePostEnabled = true) //spring security默认是关闭注解的，要开启security注解
 @Log4j2
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private TokenService tokenService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -88,7 +87,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //定义认证规则
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(tokenService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
         auth.authenticationProvider(authenticationProvider());
        // 在内存中创建用户和密码，模拟数据库实现用户登录
         /*auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())  //在Spring Security 5.0中新增了多种加密方式，也改变了密码的格式
@@ -111,7 +110,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(tokenService);
+        authProvider.setUserDetailsService(userDetailsService());
         authProvider.setPasswordEncoder(passwordEncoder());  // 设置密码加密方式
         return authProvider;
     }
@@ -155,14 +154,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         };
     }
 
-    /*@Bean
+    @Bean
     @Override
     public UserDetailsService userDetailsService() {    //用户登录实现
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(User.withUsername("admin").password("123456").authorities("ADMIN").build());
         manager.createUser(User.withUsername("crw").password("123456").authorities("USER").build());
         return manager;
-    }*/
+    }
 
     /**
      * 加了configure(WebSercurity web)导致spring security默认的权限控制失效的问题
