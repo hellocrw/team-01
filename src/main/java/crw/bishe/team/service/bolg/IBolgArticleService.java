@@ -1,8 +1,12 @@
 package crw.bishe.team.service.bolg;
 
-import crw.bishe.team.entity.bolg.BolgArticle;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+import crw.bishe.team.entity.bolg.BolgArticle;
+import crw.bishe.team.vo.bolg.ArticleVo;
+import crw.bishe.team.vo.bolg.TenArticleVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -54,4 +58,17 @@ public interface IBolgArticleService extends IService<BolgArticle> {
      * @return BolgArticle
      */
     BolgArticle findById(Long id);
+
+    /**
+     * 根据博客编号查询文章信息
+     * @param articleId 文章编号
+     * @return 文章信息
+     */
+    ArticleVo queryBolg(Integer articleId);
+
+    /**
+     * 查看近来十篇文章
+     * @return
+     */
+    List<TenArticleVo> queryTenArticle();
 }

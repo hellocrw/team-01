@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import crw.bishe.team.entity.bolg.BolgArticle;
 import crw.bishe.team.service.bolg.IBolgArticleService;
 import crw.bishe.team.vo.Result;
+import crw.bishe.team.vo.bolg.ArticleVo;
+import crw.bishe.team.vo.bolg.TenArticleVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -62,6 +65,17 @@ public class BolgArticleController {
     @GetMapping("{id}")
     public ResponseEntity<Result<BolgArticle>> findById(@PathVariable Long id){
         return new ResponseEntity<>(new Result<>(200, "success", bolgArticleService.findById(id)), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "根据博客编号查询文章信息")
+    @GetMapping("/queryBolg/{articleId}")
+    public ResponseEntity<Result<ArticleVo>> queryBolg(@PathVariable Integer articleId){
+        return new ResponseEntity<>(new Result(200, "success", bolgArticleService.queryBolg(articleId)), HttpStatus.OK);
+    }
+    @ApiOperation(value = "查看进来十章文章")
+    @GetMapping("/queryTenBolg")
+    public ResponseEntity<Result<List<TenArticleVo>>> queryTenArticle(){
+        return new ResponseEntity<>(new Result<>(200, "success", bolgArticleService.queryTenArticle()), HttpStatus.OK);
     }
 
 }

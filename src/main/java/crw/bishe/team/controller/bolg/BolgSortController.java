@@ -1,5 +1,6 @@
 package crw.bishe.team.controller.bolg;
 
+import crw.bishe.team.vo.bolg.SortActicleVo;
 import org.springframework.web.bind.annotation.*;
 import crw.bishe.team.service.bolg.IBolgSortService;
 import crw.bishe.team.entity.bolg.BolgSort;
@@ -14,6 +15,8 @@ import org.springframework.http.HttpStatus;
 
 import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -63,6 +66,12 @@ public class BolgSortController {
     @GetMapping("{id}")
     public ResponseEntity<Result<BolgSort>> findById(@PathVariable Long id){
         return new ResponseEntity<>(new Result<>(200, "success", bolgSortService.findById(id)), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "查看分类名称及分类下的文章")
+    @GetMapping("/querySortActicle")
+    public ResponseEntity<Result<List<SortActicleVo>>> querySortActicle(){
+        return new ResponseEntity<>(new Result(200, "success", bolgSortService.querySortActicle()), HttpStatus.OK);
     }
 
 }

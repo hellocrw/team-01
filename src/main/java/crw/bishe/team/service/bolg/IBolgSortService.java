@@ -3,6 +3,9 @@ package crw.bishe.team.service.bolg;
 import crw.bishe.team.entity.bolg.BolgSort;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import crw.bishe.team.vo.bolg.SortActicleVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -54,4 +57,10 @@ public interface IBolgSortService extends IService<BolgSort> {
      * @return BolgSort
      */
     BolgSort findById(Long id);
+
+    /**
+     * 查看分类及分类下的文章
+     * @return
+     */
+    List<SortActicleVo> querySortActicle();
 }

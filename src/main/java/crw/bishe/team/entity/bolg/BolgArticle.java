@@ -48,5 +48,14 @@ public class BolgArticle implements Serializable {
     @ApiModelProperty(value = "博客点赞数")
     private Integer articleLikeCount;
 
+    @ApiModelProperty(value = "用户编号")
+    private Integer userId;
+
+    @ApiModelProperty(value = "最新更新时间")
+    private Date lastUpdateTime;
+
+    @ApiModelProperty(value = "博客图片")
+    private String articleImage;
+
 
 }

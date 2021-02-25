@@ -18,4 +18,16 @@
             article_id, article_tilte, article_content, article_views, article_comment_count, article_create_date, article_like_count
         </sql>
 
+    <select id="queryBolg" parameterType="integer" resultType="crw.bishe.team.vo.bolg.ArticleVo">
+        select article.article_id,article.article_tilte, article.article_content, user.USER_NAME, article.article_create_date,
+       article.article_image, article.last_update_time, article.article_views, article.article_like_count
+            from bolg_article article
+            join v_user_info user on user.USER_ID = article.user_id
+        where article_id = #{articleId}
+    </select>
+
+    <select id="queryTenArticle" resultType="crw.bishe.team.vo.bolg.TenArticleVo">
+        select article_id, article_title, last_update_time from bolg_article order by last_update_time desc limit 10
+    </select>
+
 </mapper>
