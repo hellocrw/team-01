@@ -1,6 +1,7 @@
 package crw.bishe.team.service.bolg;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import crw.bishe.team.entity.bolg.BolgArticle;
 import crw.bishe.team.vo.bolg.ArticleVo;
@@ -25,7 +26,7 @@ public interface IBolgArticleService extends IService<BolgArticle> {
      * @param pageCount 每页条数
      * @return IPage<BolgArticle>
      */
-    IPage<BolgArticle> findListByPage(Integer page, Integer pageCount);
+    Page<BolgArticle> findListByPage(Integer page, Integer pageCount);
 
     /**
      * 添加博客表

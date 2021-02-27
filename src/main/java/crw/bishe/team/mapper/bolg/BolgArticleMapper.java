@@ -1,5 +1,7 @@
 package crw.bishe.team.mapper.bolg;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import crw.bishe.team.entity.bolg.BolgArticle;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import crw.bishe.team.vo.bolg.ArticleVo;
@@ -17,6 +19,13 @@ import java.util.List;
  * @since 2021-02-23
  */
 public interface BolgArticleMapper extends BaseMapper<BolgArticle> {
+
+    /**
+     * 分页查询文章内容
+     * @param page
+     * @return
+     */
+    List<BolgArticle> selectArticlePage(@Param("page") IPage<BolgArticle> page);
 
     /**
      * 查看文章信息

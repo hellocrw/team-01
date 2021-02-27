@@ -5,7 +5,7 @@
         <!-- 通用查询映射结果 -->
         <resultMap id="BaseResultMap" type="crw.bishe.team.entity.bolg.BolgArticle">
                     <id column="article_id" property="articleId"/>
-                    <result column="article_tilte" property="articleTilte"/>
+                    <result column="article_title" property="articleTitle"/>
                     <result column="article_content" property="articleContent"/>
                     <result column="article_views" property="articleViews"/>
                     <result column="article_comment_count" property="articleCommentCount"/>
@@ -15,11 +15,16 @@
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-            article_id, article_tilte, article_content, article_views, article_comment_count, article_create_date, article_like_count
+            article_id, article_title, article_content, article_views, article_comment_count, article_create_date, article_like_count
         </sql>
 
+    <select id="selectArticlePage" resultType="crw.bishe.team.entity.bolg.BolgArticle">
+      select article.*,user.USER_NAME  from bolg_article article
+        left join v_user_info user  on user.USER_ID = article.user_id
+    </select>
+
     <select id="queryBolg" parameterType="integer" resultType="crw.bishe.team.vo.bolg.ArticleVo">
-        select article.article_id,article.article_tilte, article.article_content, user.USER_NAME, article.article_create_date,
+        select article.article_id,article.article_title, article.article_content, user.USER_NAME, article.article_create_date,
        article.article_image, article.last_update_time, article.article_views, article.article_like_count
             from bolg_article article
             join v_user_info user on user.USER_ID = article.user_id

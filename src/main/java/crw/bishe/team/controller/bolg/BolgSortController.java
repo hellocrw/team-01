@@ -74,4 +74,10 @@ public class BolgSortController {
         return new ResponseEntity<>(new Result(200, "success", bolgSortService.querySortActicle()), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "查询分类根目录")
+    @GetMapping("/queryRootSort")
+    public ResponseEntity<Result<List<BolgSort>>> queryRootSort(){
+        return new ResponseEntity<>(new Result<>(20, "success", bolgSortService.queryRootSort()), HttpStatus.OK);
+    }
+
 }

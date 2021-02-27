@@ -42,11 +42,10 @@ public class BolgArticleServiceImpl extends ServiceImpl<BolgArticleMapper, BolgA
     }
 
     @Override
-    public  IPage<BolgArticle> findListByPage(Integer page, Integer pageCount){
-        IPage<BolgArticle> wherePage = new Page<>(page, pageCount);
-        BolgArticle where = new BolgArticle();
-
-        return   baseMapper.selectPage(wherePage, Wrappers.query(where));
+    public  Page<BolgArticle> findListByPage(Integer page, Integer pageCount){
+        Page<BolgArticle> wherePage = new Page<>(page, pageCount);
+        Page<BolgArticle> bolgArticlePage = baseMapper.selectPage(wherePage, new QueryWrapper<>());
+        return  bolgArticlePage;
     }
 
     @Override

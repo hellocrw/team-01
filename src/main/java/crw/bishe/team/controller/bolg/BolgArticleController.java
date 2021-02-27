@@ -1,6 +1,6 @@
 package crw.bishe.team.controller.bolg;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import crw.bishe.team.entity.bolg.BolgArticle;
 import crw.bishe.team.service.bolg.IBolgArticleService;
 import crw.bishe.team.vo.Result;
@@ -56,9 +56,10 @@ public class BolgArticleController {
 
     @ApiOperation(value = "查询博客表分页数据")
     @GetMapping()
-    public ResponseEntity<Result<IPage<BolgArticle>>> findListByPage(@RequestParam Integer page,
-                                   @RequestParam Integer pageCount){
-        return new ResponseEntity<>(new Result<>(200, "success", bolgArticleService.findListByPage(page, pageCount)), HttpStatus.OK);
+    public ResponseEntity<Result<Page<BolgArticle>>> findListByPage(@RequestParam Integer page,
+                                                                    @RequestParam Integer pageCount){
+        Page<BolgArticle> listByPage = bolgArticleService.findListByPage(page, pageCount);
+        return new ResponseEntity<>(new Result<>(200, "success", listByPage), HttpStatus.OK);
     }
 
     @ApiOperation(value = "id查询博客表")

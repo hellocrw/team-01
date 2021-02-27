@@ -5,7 +5,7 @@
         <!-- 通用查询映射结果 -->
         <resultMap id="BaseResultMap" type="crw.bishe.team.entity.bolg.BolgArticle">
                     <id column="article_id" property="articleId"/>
-                    <result column="article_tilte" property="articleTilte"/>
+                    <result column="article_title" property="articleTitle"/>
                     <result column="article_content" property="articleContent"/>
                     <result column="article_views" property="articleViews"/>
                     <result column="article_comment_count" property="articleCommentCount"/>
@@ -15,7 +15,7 @@
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-            article_id, article_tilte, article_content, article_views, article_comment_count, article_create_date, article_like_count
+            article_id, article_title, article_content, article_views, article_comment_count, article_create_date, article_like_count
         </sql>
 
 </mapper>

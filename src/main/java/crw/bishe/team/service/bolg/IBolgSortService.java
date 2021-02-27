@@ -63,4 +63,10 @@ public interface IBolgSortService extends IService<BolgSort> {
      * @return
      */
     List<SortActicleVo> querySortActicle();
+
+    /**
+     * 查询分类根目录
+     * @return
+     */
+    List<BolgSort> queryRootSort();
 }

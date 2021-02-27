@@ -31,7 +31,7 @@ public class BolgArticle implements Serializable {
     private Integer articleId;
 
     @ApiModelProperty(value = "博客标题")
-    private String articleTilte;
+    private String articleTitle;
 
     @ApiModelProperty(value = "博客内容")
     private String articleContent;

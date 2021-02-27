@@ -1,10 +1,7 @@
 package crw.bishe.team.mapper.bolg;
 
-import crw.bishe.team.entity.bolg.BolgSort;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import crw.bishe.team.vo.bolg.SortActicleVo;
-
-import java.util.List;
+import crw.bishe.team.entity.bolg.BolgSort;
 
 /**
  * <p>
@@ -15,5 +12,4 @@ import java.util.List;
  * @since 2021-02-24
  */
 public interface BolgSortMapper extends BaseMapper<BolgSort> {
-
 }

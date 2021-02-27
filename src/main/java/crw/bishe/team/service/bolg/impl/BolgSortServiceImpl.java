@@ -89,11 +89,16 @@ public class BolgSortServiceImpl extends ServiceImpl<BolgSortMapper, BolgSort> i
                 ArticleVo articleVo = new ArticleVo();
                 BolgArticle bolgArticle = bolgArticleMapper.selectById(bolgArticleSort.getArticleId());
                 articleVo.setArticleId(bolgArticle.getArticleId());
-                articleVo.setArticleTitle(bolgArticle.getArticleTilte());
+                articleVo.setArticleTitle(bolgArticle.getArticleTitle());
                 articleVoList.add(articleVo);
             }
             sortActicleVo.setArticleList(articleVoList);
         }
         return sortActicleVoList;
+    }
+
+    @Override
+    public List<BolgSort> queryRootSort() {
+        return baseMapper.selectList(new QueryWrapper<BolgSort>().eq("parent_sort_id", 0));
     }
 }
