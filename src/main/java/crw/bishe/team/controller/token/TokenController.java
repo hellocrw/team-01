@@ -47,16 +47,17 @@ public class TokenController {
     @Autowired
     private IAuthUserService authUserService;
 
-    private final AuthenticationManager authenticationManager;
-
-    private RedisTemplate redisTemplate;
-
     @Autowired
-    public TokenController(AuthenticationManager authenticationManager,
-                           RedisTemplate redisTemplate) {
-        this.authenticationManager = authenticationManager;
-        this.redisTemplate = redisTemplate;
-    }
+    private AuthenticationManager authenticationManager;
+
+//    private RedisTemplate redisTemplate;
+//
+//    @Autowired
+//    public TokenController(AuthenticationManager authenticationManager,
+//                           RedisTemplate redisTemplate) {
+//        this.authenticationManager = authenticationManager;
+//        this.redisTemplate = redisTemplate;
+//    }
 
     @ApiOperation("使用账号密码获取Token,自定义登录")
     @PostMapping("/getToken")
@@ -93,8 +94,8 @@ public class TokenController {
                 response.setHeader("Access-Control-Expose-Headers","role");
             }
             // 将当前登录的用户存储到redis缓存中
-            SetOperations setOperations = redisTemplate.opsForSet();
-            setOperations.add("onlineUser", userRolesDto.getUsername());
+            // SetOperations setOperations = redisTemplate.opsForSet();
+            // setOperations.add("onlineUser", userRolesDto.getUsername());
             return new ResponseEntity<>(new Result(200,"ok" , res), HttpStatus.OK);
         }catch (Exception e){
             System.out.println("空指针异常");

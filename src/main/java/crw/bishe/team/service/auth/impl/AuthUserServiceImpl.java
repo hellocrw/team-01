@@ -3,9 +3,13 @@ package crw.bishe.team.service.auth.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import crw.bishe.team.dto.AlterPasswordDto;
 import crw.bishe.team.dto.UserRegisterDto;
+import crw.bishe.team.entity.auth.AuthRole;
 import crw.bishe.team.entity.auth.AuthUser;
+import crw.bishe.team.entity.auth.UserRole;
+import crw.bishe.team.mapper.auth.AuthRoleMapper;
 import crw.bishe.team.mapper.auth.AuthUserMapper;
 import crw.bishe.team.mapper.auth.OperatorLogMapper;
+import crw.bishe.team.mapper.auth.UserRoleMapper;
 import crw.bishe.team.service.auth.IAuthUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,14 +50,22 @@ public class AuthUserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser> i
 
     private AuthUserMapper authUserMapper;
 
+    private AuthRoleMapper authRoleMapper;
+
+    private UserRoleMapper userRoleMapper;
+
     private RedisTemplate redisTemplate;
 
     @Autowired
     public AuthUserServiceImpl(OperatorLogMapper operatorLogMapper,
                                AuthUserMapper authUserMapper,
+                               AuthRoleMapper authRoleMapper,
+                               UserRoleMapper userRoleMapper,
                                RedisTemplate redisTemplate) {
         this.operatorLogMapper = operatorLogMapper;
         this.authUserMapper = authUserMapper;
+        this.authRoleMapper = authRoleMapper;
+        this.userRoleMapper = userRoleMapper;
         this.redisTemplate = redisTemplate;
     }
 
@@ -95,18 +107,34 @@ public class AuthUserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser> i
     @Transactional
     public String register(UserRegisterDto userRegisterDto) {
         // 判断用户名是否存在
-        AuthUser authUser = baseMapper.selectOne(new QueryWrapper<AuthUser>().eq("USER_NAME", userRegisterDto.getUsername()));
-        if (Objects.nonNull(authUser)) return "用户名已经存在";
-        AuthUser user = new AuthUser();
-        user.setRevision(1);
-        user.setCreatedBy("caorongwu");
-        user.setCreatedTime(new Date());
-        user.setUserId(UUID.randomUUID().toString());
-        user.setPassword(BCrypt.hashpw(userRegisterDto.getPassword(), BCrypt.gensalt()));
-        user.setUserName(userRegisterDto.getUsername());
-        user.setUserGroupId(userRegisterDto.getUserGroupId());
-        int insert = baseMapper.insert(user);
-        if (insert > 0)
+        AuthUser user = baseMapper.selectOne(new QueryWrapper<AuthUser>().eq("USER_NAME", userRegisterDto.getUsername()));
+        if (Objects.nonNull(user)) return "用户名已经存在";
+        // 权限用户表插入
+        AuthUser authUser = new AuthUser();
+        authUser.setRevision(1);
+        authUser.setCreatedBy(userRegisterDto.getUsername());
+        authUser.setCreatedTime(new Date());
+        authUser.setUserId(UUID.randomUUID().toString());
+        authUser.setPassword(BCrypt.hashpw(userRegisterDto.getPassword(), BCrypt.gensalt()));
+        authUser.setUserName(userRegisterDto.getUsername());
+        authUser.setUserGroupId(userRegisterDto.getUserGroupId());
+        baseMapper.insert(authUser);
+        // 插入角色表
+        AuthRole authRole = new AuthRole();
+        authRole.setCreatedBy(userRegisterDto.getUsername());
+        authRole.setCreatedTime(new Date());
+        authRole.setRoleId(UUID.randomUUID().toString());
+        authRole.setRoleName(userRegisterDto.getRole());
+        authRoleMapper.insert(authRole);
+        // 插入用户角色关联表
+        UserRole userRole = new UserRole();
+        userRole.setCreatedBy(userRegisterDto.getUsername());
+        userRole.setCreatedTime(new Date());
+        userRole.setUserRoleId(UUID.randomUUID().toString());
+        userRole.setUserId(authUser.getUserId());
+        userRole.setRoleId(authRole.getRoleId());
+        int result = userRoleMapper.insert(userRole);
+        if (result > 0)
             return "注册成功";
         else {
             return "注册失败";

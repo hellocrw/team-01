@@ -1,5 +1,6 @@
 package crw.bishe.team.entity.auth;
 
+import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -24,6 +25,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("ROLE_PERMISSION")
 @ApiModel(value="RolePermission对象", description=" ")
+@KeySequence(value = "RECORD_SEQ", clazz = String.class)
 public class RolePermission implements Serializable {
 
     private static final long serialVersionUID = 1L;
